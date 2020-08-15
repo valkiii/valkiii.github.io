@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://valkiii.github.io/about/</loc>
+    <lastmod>2020-08-14T13:45:27+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/secret_projects/talks/</loc>
+    <lastmod>2019-03-23T17:47:27+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/secret_projects/citations/</loc>
+    <lastmod>2019-03-23T16:23:41+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/secret_projects/signed_networks/</loc>
+    <lastmod>2019-03-23T13:25:26+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/academia/</loc>
+    <lastmod>2019-03-21T17:51:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/secret_projects/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://valkiii.github.io/</loc>
+    <lastmod>2020-08-14T13:45:27+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
