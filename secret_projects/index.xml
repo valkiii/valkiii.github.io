@@ -7,9 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>VC 2020</copyright>
+    <lastBuildDate>Sat, 15 Aug 2020 19:11:15 +0100</lastBuildDate>
     
 	<atom:link href="https://valkiii.github.io/secret_projects/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>People’s connections as the source of early stage startups success</title>
+      <link>https://valkiii.github.io/secret_projects/stn/</link>
+      <pubDate>Sat, 15 Aug 2020 19:11:15 +0100</pubDate>
+      
+      <guid>https://valkiii.github.io/secret_projects/stn/</guid>
+      <description>The Italian translation of the common English saying “a friend is worth his weight in gold” is “who finds a friend, discovers a treasure”. In the startup ecosystem we can venture that “who finds the right team, discovers a unicorn”.
+For early stage startups, a key source of success lies in its team.These people will have the responsibilities to develop and transform what is only an idea into a tangible product or asset.</description>
+    </item>
     
   </channel>
 </rss>
