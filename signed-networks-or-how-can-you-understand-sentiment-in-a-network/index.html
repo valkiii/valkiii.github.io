@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="/images/signed/signed.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Signed networks - or how can you understand sentiment in a network"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@Ciottiv"/>
+
+
+
+  	<meta property="og:title" content="Signed networks - or how can you understand sentiment in a network &middot; Valerio&#39;s Blog" />
+  	<meta property="og:site_name" content="Valerio&#39;s Blog" />
+  	<meta property="og:url" content="https://valkiii.github.io/signed-networks-or-how-can-you-understand-sentiment-in-a-network/" />
+
+    
+       <meta property="og:image" content="/images/signed/signed.jpg"/>
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2019-03-23T13:25:26Z" />
+
+    
+    
+
+    <title>Signed networks - or how can you understand sentiment in a network &middot; Valerio&#39;s Blog</title>
+
+    
+    <meta name="description" content="Research in the complex network domain seems to converge on the idea that, unlike other types of networks (e.g., technological and biological), social networks " />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://valkiii.github.io/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://valkiii.github.io/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="https://valkiii.github.io/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="https://valkiii.github.io/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="https://valkiii.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Valerio&#39;s Blog" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.54.0" />
+
+    <link rel="canonical" href="https://valkiii.github.io/signed-networks-or-how-can-you-understand-sentiment-in-a-network/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": ,
+        "logo": https://valkiii.github.io/images/avatar.png
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": https://valkiii.github.io/images/avatar.png,
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": ,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": Data Scientist, Open Source enthusiast
+        
+    },
+    "headline": Signed networks - or how can you understand sentiment in a network,
+    "name": Signed networks - or how can you understand sentiment in a network,
+    "wordCount": 850,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": https://valkiii.github.io/signed-networks-or-how-can-you-understand-sentiment-in-a-network/,
+    "datePublished": 2019-03-23T13:25Z,
+    "dateModified": 2019-03-23T13:25Z,
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": https://valkiii.github.io/images/signed/signed.jpg,
+        "width": 3000,
+        "height": 1445
+    },
+    
+    
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": https://valkiii.github.io/signed-networks-or-how-can-you-understand-sentiment-in-a-network/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Previously</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://valkiii.github.io/academia">Academia</a>
+            </li>
+        
+            <h3>Currently</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://valkiii.github.io/post">Blog</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="https://valkiii.github.io/about">About</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href=""></a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="https://valkiii.github.io/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(/images/signed/signed.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="https://valkiii.github.io/"><img src="https://valkiii.github.io/images/avatar.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Signed networks - or how can you understand sentiment in a network</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2019-03-23T13:25:26Z">
+            Mar 23, 2019
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>Research in the <strong>complex network</strong> domain seems to converge on the idea that, unlike other types of networks (e.g., technological and biological), <strong>social networks</strong> (e.g., online social networks and scientific collaboration networks) share a distinctive empirical regularity: that the number of neighbouring nodes tend to be correlated. Nodes with many friends are connected with nodes that have many friends, while nodes with few friends are connected with nodes with few friends. It is possible to quantitatively evaluate this through the correlation of the number of connections of a node with the number of the average connections of its neighbours.</p>
+
+<p>Let me give you a simple example. Node i posses five friends, and its five friends have on average five friends as well (someone can have 6 and another 4, but the average number of friends would still be 5). We say that node i’s “degree” is correlated with its neighbors. The opposite situation sees node i with five friends who have just node i as a friend. We say that node i‘s degree is anticorrelated with its neighbours. The tendency of nodes with (dis)similar degrees to connect with each other is often referred to as ”(dis)assortative mixing by degree”.</p>
+
+<p>Signed social networks are not new in sociological and psychological literature. There are many works on this subject. Among them,  is the theory of cognitive dissonance: an individual who experiences inconsistency (dissonance) tends to become psychologically uncomfortable, and is motivated to try to reduce this dissonance. This means that in triadic relationships we will find an abundance of balanced triads, i.e. situations where we have only positive relations between three connected people or only two negative links, which reflect, respectively, the fact that “the friend of my friend is my friend” and “the enemy of my enemy is my friend“. When a network has only positive balanced triads, it is said to be structurally balanced.</p>
+
+<p>Relatively little attention has been devoted to the emergence of degree correlations in signed social networks, i.e. networks where we have a mixture of positive and negative ties between individuals. In particular, we have difficulty finding negative networks, where individuals are connected through links with a negative connotation (e.g., distrust, enmity, and competition). Do individuals who like (dislike) many others tend to like (dislike) each other, or do they like (dislike) those who like (dislike) only very few others?</p>
+
+<p>We start by analysing the two whole social networks, treating them as unsigned network. We find that both networks have the usual social networks characteristics: both are assortative. Our aim is to test whether the sign of the link affects the structure of the network: do we create ties with each other in a different way based on the nature of the connection? In order to test that, we split the whole network into two sub-networks with only positive and only negative links (see Fig.1).</p>
+
+<figure>
+  <img src="images/division_2.png#floatright"/>
+</figure>
+
+<p>On the right hand side figure (Fig.1) we can observe the division of the whole signed network (a) into two sub-networks with only positive (b) and only negative (\c) links.</p>
+
+<p>We then ran the network measure over these two datasets (two for each analysed social network). Results are quite interesting: the positive sub-network is assortative while the negative one is disassortative. This reflects the fact that individuals that have many negative ties are negatively connected with individuals that have few negative relations, while individuals that have many, or few, positive ties are positively connected with individuals that have respectively, many or few positive ties.</p>
+
+<figure>
+  <img src="images/result_slashdot.png#floatleft"/>
+</figure>
+
+<p>The left hand side figure (Fig.2) shows a subset of Slashdot’s network. Red links represent negative relationships between nodes, green links positive ones. From this picture it is clear that the way with which nodes connected is influenced by the nature of the relationships: people that make many enemies are connected with people that make few enemies, while the opposite happens for friend relationships.</p>
+
+<p>We were curious to understand why this happens. Is it possible to find the mechanisms that reproduce these two distinctive patterns for the positive and the negative sub-networks? We propose a model to analyse the interplay between network topology and sign of links, and uncover the conditions that underpin the emergence of the degree correlations observed in the data.</p>
+
+<p>The model is simple: we first create a network which is assortative; we label every node with two possible label, A or B, with different probability: a node belongs to the group A with probability <em>m</em>, while with probability 1-m to group B (see Fig.3). Once everything is ready, we must find a
+<figure>
+  <img src="images/due-gruppi.png#floatright"/>
+</figure>
+rule to assign a sign over each link: links within a group are positive while links across groups are negative.</p>
+
+<p>In order to reproduce the empirical finding we found three fundamental mechanisms:</p>
+
+<ul>
+<li>an assortative unsigned network;</li>
+<li>the groups of nodes are of different size;</li>
+<li>the signed global network is structurally balanced.</li>
+</ul>
+
+<hr />
+
+<p>If I have made you curious, you can find more about this work <a href="https://www.sciencedirect.com/science/article/pii/S0378437114010334">here</a>.</p>
+
+<p>V. Ciotti, G. Bianconi, A. Capocci, F. Colaiori, and P. Panzarasa (2015). Degree correlations in signed social networks. Physica A: Statistical Mechanics and its Applications 422: 25-39</p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://valkiii.github.io/" style="background-image: url(/images/avatar.png)"><span class="hidden">Valerio Ciotti's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://valkiii.github.io/">Valerio Ciotti</a></h4>
+  
+  <p>Data Scientist, Open Source enthusiast</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">London, UK</span>
+    
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Signed%20networks%20-%20or%20how%20can%20you%20understand%20sentiment%20in%20a%20network&nbsp;-&nbsp;Valerio%27s%20Blog&amp;url=https%3a%2f%2fvalkiii.github.io%2fsigned-networks-or-how-can-you-understand-sentiment-in-a-network%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvalkiii.github.io%2fsigned-networks-or-how-can-you-understand-sentiment-in-a-network%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fvalkiii.github.io%2fsigned-networks-or-how-can-you-understand-sentiment-in-a-network%2f&amp;description=Signed%20networks%20-%20or%20how%20can%20you%20understand%20sentiment%20in%20a%20network"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fvalkiii.github.io%2fsigned-networks-or-how-can-you-understand-sentiment-in-a-network%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="background-image: url(/images/citations/writing.jpg)" href="https://valkiii.github.io/did-you-remember-to-cite/">
+          <section class="post">
+              <h2>Did you remember to cite?</h2>
+              
+          </section>
+      </a>
+  
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Valerio&#39;s Blog</a> VC 2020</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://valkiii.github.io/js/jquery.js"></script>
+    <script type="text/javascript" src="https://valkiii.github.io/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://valkiii.github.io/js/index.js"></script>
+    
+</body>
+</html>
+

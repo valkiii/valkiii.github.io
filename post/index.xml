@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Valerio&#39;s Blog</title>
-    <link>https://valkiii.github.io/</link>
-    <description>Recent content on Valerio&#39;s Blog</description>
+    <title>Post on Valerio&#39;s Blog</title>
+    <link>https://valkiii.github.io/post/</link>
+    <description>Recent content in Post on Valerio&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>VC 2020</copyright>
     <lastBuildDate>Sat, 15 Aug 2020 19:11:15 +0100</lastBuildDate>
     
-	<atom:link href="https://valkiii.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://valkiii.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,15 +20,6 @@
       <guid>https://valkiii.github.io/peoples-connections-as-the-source-of-early-stage-startups-success/</guid>
       <description>The Italian translation of the common English saying “a friend is worth his weight in gold” is “who finds a friend, discovers a treasure”. In the startup ecosystem we can venture that “who finds the right team, discovers a unicorn”.
 For early stage startups, a key source of success lies in its team.These people will have the responsibilities to develop and transform what is only an idea into a tangible product or asset.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://valkiii.github.io/about/</link>
-      <pubDate>Fri, 14 Aug 2020 13:45:27 +0100</pubDate>
-      
-      <guid>https://valkiii.github.io/about/</guid>
-      <description>This is just a test</description>
     </item>
     
     <item>
@@ -56,16 +47,6 @@ For early stage startups, a key source of success lies in its team.These people 
       
       <guid>https://valkiii.github.io/signed-networks-or-how-can-you-understand-sentiment-in-a-network/</guid>
       <description>Research in the complex network domain seems to converge on the idea that, unlike other types of networks (e.g., technological and biological), social networks (e.g., online social networks and scientific collaboration networks) share a distinctive empirical regularity: that the number of neighbouring nodes tend to be correlated. Nodes with many friends are connected with nodes that have many friends, while nodes with few friends are connected with nodes with few friends.</description>
-    </item>
-    
-    <item>
-      <title>My Academic Life</title>
-      <link>https://valkiii.github.io/academia/</link>
-      <pubDate>Thu, 21 Mar 2019 17:51:00 +0000</pubDate>
-      
-      <guid>https://valkiii.github.io/academia/</guid>
-      <description>Education Doctor of Philosophy (Ph.D.) in Applied Mathematics (2013 - 2017)    
-My research was broadly concerned with collaborative social networks, the antecedents and consequences of group formation, and social capital. I am interested primarily in uncovering the network mechanisms that are responsible for forging, maintaining, and severing social relationships among individuals over time. I am interested in the structural foundations of economic performance, scientific success, and artistic creativity.</description>
     </item>
     
   </channel>
