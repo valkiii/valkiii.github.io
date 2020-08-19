@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://valkiii.github.io/publications/</loc>
+    <lastmod>2020-08-19T21:55:17+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://valkiii.github.io/about/</loc>
     <lastmod>2020-08-16T11:56:23+01:00</lastmod>
   </url>
@@ -49,7 +54,7 @@
   
   <url>
     <loc>https://valkiii.github.io/</loc>
-    <lastmod>2020-08-16T11:56:23+01:00</lastmod>
+    <lastmod>2020-08-19T21:55:17+01:00</lastmod>
     <priority>0</priority>
   </url>
   
