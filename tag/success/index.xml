@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Success | VC</title>
+    <link>https://valkiii.github.io/tag/success/</link>
+      <atom:link href="https://valkiii.github.io/tag/success/index.xml" rel="self" type="application/rss+xml" />
+    <description>Success</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
+      <title>Success</title>
+      <link>https://valkiii.github.io/tag/success/</link>
+    </image>
+    
+    <item>
+      <title>Predicting success in the worldwide start-up network</title>
+      <link>https://valkiii.github.io/publication/startups/</link>
+      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/startups/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

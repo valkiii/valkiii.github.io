@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Books | VC</title>
+    <link>https://valkiii.github.io/tag/books/</link>
+      <atom:link href="https://valkiii.github.io/tag/books/index.xml" rel="self" type="application/rss+xml" />
+    <description>Books</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
+      <title>Books</title>
+      <link>https://valkiii.github.io/tag/books/</link>
+    </image>
+    
+    <item>
+      <title>📚 Bookshelf 2022 📚</title>
+      <link>https://valkiii.github.io/post/bookshelf/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/post/bookshelf/</guid>
+      <description>&lt;h2 id=&#34;currently-reading&#34;&gt;&lt;strong&gt;Currently Reading&lt;/strong&gt;&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;--foundation---isaac-asimov&#34;&gt;- Foundation - Isaac Asimov&lt;/h3&gt;
+&lt;h3 id=&#34;--creativity-inc---amy-wallace--edwin-catmull&#34;&gt;- Creativity Inc. - Amy Wallace &amp;amp; Edwin Catmull&lt;/h3&gt;
+&lt;h3 id=&#34;--what-do-you-care-what-other-people-think---richard-feynman&#34;&gt;- What Do You Care What Other People Think? - Richard Feynman&lt;/h3&gt;
+&lt;h3 id=&#34;--the-restaurant-at-the-end-of-the-universe---douglas-adams&#34;&gt;- The restaurant at the end of the universe - Douglas Adams&lt;/h3&gt;
+&lt;h3 id=&#34;--sapiens-a-graphic-history-vol-2---vandermeulen-casanave&#34;&gt;- Sapiens, A graphic history vol 2 - Vandermeulen, Casanave&lt;/h3&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;waiting-on-the-bookshelf&#34;&gt;&lt;strong&gt;Waiting on the bookshelf&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;study-books&#34; style=&#34;color: green&#34;&gt;Study books&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Bayesian reasoning and machine learning - Barber&lt;/li&gt;
+&lt;li&gt;Graph Machine Learning - Stamile, Marzullo, Deusebio&lt;/li&gt;
+&lt;li&gt;Probabilistic Deep Learning - Durr, Sick&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comics--graphic-novels&#34; style=&#34;color: green&#34;&gt;Comics &amp;amp; Graphic Novels&lt;/h3&gt;
+&lt;h3 id=&#34;pop-science&#34; style=&#34;color: green&#34;&gt;Pop science&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Dio gioca a dadi? - Stewart&lt;/li&gt;
+&lt;li&gt;Caos - Malvaldi, Marmi&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
