@@ -48,7 +48,8 @@
       <link>https://valkiii.github.io/project/nannypi/</link>
       <pubDate>Thu, 26 Jan 2023 00:00:00 +0000</pubDate>
       <guid>https://valkiii.github.io/project/nannypi/</guid>
-      <description>&lt;p&gt;TBA&lt;/p&gt;
+      <description>&lt;iframe title=&#34;Embedded cell output&#34; src=&#34;https://embed.deepnote.com/c3989ec9-95f0-4599-901b-e2af67fb864c/54f7157aa99c4e29b82a750c9ce1e3da/487a5e793e424c45852ac44283e346d7?height=152&#34; height=&#34;152&#34; width=&#34;500&#34;/&gt;
+&lt;p&gt;TBA&lt;/p&gt;
 </description>
     </item>
     
@@ -103,7 +104,16 @@
       <link>https://valkiii.github.io/publication/citation/</link>
       <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
       <guid>https://valkiii.github.io/publication/citation/</guid>
-      <description></description>
+      <description>&lt;div&gt;Number of visitors: &lt;div id=&#34;stats&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script&gt;
+    var r = new XMLHttpRequest();
+    r.addEventListener(&#39;load&#39;, function() {
+        document.querySelector(&#39;#stats&#39;).innerText = JSON.parse(this.responseText).count_unique
+    })
+    r.open(&#39;GET&#39;, &#39;https://valkiii.goatcounter.com/counter/&#39; + encodeURIComponent(location.pathname) + &#39;.json&#39;)
+    r.send()
+&lt;/script&gt;
+</description>
     </item>
     
     <item>
