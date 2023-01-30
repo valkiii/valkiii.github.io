@@ -33,7 +33,9 @@
       <link>https://valkiii.github.io/publication/citation/</link>
       <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
       <guid>https://valkiii.github.io/publication/citation/</guid>
-      <description>&lt;div&gt;Number of visitors: &lt;div id=&#34;stats&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+      <description>&lt;script data-goatcounter=&#34;https://valkiii.goatcounter.com/count&#34;
+        async src=&#34;//gc.zgo.at/count.js&#34;&gt;&lt;/script&gt;
+&lt;div&gt;Number of visitors: &lt;div id=&#34;stats&#34;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;script&gt;
     var r = new XMLHttpRequest();
     r.addEventListener(&#39;load&#39;, function() {
