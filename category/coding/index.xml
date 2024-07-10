@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bash | VC</title>
-    <link>https://valkiii.github.io/tag/bash/</link>
-      <atom:link href="https://valkiii.github.io/tag/bash/index.xml" rel="self" type="application/rss+xml" />
-    <description>Bash</description>
+    <title>Coding | VC</title>
+    <link>https://valkiii.github.io/category/coding/</link>
+      <atom:link href="https://valkiii.github.io/category/coding/index.xml" rel="self" type="application/rss+xml" />
+    <description>Coding</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 28 Jan 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
-      <title>Bash</title>
-      <link>https://valkiii.github.io/tag/bash/</link>
+      <title>Coding</title>
+      <link>https://valkiii.github.io/category/coding/</link>
     </image>
     
     <item>

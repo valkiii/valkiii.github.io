@@ -5,12 +5,33 @@
     <link>https://valkiii.github.io/post/</link>
       <atom:link href="https://valkiii.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 28 Jan 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>https://valkiii.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Bash functions</title>
+      <link>https://valkiii.github.io/post/bash-alias/</link>
+      <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/post/bash-alias/</guid>
+      <description>&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;I am grateful that Hugo and Github (and their communit of developers) exist, otherwise I would not have been able to create this website in the first place. However, if you do not spend too much time digging into how everything works, you may end up feeling lost.&lt;/p&gt;
+&lt;p&gt;I always had a hard time figuring out all the different steps to modify my website locally, push the changes on my repo, and then see them appear (magically) on my github page. To be honest, &lt;del&gt;spending&lt;/del&gt; investing a bit of time understanding how all parts interact with one another is not that difficult but, let&amp;rsquo;s be honest, I always first dirty my hands until I can&amp;rsquo;t take it anymore, and finally end up reading about how things are built and meant to work. Note for myself, &lt;mark&gt;investing time studying, it&amp;rsquo;s always the right starting point&lt;/mark&gt;.&lt;/p&gt;
+&lt;p&gt;I think I finally found a way to help myself automating the process of updating my blog (and hopefully keep writing on it more than before).&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;how-i-structured-the-web-site&#34;&gt;How I structured the web site&lt;/h2&gt;
+&lt;p&gt;To keep things easy, I have now two repos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;one where I develop locally my website using the theme from wowchemy, which goes under the name &lt;code&gt;blog&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;one that has the website name &lt;code&gt;valkiii.github.io&lt;/code&gt; and where I transfer the &lt;code&gt;public&lt;/code&gt; content of the &lt;code&gt;blog&lt;/code&gt; repo.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+    </item>
     
     <item>
       <title>📚 Bookshelf 📚</title>
