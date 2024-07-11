@@ -5,7 +5,7 @@
     <link>https://valkiii.github.io/</link>
       <atom:link href="https://valkiii.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>VC</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 28 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
       <title>VC</title>
@@ -13,15 +13,15 @@
     </image>
     
     <item>
-      <title>Bash functions</title>
+      <title>Automating Your Website Updates with Hugo and GitHub Pages</title>
       <link>https://valkiii.github.io/post/bash-alias/</link>
-      <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
       <guid>https://valkiii.github.io/post/bash-alias/</guid>
       <description>&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
 &lt;hr&gt;
-&lt;p&gt;I am grateful that Hugo and Github (and their communit of developers) exist, otherwise I would not have been able to create this website in the first place. However, if you do not spend too much time digging into how everything works, you may end up feeling lost.&lt;/p&gt;
-&lt;p&gt;I always had a hard time figuring out all the different steps to modify my website locally, push the changes on my repo, and then see them appear (magically) on my github page. To be honest, &lt;del&gt;spending&lt;/del&gt; investing a bit of time understanding how all parts interact with one another is not that difficult but, let&amp;rsquo;s be honest, I always first dirty my hands until I can&amp;rsquo;t take it anymore, and finally end up reading about how things are built and meant to work. Note for myself, &lt;mark&gt;investing time studying, it&amp;rsquo;s always the right starting point&lt;/mark&gt;.&lt;/p&gt;
-&lt;p&gt;I think I finally found a way to help myself automating the process of updating my blog (and hopefully keep writing on it more than before).&lt;/p&gt;
+&lt;p&gt;I am grateful that Hugo and GitHub (and their community of developers) exist, otherwise I would not have been able to create this website in the first place. However, if you do not spend too much time digging into how everything works, you may end up feeling lost.&lt;/p&gt;
+&lt;p&gt;I always had a hard time figuring out all the different steps to modify my website locally, push the changes to my repository, and then see them appear (magically) on my GitHub Pages site. To be honest, investing a bit of time understanding how all parts interact with one another is not that difficult. But, let&amp;rsquo;s be honest, I always first dirty my hands until I can&amp;rsquo;t take it anymore, and finally end up reading about how things are built and meant to work. Note to myself, &lt;mark&gt;investing time studying, it&amp;rsquo;s always the right starting point&lt;/mark&gt;.&lt;/p&gt;
+&lt;p&gt;I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;how-i-structured-the-web-site&#34;&gt;How I structured the web site&lt;/h2&gt;
 &lt;p&gt;To keep things easy, I have now two repos:&lt;/p&gt;
@@ -30,6 +30,48 @@
 &lt;li&gt;one that has the website name &lt;code&gt;valkiii.github.io&lt;/code&gt; and where I transfer the &lt;code&gt;public&lt;/code&gt; content of the &lt;code&gt;blog&lt;/code&gt; repo.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
+&lt;p&gt;I decided that I wanted a simple command to run all this. To do so, I wrote a simple Bash function in my &lt;code&gt;.bashrc&lt;/code&gt; file containing the following:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;alt text&#34;
+           src=&#34;https://valkiii.github.io/post/bash-alias/bash_update.svg&#34;
+           loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s break down what this function does: First it launches &lt;code&gt;hugo&lt;/code&gt; to build the website, generating the static files in the public directory. Then I run &lt;code&gt;rsync -a public/* ../valkiii.github.io/.&lt;/code&gt; to sync the contents of the public directory to the root of my GitHub Pages repository (&lt;code&gt;valkiii.github.io&lt;/code&gt; in this example). I added the -a flag to ensure that all files and directories are copied recursively while preserving permissions and other attributes.&lt;/p&gt;
+&lt;p&gt;Then it&amp;rsquo;s time to add all changes in the current directory (my Hugo project directory) for committing with &lt;code&gt;git add --all&lt;/code&gt;. There is not a &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; with the only excpection that the message that we add the commit get provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;). These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.&lt;/p&gt;
+&lt;div class=&#34;container&#34;&gt;
+  &lt;div class=&#34;quote&#34;&gt;
+    &lt;div class=&#34;rectangle&#34;&gt;&lt;/div&gt;
+    &lt;p class=&#34;large-text&#34;&gt;&#34;Investing time studying, it&#39;s always the right starting point&#34;&lt;/p&gt;
+  &lt;/div&gt;
+   &lt;p&gt;
+    Then it&#39;s time to add all changes in the current directory (my Hugo project directory) for
+    committing with &lt;code&gt;git add --all&lt;/code&gt;. There is not a &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &#34;$1&#34;&lt;/code&gt; with the only exception that the message that we add the commit get provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;).
+  &lt;/p&gt;
+&lt;/div&gt;
+ These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.
+&lt;p&gt;&lt;br&gt;Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so first I go back to my repo folder &lt;code&gt;cd ../valkiii.github.io&lt;/code&gt;, then like before, git add, commit and push all changes with
+&lt;code&gt;git add --all&lt;/code&gt;, &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; and &lt;code&gt;git push&lt;/code&gt; and finally go back to the blog folder in order to maybe continue modify and render my website locally with &lt;code&gt;cd ../blog/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To use this function, save it in your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.bash_profile&lt;/code&gt; file and source the file using source &lt;code&gt;~/.bashrc&lt;/code&gt; to make the function available in your terminal session. Then, you can simply run update_website &amp;ldquo;Your commit message&amp;rdquo; whenever you want to build and deploy your website with a single command.&lt;/p&gt;
+&lt;p&gt;Note that this script assumes that your blog and &lt;code&gt;valkiii.github.io&lt;/code&gt; repositories are in the same parent directory.&lt;/p&gt;
+&lt;p&gt;By automating the build and deployment process with a Bash function, you can save time and ensure consistency in your website updates. Give it a try and adapt it to fit your own website setup!&lt;/p&gt;
 </description>
     </item>
     
