@@ -54,8 +54,7 @@
            loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s break down what this function does: First it launches &lt;code&gt;hugo&lt;/code&gt; to build the website, generating the static files in the public directory. Then I run &lt;code&gt;rsync -a public/* ../valkiii.github.io/.&lt;/code&gt; to sync the contents of the public directory to the root of my GitHub Pages repository (&lt;code&gt;valkiii.github.io&lt;/code&gt; in this example). I added the -a flag to ensure that all files and directories are copied recursively while preserving permissions and other attributes.&lt;/p&gt;
-&lt;p&gt;Then it&amp;rsquo;s time to add all changes in the current directory (my Hugo project directory) for committing with &lt;code&gt;git add --all&lt;/code&gt;. There is no &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; with the only exception being that the commit message is provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;). These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s break down what this function does: First it launches &lt;code&gt;hugo&lt;/code&gt; to build the website, generating the static files in the public directory. Then I run &lt;code&gt;rsync -a public/* ../valkiii.github.io/.&lt;/code&gt; to sync the contents of the public directory to the root of my GitHub Pages repository (&lt;code&gt;valkiii.github.io&lt;/code&gt; in this example). I added the &lt;code&gt;-a&lt;/code&gt; flag to ensure that all files and directories are copied recursively while preserving permissions and other attributes.&lt;/p&gt;
 &lt;div class=&#34;container&#34;&gt;
   &lt;div class=&#34;quote&#34;&gt;
     &lt;div class=&#34;quote-content&#34;&gt;
