@@ -58,16 +58,17 @@
 &lt;p&gt;Then it&amp;rsquo;s time to add all changes in the current directory (my Hugo project directory) for committing with &lt;code&gt;git add --all&lt;/code&gt;. There is no &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; with the only exception being that the commit message is provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;). These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.&lt;/p&gt;
 &lt;div class=&#34;container&#34;&gt;
   &lt;div class=&#34;quote&#34;&gt;
-    &lt;div class=&#34;rectangle&#34;&gt;&lt;/div&gt;
-    &lt;p class=&#34;large-text&#34;&gt;&#34;Investing time studying, is always the right starting point&#34;&lt;/p&gt;
+    &lt;div class=&#34;quote-content&#34;&gt;
+      &lt;div class=&#34;rectangle&#34;&gt;&lt;/div&gt;
+      &lt;p class=&#34;large-text&#34;&gt;&#34;Investing time studying, is always the right starting point&#34;&lt;/p&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-   &lt;p&gt;
-    Then it&#39;s time to add all changes in the current directory (my Hugo project directory) for
-    committing with &lt;code&gt;git add --all&lt;/code&gt;. There is not a &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &#34;$1&#34;&lt;/code&gt; with the only exception that the message that we add the commit get provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;).
+  &lt;p&gt;
+  Then it&#39;s time to add all changes in the current directory (my Hugo project directory) for committing with &lt;code&gt;git add --all&lt;/code&gt;. There is not a &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &#34;$1&#34;&lt;/code&gt; with the only exception that the message that we add the commit get provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;).
   &lt;/p&gt;
 &lt;/div&gt;
- These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.
-&lt;p&gt;&lt;br&gt;Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so, fI first go back to my repo folder with &lt;code&gt;cd ../valkiii.github.io&lt;/code&gt;, then, like before, I git add, commit, and push all changes with &lt;code&gt;git add --all&lt;/code&gt;, &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; and &lt;code&gt;git push&lt;/code&gt;. Finally, I go back to the blog folder to continue modifying and rendering my website locally with &lt;code&gt;cd ../blog/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.&lt;/p&gt;
+&lt;p&gt;Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so, fI first go back to my repo folder with &lt;code&gt;cd ../valkiii.github.io&lt;/code&gt;, then, like before, I git add, commit, and push all changes with &lt;code&gt;git add --all&lt;/code&gt;, &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; and &lt;code&gt;git push&lt;/code&gt;. Finally, I go back to the blog folder to continue modifying and rendering my website locally with &lt;code&gt;cd ../blog/&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To use this function, save it in your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.bash_profile&lt;/code&gt; file and source the file using source &lt;code&gt;~/.bashrc&lt;/code&gt; to make the function available in your terminal session. Then, you can simply run update_website &amp;ldquo;Your commit message&amp;rdquo; whenever you want to build and deploy your website with a single command.&lt;/p&gt;
 &lt;p&gt;Note that this script assumes that your blog and &lt;code&gt;valkiii.github.io&lt;/code&gt; repositories are in the same parent directory.&lt;/p&gt;
 &lt;p&gt;By automating the build and deployment process with a Bash function, you can save time and ensure consistency in your website updates. Give it a try and adapt it to fit your own website setup!&lt;/p&gt;
