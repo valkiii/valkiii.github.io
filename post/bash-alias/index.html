@@ -60,7 +60,7 @@
   
     
   
-  <meta name="description" content="I was looking to find a way to automate the process behind updating my site, and I found one." />
+  <meta name="description" content="I was looking for a way to automate the process behind updating my site, and I found one." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://valkiii.github.io/post/bash-alias/" />
@@ -300,7 +300,7 @@
   <meta property="og:site_name" content="VC" />
   <meta property="og:url" content="https://valkiii.github.io/post/bash-alias/" />
   <meta property="og:title" content="Automating Your Website Updates with Hugo and GitHub Pages | VC" />
-  <meta property="og:description" content="I was looking to find a way to automate the process behind updating my site, and I found one." /><meta property="og:image" content="https://valkiii.github.io/post/bash-alias/featured.png" />
+  <meta property="og:description" content="I was looking for a way to automate the process behind updating my site, and I found one." /><meta property="og:image" content="https://valkiii.github.io/post/bash-alias/featured.png" />
     <meta property="twitter:image" content="https://valkiii.github.io/post/bash-alias/featured.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -357,7 +357,7 @@
       "url": "https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "I was looking to find a way to automate the process behind updating my site, and I found one."
+  "description": "I was looking for a way to automate the process behind updating my site, and I found one."
 }
 </script>
 
@@ -817,15 +817,14 @@
     <div class="article-style">
       <h1 id="heading"></h1>
 <hr>
-<p>I am grateful that Hugo and GitHub (and their community of developers) exist, otherwise I would not have been able to create this website in the first place. However, if you do not spend too much time digging into how everything works, you may end up feeling lost.</p>
-<p>I always had a hard time figuring out all the different steps to modify my website locally, push the changes to my repository, and then see them appear (magically) on my GitHub Pages site. To be honest, investing a bit of time understanding how all parts interact with one another is not that difficult. But, let&rsquo;s be honest, I always first dirty my hands until I can&rsquo;t take it anymore, and finally end up reading about how things are built and meant to work. Note to myself, <mark>investing time studying, it&rsquo;s always the right starting point</mark>.</p>
-<p>I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.</p>
-<hr>
+<p>I am grateful that Hugo and GitHub (and their community of developers) exist; otherwise, I would not have been able to create this website in the first place. However, if you do not spend enough time digging into how everything works, you may end up feeling lost.</p>
+<p>I always had a hard time figuring out all the different steps to modify my website locally, push the changes to my repository, and then see them appear (magically) on my GitHub Pages site. To be honest, investing a bit of time understanding how all parts interact with one another is not that difficult. But let&rsquo;s be honest, I always dirty my hands first until I can&rsquo;t take it anymore and finally end up reading about how things are built and meant to work. Note to self: <mark>investing time studying is always the right starting point</mark>.</p>
+<h2 id="i-think-i-finally-found-a-way-to-help-myself-by-automating-the-process-of-updating-my-blog-and-hopefully-keep-writing-on-it-more-than-before-using-a-single-bash-function">I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.</h2>
 <h2 id="how-i-structured-the-web-site">How I structured the web site</h2>
 <p>To keep things easy, I have now two repos:</p>
 <ul>
-<li>one where I develop locally my website using the theme from wowchemy, which goes under the name <code>blog</code>.</li>
-<li>one that has the website name <code>valkiii.github.io</code> and where I transfer the <code>public</code> content of the <code>blog</code> repo.</li>
+<li>One where I develop my website locally using the theme from Wowchemy, which goes under the name <code>blog</code>.</li>
+<li>One that has the website name <code>valkiii.github.io</code> and where I transfer the <code>public</code> content of the <code>blog</code> repo.</li>
 </ul>
 <hr>
 <p>I decided that I wanted a simple command to run all this. To do so, I wrote a simple Bash function in my <code>.bashrc</code> file containing the following:</p>
@@ -853,11 +852,11 @@
   </div></figure>
 </p>
 <p>Let&rsquo;s break down what this function does: First it launches <code>hugo</code> to build the website, generating the static files in the public directory. Then I run <code>rsync -a public/* ../valkiii.github.io/.</code> to sync the contents of the public directory to the root of my GitHub Pages repository (<code>valkiii.github.io</code> in this example). I added the -a flag to ensure that all files and directories are copied recursively while preserving permissions and other attributes.</p>
-<p>Then it&rsquo;s time to add all changes in the current directory (my Hugo project directory) for committing with <code>git add --all</code>. There is not a <code>git add</code> without a following <code>git commit -m &quot;$1&quot;</code> with the only excpection that the message that we add the commit get provided as the first argument to the function (<code>$1</code>). These two commands are naturally followed by a <code>git push</code> that pushes the changes to the remote repository, updating the Hugo project repository.</p>
+<p>Then it&rsquo;s time to add all changes in the current directory (my Hugo project directory) for committing with <code>git add --all</code>. There is no <code>git add</code> without a following <code>git commit -m &quot;$1&quot;</code> with the only exception being that the commit message is provided as the first argument to the function (<code>$1</code>). These two commands are naturally followed by a <code>git push</code> that pushes the changes to the remote repository, updating the Hugo project repository.</p>
 <div class="container">
   <div class="quote">
     <div class="rectangle"></div>
-    <p class="large-text">"Investing time studying, it's always the right starting point"</p>
+    <p class="large-text">"Investing time studying, is always the right starting point"</p>
   </div>
    <p>
     Then it's time to add all changes in the current directory (my Hugo project directory) for
@@ -865,8 +864,7 @@
   </p>
 </div>
  These two commands are naturally followed by a <code>git push</code> that pushes the changes to the remote repository, updating the Hugo project repository.
-<p><br>Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so first I go back to my repo folder <code>cd ../valkiii.github.io</code>, then like before, git add, commit and push all changes with
-<code>git add --all</code>, <code>git commit -m &quot;$1&quot;</code> and <code>git push</code> and finally go back to the blog folder in order to maybe continue modify and render my website locally with <code>cd ../blog/</code>.</p>
+<p><br>Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so, fI first go back to my repo folder with <code>cd ../valkiii.github.io</code>, then, like before, I git add, commit, and push all changes with <code>git add --all</code>, <code>git commit -m &quot;$1&quot;</code> and <code>git push</code>. Finally, I go back to the blog folder to continue modifying and rendering my website locally with <code>cd ../blog/</code>.</p>
 <p>To use this function, save it in your <code>.bashrc</code> or <code>.bash_profile</code> file and source the file using source <code>~/.bashrc</code> to make the function available in your terminal session. Then, you can simply run update_website &ldquo;Your commit message&rdquo; whenever you want to build and deploy your website with a single command.</p>
 <p>Note that this script assumes that your blog and <code>valkiii.github.io</code> repositories are in the same parent directory.</p>
 <p>By automating the build and deployment process with a Bash function, you can save time and ensure consistency in your website updates. Give it a try and adapt it to fit your own website setup!</p>
