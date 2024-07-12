@@ -21,7 +21,8 @@
 &lt;hr&gt;
 &lt;p&gt;I am grateful that Hugo and GitHub (and their community of developers) exist; otherwise, I would not have been able to create this website in the first place. However, if you do not spend enough time digging into how everything works, you may end up feeling lost.&lt;/p&gt;
 &lt;p&gt;I always had a hard time figuring out all the different steps to modify my website locally, push the changes to my repository, and then see them appear (magically) on my GitHub Pages site. To be honest, investing a bit of time understanding how all parts interact with one another is not that difficult. But let&amp;rsquo;s be honest, I always dirty my hands first until I can&amp;rsquo;t take it anymore and finally end up reading about how things are built and meant to work. Note to self: &lt;mark&gt;investing time studying is always the right starting point&lt;/mark&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;i-think-i-finally-found-a-way-to-help-myself-by-automating-the-process-of-updating-my-blog-and-hopefully-keep-writing-on-it-more-than-before-using-a-single-bash-function&#34;&gt;I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.&lt;/h2&gt;
+&lt;p&gt;I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;how-i-structured-the-web-site&#34;&gt;How I structured the web site&lt;/h2&gt;
 &lt;p&gt;To keep things easy, I have now two repos:&lt;/p&gt;
 &lt;ul&gt;
