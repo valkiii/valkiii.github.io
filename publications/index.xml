@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications | VC</title>
+    <link>https://valkiii.github.io/publications/</link>
+      <atom:link href="https://valkiii.github.io/publications/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publications</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 26 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
+      <title>Publications</title>
+      <link>https://valkiii.github.io/publications/</link>
+    </image>
+    
+    <item>
+      <title>Positive and negative connections and homophily in complex networks</title>
+      <link>https://valkiii.github.io/publication/thesis/</link>
+      <pubDate>Thu, 26 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/thesis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Degree correlations in signed social networks</title>
+      <link>https://valkiii.github.io/publication/signed_networks/</link>
+      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/signed_networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Homophily and missing links in citation networks</title>
+      <link>https://valkiii.github.io/publication/citation/</link>
+      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/citation/</guid>
+      <description>&lt;script data-goatcounter=&#34;https://valkiii.goatcounter.com/count&#34;
+        async src=&#34;//gc.zgo.at/count.js&#34;&gt;&lt;/script&gt;
+&lt;div&gt;Number of visitors: &lt;div id=&#34;stats&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script&gt;
+    var r = new XMLHttpRequest();
+    r.addEventListener(&#39;load&#39;, function() {
+        document.querySelector(&#39;#stats&#39;).innerText = JSON.parse(this.responseText).count_unique
+    })
+    r.open(&#39;GET&#39;, &#39;https://valkiii.goatcounter.com/counter/&#39; + encodeURIComponent(location.pathname) + &#39;.json&#39;)
+    r.send()
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Predicting success in the worldwide start-up network</title>
+      <link>https://valkiii.github.io/publication/startups/</link>
+      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/startups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://valkiii.github.io/publication/featured/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/featured/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://valkiii.github.io/publication/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/publication/publications/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
