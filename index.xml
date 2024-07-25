@@ -1,313 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>VC</title>
-    <link>https://valkiii.github.io/</link>
-      <atom:link href="https://valkiii.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <description>VC</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <image>
-      <url>https://valkiii.github.io/media/icon_hu0b063770097ab0fc917a4fce022a42fb_4191_512x512_fill_lanczos_center_3.png</url>
-      <title>VC</title>
-      <link>https://valkiii.github.io/</link>
-    </image>
-    
+    <title>Valerio Ciotti</title>
+    <link>valkiii.github.io/</link>
+    <description>Recent content on Valerio Ciotti</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="valkiii.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automating Your Website Updates with Hugo and GitHub Pages</title>
-      <link>https://valkiii.github.io/post/bash-alias/</link>
+      <link>valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/post/bash-alias/</guid>
-      <description>&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;I am grateful that Hugo and GitHub (and their community of developers) exist; otherwise, I would not have been able to create this website in the first place. However, if you do not spend enough time digging into how everything works, you may end up feeling lost.&lt;/p&gt;
-&lt;p&gt;I always had a hard time figuring out all the different steps to modify my website locally, push the changes to my repository, and then see them appear (magically) on my GitHub Pages site. To be honest, investing a bit of time understanding how all parts interact with one another is not that difficult. But let&amp;rsquo;s be honest, I always dirty my hands first until I can&amp;rsquo;t take it anymore and finally end up reading about how things are built and meant to work. Note to self: &lt;mark&gt;investing time studying is always the right starting point&lt;/mark&gt;.&lt;/p&gt;
-&lt;p&gt;I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;how-i-structured-the-web-site&#34;&gt;How I structured the web site&lt;/h2&gt;
-&lt;p&gt;To keep things easy, I have now two repos:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;One where I develop my website locally using the theme from Wowchemy, which goes under the name &lt;code&gt;blog&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;One that has the website name &lt;code&gt;valkiii.github.io&lt;/code&gt; and where I transfer the &lt;code&gt;public&lt;/code&gt; content of the &lt;code&gt;blog&lt;/code&gt; repo.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;I decided that I wanted a simple command to run all this. To do so, I wrote a simple Bash function in my &lt;code&gt;.bashrc&lt;/code&gt; file containing the following:&lt;/p&gt;
-&lt;p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure  &gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;alt text&#34;
-           src=&#34;https://valkiii.github.io/post/bash-alias/bash_update.svg&#34;
-           loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;/figure&gt;
-&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s break down what this function does: First it launches &lt;code&gt;hugo&lt;/code&gt; to build the website, generating the static files in the public directory. Then I run &lt;code&gt;rsync -a public/* ../valkiii.github.io/.&lt;/code&gt; to sync the contents of the public directory to the root of my GitHub Pages repository (&lt;code&gt;valkiii.github.io&lt;/code&gt; in this example). I added the &lt;code&gt;-a&lt;/code&gt; flag to ensure that all files and directories are copied recursively while preserving permissions and other attributes.&lt;/p&gt;
-&lt;div class=&#34;container&#34;&gt;
-  &lt;div class=&#34;quote&#34;&gt;
-    &lt;div class=&#34;quote-content&#34;&gt;
-      &lt;div class=&#34;rectangle&#34;&gt;&lt;/div&gt;
-      &lt;p class=&#34;large-text&#34;&gt;&#34;Investing time studying, is always the right starting point&#34;&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;p&gt;
-  Then it&#39;s time to add all changes in the current directory (my Hugo project directory) for committing with &lt;code&gt;git add --all&lt;/code&gt;. There is not a &lt;code&gt;git add&lt;/code&gt; without a following &lt;code&gt;git commit -m &#34;$1&#34;&lt;/code&gt; with the only exception that the message that we add the commit get provided as the first argument to the function (&lt;code&gt;$1&lt;/code&gt;).
-  &lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;These two commands are naturally followed by a &lt;code&gt;git push&lt;/code&gt; that pushes the changes to the remote repository, updating the Hugo project repository.&lt;/p&gt;
-&lt;p&gt;Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so, fI first go back to my repo folder with &lt;code&gt;cd ../valkiii.github.io&lt;/code&gt;, then, like before, I git add, commit, and push all changes with &lt;code&gt;git add --all&lt;/code&gt;, &lt;code&gt;git commit -m &amp;quot;$1&amp;quot;&lt;/code&gt; and &lt;code&gt;git push&lt;/code&gt;. Finally, I go back to the blog folder to continue modifying and rendering my website locally with &lt;code&gt;cd ../blog/&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;To use this function, save it in your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.bash_profile&lt;/code&gt; file and source the file using source &lt;code&gt;~/.bashrc&lt;/code&gt; to make the function available in your terminal session. Then, you can simply run update_website &amp;ldquo;Your commit message&amp;rdquo; whenever you want to build and deploy your website with a single command.&lt;/p&gt;
-&lt;p&gt;Note that this script assumes that your blog and &lt;code&gt;valkiii.github.io&lt;/code&gt; repositories are in the same parent directory.&lt;/p&gt;
-&lt;p&gt;By automating the build and deployment process with a Bash function, you can save time and ensure consistency in your website updates. Give it a try and adapt it to fit your own website setup!&lt;/p&gt;
-</description>
+      <guid>valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</guid>
+      <description>I was looking for a way to automate the process behind updating my site, and I found one.</description>
     </item>
-    
     <item>
       <title>Positive and negative connections and homophily in complex networks</title>
-      <link>https://valkiii.github.io/publication/thesis/</link>
-      <pubDate>Thu, 26 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/publication/thesis/</guid>
-      <description></description>
+      <link>valkiii.github.io/publication/thesis/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>valkiii.github.io/publication/thesis/</guid>
+      <description>In this thesis I investigate the effects of positive and negative connections on social and organization networks, and the presence and role of homophily in networks of scientific collaborations and citations through the combination of methodologies borrowed from complexity science,statistics, and organizational sciences. In the first part of the thesis, I study the differences between patterns of positive and negative connections among individuals in two online signed social networks. Findings suggest that the sign of links in a social network shapes differently the network topology. There is a positive correlation between the degrees of two nodes, when they share a positive connection, and a negative correlation when they share a negative connection. I then move my focus to the study of a dataset on start-ups from which I construct and analyse the competition and mobility networks among companies. Results show that the presence of competition has negative effects on the mobility of people among companies and on the success of the start-up ecosystem of a nation. Competitive behaviours may also emerge in science. Therefore, in the second part of this thesis, I focus on a database of all papers and authors who have published in the American Physical Society (APS) journals. Through the analysis of the citation network of the APS, I propose a method that aims to statistically validate the presence (or absence) of a citation between any two articles. Results show that homophily is an important mechanism behind the citation between articles such as, the more two articles share similar bibliographies, i.e., deal with similar arguments, the more likely there is a citation between them. In the last chapter, I investigate the presence of homophily in the APS data set, this time at the level of the collaboration network among scientists. Results show that homophily can be responsible in fostering collaboration, but above a given point the effect of similarity decreases the probability of a collaboration. Additionally, I propose a model that successfully reproduces the empirical findings.</description>
     </item>
-    
     <item>
       <title>📚 Bookshelf 📚</title>
-      <link>https://valkiii.github.io/post/bookshelf/</link>
+      <link>valkiii.github.io/posts/2022/01/bookshelf/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/post/bookshelf/</guid>
-      <description>&lt;h2 id=&#34;currently-reading&#34;&gt;&lt;strong&gt;Currently Reading&lt;/strong&gt;&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;--foundation---span-stylecolor-greenisaac-asimovspan&#34;&gt;- Foundation - &lt;span style=&#34;color: green;&#34;&gt;Isaac Asimov&lt;/span&gt;&lt;/h3&gt;
-&lt;h3 id=&#34;--creativity-inc---span-stylecolor-greenamy-wallace--edwin-catmullspan&#34;&gt;- Creativity Inc. - &lt;span style=&#34;color: green;&#34;&gt;Amy Wallace &amp;amp; Edwin Catmull&lt;/span&gt;&lt;/h3&gt;
-&lt;h3 id=&#34;--what-do-you-care-what-other-people-think---span-stylecolor-greenrichard-feynmanspan&#34;&gt;- What Do You Care What Other People Think? - &lt;span style=&#34;color: green;&#34;&gt;Richard Feynman&lt;/span&gt;&lt;/h3&gt;
-&lt;h3 id=&#34;--the-restaurant-at-the-end-of-the-universe---span-stylecolor-greenouglas-adamsspan&#34;&gt;- The restaurant at the end of the universe - &lt;span style=&#34;color: green;&#34;&gt;ouglas Adams&lt;/span&gt;&lt;/h3&gt;
-&lt;h3 id=&#34;--sapiens-a-graphic-history-vol-2---span-stylecolor-greenvandermeulen-casanave-yuval-noahspan&#34;&gt;- Sapiens, A graphic history vol 2 - &lt;span style=&#34;color: green;&#34;&gt;Vandermeulen, Casanave, Yuval Noah&lt;/span&gt;&lt;/h3&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;waiting-on-the-bookshelf&#34;&gt;&lt;strong&gt;Waiting on the bookshelf&lt;/strong&gt;&lt;/h2&gt;
-&lt;h3 id=&#34;study-books&#34; style=&#34;color: green&#34;&gt;Study books&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Bayesian reasoning and machine learning - Barber&lt;/li&gt;
-&lt;li&gt;Graph Machine Learning - Stamile, Marzullo, Deusebio&lt;/li&gt;
-&lt;li&gt;Probabilistic Deep Learning - Durr, Sick&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comics--graphic-novels&#34; style=&#34;color: green&#34;&gt;Comics &amp;amp; Graphic Novels&lt;/h3&gt;
-&lt;h3 id=&#34;pop-science&#34; style=&#34;color: green&#34;&gt;Pop science&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Dio gioca a dadi? - Stewart&lt;/li&gt;
-&lt;li&gt;Caos - Malvaldi, Marmi&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>valkiii.github.io/posts/2022/01/bookshelf/</guid>
+      <description>List of books that I am currently reading&amp;hellip;</description>
     </item>
-    
     <item>
       <title>Degree correlations in signed social networks</title>
-      <link>https://valkiii.github.io/publication/signed_networks/</link>
-      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/publication/signed_networks/</guid>
-      <description></description>
+      <link>valkiii.github.io/publication/signed_networks/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>valkiii.github.io/publication/signed_networks/</guid>
+      <description>We investigate degree correlations in two online social networks where users are connected through different types of links. We find that, while subnetworks in which links have a positive connotation, such as endorsement and trust, are characterized by assortative mixing by degree, networks in which links have a negative connotation, such as disapproval and distrust, are characterized by disassortative patterns. We introduce a class of simple theoretical models to analyze the interplay between network topology and the superimposed structure based on the sign of links. Results uncover the conditions that underpin the emergence of the patterns observed in the data, namely the assortativity of positive subnetworks and the disassortativity of negative ones. We discuss the implications of our study for the analysis of signed complex networks.</description>
     </item>
-    
     <item>
       <title>Homophily and missing links in citation networks</title>
-      <link>https://valkiii.github.io/publication/citation/</link>
-      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/publication/citation/</guid>
-      <description>&lt;script data-goatcounter=&#34;https://valkiii.goatcounter.com/count&#34;
-        async src=&#34;//gc.zgo.at/count.js&#34;&gt;&lt;/script&gt;
-&lt;div&gt;Number of visitors: &lt;div id=&#34;stats&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;script&gt;
-    var r = new XMLHttpRequest();
-    r.addEventListener(&#39;load&#39;, function() {
-        document.querySelector(&#39;#stats&#39;).innerText = JSON.parse(this.responseText).count_unique
-    })
-    r.open(&#39;GET&#39;, &#39;https://valkiii.goatcounter.com/counter/&#39; + encodeURIComponent(location.pathname) + &#39;.json&#39;)
-    r.send()
-&lt;/script&gt;
-</description>
+      <link>valkiii.github.io/publication/citation/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>valkiii.github.io/publication/citation/</guid>
+      <description>Citation networks have been widely used to study the evolution of science through the lenses of the underlying patterns of knowledge flows among academic papers, authors, research sub-fields, and scientific journals. Here we focus on citation networks to cast light on the salience of homophily, namely the principle that similarity breeds connection, for knowledge transfer between papers. To this end, we assess the degree to which citations tend to occur between papers that are concerned with seemingly related topics or research problems. Drawing on a large data set of articles published in the journals of the American Physical Society between 1893 and 2009, we propose a novel method for measuring the similarity between articles through the statistical validation of the overlap between their bibliographies. Results suggest that the probability of a citation made by one article to another is indeed an increasing function of the similarity between the two articles. Our study also enables us to uncover missing citations between pairs of highly related articles, and may thus help identify barriers to effective knowledge flows. By quantifying the proportion of missing citations, we conduct a comparative assessment of distinct journals and research sub-fields in terms of their ability to facilitate or impede the dissemination of knowledge. Findings indicate that Electromagnetism and Interdisciplinary Physics are the two sub-fields in physics with the smallest percentage of missing citations. Moreover, knowledge transfer seems to be more effectively facilitated by journals of wide visibility, such as Physical Review Letters, than by lower-impact ones. Our study has important implications for authors, editors and reviewers of scientific journals, as well as public preprint repositories, as it provides a procedure for recommending relevant yet missing references and properly integrating bibliographies of papers.</description>
     </item>
-    
     <item>
       <title>Predicting success in the worldwide start-up network</title>
-      <link>https://valkiii.github.io/publication/startups/</link>
-      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/publication/startups/</guid>
-      <description></description>
+      <link>valkiii.github.io/publication/startups/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>valkiii.github.io/publication/startups/</guid>
+      <description>By drawing on large-scale online data we are able to construct and analyze the time-varying worldwide network of professional relationships among start-ups. The nodes of this network represent companies, while the links model the flow of employees and the associated transfer of know-how across companies. We use network centrality measures to assess, at an early stage, the likelihood of the long-term positive economic performance of a start-up. We find that the start-up network has predictive power and that by using network centrality we can provide valuable recommendations, sometimes doubling the current state of the art performance of venture capital funds. Our network-based approach supports the theory that the position of a start-up within its ecosystem is relevant for its future success, while at the same time it offers an effective complement to the labour-intensive screening processes of venture capital firms. Our results can also enable policy-makers and entrepreneurs to conduct a more objective assessment of the long-term potentials of innovation ecosystems, and to target their interventions accordingly.</description>
     </item>
-    
-    <item>
-      <title>Slides</title>
-      <link>https://valkiii.github.io/slides/example/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/slides/example/</guid>
-      <description>&lt;h1 id=&#34;create-slides-in-markdown-with-wowchemy&#34;&gt;Create slides in Markdown with Wowchemy&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wowchemy&lt;/a&gt; | &lt;a href=&#34;https://owchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
-&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
-&lt;li&gt;Supports speaker notes&lt;/li&gt;
-&lt;li&gt;Mobile friendly slides&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
-&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Code block:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
-if porridge == &amp;quot;blueberry&amp;quot;:
-    print(&amp;quot;Eating...&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
-&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
-&lt;p&gt;Block math:&lt;/p&gt;
-&lt;p&gt;$$
-f\left( x \right) = ;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
-$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
-&lt;p&gt;Make content appear incrementally&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
-{{% fragment %}} **Two** {{% /fragment %}}
-{{% fragment %}} Three {{% /fragment %}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-   One 
-&lt;/span&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-   **Two** 
-&lt;/span&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-   Three 
-&lt;/span&gt;
-&lt;hr&gt;
-&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
-&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
-- Only the speaker can read these notes
-- Press `S` key to view
-{{% /speaker_note %}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
-&lt;aside class=&#34;notes&#34;&gt;
-  &lt;ul&gt;
-&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
-&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/aside&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
-&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
-&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
-&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
-&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
-&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
-&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
-&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-
-&lt;section data-noprocess data-shortcode-slide
-  
-      
-      data-background-image=&#34;/media/boards.jpg&#34;
-  &gt;
-
-&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
-&lt;p&gt;Customize the slide style and background&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/media/boards.jpg&amp;quot; &amp;gt;}}
-{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
-{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
-&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
-.reveal section h2,
-.reveal section h3 {
-  color: navy;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/discussions&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://valkiii.github.io/admin/config.yml</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/admin/config.yml</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://valkiii.github.io/publication/featured/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/publication/featured/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://valkiii.github.io/publication/publications/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/publication/publications/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Who is</title>
-      <link>https://valkiii.github.io/whois/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/whois/</guid>
-      <description>&lt;p&gt;experience&lt;/p&gt;
-</description>
-    </item>
-    
   </channel>
 </rss>

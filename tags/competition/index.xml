@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Competition on Valerio Ciotti</title>
+    <link>valkiii.github.io/tags/competition/</link>
+    <description>Recent content in Competition on Valerio Ciotti</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="valkiii.github.io/tags/competition/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Positive and negative connections and homophily in complex networks</title>
+      <link>valkiii.github.io/publication/thesis/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>valkiii.github.io/publication/thesis/</guid>
+      <description>In this thesis I investigate the effects of positive and negative connections on social and organization networks, and the presence and role of homophily in networks of scientific collaborations and citations through the combination of methodologies borrowed from complexity science,statistics, and organizational sciences. In the first part of the thesis, I study the differences between patterns of positive and negative connections among individuals in two online signed social networks. Findings suggest that the sign of links in a social network shapes differently the network topology. There is a positive correlation between the degrees of two nodes, when they share a positive connection, and a negative correlation when they share a negative connection. I then move my focus to the study of a dataset on start-ups from which I construct and analyse the competition and mobility networks among companies. Results show that the presence of competition has negative effects on the mobility of people among companies and on the success of the start-up ecosystem of a nation. Competitive behaviours may also emerge in science. Therefore, in the second part of this thesis, I focus on a database of all papers and authors who have published in the American Physical Society (APS) journals. Through the analysis of the citation network of the APS, I propose a method that aims to statistically validate the presence (or absence) of a citation between any two articles. Results show that homophily is an important mechanism behind the citation between articles such as, the more two articles share similar bibliographies, i.e., deal with similar arguments, the more likely there is a citation between them. In the last chapter, I investigate the presence of homophily in the APS data set, this time at the level of the collaboration network among scientists. Results show that homophily can be responsible in fostering collaboration, but above a given point the effect of similarity decreases the probability of a collaboration. Additionally, I propose a model that successfully reproduces the empirical findings.</description>
+    </item>
+  </channel>
+</rss>

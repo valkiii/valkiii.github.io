@@ -1,3 +1,1 @@
 User-agent: *
-
-Sitemap: https://valkiii.github.io/sitemap.xml

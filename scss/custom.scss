@@ -1,0 +1,412 @@
+// Custom color variables
+$primary: rgb(8, 97, 60); 
+$secondary: #181d21;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #343a40;
+
+// Apply custom colors
+#navbar-main {
+    background-color: $primary !important;
+  }
+  
+  // Change navigation bar font color
+  #navbar-main .navbar-nav .nav-link {
+    color: #e4a811 !important; // Change this to your desired default font color
+  }
+  
+  // Change color for active/hover state
+  #navbar-main .navbar-nav .nav-link:hover {
+    color: #ffff66 !important;
+  }
+  
+  #navbar-main .navbar-nav .nav-link.active {
+    color: #081e6f !important;
+  }
+  
+  // Change site title color
+  #navbar-main .navbar-brand {
+    color: #dcc814 !important; // Change this to your desired color for the site title
+  }
+
+  body {
+    --color-bg: #{$body-bg};
+    --color-text: #{$body-color};
+    --color-primary: #{$primary};
+    --color-secondary: #{$secondary};
+    --color-border: #{$border-color};
+    --color-plus:#70b1f7;
+    --color-consultant:#c5e2ba;
+  }
+  
+  body.dark {
+    --color-bg: rgb(8, 97, 60);
+    --color-text: #f0f0f0;
+    --color-primary: #02210c;
+    --color-secondary: #a1a8ae;
+    --color-border: #2c2c2c;
+    --color-plus:#d9711cc4;
+    --color-consultant:#c5e2ba;
+  }
+  
+  #experience.home-section {
+    .timeline-content {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+  
+    .experience-title {
+      color: var(--color-plus);
+    }
+  
+    .experience-company {
+      color: var(--color-primary);
+    }
+  
+    .experience-location, .experience-date {
+      color: var(--color-secondary);
+    }
+  
+    .experience-expand {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+  
+    .experience-description {
+      color: var(--color-text);
+    }
+  }
+  
+  .timeline {
+    position: relative;
+    padding: 0;
+    list-style: none;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+//   .experience-card.consultant {
+//     background-color: var(--color-consultant);
+//     margin: 0px solid var(--color-consultant);
+//   }
+
+  .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    margin-left: -1px;
+    background-color: var(--color-secondary);
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    z-index: 100;
+  }
+  
+  .timeline-content {
+    width: 45%;
+    padding: 20px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    color: var(--color-text);
+  }
+  
+  .timeline-content:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .timeline-content-left {
+    margin-right: auto;
+  }
+  
+  .timeline-content-right {
+    margin-left: auto;
+  }
+  
+  .experience-card {
+    cursor: pointer;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .experience-title {
+    font-size: 5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--color-text);
+  }
+  
+  .experience-company {
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+  }
+  
+  .experience-location, .experience-date {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    margin-bottom: 5px;
+  }
+  
+  .experience-expand {
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin: 10px auto 0;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+  
+  .experience-card:hover .experience-expand {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+  }
+  
+  .experience-description {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+  
+  @media (max-width: 768px) {
+    .timeline:before {
+      left: 20px;
+    }
+    
+    .timeline-marker {
+      left: 20px;
+      margin-left: 0;
+    }
+    
+    .timeline-content {
+      width: calc(100% - 60px);
+      margin-left: 60px !important;
+      margin-right: 0 !important;
+    }
+  
+    .timeline-item {
+      width: 100%;
+    }
+  }
+  
+  .experience-card {
+    cursor: pointer;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .experience-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .experience-company {
+    font-size: 1rem;
+    color: #37b826;
+    margin-bottom: 5px;
+  }
+  
+  .experience-location, .experience-date {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+  }
+  
+  .experience-expand {
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #36a428;
+    margin: 10px auto 0;
+    border: 3px solid #36a428;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .experience-description {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;  // Reset text alignment for description
+  }
+  
+  @media (max-width: 768px) {
+    .timeline:before {
+      left: 20px;
+    }
+    
+    .timeline-marker {
+      left: 20px;
+      margin-left: 0;
+    }
+    
+    .timeline-content {
+      width: calc(100% - 60px);
+      margin-left: 60px !important;
+      margin-right: 0 !important;
+    }
+  
+    .timeline-item {
+      width: 100%;
+    }
+  }
+
+  .company-logo {
+    max-width: 100px;
+    max-height: 50px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  
+  .experience-card {
+    cursor: pointer;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+//   .experience-card.expanded {
+//     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+//   }
+  
+  .experience-expand {
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin: 10px auto 0;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+  
+  .experience-card:hover .experience-expand {
+    background-color: var(--color-plus);
+    color: #fff;
+  }
+
+  // .container {
+  //   display: flex;
+  // }
+  
+  // .container p {
+  //   margin-left: 20px;
+  // }
+  
+  // .highlight {
+  //   background-color: #d1ecf1;
+  //   padding: 10px;
+  //   margin-right: 20px;
+  //   flex: 0 0 200px;
+  // }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .container p {
+    margin-left: 20px;
+    flex: 1;
+  }
+  
+  .quote {
+    flex: 0 0 300px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    // background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+  }
+  
+  .quote-content {
+    position: relative;
+    left: -45px;
+    padding-left: 0px;
+  }
+  
+  .rectangle {
+    width: 20%;
+    height: 20px;
+    background-color: #0c5460;
+    margin-bottom: 10px;
+  }
+
+  .large-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 1px;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .quote {
+      flex-basis: auto;
+      margin-right: 0;
+    }
+  
+    .quote-content {
+      left: 0;
+      padding-left: 0;
+    }
+  
+    .container p {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
