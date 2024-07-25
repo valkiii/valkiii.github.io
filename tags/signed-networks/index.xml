@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Signed Networks on Valerio Ciotti</title>
-    <link>valkiii.github.io/tags/signed-networks/</link>
+    <link>https://valkiii.github.io/tags/signed-networks/</link>
     <description>Recent content in Signed Networks on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="valkiii.github.io/tags/signed-networks/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/tags/signed-networks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Degree correlations in signed social networks</title>
-      <link>valkiii.github.io/publication/signed_networks/</link>
+      <link>https://valkiii.github.io/publication/signed_networks/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/publication/signed_networks/</guid>
+      <guid>https://valkiii.github.io/publication/signed_networks/</guid>
       <description>We investigate degree correlations in two online social networks where users are connected through different types of links. We find that, while subnetworks in which links have a positive connotation, such as endorsement and trust, are characterized by assortative mixing by degree, networks in which links have a negative connotation, such as disapproval and distrust, are characterized by disassortative patterns. We introduce a class of simple theoretical models to analyze the interplay between network topology and the superimposed structure based on the sign of links. Results uncover the conditions that underpin the emergence of the patterns observed in the data, namely the assortativity of positive subnetworks and the disassortativity of negative ones. We discuss the implications of our study for the analysis of signed complex networks.</description>
     </item>
   </channel>

@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Valerio Ciotti</title>
-    <link>valkiii.github.io/whois/</link>
+    <link>https://valkiii.github.io/whois/</link>
     <description>Recent content on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="valkiii.github.io/whois/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/whois/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

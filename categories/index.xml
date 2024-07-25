@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Valerio Ciotti</title>
-    <link>valkiii.github.io/categories/</link>
+    <link>https://valkiii.github.io/categories/</link>
     <description>Recent content in Categories on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="valkiii.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Coding</title>
-      <link>valkiii.github.io/categories/coding/</link>
+      <link>https://valkiii.github.io/categories/coding/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/categories/coding/</guid>
+      <guid>https://valkiii.github.io/categories/coding/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
-      <link>valkiii.github.io/categories/optimization/</link>
+      <link>https://valkiii.github.io/categories/optimization/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/categories/optimization/</guid>
+      <guid>https://valkiii.github.io/categories/optimization/</guid>
       <description></description>
     </item>
     <item>
       <title>Free Time</title>
-      <link>valkiii.github.io/categories/free-time/</link>
+      <link>https://valkiii.github.io/categories/free-time/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/categories/free-time/</guid>
+      <guid>https://valkiii.github.io/categories/free-time/</guid>
       <description></description>
     </item>
     <item>
       <title>Study</title>
-      <link>valkiii.github.io/categories/study/</link>
+      <link>https://valkiii.github.io/categories/study/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/categories/study/</guid>
+      <guid>https://valkiii.github.io/categories/study/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Startups on Valerio Ciotti</title>
-    <link>valkiii.github.io/tags/startups/</link>
+    <link>https://valkiii.github.io/tags/startups/</link>
     <description>Recent content in Startups on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="valkiii.github.io/tags/startups/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/tags/startups/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Predicting success in the worldwide start-up network</title>
-      <link>valkiii.github.io/publication/startups/</link>
+      <link>https://valkiii.github.io/publication/startups/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/publication/startups/</guid>
+      <guid>https://valkiii.github.io/publication/startups/</guid>
       <description>By drawing on large-scale online data we are able to construct and analyze the time-varying worldwide network of professional relationships among start-ups. The nodes of this network represent companies, while the links model the flow of employees and the associated transfer of know-how across companies. We use network centrality measures to assess, at an early stage, the likelihood of the long-term positive economic performance of a start-up. We find that the start-up network has predictive power and that by using network centrality we can provide valuable recommendations, sometimes doubling the current state of the art performance of venture capital funds. Our network-based approach supports the theory that the position of a start-up within its ecosystem is relevant for its future success, while at the same time it offers an effective complement to the labour-intensive screening processes of venture capital firms. Our results can also enable policy-makers and entrepreneurs to conduct a more objective assessment of the long-term potentials of innovation ecosystems, and to target their interventions accordingly.</description>
     </item>
   </channel>

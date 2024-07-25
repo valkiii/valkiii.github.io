@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Coding on Valerio Ciotti</title>
-    <link>valkiii.github.io/tags/coding/</link>
+    <link>https://valkiii.github.io/tags/coding/</link>
     <description>Recent content in Coding on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="valkiii.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automating Your Website Updates with Hugo and GitHub Pages</title>
-      <link>valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</link>
+      <link>https://valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</guid>
+      <guid>https://valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</guid>
       <description>I was looking for a way to automate the process behind updating my site, and I found one.</description>
     </item>
   </channel>

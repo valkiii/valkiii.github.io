@@ -2,143 +2,143 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Valerio Ciotti</title>
-    <link>valkiii.github.io/tags/</link>
+    <link>https://valkiii.github.io/tags/</link>
     <description>Recent content in Tags on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="valkiii.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bash</title>
-      <link>valkiii.github.io/tags/bash/</link>
+      <link>https://valkiii.github.io/tags/bash/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/bash/</guid>
+      <guid>https://valkiii.github.io/tags/bash/</guid>
       <description></description>
     </item>
     <item>
       <title>Coding</title>
-      <link>valkiii.github.io/tags/coding/</link>
+      <link>https://valkiii.github.io/tags/coding/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/coding/</guid>
+      <guid>https://valkiii.github.io/tags/coding/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
-      <link>valkiii.github.io/tags/optimization/</link>
+      <link>https://valkiii.github.io/tags/optimization/</link>
       <pubDate>Thu, 11 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/optimization/</guid>
+      <guid>https://valkiii.github.io/tags/optimization/</guid>
       <description></description>
     </item>
     <item>
       <title>Bibliometric Techniques</title>
-      <link>valkiii.github.io/tags/bibliometric-techniques/</link>
+      <link>https://valkiii.github.io/tags/bibliometric-techniques/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/bibliometric-techniques/</guid>
+      <guid>https://valkiii.github.io/tags/bibliometric-techniques/</guid>
       <description></description>
     </item>
     <item>
       <title>Citation Networks</title>
-      <link>valkiii.github.io/tags/citation-networks/</link>
+      <link>https://valkiii.github.io/tags/citation-networks/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/citation-networks/</guid>
+      <guid>https://valkiii.github.io/tags/citation-networks/</guid>
       <description></description>
     </item>
     <item>
       <title>Competition</title>
-      <link>valkiii.github.io/tags/competition/</link>
+      <link>https://valkiii.github.io/tags/competition/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/competition/</guid>
+      <guid>https://valkiii.github.io/tags/competition/</guid>
       <description></description>
     </item>
     <item>
       <title>Complex Network</title>
-      <link>valkiii.github.io/tags/complex-network/</link>
+      <link>https://valkiii.github.io/tags/complex-network/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/complex-network/</guid>
+      <guid>https://valkiii.github.io/tags/complex-network/</guid>
       <description></description>
     </item>
     <item>
       <title>Homophily</title>
-      <link>valkiii.github.io/tags/homophily/</link>
+      <link>https://valkiii.github.io/tags/homophily/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/homophily/</guid>
+      <guid>https://valkiii.github.io/tags/homophily/</guid>
       <description></description>
     </item>
     <item>
       <title>Link Prediction</title>
-      <link>valkiii.github.io/tags/link-prediction/</link>
+      <link>https://valkiii.github.io/tags/link-prediction/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/link-prediction/</guid>
+      <guid>https://valkiii.github.io/tags/link-prediction/</guid>
       <description></description>
     </item>
     <item>
       <title>Mobility</title>
-      <link>valkiii.github.io/tags/mobility/</link>
+      <link>https://valkiii.github.io/tags/mobility/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/mobility/</guid>
+      <guid>https://valkiii.github.io/tags/mobility/</guid>
       <description></description>
     </item>
     <item>
       <title>Network Analysis</title>
-      <link>valkiii.github.io/tags/network-analysis/</link>
+      <link>https://valkiii.github.io/tags/network-analysis/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/network-analysis/</guid>
+      <guid>https://valkiii.github.io/tags/network-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Startups Network</title>
-      <link>valkiii.github.io/tags/startups-network/</link>
+      <link>https://valkiii.github.io/tags/startups-network/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/startups-network/</guid>
+      <guid>https://valkiii.github.io/tags/startups-network/</guid>
       <description></description>
     </item>
     <item>
       <title>Books</title>
-      <link>valkiii.github.io/tags/books/</link>
+      <link>https://valkiii.github.io/tags/books/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/books/</guid>
+      <guid>https://valkiii.github.io/tags/books/</guid>
       <description></description>
     </item>
     <item>
       <title>Study</title>
-      <link>valkiii.github.io/tags/study/</link>
+      <link>https://valkiii.github.io/tags/study/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/study/</guid>
+      <guid>https://valkiii.github.io/tags/study/</guid>
       <description></description>
     </item>
     <item>
       <title>Sentiment Analysis</title>
-      <link>valkiii.github.io/tags/sentiment-analysis/</link>
+      <link>https://valkiii.github.io/tags/sentiment-analysis/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/sentiment-analysis/</guid>
+      <guid>https://valkiii.github.io/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Signed Networks</title>
-      <link>valkiii.github.io/tags/signed-networks/</link>
+      <link>https://valkiii.github.io/tags/signed-networks/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/signed-networks/</guid>
+      <guid>https://valkiii.github.io/tags/signed-networks/</guid>
       <description></description>
     </item>
     <item>
       <title>Startups</title>
-      <link>valkiii.github.io/tags/startups/</link>
+      <link>https://valkiii.github.io/tags/startups/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/startups/</guid>
+      <guid>https://valkiii.github.io/tags/startups/</guid>
       <description></description>
     </item>
     <item>
       <title>Success</title>
-      <link>valkiii.github.io/tags/success/</link>
+      <link>https://valkiii.github.io/tags/success/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/success/</guid>
+      <guid>https://valkiii.github.io/tags/success/</guid>
       <description></description>
     </item>
     <item>
       <title>Unicorn</title>
-      <link>valkiii.github.io/tags/unicorn/</link>
+      <link>https://valkiii.github.io/tags/unicorn/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/tags/unicorn/</guid>
+      <guid>https://valkiii.github.io/tags/unicorn/</guid>
       <description></description>
     </item>
   </channel>

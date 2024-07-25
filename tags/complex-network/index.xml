@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Complex Network on Valerio Ciotti</title>
-    <link>valkiii.github.io/tags/complex-network/</link>
+    <link>https://valkiii.github.io/tags/complex-network/</link>
     <description>Recent content in Complex Network on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 26 Jan 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="valkiii.github.io/tags/complex-network/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://valkiii.github.io/tags/complex-network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Positive and negative connections and homophily in complex networks</title>
-      <link>valkiii.github.io/publication/thesis/</link>
+      <link>https://valkiii.github.io/publication/thesis/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/publication/thesis/</guid>
+      <guid>https://valkiii.github.io/publication/thesis/</guid>
       <description>In this thesis I investigate the effects of positive and negative connections on social and organization networks, and the presence and role of homophily in networks of scientific collaborations and citations through the combination of methodologies borrowed from complexity science,statistics, and organizational sciences. In the first part of the thesis, I study the differences between patterns of positive and negative connections among individuals in two online signed social networks. Findings suggest that the sign of links in a social network shapes differently the network topology. There is a positive correlation between the degrees of two nodes, when they share a positive connection, and a negative correlation when they share a negative connection. I then move my focus to the study of a dataset on start-ups from which I construct and analyse the competition and mobility networks among companies. Results show that the presence of competition has negative effects on the mobility of people among companies and on the success of the start-up ecosystem of a nation. Competitive behaviours may also emerge in science. Therefore, in the second part of this thesis, I focus on a database of all papers and authors who have published in the American Physical Society (APS) journals. Through the analysis of the citation network of the APS, I propose a method that aims to statistically validate the presence (or absence) of a citation between any two articles. Results show that homophily is an important mechanism behind the citation between articles such as, the more two articles share similar bibliographies, i.e., deal with similar arguments, the more likely there is a citation between them. In the last chapter, I investigate the presence of homophily in the APS data set, this time at the level of the collaboration network among scientists. Results show that homophily can be responsible in fostering collaboration, but above a given point the effect of similarity decreases the probability of a collaboration. Additionally, I propose a model that successfully reproduces the empirical findings.</description>
     </item>
     <item>
       <title>Degree correlations in signed social networks</title>
-      <link>valkiii.github.io/publication/signed_networks/</link>
+      <link>https://valkiii.github.io/publication/signed_networks/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/publication/signed_networks/</guid>
+      <guid>https://valkiii.github.io/publication/signed_networks/</guid>
       <description>We investigate degree correlations in two online social networks where users are connected through different types of links. We find that, while subnetworks in which links have a positive connotation, such as endorsement and trust, are characterized by assortative mixing by degree, networks in which links have a negative connotation, such as disapproval and distrust, are characterized by disassortative patterns. We introduce a class of simple theoretical models to analyze the interplay between network topology and the superimposed structure based on the sign of links. Results uncover the conditions that underpin the emergence of the patterns observed in the data, namely the assortativity of positive subnetworks and the disassortativity of negative ones. We discuss the implications of our study for the analysis of signed complex networks.</description>
     </item>
     <item>
       <title>Homophily and missing links in citation networks</title>
-      <link>valkiii.github.io/publication/citation/</link>
+      <link>https://valkiii.github.io/publication/citation/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/publication/citation/</guid>
+      <guid>https://valkiii.github.io/publication/citation/</guid>
       <description>Citation networks have been widely used to study the evolution of science through the lenses of the underlying patterns of knowledge flows among academic papers, authors, research sub-fields, and scientific journals. Here we focus on citation networks to cast light on the salience of homophily, namely the principle that similarity breeds connection, for knowledge transfer between papers. To this end, we assess the degree to which citations tend to occur between papers that are concerned with seemingly related topics or research problems. Drawing on a large data set of articles published in the journals of the American Physical Society between 1893 and 2009, we propose a novel method for measuring the similarity between articles through the statistical validation of the overlap between their bibliographies. Results suggest that the probability of a citation made by one article to another is indeed an increasing function of the similarity between the two articles. Our study also enables us to uncover missing citations between pairs of highly related articles, and may thus help identify barriers to effective knowledge flows. By quantifying the proportion of missing citations, we conduct a comparative assessment of distinct journals and research sub-fields in terms of their ability to facilitate or impede the dissemination of knowledge. Findings indicate that Electromagnetism and Interdisciplinary Physics are the two sub-fields in physics with the smallest percentage of missing citations. Moreover, knowledge transfer seems to be more effectively facilitated by journals of wide visibility, such as Physical Review Letters, than by lower-impact ones. Our study has important implications for authors, editors and reviewers of scientific journals, as well as public preprint repositories, as it provides a procedure for recommending relevant yet missing references and properly integrating bibliographies of papers.</description>
     </item>
     <item>
       <title>Predicting success in the worldwide start-up network</title>
-      <link>valkiii.github.io/publication/startups/</link>
+      <link>https://valkiii.github.io/publication/startups/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>valkiii.github.io/publication/startups/</guid>
+      <guid>https://valkiii.github.io/publication/startups/</guid>
       <description>By drawing on large-scale online data we are able to construct and analyze the time-varying worldwide network of professional relationships among start-ups. The nodes of this network represent companies, while the links model the flow of employees and the associated transfer of know-how across companies. We use network centrality measures to assess, at an early stage, the likelihood of the long-term positive economic performance of a start-up. We find that the start-up network has predictive power and that by using network centrality we can provide valuable recommendations, sometimes doubling the current state of the art performance of venture capital funds. Our network-based approach supports the theory that the position of a start-up within its ecosystem is relevant for its future success, while at the same time it offers an effective complement to the labour-intensive screening processes of venture capital firms. Our results can also enable policy-makers and entrepreneurs to conduct a more objective assessment of the long-term potentials of innovation ecosystems, and to target their interventions accordingly.</description>
     </item>
   </channel>
