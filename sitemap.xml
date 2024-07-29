@@ -32,39 +32,6 @@
     <loc>https://valkiii.github.io/</loc>
     <lastmod>2024-07-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://valkiii.github.io/tags/bibliometric-techniques/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/citation-networks/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/competition/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/complex-network/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/homophily/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/link-prediction/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/mobility/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/network-analysis/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/publication/thesis/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/publications/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/startups-network/</loc>
-    <lastmod>2023-01-26T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://valkiii.github.io/posts/2022/01/bookshelf/</loc>
     <lastmod>2023-01-26T00:00:00+00:00</lastmod>
   </url><url>
@@ -80,29 +47,62 @@
     <loc>https://valkiii.github.io/categories/study/</loc>
     <lastmod>2023-01-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://valkiii.github.io/publication/signed_networks/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <loc>https://valkiii.github.io/tags/complex-network/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://valkiii.github.io/publication/citation/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <loc>https://valkiii.github.io/tags/network-analysis/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/publication/startups/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://valkiii.github.io/tags/sentiment-analysis/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/signed-networks/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <loc>https://valkiii.github.io/publications/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/tags/startups/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/tags/success/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/tags/unicorn/</loc>
-    <lastmod>2021-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/bibliometric-techniques/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/citation-networks/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/competition/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/homophily/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/link-prediction/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/mobility/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/publication/thesis/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/startups-network/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/publication/citation/</loc>
+    <lastmod>2016-11-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/publication/signed_networks/</loc>
+    <lastmod>2015-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/sentiment-analysis/</loc>
+    <lastmod>2015-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/signed-networks/</loc>
+    <lastmod>2015-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/whois/</loc>
   </url><url>

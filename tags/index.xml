@@ -30,69 +30,6 @@
       <description></description>
     </item>
     <item>
-      <title>Bibliometric Techniques</title>
-      <link>https://valkiii.github.io/tags/bibliometric-techniques/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/bibliometric-techniques/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Citation Networks</title>
-      <link>https://valkiii.github.io/tags/citation-networks/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/citation-networks/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Competition</title>
-      <link>https://valkiii.github.io/tags/competition/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/competition/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Complex Network</title>
-      <link>https://valkiii.github.io/tags/complex-network/</link>
-      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/complex-network/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Homophily</title>
-      <link>https://valkiii.github.io/tags/homophily/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/homophily/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Link Prediction</title>
-      <link>https://valkiii.github.io/tags/link-prediction/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/link-prediction/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Mobility</title>
-      <link>https://valkiii.github.io/tags/mobility/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/mobility/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Network Analysis</title>
-      <link>https://valkiii.github.io/tags/network-analysis/</link>
-      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/network-analysis/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Startups Network</title>
-      <link>https://valkiii.github.io/tags/startups-network/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/startups-network/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Books</title>
       <link>https://valkiii.github.io/tags/books/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
@@ -107,17 +44,17 @@
       <description></description>
     </item>
     <item>
-      <title>Sentiment Analysis</title>
-      <link>https://valkiii.github.io/tags/sentiment-analysis/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/sentiment-analysis/</guid>
+      <title>Complex Network</title>
+      <link>https://valkiii.github.io/tags/complex-network/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/complex-network/</guid>
       <description></description>
     </item>
     <item>
-      <title>Signed Networks</title>
-      <link>https://valkiii.github.io/tags/signed-networks/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://valkiii.github.io/tags/signed-networks/</guid>
+      <title>Network Analysis</title>
+      <link>https://valkiii.github.io/tags/network-analysis/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/network-analysis/</guid>
       <description></description>
     </item>
     <item>
@@ -139,6 +76,69 @@
       <link>https://valkiii.github.io/tags/unicorn/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       <guid>https://valkiii.github.io/tags/unicorn/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bibliometric Techniques</title>
+      <link>https://valkiii.github.io/tags/bibliometric-techniques/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/bibliometric-techniques/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Citation Networks</title>
+      <link>https://valkiii.github.io/tags/citation-networks/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/citation-networks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Competition</title>
+      <link>https://valkiii.github.io/tags/competition/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/competition/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Homophily</title>
+      <link>https://valkiii.github.io/tags/homophily/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/homophily/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Link Prediction</title>
+      <link>https://valkiii.github.io/tags/link-prediction/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/link-prediction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mobility</title>
+      <link>https://valkiii.github.io/tags/mobility/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/mobility/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Startups Network</title>
+      <link>https://valkiii.github.io/tags/startups-network/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/startups-network/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sentiment Analysis</title>
+      <link>https://valkiii.github.io/tags/sentiment-analysis/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/sentiment-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Signed Networks</title>
+      <link>https://valkiii.github.io/tags/signed-networks/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/signed-networks/</guid>
       <description></description>
     </item>
   </channel>

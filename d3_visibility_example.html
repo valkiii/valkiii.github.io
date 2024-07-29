@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visibility Graph Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        #vis-container {
+            width: 100%;
+            height: 450px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="vis-container"></div>
+    <script>
+        // Set up dimensions
+        const margin = {top: 20, right: 20, bottom: 50, left: 50};
+        const width = 800 - margin.left - margin.right;
+        const height = 400 - margin.top - margin.bottom;
+
+        // Create SVG
+        const svg = d3.select("#vis-container")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Generate sample data
+        const data = Array.from({length: 10}, () => Math.random() * 10);
+
+        // Set up scales
+        const xScale = d3.scaleLinear().domain([0, data.length - 1]).range([0, width]);
+        const yScale = d3.scaleLinear().domain([0, d3.max(data)]).range([height, 0]);
+
+        // Draw time series
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 2)
+            .attr("d", d3.line()
+                .x((d, i) => xScale(i))
+                .y(d => yScale(d))
+            );
+
+        // Draw points
+        const points = svg.selectAll(".point")
+            .data(data)
+            .enter().append("circle")
+            .attr("class", "point")
+            .attr("cx", (d, i) => xScale(i))
+            .attr("cy", d => yScale(d))
+            .attr("r", 5)
+            .attr("fill", "steelblue");
+
+        // Function to check visibility
+        function isVisible(i, j) {
+            for (let k = i + 1; k < j; k++) {
+                if (data[k] > data[i] + (data[j] - data[i]) * (k - i) / (j - i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Draw visibility graph edges
+        for (let i = 0; i < data.length; i++) {
+            for (let j = i + 1; j < data.length; j++) {
+                if (isVisible(i, j)) {
+                    svg.append("line")
+                        .attr("x1", xScale(i))
+                        .attr("y1", yScale(data[i]))
+                        .attr("x2", xScale(j))
+                        .attr("y2", yScale(data[j]))
+                        .attr("stroke", "rgba(255, 0, 0, 0.2)")
+                        .attr("stroke-width", 1);
+                }
+            }
+        }
+
+        // Add interactivity
+        points.on("mouseover", function(event, d) {
+            d3.select(this).attr("r", 8).attr("fill", "red");
+            svg.selectAll("line")
+                .filter(l => l.source === d || l.target === d)
+                .attr("stroke", "red")
+                .attr("stroke-width", 2);
+        }).on("mouseout", function() {
+            d3.select(this).attr("r", 5).attr("fill", "steelblue");
+            svg.selectAll("line")
+                .attr("stroke", "rgba(255, 0, 0, 0.2)")
+                .attr("stroke-width", 1);
+        });
+
+        // Add axes
+        svg.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(xScale));
+
+        svg.append("g")
+            .call(d3.axisLeft(yScale));
+
+        // Add labels
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("x", width / 2)
+            .attr("y", height + 40)
+            .text("Time");
+
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -40)
+            .attr("x", -height / 2)
+            .text("Value");
+    </script>
+</body>
+</html>
