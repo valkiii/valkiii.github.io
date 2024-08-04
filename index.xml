@@ -6,8 +6,15 @@
     <description>Recent content on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://valkiii.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My heart beats like a network</title>
+      <link>https://valkiii.github.io/posts/2024/08/my-heart-beats-like-a-network/</link>
+      <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/posts/2024/08/my-heart-beats-like-a-network/</guid>
+      <description>I was looking for a way to automate the process behind updating my site, and I found one.</description>
+    </item>
     <item>
       <title>Automating Your Website Updates with Hugo and GitHub Pages</title>
       <link>https://valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</link>

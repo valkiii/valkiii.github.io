@@ -6,8 +6,36 @@
     <description>Recent content in Tags on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://valkiii.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Art</title>
+      <link>https://valkiii.github.io/tags/art/</link>
+      <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/art/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Methodology</title>
+      <link>https://valkiii.github.io/tags/methodology/</link>
+      <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/methodology/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Timeseries</title>
+      <link>https://valkiii.github.io/tags/timeseries/</link>
+      <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/timeseries/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Visibility Graph</title>
+      <link>https://valkiii.github.io/tags/visibility-graph/</link>
+      <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/tags/visibility-graph/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Bash</title>
       <link>https://valkiii.github.io/tags/bash/</link>

@@ -2,13 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://valkiii.github.io/tags/art/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/categories/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/methodology/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/posts/2024/08/my-heart-beats-like-a-network/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/categories/network-analysis/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/posts/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/categories/research/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/timeseries/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://valkiii.github.io/tags/visibility-graph/</loc>
+    <lastmod>2024-08-04T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://valkiii.github.io/posts/2024/07/automating-your-website-updates-with-hugo-and-github-pages/</loc>
     <lastmod>2024-07-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/tags/bash/</loc>
-    <lastmod>2024-07-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/categories/</loc>
     <lastmod>2024-07-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/tags/coding/</loc>
@@ -21,15 +51,6 @@
     <lastmod>2024-07-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/categories/optimization/</loc>
-    <lastmod>2024-07-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/posts/</loc>
-    <lastmod>2024-07-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/tags/</loc>
-    <lastmod>2024-07-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://valkiii.github.io/</loc>
     <lastmod>2024-07-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://valkiii.github.io/posts/2022/01/bookshelf/</loc>

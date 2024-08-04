@@ -41,7 +41,7 @@
   <meta itemprop="description" content="I was looking for a way to automate the process behind updating my site, and I found one.">
   <meta itemprop="datePublished" content="2024-07-11T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-07-11T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1512">
+  <meta itemprop="wordCount" content="1805">
   <meta itemprop="image" content="http://localhost:1313/posts/2024/07/my-heart-beats-like-a-network/featured.png">
   <meta itemprop="keywords" content="Optimization,Bash,Coding">
 
@@ -126,6 +126,11 @@
                     </svg>
                 </span>
             
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
         </span>
     </span>
 </header>
@@ -141,7 +146,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        8 minutes
+        9 minutes
 
         
       </p>
@@ -159,53 +164,102 @@
       
 
       <div class="post-content">
-        <h1 id="heading"></h1>
+        <head>
+    <link rel="preload" as="image" href="visibility_xkcd_example.png">
+    <link rel="preload" as="image" href="dark-visibility.png">
+</head>
+<h1 id="heading"></h1>
 <hr>
-<p><img src="featured.png" alt="alt text"></p>
-<p>In the realm of data science, researchers and practitioners are constantly seeking innovative approaches to extract meaningful insights from complex datasets. One such approach that has gained significant attention in recent years is the concept of visibility graphs [1]. In this blog post, we will delve into the fundamentals of visibility graphs, explore their mathematical underpinnings, and showcase their potential applications in various domains.</p>
+<!-- Load KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+<!-- Load KaTeX JavaScript -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\\(", right: "\\)", display: false}
+      ]
+    });
+  });
+</script>
+<!-- ![alt text](featured.png) -->
+<p align="center">
+  <img src="featured.png" alt="alt text" width="500", height="500">
+</p>
+<p>I have always been a romantic which probably is due to the amount and genre of songs that I (my parents were) was listening to since my childhood. The first song I remember is from an Italian songwriter, who sings about how everything he did reminded him of a special someone. Even as a child, I could sense a hint of the emotional struggle in his lyrics, though my young heart had yet to experience the full spectrum of joy and sorrow that comes with love which governs our heartbeats.</p>
+<p>But this post isn&rsquo;t about romance or love; it&rsquo;s actually about heartbeats - specifically, how we can visualize and understand them using data science techniques. Let me start from the begin. My passion for complex systems and the ways they behave has always driven me, both as a person and as a (data) scientist. I always been interested in understanding how things work. About these systems, since my master, I got really interested to evalaute, measure, and quantify complex systems extracting any relevant structure from what might initially seem like a chaotic mess.</p>
+<p>The approach we will discuss in this blog post represents an innovative method for extracting valuable insights from complex datasets: the concept of visibility graphs [1]. I will introduce the fundamentals of visibility graphs, explore their mathematical significance, and demonstrate an artistic way to visualize heartbeats. By leveraging the theory behind visibility graphs, we can extract meaningful insights from complex datasets, offering a unique and innovative approach to data visualization.</p>
 <h3 id="understanding-visibility-graphs-through-skyscrapers">Understanding Visibility Graphs through Skyscrapers</h3>
-<p>In data visualization and analysis, a visibility graph is a powerful tool for representing relationships between data points. However, the concept can sometimes be abstract and challenging to grasp. To make this easier to understand, let&rsquo;s use a more tangible metaphor: skyscrapers in a bustling city.</p>
-<p>Picture yourself in a city filled with towering skyscrapers, each representing a point in time or a specific data value. The height of each skyscraper corresponds to the magnitude of the data point it represents. These skyscrapers are arranged in a line along a single street, much like data points along a time series.</p>
-<p><img src="cityscape.png" alt="alt text"></p>
+<p>A visibility graph is a powerful tool for representing relationships between data points. To allow any reader to better understand how do they work let&rsquo;s use a more tangible metaphor: skyscrapers in a bustling city.</p>
+<p>Picture yourself in a city filled with towering skyscrapers. Each skyscraper represents a data point. The height of each skyscraper corresponds to the magnitude of the data point it represents. This city is quite particular, in fact, all skyscrapers are arranged in a line along a single street, much like data points along a time series.</p>
+<!-- ![alt text](cityscape.png) -->
+<p align="center">
+  <img src="cityscape.png" alt="alt text" width="400", height="400">
+</p>
 <p>Now, imagine you are standing on the roof of one of these skyscrapers. From your vantage point, you can see some buildings down the line, while others are obscured by taller structures in between. This scenario is a perfect analogy for understanding visibility graphs.</p>
 <h3 id="the-concept-of-visibility">The Concept of Visibility</h3>
-<p>In our metaphor, visibility means whether you can see the roof of one skyscraper from the roof of another. For two skyscrapers to see each other (i.e., to have a line of sight), there must be no other skyscraper in between that is as tall or taller. This is analogous to checking if one data point can &ldquo;see&rdquo; another without being obscured by an intermediate point.</p>
-<p><mark> Direct Line of Sight</mark>: If skyscraper A is 50 meters tall and skyscraper B, further down the street, is 100 meters tall, you can see B from A if no other skyscraper in between is taller than 50 meters at the point it blocks the line of sight.</p>
-<p>Blocked Visibility: If there&rsquo;s a skyscraper C that is 120 meters tall between A and B, then A cannot see B. This blockage happens because C&rsquo;s height interferes with the direct line of sight from A to B.</p>
-<p>Building the Visibility Graph
-To construct a visibility graph from this setup:</p>
-<p>Nodes: Each node represents a skyscraper. The horizontal position of a node corresponds to the position of the skyscraper on the street, and the vertical position represents its height.</p>
-<p>Edges: An edge between two nodes indicates a clear line of sight between the corresponding skyscrapers. If skyscraper A can see skyscraper B, an edge is drawn between the nodes representing these two skyscrapers.</p>
-<p>Visualizing the Concept with Code
-In the provided Python code:</p>
-<p>Random Heights Generation: Heights for 15 skyscrapers are generated randomly, simulating the varying data points in a dataset.
-Visibility Calculation: The code checks each pair of skyscrapers to determine if there&rsquo;s a direct line of sight between them, considering potential obstructions by other skyscrapers in between. If there is no obstruction, an edge is created in the visibility graph.
-The resulting visualization consists of two main parts:</p>
+<p>In our metaphor, <mark>visibility</mark> means whether you can see the roof of one skyscraper from the roof of another. For two skyscrapers to see each other (i.e., to have a line of sight), there must be no other skyscraper in between that is as tall or taller. This is analogous to checking if one data point can &ldquo;see&rdquo; another without being obscured by an intermediate point.</p>
+<p>This means that if skyscraper A is 50 meters tall and skyscraper B, further down the street, is 100 meters tall, you can see B from A if no other skyscraper in between is taller than 50 meters at the point it blocks the line of sight.</p>
+<p>
+  <figure class="centered-figure">
+    <img id="theme-image" src="visibility_xkcd_example.png" alt="Theme-dependent image" width="400" height="300">
+    <figcaption>Image made using excalidraw strongly suggested by Christian te Riet, excalidraw's evangelist</figcaption>
+  </figure>
+</p>
+<p>However, if there&rsquo;s a skyscraper C that is 120 meters tall between A and B, then A cannot see B. This blockage happens because C&rsquo;s height interferes with the direct line of sight from A to B.</p>
+<p>Given these instructions, we can now pass building a network. To construct a visibility graph from this setup, we creates:</p>
 <ul>
 <li>
-<p>Time Series (Bar Chart): This shows the heights of the skyscrapers over a sequence, with visibility lines overlaid to illustrate which skyscrapers can see each other.</p>
+<p>Nodes: Each node represents a skyscraper (or a data point in our time series). In the example below, the horizontal position of a node corresponds to the position of the skyscraper on the street, and the vertical position represents its height. N.B.: for larger networks and the heart beat example, nodes&rsquo; positions will be defined based on the layout we will choose, without respecting the 1-on-1 relationship with the time series like the image below.</p>
 </li>
 <li>
-<p>Visibility Graph Network (Scatter Plot): This plot displays the nodes and edges, representing the skyscrapers and their visibility relationships, respectively. The nodes are placed according to their sequence and heights, while the edges represent the lines of sight.</p>
+<p>Edges: An edge between two nodes indicates a clear line of sight between the corresponding skyscrapers. If skyscraper A can see skyscraper B, an edge is drawn between the nodes representing these two skyscrapers.</p>
 </li>
 </ul>
-<h3 id="why-use-visibility-graphs">Why Use Visibility Graphs?</h3>
+<iframe src="http://localhost:1313/interactive_visibility_graph.html" width="100%" height="820" frameborder="0"></iframe>
+<!-- Visualizing the Concept with Code
+In the provided Python code:
+
+Random Heights Generation: Heights for 15 skyscrapers are generated randomly, simulating the varying data points in a dataset.
+Visibility Calculation: The code checks each pair of skyscrapers to determine if there's a direct line of sight between them, considering potential obstructions by other skyscrapers in between. If there is no obstruction, an edge is created in the visibility graph.
+The resulting visualization consists of two main parts:
+
+- Time Series (Bar Chart): This shows the heights of the skyscrapers over a sequence, with visibility lines overlaid to illustrate which skyscrapers can see each other.
+
+- Visibility Graph Network (Scatter Plot): This plot displays the nodes and edges, representing the skyscrapers and their visibility relationships, respectively. The nodes are placed according to their sequence and heights, while the edges represent the lines of sight. -->
+<h3 id="visibility-graphs-and-the-maths-behind">Visibility Graphs and the maths behind</h3>
 <p>This visualization technique is particularly useful in analyzing time series data, where understanding the relationships and dependencies between different data points is crucial. For instance, in financial data analysis, a visibility graph can help identify periods where market behaviors are similar or influenced by similar factors, despite potential intervening data points.</p>
-<p>By using the metaphor of skyscrapers, we can simplify the concept of visibility graphs, making it more accessible and easier to understand. This approach not only helps in visualizing the data but also in drawing insights from complex datasets.</p>
-<p>In summary, the visibility graph and skyscraper metaphor provide a unique and intuitive way to explore and understand the relationships within data, helping us see the bigger picture without losing sight of the details.</p>
-<p>At its core, a visibility graph is a representation of a time series or a spatial dataset where each data point is treated as a node, and an edge is created between two nodes if they have a clear line of sight. Formally, given a time series {x_i}_(i=1)^N, a visibility graph is constructed by connecting nodes i and j if and only if [2]:</p>
-<p>x_i, x_j &gt; x_n for all n such that i &lt; n &lt; j</p>
+<!-- By using the metaphor of skyscrapers, we can simplify the concept of visibility graphs, making it more accessible and easier to understand. This approach not only helps in visualizing the data but also in drawing insights from complex datasets.
+
+In summary, the visibility graph and skyscraper metaphor provide a unique and intuitive way to explore and understand the relationships within data, helping us see the bigger picture without losing sight of the details. -->
+<p>Non metaphorically speaking, at its core, a visibility graph is a representation of a time series or a spatial dataset where each data point is treated as a node, and an edge is created between two nodes if they have a clear line of sight. Quoting directly from the original paper [1], given a time series ${x_i}_{(a=1)}^{N}$, a visibility graph is constructed by connecting two arbitrary data values $(t_a, y_a)$ and $(t_b, y_b)$ if they have visibility, such that if any other data $(t_c, y_c)$ placed between them fulfills $$y_c &lt; y_b + (y_a-y_b) \frac{t_b-t_c}{t_b-t_a}$$</p>
+<p>We can easily check that by means of the present algorithm, the associated graph extracted from a time series is always:</p>
+<ol>
+<li>Connected: each node sees at least its nearest neighbors (left and right).</li>
+<li>Undirected: the way the algorithm is built up, there is no direction defined in the links.</li>
+<li>Invariant under affine transformations of the series data: the visibility criterion is invariant under rescaling of both horizontal and vertical axes, and under horizontal and vertical translations.</li>
+</ol>
 <p>This formulation ensures that two nodes are connected if no intermediate data point obscures their visibility. The resulting graph encodes the structural properties of the original dataset, revealing patterns, and relationships that may not be immediately apparent.</p>
-<p>The construction of visibility graphs relies on the visibility algorithm, which efficiently computes the edges between nodes. The algorithm has a time complexity of O(N^2), where N is the number of data points. However, recent advancements have led to the development of more efficient algorithms, such as the horizontal visibility graph algorithm, which reduces the time complexity to O(N log N) [3].</p>
+<p>The construction of visibility graphs relies on the visibility algorithm, which efficiently computes the edges between nodes. The algorithm has a time complexity of $O(N^2)$, where $N$ is the number of data points. However, recent advancements have led to the development of more efficient algorithms, such as the horizontal visibility graph algorithm, which reduces the time complexity to $O(N log N)$ [3].</p>
+<h3 id="visibility-graphs-why-bother">Visibility Graphs, why bother?</h3>
 <p>One of the key advantages of visibility graphs lies in their ability to capture both local and global properties of the dataset. Local properties, such as the degree distribution of nodes, provide insights into the immediate neighborhood of each data point. On the other hand, global properties, such as the average path length and clustering coefficient, reveal the overall structure and connectivity of the graph [4].</p>
-<p>From a mathematical perspective, visibility graphs exhibit intriguing properties that have been extensively studied. For instance, the degree distribution of visibility graphs constructed from fractal time series follows a power law, P(k) ~ k^(-γ), where k is the degree and γ is the scaling exponent [5]. This property has been leveraged to characterize the complexity and self-similarity of time series data.</p>
-<p>To better understand how visibility graphs work, interact with the demonstration below. This visualization shows how a simple time series is transformed into a visibility graph, highlighting the connections between data points based on their visibility.</p>
-<iframe src="http://localhost:1313/interactive_visibility_graph.html" width="100%" height="850" frameborder="0"></iframe>
+<p>From a mathematical perspective, visibility graphs exhibit intriguing properties that have been extensively studied. For instance, the degree distribution of visibility graphs constructed from fractal time series follows a power law, $P(k) ~ k^(-\gamma)$, where $k$ is the degree and $\gamma$ is the scaling exponent [5]. This property has been leveraged to characterize the complexity and self-similarity of time series data.</p>
+<!-- To better understand how visibility graphs work, interact with the demonstration below. This visualization shows how a simple time series is transformed into a visibility graph, highlighting the connections between data points based on their visibility. -->
 <p>Moreover, visibility graphs have found applications in various domains, ranging from finance to neuroscience. In finance, visibility graphs have been used to analyze stock market dynamics, detect market inefficiencies, and predict future price movements [6]. By constructing visibility graphs from stock price time series, researchers have uncovered hidden patterns and correlations that traditional methods may overlook.</p>
 <p>In neuroscience, visibility graphs have been employed to study the complex dynamics of brain activity. By transforming brain signals, such as EEG or fMRI data, into visibility graphs, researchers can characterize the functional connectivity and synchronization of different brain regions [7]. This approach has shed light on the intricate workings of the brain and has potential implications for understanding neurological disorders.</p>
+<h3 id="you-make-my-heart-beat">You make my heart beat</h3>
+<p>Now we understood how visibility graphs work. I hope I did not lose too many of you with the serious talks of the previous section, but I felt it necessary to better appreaciate the results that I am about to show you. Last year, when I had some time, I was used to go for a run around the neighborhood and record my run with my sportwatch. Among the different parameters that you can register, the heartbeat is one of them.</p>
+<p>Since I heard about visibility graph, I always was interested in analysing something unseen before and see what it would actually look like. The heartbeat was one of them, but during my PhD time I did not have a top smartwatch (nor a proper algorithm to measure heartbeat was around) to properly analyse the heartbeat like I have today. The partial result of my run is showed in the interactive graph below.</p>
+<iframe src="http://localhost:1313/heart_rate_visibility_graph_communities.html" width="100%" height="820" frameborder="0"></iframe>
+<p>It&rsquo;s nothing special, except for the fact that I can actually visualize how my heartbeat&rsquo;s time series becomes a graph, an object that I studied for many years of my life. I find this result to be quite fascinating and artistic.</p>
+<h3 id="conclusions">Conclusions</h3>
 <p>As the field of data science continues to evolve, visibility graphs remain a powerful tool in the arsenal of researchers and practitioners. Their ability to uncover hidden patterns, quantify complex dynamics, and provide a fresh perspective on data analysis makes them an invaluable asset. With ongoing research and development, we can expect to see further advancements in the theory and applications of visibility graphs, pushing the boundaries of what is possible in data science.</p>
 <p>In conclusion, visibility graphs offer a unique and compelling approach to data analysis, bridging the gap between time series, spatial data, and network science. By leveraging their mathematical properties and algorithmic efficiency, data scientists can gain deeper insights, make more accurate predictions, and unlock the full potential of their datasets. As we continue to explore the power of visibility graphs, we can look forward to a future where data-driven decision-making is more precise, efficient, and impactful than ever before.</p>
-<iframe src="http://localhost:1313/heart_rate_visibility_graph_communities.html" width="100%" height="820" frameborder="0"></iframe>
 <p>The final network:</p>
 <iframe src="http://localhost:1313/final_network_snapshot_interactive.html" width="100%" height="450" frameborder="0"></iframe>
 <hr>
@@ -217,6 +271,112 @@ The resulting visualization consists of two main parts:</p>
 <p>[5] Lacasa, L., &amp; Toral, R. (2010). Description of stochastic and chaotic series using visibility graphs. Physical Review E, 82(3), 036120.</p>
 <p>[6] Yang, Y., Wang, J., Yang, H., &amp; Mang, J. (2009). Visibility graph approach to exchange rate series. Physica A: Statistical Mechanics and its Applications, 388(20), 4431-4437.</p>
 <p>[7] Ahmadlou, M., Ahmadi, K., Rezazade, M., &amp; Azad-Marzabadi, E. (2013). Global organization of functional brain connectivity in methamphetamine abusers. Clinical Neurophysiology, 124(6), 1122-1131.</p>
+<script src="https://utteranc.es/client.js"
+        repo="valkiii/valkiii.github.io"
+        issue-term="pathname"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        async>
+</script>
+<!-- <div class="quote-container">
+  <blockquote class="styled-quote">
+    <div class="quote-rectangle"></div>
+    <p>"The sign of social relationships is not just a detail - it's a key that unlocks hidden structural patterns in networks."</p>
+  </blockquote>
+  <p>These findings challenge the notion that community structure alone explains assortative mixing in social networks. Instead, the nature and sign of the relationships appear to be key factors in determining network structure. The widely observed assortativity in social networks may be primarily due to positive relationships, while negative relationships exhibit different patterns. This research opens up several exciting avenues for future exploration. </p>
+</div> -->
+<style>
+
+.quote-container {
+  margin: 1em 0;
+  overflow: hidden;
+  width: 100%; /* Ensure container doesn't exceed body width */
+}
+
+.styled-quote {
+  /* background-color: #f9f9f9; */
+  padding: 1em 0.8em 0.8em 0; /* Removed left padding */
+  position: relative;
+  margin: 0 0 1em 0;
+  border: none;
+  font-size: 1.2em;
+}
+.centered-figure {
+  text-align: center;
+}
+
+.centered-figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+.styled-quote p {
+  margin: 0;
+  padding-left: 15px; /* Should match the width of the rectangle */
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+  text-underline-offset: 3px;
+}
+
+.quote-rectangle {
+  width: 30px;
+  height: 15px;
+  background-color: #4CAF50;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.quote-container > p {
+  font-size: 1em;
+  margin: 0;
+  overflow: hidden; /* Prevent text overflow */
+}
+
+@media (min-width: 768px) {
+  .quote-container {
+    position: relative;
+    left: -5%;
+    width: 105%; /* Slightly less overflow */
+  }
+
+  .styled-quote {
+    float: left;
+    width: 35%; /* Smaller width for the quote box */
+    margin-right: -1em;
+    margin-bottom: 0.5em;
+  }
+  
+  .quote-container > p {
+    width: calc(65% - 1em); /* Adjust width to prevent overflow */
+    float: right;
+  }
+}
+
+@media (max-width: 767px) {
+  .quote-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .styled-quote {
+    width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #theme-image {
+    content: "dark-visibility.png";
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  #theme-image {
+    content: "visibility_xkcd_example-image.png";
+  }
+}
+</style>
 
       </div>
     </article>
@@ -252,7 +412,7 @@ The resulting visualization consists of two main parts:</p>
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        1512 Words
+        1805 Words
       </p>
 
       <p>
