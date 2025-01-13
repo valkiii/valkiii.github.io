@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Presentation on Valerio Ciotti</title>
+    <link>https://valkiii.github.io/categories/presentation/</link>
+    <description>Recent content in Presentation on Valerio Ciotti</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://valkiii.github.io/categories/presentation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hunting unicorns with Network analysis</title>
+      <link>https://valkiii.github.io/posts/2024/09/hunting-unicorns-with-network-analysis/</link>
+      <pubDate>Sat, 14 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/posts/2024/09/hunting-unicorns-with-network-analysis/</guid>
+      <description>If you were not one of the lucky people to participate at PyData 2024, no worries—you can find my talk on YouTube (see below).&#xA;The talk is about the construction and analysis of a time-varying worldwide network of professional relationships among startups to predict long-term economic performance using network centrality measures. In my PyData talk, I provided an overview of how I built the worldwide startup network using CrunchBase data and the Networkx library.</description>
+    </item>
+  </channel>
+</rss>
