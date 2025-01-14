@@ -6,8 +6,15 @@
     <description>Recent content on Valerio Ciotti</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jan 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://valkiii.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Individual Contributor to Leader</title>
+      <link>https://valkiii.github.io/posts/2025/01/from-individual-contributor-to-leader/</link>
+      <pubDate>Mon, 13 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://valkiii.github.io/posts/2025/01/from-individual-contributor-to-leader/</guid>
+      <description>I recently had the opportunity to have an intersting conversation with João Querido and Solaiyappan Shanmugam regarding the challenging move from Individual contributor (aka senior data scientist in my case) to leading a team. You can listen to this coversation in the last episode of the podcast Bind2Tech hosted by Waheed Najimi. Hope you enjoy listening to it as much I did doing it!</description>
+    </item>
     <item>
       <title>Hunting unicorns with Network analysis</title>
       <link>https://valkiii.github.io/posts/2024/09/hunting-unicorns-with-network-analysis/</link>
