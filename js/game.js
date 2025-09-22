@@ -59,15 +59,51 @@ class Connect4Game {
         // Update AI info in the UI
         const aiInfo = document.querySelector('.ai-info');
         if (aiInfo) {
-            const statusElement = aiInfo.querySelector('.ai-status') || document.createElement('p');
+            const statusElement = aiInfo.querySelector('.ai-status') || document.createElement('div');
             statusElement.className = 'ai-status';
-            statusElement.style.fontSize = '0.9rem';
-            statusElement.style.fontStyle = 'italic';
-            statusElement.style.color = this.realAI.isAvailable ? '#27ae60' : '#f39c12';
-            statusElement.textContent = `Status: ${status}`;
+            statusElement.style.fontSize = '1rem';
+            statusElement.style.fontWeight = 'bold';
+            statusElement.style.padding = '8px 12px';
+            statusElement.style.borderRadius = '6px';
+            statusElement.style.marginTop = '10px';
+            statusElement.style.textAlign = 'center';
+            
+            // Set colors and icons based on AI type
+            const isRealAI = this.realAI && this.realAI.isAvailable;
+            if (isRealAI) {
+                statusElement.style.backgroundColor = '#d4edda';
+                statusElement.style.color = '#155724';
+                statusElement.style.border = '1px solid #c3e6cb';
+                statusElement.innerHTML = `🧠 <strong>REAL AI ENSEMBLE ACTIVE</strong><br><small>Using 5 CNN models with Q-value averaging</small>`;
+            } else if (this.fallbackAI) {
+                statusElement.style.backgroundColor = '#fff3cd';
+                statusElement.style.color = '#856404';
+                statusElement.style.border = '1px solid #ffeaa7';
+                statusElement.innerHTML = `🎲 <strong>HEURISTIC AI ACTIVE</strong><br><small>Advanced strategic algorithm (not neural network)</small>`;
+            } else {
+                statusElement.style.backgroundColor = '#f8d7da';
+                statusElement.style.color = '#721c24';
+                statusElement.style.border = '1px solid #f5c6cb';
+                statusElement.innerHTML = `⚠️ <strong>BASIC AI FALLBACK</strong><br><small>Random moves with basic rules</small>`;
+            }
             
             if (!aiInfo.querySelector('.ai-status')) {
                 aiInfo.appendChild(statusElement);
+            }
+        }
+        
+        // Also update the current player indicator during AI moves
+        this.updatePlayerIndicatorWithAIType();
+    }
+    
+    updatePlayerIndicatorWithAIType() {
+        const indicator = document.getElementById('player-indicator');
+        if (indicator && this.currentPlayer === 2 && this.gameActive) {
+            const isRealAI = this.realAI && this.realAI.isAvailable;
+            if (isRealAI) {
+                indicator.innerHTML = '🧠 AI Ensemble thinking... <span class="ai-thinking">●●●</span>';
+            } else {
+                indicator.innerHTML = '🎲 Strategic AI thinking... <span class="ai-thinking">●●●</span>';
             }
         }
     }
@@ -145,14 +181,14 @@ class Connect4Game {
             
             if (this.realAI && this.realAI.isAvailable) {
                 aiMove = await this.realAI.chooseMove(this.board, validMoves);
-                console.log('🤖 Real AI move:', aiMove + 1);
+                console.log('🧠 REAL AI ENSEMBLE move:', aiMove + 1, '- Using 5 CNN models with Q-value averaging');
             } else if (this.fallbackAI) {
                 aiMove = this.fallbackAI.chooseMove(this.board, validMoves);
-                console.log('🎲 Fallback AI move:', aiMove + 1);
+                console.log('🎲 HEURISTIC AI move:', aiMove + 1, '- Using advanced strategic algorithm');
             } else {
                 // Emergency fallback - random move
                 aiMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-                console.log('🎯 Random move:', aiMove + 1);
+                console.log('🎯 RANDOM FALLBACK move:', aiMove + 1, '- Basic random selection');
             }
             
             if (aiMove !== null && aiMove !== undefined) {
@@ -301,8 +337,8 @@ class Connect4Game {
     
     showAIThinking() {
         const indicator = document.getElementById('player-indicator');
-        indicator.innerHTML = 'AI is thinking... 🤖 <span class="ai-thinking">●●●</span>';
         indicator.className = 'current-player ai-turn';
+        this.updatePlayerIndicatorWithAIType();
     }
     
     hideAIThinking() {
