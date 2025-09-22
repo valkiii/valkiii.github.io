@@ -23,35 +23,33 @@ class Connect4Game {
     
     async initializeAI() {
         try {
-            // Initialize fallback AI first
-            if (window.Connect4AI) {
-                this.fallbackAI = new window.Connect4AI();
-                console.log('✅ Fallback AI initialized');
-            } else {
-                console.error('❌ Connect4AI class not found');
-                return;
-            }
-            
-            // Try to initialize real AI if available
+            // Only try to initialize real AI
             if (window.Connect4RealAI) {
                 this.realAI = new window.Connect4RealAI();
-                // Wait a moment for the real AI to check availability
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                console.log('🔄 Checking real AI availability...');
+                
+                // Wait for the real AI to check availability
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 
                 if (this.realAI.isAvailable) {
                     console.log('✅ Using real AI ensemble with actual .pt models');
                     this.updateAIStatus('Real AI Ensemble Active');
                 } else {
-                    console.log('🎲 Using fallback heuristic AI');
-                    this.updateAIStatus('Heuristic AI (API not available)');
+                    console.error('❌ Real AI not available - game disabled');
+                    this.updateAIStatus('Real AI Required (Not Available)');
+                    this.gameActive = false;
+                    alert('⚠️ Real AI ensemble is not available. Please ensure the Python API server is running on localhost:5001');
                 }
             } else {
-                console.log('🎲 Using fallback heuristic AI (RealAI not available)');
-                this.updateAIStatus('Heuristic AI');
+                console.error('❌ Connect4RealAI class not found');
+                this.updateAIStatus('Real AI Required (Not Found)');
+                this.gameActive = false;
+                alert('⚠️ Real AI components not loaded');
             }
         } catch (error) {
             console.error('❌ Error initializing AI:', error);
             this.updateAIStatus('AI Error');
+            this.gameActive = false;
         }
     }
     
@@ -74,17 +72,12 @@ class Connect4Game {
                 statusElement.style.backgroundColor = '#d4edda';
                 statusElement.style.color = '#155724';
                 statusElement.style.border = '1px solid #c3e6cb';
-                statusElement.innerHTML = `🧠 <strong>REAL AI ENSEMBLE ACTIVE</strong><br><small>Using 5 CNN models with Q-value averaging</small>`;
-            } else if (this.fallbackAI) {
-                statusElement.style.backgroundColor = '#fff3cd';
-                statusElement.style.color = '#856404';
-                statusElement.style.border = '1px solid #ffeaa7';
-                statusElement.innerHTML = `🎲 <strong>HEURISTIC AI ACTIVE</strong><br><small>Advanced strategic algorithm (not neural network)</small>`;
+                statusElement.innerHTML = `🧠 <strong>REAL AI ENSEMBLE ACTIVE</strong><br><small>Tournament winner: 5 CNN models with Q-value averaging</small>`;
             } else {
                 statusElement.style.backgroundColor = '#f8d7da';
                 statusElement.style.color = '#721c24';
                 statusElement.style.border = '1px solid #f5c6cb';
-                statusElement.innerHTML = `⚠️ <strong>BASIC AI FALLBACK</strong><br><small>Random moves with basic rules</small>`;
+                statusElement.innerHTML = `⚠️ <strong>REAL AI REQUIRED</strong><br><small>Start Python API server on localhost:5001</small>`;
             }
             
             if (!aiInfo.querySelector('.ai-status')) {
@@ -101,9 +94,9 @@ class Connect4Game {
         if (indicator && this.currentPlayer === 2 && this.gameActive) {
             const isRealAI = this.realAI && this.realAI.isAvailable;
             if (isRealAI) {
-                indicator.innerHTML = '🧠 AI Ensemble thinking... <span class="ai-thinking">●●●</span>';
+                indicator.innerHTML = '🧠 Tournament AI thinking... <span class="ai-thinking">●●●</span>';
             } else {
-                indicator.innerHTML = '🎲 Strategic AI thinking... <span class="ai-thinking">●●●</span>';
+                indicator.innerHTML = '⚠️ AI not available';
             }
         }
     }
@@ -175,20 +168,18 @@ class Connect4Game {
         this.showAIThinking();
         
         try {
-            // Get AI move from real AI or fallback
+            // Get AI move from real AI only
             const validMoves = this.getValidMoves();
             let aiMove;
             
             if (this.realAI && this.realAI.isAvailable) {
                 aiMove = await this.realAI.chooseMove(this.board, validMoves);
                 console.log('🧠 REAL AI ENSEMBLE move:', aiMove + 1, '- Using 5 CNN models with Q-value averaging');
-            } else if (this.fallbackAI) {
-                aiMove = this.fallbackAI.chooseMove(this.board, validMoves);
-                console.log('🎲 HEURISTIC AI move:', aiMove + 1, '- Using advanced strategic algorithm');
             } else {
-                // Emergency fallback - random move
-                aiMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-                console.log('🎯 RANDOM FALLBACK move:', aiMove + 1, '- Basic random selection');
+                console.error('❌ Real AI not available for move');
+                this.gameActive = false;
+                alert('⚠️ Real AI connection lost. Game stopped.');
+                return;
             }
             
             if (aiMove !== null && aiMove !== undefined) {
@@ -200,15 +191,8 @@ class Connect4Game {
             
         } catch (error) {
             console.error('❌ Error in AI move:', error);
-            // Emergency fallback
-            const validMoves = this.getValidMoves();
-            let emergencyMove;
-            if (this.fallbackAI) {
-                emergencyMove = this.fallbackAI.chooseMove(this.board, validMoves);
-            } else {
-                emergencyMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-            }
-            this.makeMove(emergencyMove, 2);
+            this.gameActive = false;
+            alert('⚠️ AI error occurred. Game stopped. Please check the API server.');
         }
         
         this.hideAIThinking();
@@ -415,25 +399,13 @@ class Connect4Game {
         try {
             let hintResult;
             
-            // Get hint from real AI if available
+            // Get hint from real AI only
             if (this.realAI && this.realAI.isAvailable) {
                 hintResult = await this.realAI.getHint(this.board, validMoves);
                 console.log('💡 Real AI hint:', hintResult);
-            } else if (this.fallbackAI) {
-                const suggestedMove = this.fallbackAI.chooseMove(this.board, validMoves);
-                hintResult = {
-                    move: suggestedMove,
-                    explanation: `AI suggests column ${suggestedMove + 1}`,
-                    confidence: 'medium'
-                };
             } else {
-                // Emergency fallback
-                const suggestedMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-                hintResult = {
-                    move: suggestedMove,
-                    explanation: `Random suggestion: column ${suggestedMove + 1}`,
-                    confidence: 'low'
-                };
+                alert('⚠️ Hints require the real AI ensemble. Please ensure the API server is running.');
+                return;
             }
             
             if (hintResult && hintResult.move !== null) {
@@ -448,17 +420,7 @@ class Connect4Game {
             
         } catch (error) {
             console.error('❌ Error getting hint:', error);
-            // Emergency fallback
-            let suggestedMove;
-            if (this.fallbackAI) {
-                suggestedMove = this.fallbackAI.chooseMove(this.board, validMoves);
-                this.highlightColumn(suggestedMove);
-                alert(`💡 AI suggests column ${suggestedMove + 1} (fallback)`);
-            } else {
-                suggestedMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-                this.highlightColumn(suggestedMove);
-                alert(`💡 Random suggestion: column ${suggestedMove + 1}`);
-            }
+            alert('⚠️ Error getting hint from AI. Please check the API server.');
         }
     }
     

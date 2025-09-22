@@ -7,7 +7,7 @@
  */
 
 class Connect4RealAI {
-    constructor(apiUrl = 'http://localhost:5000') {
+    constructor(apiUrl = 'http://localhost:5001') {
         this.apiUrl = apiUrl;
         this.isAvailable = false;
         this.modelInfo = null;
