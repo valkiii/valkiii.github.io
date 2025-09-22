@@ -9,9 +9,9 @@ class Connect4Game {
         this.currentPlayer = 1; // 1 = human, 2 = AI
         this.gameActive = true;
         
-        // Try to use real AI first, fallback to heuristic
-        this.realAI = new Connect4RealAI();
-        this.fallbackAI = new Connect4AI(); // Heuristic AI
+        // Initialize AI systems with fallback
+        this.fallbackAI = null;
+        this.realAI = null;
         
         this.moveHistory = [];
         this.stats = this.loadStats();
@@ -22,15 +22,36 @@ class Connect4Game {
     }
     
     async initializeAI() {
-        // Wait a moment for the real AI to check availability
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        if (this.realAI.isAvailable) {
-            console.log('✅ Using real AI ensemble with actual .pt models');
-            this.updateAIStatus('Real AI Ensemble Active');
-        } else {
-            console.log('🎲 Using fallback heuristic AI');
-            this.updateAIStatus('Heuristic AI (API not available)');
+        try {
+            // Initialize fallback AI first
+            if (window.Connect4AI) {
+                this.fallbackAI = new window.Connect4AI();
+                console.log('✅ Fallback AI initialized');
+            } else {
+                console.error('❌ Connect4AI class not found');
+                return;
+            }
+            
+            // Try to initialize real AI if available
+            if (window.Connect4RealAI) {
+                this.realAI = new window.Connect4RealAI();
+                // Wait a moment for the real AI to check availability
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                if (this.realAI.isAvailable) {
+                    console.log('✅ Using real AI ensemble with actual .pt models');
+                    this.updateAIStatus('Real AI Ensemble Active');
+                } else {
+                    console.log('🎲 Using fallback heuristic AI');
+                    this.updateAIStatus('Heuristic AI (API not available)');
+                }
+            } else {
+                console.log('🎲 Using fallback heuristic AI (RealAI not available)');
+                this.updateAIStatus('Heuristic AI');
+            }
+        } catch (error) {
+            console.error('❌ Error initializing AI:', error);
+            this.updateAIStatus('AI Error');
         }
     }
     
@@ -122,17 +143,21 @@ class Connect4Game {
             const validMoves = this.getValidMoves();
             let aiMove;
             
-            if (this.realAI.isAvailable) {
+            if (this.realAI && this.realAI.isAvailable) {
                 aiMove = await this.realAI.chooseMove(this.board, validMoves);
                 console.log('🤖 Real AI move:', aiMove + 1);
-            } else {
+            } else if (this.fallbackAI) {
                 aiMove = this.fallbackAI.chooseMove(this.board, validMoves);
                 console.log('🎲 Fallback AI move:', aiMove + 1);
+            } else {
+                // Emergency fallback - random move
+                aiMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+                console.log('🎯 Random move:', aiMove + 1);
             }
             
             if (aiMove !== null && aiMove !== undefined) {
                 // Small delay to show thinking (shorter for real AI since it's already delayed by network)
-                const delay = this.realAI.isAvailable ? 300 : 800;
+                const delay = (this.realAI && this.realAI.isAvailable) ? 300 : 800;
                 await new Promise(resolve => setTimeout(resolve, delay));
                 this.makeMove(aiMove, 2);
             }
@@ -141,8 +166,13 @@ class Connect4Game {
             console.error('❌ Error in AI move:', error);
             // Emergency fallback
             const validMoves = this.getValidMoves();
-            const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-            this.makeMove(randomMove, 2);
+            let emergencyMove;
+            if (this.fallbackAI) {
+                emergencyMove = this.fallbackAI.chooseMove(this.board, validMoves);
+            } else {
+                emergencyMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+            }
+            this.makeMove(emergencyMove, 2);
         }
         
         this.hideAIThinking();
@@ -350,15 +380,23 @@ class Connect4Game {
             let hintResult;
             
             // Get hint from real AI if available
-            if (this.realAI.isAvailable) {
+            if (this.realAI && this.realAI.isAvailable) {
                 hintResult = await this.realAI.getHint(this.board, validMoves);
                 console.log('💡 Real AI hint:', hintResult);
-            } else {
+            } else if (this.fallbackAI) {
                 const suggestedMove = this.fallbackAI.chooseMove(this.board, validMoves);
                 hintResult = {
                     move: suggestedMove,
                     explanation: `AI suggests column ${suggestedMove + 1}`,
                     confidence: 'medium'
+                };
+            } else {
+                // Emergency fallback
+                const suggestedMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+                hintResult = {
+                    move: suggestedMove,
+                    explanation: `Random suggestion: column ${suggestedMove + 1}`,
+                    confidence: 'low'
                 };
             }
             
@@ -375,9 +413,16 @@ class Connect4Game {
         } catch (error) {
             console.error('❌ Error getting hint:', error);
             // Emergency fallback
-            const suggestedMove = this.fallbackAI.chooseMove(this.board, validMoves);
-            this.highlightColumn(suggestedMove);
-            alert(`💡 AI suggests column ${suggestedMove + 1} (fallback)`);
+            let suggestedMove;
+            if (this.fallbackAI) {
+                suggestedMove = this.fallbackAI.chooseMove(this.board, validMoves);
+                this.highlightColumn(suggestedMove);
+                alert(`💡 AI suggests column ${suggestedMove + 1} (fallback)`);
+            } else {
+                suggestedMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+                this.highlightColumn(suggestedMove);
+                alert(`💡 Random suggestion: column ${suggestedMove + 1}`);
+            }
         }
     }
     
