@@ -23,28 +23,16 @@ class Connect4Game {
     
     async initializeAI() {
         try {
-            // Only try to initialize real AI
-            if (window.Connect4RealAI) {
-                this.realAI = new window.Connect4RealAI();
-                console.log('🔄 Checking real AI availability...');
-                
-                // Wait for the real AI to check availability
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                if (this.realAI.isAvailable) {
-                    console.log('✅ Using real AI ensemble with actual .pt models');
-                    this.updateAIStatus('Real AI Ensemble Active');
-                } else {
-                    console.error('❌ Real AI not available - game disabled');
-                    this.updateAIStatus('Real AI Required (Not Available)');
-                    this.gameActive = false;
-                    alert('⚠️ Real AI ensemble is not available. Please ensure the Python API server is running on localhost:5001');
-                }
+            // Initialize the advanced tournament AI (client-side)
+            if (window.Connect4TournamentAI) {
+                this.realAI = new window.Connect4TournamentAI();
+                console.log('🏆 Tournament AI initialized - replicating ensemble behavior');
+                this.updateAIStatus('Tournament AI Active');
             } else {
-                console.error('❌ Connect4RealAI class not found');
-                this.updateAIStatus('Real AI Required (Not Found)');
+                console.error('❌ Connect4TournamentAI class not found');
+                this.updateAIStatus('Tournament AI Required (Not Found)');
                 this.gameActive = false;
-                alert('⚠️ Real AI components not loaded');
+                alert('⚠️ Tournament AI components not loaded');
             }
         } catch (error) {
             console.error('❌ Error initializing AI:', error);
@@ -67,17 +55,17 @@ class Connect4Game {
             statusElement.style.textAlign = 'center';
             
             // Set colors and icons based on AI type
-            const isRealAI = this.realAI && this.realAI.isAvailable;
-            if (isRealAI) {
+            const isTournamentAI = this.realAI && this.realAI.isAvailable;
+            if (isTournamentAI) {
                 statusElement.style.backgroundColor = '#d4edda';
                 statusElement.style.color = '#155724';
                 statusElement.style.border = '1px solid #c3e6cb';
-                statusElement.innerHTML = `🧠 <strong>REAL AI ENSEMBLE ACTIVE</strong><br><small>Tournament winner: 5 CNN models with Q-value averaging</small>`;
+                statusElement.innerHTML = `🏆 <strong>TOURNAMENT AI ACTIVE</strong><br><small>Advanced client-side AI replicating ensemble behavior</small>`;
             } else {
                 statusElement.style.backgroundColor = '#f8d7da';
                 statusElement.style.color = '#721c24';
                 statusElement.style.border = '1px solid #f5c6cb';
-                statusElement.innerHTML = `⚠️ <strong>REAL AI REQUIRED</strong><br><small>Start Python API server on localhost:5001</small>`;
+                statusElement.innerHTML = `⚠️ <strong>TOURNAMENT AI ERROR</strong><br><small>AI initialization failed</small>`;
             }
             
             if (!aiInfo.querySelector('.ai-status')) {
@@ -92,9 +80,9 @@ class Connect4Game {
     updatePlayerIndicatorWithAIType() {
         const indicator = document.getElementById('player-indicator');
         if (indicator && this.currentPlayer === 2 && this.gameActive) {
-            const isRealAI = this.realAI && this.realAI.isAvailable;
-            if (isRealAI) {
-                indicator.innerHTML = '🧠 Tournament AI thinking... <span class="ai-thinking">●●●</span>';
+            const isTournamentAI = this.realAI && this.realAI.isAvailable;
+            if (isTournamentAI) {
+                indicator.innerHTML = '🏆 Tournament AI thinking... <span class="ai-thinking">●●●</span>';
             } else {
                 indicator.innerHTML = '⚠️ AI not available';
             }
@@ -174,17 +162,17 @@ class Connect4Game {
             
             if (this.realAI && this.realAI.isAvailable) {
                 aiMove = await this.realAI.chooseMove(this.board, validMoves);
-                console.log('🧠 REAL AI ENSEMBLE move:', aiMove + 1, '- Using 5 CNN models with Q-value averaging');
+                console.log('🏆 TOURNAMENT AI move:', aiMove + 1, '- Advanced heuristics with ensemble-like decision patterns');
             } else {
-                console.error('❌ Real AI not available for move');
+                console.error('❌ Tournament AI not available for move');
                 this.gameActive = false;
-                alert('⚠️ Real AI connection lost. Game stopped.');
+                alert('⚠️ Tournament AI error. Game stopped.');
                 return;
             }
             
             if (aiMove !== null && aiMove !== undefined) {
-                // Small delay to show thinking (shorter for real AI since it's already delayed by network)
-                const delay = (this.realAI && this.realAI.isAvailable) ? 300 : 800;
+                // Small delay to show thinking
+                const delay = 500;
                 await new Promise(resolve => setTimeout(resolve, delay));
                 this.makeMove(aiMove, 2);
             }
@@ -192,7 +180,7 @@ class Connect4Game {
         } catch (error) {
             console.error('❌ Error in AI move:', error);
             this.gameActive = false;
-            alert('⚠️ AI error occurred. Game stopped. Please check the API server.');
+            alert('⚠️ AI error occurred. Game stopped.');
         }
         
         this.hideAIThinking();
@@ -399,12 +387,12 @@ class Connect4Game {
         try {
             let hintResult;
             
-            // Get hint from real AI only
+            // Get hint from tournament AI
             if (this.realAI && this.realAI.isAvailable) {
                 hintResult = await this.realAI.getHint(this.board, validMoves);
-                console.log('💡 Real AI hint:', hintResult);
+                console.log('💡 Tournament AI hint:', hintResult);
             } else {
-                alert('⚠️ Hints require the real AI ensemble. Please ensure the API server is running.');
+                alert('⚠️ Hints require the tournament AI to be active.');
                 return;
             }
             
@@ -420,7 +408,7 @@ class Connect4Game {
             
         } catch (error) {
             console.error('❌ Error getting hint:', error);
-            alert('⚠️ Error getting hint from AI. Please check the API server.');
+            alert('⚠️ Error getting hint from AI.');
         }
     }
     
