@@ -45,6 +45,7 @@ Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-valu
         <h3>🤗 Your Opponent: Real AI Ensemble</h3>
         <p>Playing against the actual tournament-winning neural networks hosted on Hugging Face Spaces.</p>
         <p><strong>Live AI:</strong> Custom-Ensemble-Top5Models-q with 5 CNN models and Q-value averaging</p>
+        <p id="connection-status" style="color: orange;">🔄 Connecting to tournament AI...</p>
     </div>
     
     <div class="game-status">
@@ -84,6 +85,7 @@ Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-valu
     <div id="move-log"></div>
 </div>
 
+<script src="/js/connect4-immediate-fix.js"></script>
 <script src="/js/connect4-huggingface-ai.js"></script>
 <script src="/js/game.js"></script>
 <h2 id="how-the-ai-works">How the AI Works</h2>

@@ -7,7 +7,8 @@ class Connect4HuggingFaceAI {
     constructor(spaceUrl = null) {
         this.name = "Tournament AI Ensemble (HF)";
         this.isAvailable = false;
-        this.spaceUrl = spaceUrl || "https://YOUR_USERNAME-connect4-tournament-ai.hf.space";
+        this.isChecking = false;
+        this.spaceUrl = spaceUrl || "https://drbayes-connect4-tournament-ai.hf.space";
         this.apiEndpoint = `${this.spaceUrl}/api/move`;
         this.healthEndpoint = `${this.spaceUrl}/health`;
         
@@ -19,26 +20,37 @@ class Connect4HuggingFaceAI {
     }
     
     async checkAvailability() {
+        if (this.isChecking) return;
+        this.isChecking = true;
+        
         try {
             console.log('🔄 Checking Hugging Face Space availability...');
+            
+            // Create AbortController for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
             
             const response = await fetch(this.healthEndpoint, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                 },
-                timeout: 10000 // 10 second timeout
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             
             if (response.ok) {
                 const healthData = await response.json();
-                this.isAvailable = healthData.ensemble_loaded || false;
+                this.isAvailable = healthData.ai_loaded || false;
                 
                 if (this.isAvailable) {
-                    console.log('✅ Hugging Face Space is healthy and ensemble is loaded');
+                    console.log('✅ Hugging Face Space is healthy and AI is loaded');
                     console.log('🏆 Model info:', healthData.model_info);
+                    console.log('🤖 AI Type:', healthData.ai_type);
                 } else {
-                    console.warn('⚠️ Hugging Face Space is up but ensemble not loaded');
+                    console.warn('⚠️ Hugging Face Space is up but AI not loaded');
+                    console.log('Error details:', healthData.error);
                 }
             } else {
                 console.error('❌ Hugging Face Space health check failed:', response.status);
@@ -47,13 +59,23 @@ class Connect4HuggingFaceAI {
         } catch (error) {
             console.error('❌ Error checking Hugging Face Space availability:', error);
             this.isAvailable = false;
+        } finally {
+            this.isChecking = false;
         }
     }
     
     async chooseMove(board, validMoves) {
         if (!this.isAvailable) {
-            console.error('❌ Hugging Face AI not available');
-            return null;
+            // Try to check availability once more if not already checking
+            if (!this.isChecking) {
+                console.log('🔄 AI not available, retrying health check...');
+                await this.checkAvailability();
+            }
+            
+            if (!this.isAvailable) {
+                console.error('❌ Hugging Face AI not available');
+                return null;
+            }
         }
         
         try {
@@ -65,6 +87,10 @@ class Connect4HuggingFaceAI {
                 board: board
             };
             
+            // Create AbortController for timeout  
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            
             const response = await fetch(this.apiEndpoint, {
                 method: 'POST',
                 headers: {
@@ -72,8 +98,10 @@ class Connect4HuggingFaceAI {
                     'Accept': 'application/json',
                 },
                 body: JSON.stringify(requestData),
-                timeout: 15000 // 15 second timeout for AI thinking
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);

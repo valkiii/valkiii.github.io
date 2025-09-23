@@ -30,8 +30,23 @@ class Connect4Game {
                 this.realAI = new window.Connect4HuggingFaceAI(hfSpaceUrl);
                 console.log('🤗 Hugging Face AI initialized - connecting to actual tournament models');
                 
-                // Wait a moment for availability check
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Wait for availability check and manually verify
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // Manual health check to work around cached JS issue
+                try {
+                    const response = await fetch(`${hfSpaceUrl}/health`);
+                    if (response.ok) {
+                        const healthData = await response.json();
+                        if (healthData.ai_loaded) {
+                            this.realAI.isAvailable = true;
+                            console.log('✅ Manual health check confirmed: AI is loaded');
+                            console.log('🏆 Tournament AI active:', healthData.ai_type);
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Manual health check failed:', error);
+                }
                 
                 this.updateAIStatus('Hugging Face AI');
             } else {
