@@ -27,7 +27,7 @@
             <guid>https://valkiii.github.io/posts/2025/01/connect-4-vs-ai-ensemble/</guid>
             <description>Challenge our tournament-winning AI system in Connect 4! This isn&amp;rsquo;t just any AI - it&amp;rsquo;s an ensemble of 5 neural networks that dominated a comprehensive tournament against 35+ other AI opponents.
 The AI Opponent You&amp;rsquo;re playing against &amp;ldquo;Custom-Ensemble-Top5Models-q&amp;rdquo; - a sophisticated AI system that:
-Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-value averaging for strategic decision making Achieved #1 ranking with 63.4% win rate in tournament play Applies weighted strategy (30%, 20%, 20%, 15%, 15%) based on model performance 🏆 Your Opponent: Tournament AI Advanced client-side AI that replicates the behavior of the tournament-winning ensemble with sophisticated heuristics and strategic patterns.</description>
+Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-value averaging for strategic decision making Achieved #1 ranking with 63.4% win rate in tournament play Applies weighted strategy (30%, 20%, 20%, 15%, 15%) based on model performance 🤗 Your Opponent: Real AI Ensemble Playing against the actual tournament-winning neural networks hosted on Hugging Face Spaces.</description>
             <content type="html"><![CDATA[<p>Challenge our tournament-winning AI system in Connect 4! This isn&rsquo;t just any AI - it&rsquo;s an ensemble of 5 neural networks that dominated a comprehensive tournament against 35+ other AI opponents.</p>
 <h2 id="the-ai-opponent">The AI Opponent</h2>
 <p>You&rsquo;re playing against <strong>&ldquo;Custom-Ensemble-Top5Models-q&rdquo;</strong> - a sophisticated AI system that:</p>
@@ -42,9 +42,9 @@ Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-valu
 
 <div class="game-info">
     <div class="ai-info">
-        <h3>🏆 Your Opponent: Tournament AI</h3>
-        <p>Advanced client-side AI that replicates the behavior of the tournament-winning ensemble with sophisticated heuristics and strategic patterns.</p>
-        <p><strong>Based on:</strong> Custom-Ensemble-Top5Models-q with Q-value averaging and multi-pattern decision making</p>
+        <h3>🤗 Your Opponent: Real AI Ensemble</h3>
+        <p>Playing against the actual tournament-winning neural networks hosted on Hugging Face Spaces.</p>
+        <p><strong>Live AI:</strong> Custom-Ensemble-Top5Models-q with 5 CNN models and Q-value averaging</p>
     </div>
     
     <div class="game-status">
@@ -84,7 +84,7 @@ Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-valu
     <div id="move-log"></div>
 </div>
 
-<script src="/js/connect4-tournament-ai.js"></script>
+<script src="/js/connect4-huggingface-ai.js"></script>
 <script src="/js/game.js"></script>
 <h2 id="how-the-ai-works">How the AI Works</h2>
 <h3 id="-ensemble-architecture">🔗 Ensemble Architecture</h3>

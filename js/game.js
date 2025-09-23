@@ -23,16 +23,22 @@ class Connect4Game {
     
     async initializeAI() {
         try {
-            // Initialize the advanced tournament AI (client-side)
-            if (window.Connect4TournamentAI) {
-                this.realAI = new window.Connect4TournamentAI();
-                console.log('🏆 Tournament AI initialized - replicating ensemble behavior');
-                this.updateAIStatus('Tournament AI Active');
+            // Initialize the Hugging Face AI (actual models)
+            if (window.Connect4HuggingFaceAI) {
+                // Your actual HF Space URL
+                const hfSpaceUrl = "https://drbayes-connect4-tournament-ai.hf.space";
+                this.realAI = new window.Connect4HuggingFaceAI(hfSpaceUrl);
+                console.log('🤗 Hugging Face AI initialized - connecting to actual tournament models');
+                
+                // Wait a moment for availability check
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                this.updateAIStatus('Hugging Face AI');
             } else {
-                console.error('❌ Connect4TournamentAI class not found');
-                this.updateAIStatus('Tournament AI Required (Not Found)');
+                console.error('❌ Connect4HuggingFaceAI class not found');
+                this.updateAIStatus('Hugging Face AI Required (Not Found)');
                 this.gameActive = false;
-                alert('⚠️ Tournament AI components not loaded');
+                alert('⚠️ Hugging Face AI components not loaded');
             }
         } catch (error) {
             console.error('❌ Error initializing AI:', error);
@@ -55,17 +61,17 @@ class Connect4Game {
             statusElement.style.textAlign = 'center';
             
             // Set colors and icons based on AI type
-            const isTournamentAI = this.realAI && this.realAI.isAvailable;
-            if (isTournamentAI) {
+            const isHuggingFaceAI = this.realAI && this.realAI.isAvailable;
+            if (isHuggingFaceAI) {
                 statusElement.style.backgroundColor = '#d4edda';
                 statusElement.style.color = '#155724';
                 statusElement.style.border = '1px solid #c3e6cb';
-                statusElement.innerHTML = `🏆 <strong>TOURNAMENT AI ACTIVE</strong><br><small>Advanced client-side AI replicating ensemble behavior</small>`;
+                statusElement.innerHTML = `🤗 <strong>REAL AI ENSEMBLE LIVE</strong><br><small>Playing against actual tournament-winning neural networks</small>`;
             } else {
-                statusElement.style.backgroundColor = '#f8d7da';
-                statusElement.style.color = '#721c24';
-                statusElement.style.border = '1px solid #f5c6cb';
-                statusElement.innerHTML = `⚠️ <strong>TOURNAMENT AI ERROR</strong><br><small>AI initialization failed</small>`;
+                statusElement.style.backgroundColor = '#fff3cd';
+                statusElement.style.color = '#856404';
+                statusElement.style.border = '1px solid #ffeaa7';
+                statusElement.innerHTML = `🤗 <strong>CONNECTING TO HUGGING FACE...</strong><br><small>Loading tournament AI ensemble</small>`;
             }
             
             if (!aiInfo.querySelector('.ai-status')) {
@@ -80,11 +86,11 @@ class Connect4Game {
     updatePlayerIndicatorWithAIType() {
         const indicator = document.getElementById('player-indicator');
         if (indicator && this.currentPlayer === 2 && this.gameActive) {
-            const isTournamentAI = this.realAI && this.realAI.isAvailable;
-            if (isTournamentAI) {
-                indicator.innerHTML = '🏆 Tournament AI thinking... <span class="ai-thinking">●●●</span>';
+            const isHuggingFaceAI = this.realAI && this.realAI.isAvailable;
+            if (isHuggingFaceAI) {
+                indicator.innerHTML = '🤗 Real AI ensemble thinking... <span class="ai-thinking">●●●</span>';
             } else {
-                indicator.innerHTML = '⚠️ AI not available';
+                indicator.innerHTML = '🤗 Connecting to Hugging Face...';
             }
         }
     }
@@ -162,11 +168,11 @@ class Connect4Game {
             
             if (this.realAI && this.realAI.isAvailable) {
                 aiMove = await this.realAI.chooseMove(this.board, validMoves);
-                console.log('🏆 TOURNAMENT AI move:', aiMove + 1, '- Advanced heuristics with ensemble-like decision patterns');
+                console.log('🤗 REAL AI ENSEMBLE move:', aiMove + 1, '- Decision from actual tournament-winning models');
             } else {
-                console.error('❌ Tournament AI not available for move');
+                console.error('❌ Hugging Face AI not available for move');
                 this.gameActive = false;
-                alert('⚠️ Tournament AI error. Game stopped.');
+                alert('⚠️ Unable to connect to Hugging Face AI. Please check your internet connection.');
                 return;
             }
             
@@ -387,12 +393,12 @@ class Connect4Game {
         try {
             let hintResult;
             
-            // Get hint from tournament AI
+            // Get hint from Hugging Face AI
             if (this.realAI && this.realAI.isAvailable) {
                 hintResult = await this.realAI.getHint(this.board, validMoves);
-                console.log('💡 Tournament AI hint:', hintResult);
+                console.log('💡 Real AI ensemble hint:', hintResult);
             } else {
-                alert('⚠️ Hints require the tournament AI to be active.');
+                alert('⚠️ Hints require connection to the Hugging Face AI ensemble.');
                 return;
             }
             
