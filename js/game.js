@@ -6,7 +6,7 @@
 class Connect4Game {
     constructor() {
         this.board = Array(6).fill().map(() => Array(7).fill(0));
-        this.currentPlayer = 1; // 1 = human, 2 = AI
+        this.currentPlayer = this.getRandomStartingPlayer(); // 1 = human, 2 = AI
         this.gameActive = true;
         
         // Initialize AI systems with fallback
@@ -19,6 +19,15 @@ class Connect4Game {
         this.initializeBoard();
         this.updateUI();
         this.initializeAI();
+        
+        // Show who starts the initial game
+        setTimeout(() => {
+            this.showGameStart();
+            // If AI starts, make the first move after initialization
+            if (this.currentPlayer === 2) {
+                setTimeout(() => this.makeAIMove(), 1500);
+            }
+        }, 100);
     }
     
     async initializeAI() {
@@ -386,9 +395,14 @@ class Connect4Game {
         localStorage.setItem('connect4-stats', JSON.stringify(this.stats));
     }
     
+    getRandomStartingPlayer() {
+        // 50/50 chance for human or AI to start
+        return Math.random() < 0.5 ? 1 : 2;
+    }
+    
     startNewGame() {
         this.board = Array(6).fill().map(() => Array(7).fill(0));
-        this.currentPlayer = 1;
+        this.currentPlayer = this.getRandomStartingPlayer();
         this.gameActive = true;
         this.moveHistory = [];
         
@@ -397,6 +411,14 @@ class Connect4Game {
         
         // Clear move log
         document.getElementById('move-log').innerHTML = '';
+        
+        // Show who starts the game
+        this.showGameStart();
+        
+        // If AI starts, make the first move after a short delay
+        if (this.currentPlayer === 2) {
+            setTimeout(() => this.makeAIMove(), 1000);
+        }
     }
     
     async getHint() {
@@ -446,6 +468,26 @@ class Connect4Game {
                 cell.style.opacity = '';
             }, 2000);
         }
+    }
+    
+    showGameStart() {
+        const startMessage = this.currentPlayer === 1 ? 
+            "🎮 You start first! Make your move." : 
+            "🤖 AI starts first! Watch the tournament ensemble play.";
+        
+        // Show a brief notification
+        const indicator = document.getElementById('player-indicator');
+        
+        indicator.innerHTML = startMessage;
+        indicator.className = 'current-player game-start';
+        indicator.style.fontWeight = 'bold';
+        indicator.style.animation = 'pulse 1s ease-in-out';
+        
+        setTimeout(() => {
+            indicator.style.animation = '';
+            indicator.style.fontWeight = '';
+            this.updateUI();
+        }, 2000);
     }
 }
 
