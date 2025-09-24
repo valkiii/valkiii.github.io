@@ -37,7 +37,7 @@ class Connect4Game {
                 // Your actual HF Space URL
                 const hfSpaceUrl = "https://drbayes-connect4-tournament-ai.hf.space";
                 this.realAI = new window.Connect4HuggingFaceAI(hfSpaceUrl);
-                console.log('🤗 Hugging Face AI initialized - connecting to actual tournament models');
+                console.log('Hugging Face AI initialized - connecting to tournament models');
                 
                 // Wait for availability check and manually verify
                 await new Promise(resolve => setTimeout(resolve, 3000));
@@ -49,8 +49,8 @@ class Connect4Game {
                         const healthData = await response.json();
                         if (healthData.ai_loaded) {
                             this.realAI.isAvailable = true;
-                            console.log('✅ Manual health check confirmed: AI is loaded');
-                            console.log('🏆 Tournament AI active:', healthData.ai_type);
+                            console.log('Manual health check confirmed: AI is loaded');
+                            console.log('Tournament AI active:', healthData.ai_type);
                         }
                     }
                 } catch (error) {
@@ -90,12 +90,12 @@ class Connect4Game {
                 statusElement.style.backgroundColor = '#d4edda';
                 statusElement.style.color = '#155724';
                 statusElement.style.border = '1px solid #c3e6cb';
-                statusElement.innerHTML = `🤗 <strong>REAL AI ENSEMBLE LIVE</strong><br><small>Playing against actual tournament-winning neural networks</small>`;
+                statusElement.innerHTML = `<strong>AI Ensemble Connected</strong><br><small>Playing against tournament-winning neural networks</small>`;
             } else {
                 statusElement.style.backgroundColor = '#fff3cd';
                 statusElement.style.color = '#856404';
                 statusElement.style.border = '1px solid #ffeaa7';
-                statusElement.innerHTML = `🤗 <strong>CONNECTING TO HUGGING FACE...</strong><br><small>Loading tournament AI ensemble</small>`;
+                statusElement.innerHTML = `<strong>Connecting to AI...</strong><br><small>Loading tournament AI ensemble</small>`;
             }
             
             if (!aiInfo.querySelector('.ai-status')) {
@@ -112,9 +112,9 @@ class Connect4Game {
         if (indicator && this.currentPlayer === 2 && this.gameActive) {
             const isHuggingFaceAI = this.realAI && this.realAI.isAvailable;
             if (isHuggingFaceAI) {
-                indicator.innerHTML = '🤗 Real AI ensemble thinking... <span class="ai-thinking">●●●</span>';
+                indicator.innerHTML = 'AI ensemble thinking... <span class="ai-thinking">●●●</span>';
             } else {
-                indicator.innerHTML = '🤗 Connecting to Hugging Face...';
+                indicator.innerHTML = 'Connecting to AI ensemble...';
             }
         }
     }
@@ -192,7 +192,7 @@ class Connect4Game {
             
             if (this.realAI && this.realAI.isAvailable) {
                 aiMove = await this.realAI.chooseMove(this.board, validMoves);
-                console.log('🤗 REAL AI ENSEMBLE move:', aiMove + 1, '- Decision from actual tournament-winning models');
+                console.log('AI ensemble move:', aiMove + 1, '- Decision from tournament-winning models');
             } else {
                 console.error('❌ Hugging Face AI not available for move');
                 this.gameActive = false;
@@ -301,11 +301,11 @@ class Connect4Game {
         setTimeout(() => {
             let message;
             if (winner === 1) {
-                message = "🎉 Congratulations! You beat the AI ensemble!";
+                message = "Congratulations! You beat the AI ensemble!";
             } else if (winner === 2) {
-                message = "🤖 AI wins! The ensemble's strategic thinking paid off.";
+                message = "AI wins! The ensemble's strategic thinking paid off.";
             } else {
-                message = "🤝 It's a draw! Great game against the AI ensemble.";
+                message = "It's a draw! Great game against the AI ensemble.";
             }
             
             if (confirm(`${message}\n\nWould you like to play again?`)) {
@@ -356,11 +356,11 @@ class Connect4Game {
             indicator.className = 'current-player';
             hintBtn.disabled = true;
         } else if (this.currentPlayer === 1) {
-            indicator.innerHTML = 'Your turn! 🔴';
+            indicator.innerHTML = 'Your turn';
             indicator.className = 'current-player';
             hintBtn.disabled = false;
         } else {
-            indicator.innerHTML = 'AI\'s turn 🟡';
+            indicator.innerHTML = 'AI turn';
             indicator.className = 'current-player ai-turn';
             hintBtn.disabled = true;
         }
@@ -372,9 +372,9 @@ class Connect4Game {
         
         if (lastMove) {
             const playerName = lastMove.player === 1 ? 'You' : 'AI';
-            const playerEmoji = lastMove.player === 1 ? '🔴' : '🟡';
+            const playerColor = lastMove.player === 1 ? 'Red' : 'Yellow';
             const moveEntry = document.createElement('div');
-            moveEntry.innerHTML = `${lastMove.move}. ${playerName} ${playerEmoji} → Column ${lastMove.col + 1}`;
+            moveEntry.innerHTML = `${lastMove.move}. ${playerName} (${playerColor}) → Column ${lastMove.col + 1}`;
             moveLog.appendChild(moveEntry);
             moveLog.scrollTop = moveLog.scrollHeight;
         }
@@ -472,8 +472,8 @@ class Connect4Game {
     
     showGameStart() {
         const startMessage = this.currentPlayer === 1 ? 
-            "🎮 You start first! Make your move." : 
-            "🤖 AI starts first! Watch the tournament ensemble play.";
+            "You start first. Make your move." : 
+            "AI starts first. Watch the tournament ensemble play.";
         
         // Show a brief notification
         const indicator = document.getElementById('player-indicator');
@@ -524,6 +524,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    console.log('🎮 Connect 4 vs AI Ensemble loaded!');
-    console.log('💡 Use keyboard shortcuts: 1-7 for columns, H for hint, N for new game');
+    console.log('Connect 4 vs AI Ensemble loaded!');
+    console.log('Use keyboard shortcuts: 1-7 for columns, H for hint, N for new game');
 });

@@ -12,8 +12,8 @@ class Connect4HuggingFaceAI {
         this.apiEndpoint = `${this.spaceUrl}/api/move`;
         this.healthEndpoint = `${this.spaceUrl}/health`;
         
-        console.log('🤗 Hugging Face AI initialized');
-        console.log(`🔗 API endpoint: ${this.apiEndpoint}`);
+        console.log('Hugging Face AI initialized');
+        console.log(`API endpoint: ${this.apiEndpoint}`);
         
         // Check if the HF Space is available
         this.checkAvailability();
@@ -24,7 +24,7 @@ class Connect4HuggingFaceAI {
         this.isChecking = true;
         
         try {
-            console.log('🔄 Checking Hugging Face Space availability...');
+            console.log('Checking Hugging Face Space availability...');
             
             // Create AbortController for timeout
             const controller = new AbortController();
@@ -45,19 +45,19 @@ class Connect4HuggingFaceAI {
                 this.isAvailable = healthData.ai_loaded || false;
                 
                 if (this.isAvailable) {
-                    console.log('✅ Hugging Face Space is healthy and AI is loaded');
-                    console.log('🏆 Model info:', healthData.model_info);
-                    console.log('🤖 AI Type:', healthData.ai_type);
+                    console.log('Hugging Face Space is healthy and AI is loaded');
+                    console.log('Model info:', healthData.model_info);
+                    console.log('AI Type:', healthData.ai_type);
                 } else {
-                    console.warn('⚠️ Hugging Face Space is up but AI not loaded');
+                    console.warn('Warning: Hugging Face Space is up but AI not loaded');
                     console.log('Error details:', healthData.error);
                 }
             } else {
-                console.error('❌ Hugging Face Space health check failed:', response.status);
+                console.error('Hugging Face Space health check failed:', response.status);
                 this.isAvailable = false;
             }
         } catch (error) {
-            console.error('❌ Error checking Hugging Face Space availability:', error);
+            console.error('Error checking Hugging Face Space availability:', error);
             this.isAvailable = false;
         } finally {
             this.isChecking = false;
@@ -68,20 +68,20 @@ class Connect4HuggingFaceAI {
         if (!this.isAvailable) {
             // Try to check availability once more if not already checking
             if (!this.isChecking) {
-                console.log('🔄 AI not available, retrying health check...');
+                console.log('AI not available, retrying health check...');
                 await this.checkAvailability();
             }
             
             if (!this.isAvailable) {
-                console.error('❌ Hugging Face AI not available');
+                console.error('Hugging Face AI not available');
                 return null;
             }
         }
         
         try {
-            console.log('🤗 Sending move request to Hugging Face Space...');
-            console.log('📋 Board state:', board);
-            console.log('✅ Valid moves:', validMoves);
+            console.log('Sending move request to Hugging Face Space...');
+            console.log('Board state:', board);
+            console.log('Valid moves:', validMoves);
             
             const requestData = {
                 board: board
@@ -108,25 +108,25 @@ class Connect4HuggingFaceAI {
             }
             
             const data = await response.json();
-            console.log('📥 HF API response:', data);
+            console.log('HF API response:', data);
             
             if (data.error) {
                 throw new Error(data.error);
             }
             
             const aiMove = data.move;
-            console.log(`🧠 HF AI chose move: ${aiMove + 1} (column ${aiMove + 1})`);
-            console.log(`🎯 Ensemble method: ${data.ensemble_method}`);
-            console.log(`🏆 Using ${data.model_count} models`);
+            console.log(`HF AI chose move: ${aiMove + 1} (column ${aiMove + 1})`);
+            console.log(`Ensemble method: ${data.ensemble_method}`);
+            console.log(`Using ${data.model_count} models`);
             
             return aiMove;
             
         } catch (error) {
-            console.error('❌ Error getting move from Hugging Face AI:', error);
+            console.error('Error getting move from Hugging Face AI:', error);
             
             // Check if it's a network error and try to reconnect
             if (error.name === 'TypeError' || error.message.includes('fetch')) {
-                console.log('🔄 Network error detected, rechecking availability...');
+                console.log('Network error detected, rechecking availability...');
                 await this.checkAvailability();
             }
             
@@ -140,7 +140,7 @@ class Connect4HuggingFaceAI {
             if (move !== null) {
                 return {
                     move: move,
-                    explanation: `🏆 Tournament AI suggests column ${move + 1} - This is what the actual ensemble would play!`,
+                    explanation: `Tournament AI suggests column ${move + 1} - This is what the ensemble would play.`,
                     confidence: 'high'
                 };
             } else {
@@ -151,7 +151,7 @@ class Connect4HuggingFaceAI {
                 };
             }
         } catch (error) {
-            console.error('❌ Error getting hint from Hugging Face AI:', error);
+            console.error('Error getting hint from Hugging Face AI:', error);
             return {
                 move: null,
                 explanation: "Error getting hint from AI ensemble",
@@ -165,7 +165,7 @@ class Connect4HuggingFaceAI {
         this.spaceUrl = newUrl;
         this.apiEndpoint = `${this.spaceUrl}/api/move`;
         this.healthEndpoint = `${this.spaceUrl}/health`;
-        console.log(`🔄 Updated HF Space URL to: ${this.spaceUrl}`);
+        console.log(`Updated HF Space URL to: ${this.spaceUrl}`);
         
         // Recheck availability with new URL
         this.checkAvailability();
@@ -176,13 +176,13 @@ class Connect4HuggingFaceAI {
         if (this.isAvailable) {
             return {
                 status: 'active',
-                message: '🏆 Tournament AI Ensemble Active',
+                message: 'Tournament AI Ensemble Active',
                 detail: 'Connected to actual neural networks on Hugging Face'
             };
         } else {
             return {
                 status: 'unavailable',
-                message: '🤗 Connecting to Hugging Face...',
+                message: 'Connecting to Hugging Face...',
                 detail: 'Checking tournament AI availability'
             };
         }

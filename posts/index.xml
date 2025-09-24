@@ -20,15 +20,15 @@
         </item>
         
         <item>
-            <title>🔴 Connect 4 vs AI Ensemble 🟡</title>
+            <title>Connect 4 vs AI Ensemble</title>
             <link>https://valkiii.github.io/posts/2025/01/connect-4-vs-ai-ensemble/</link>
             <pubDate>Wed, 01 Jan 2025 01:01:01 +0000</pubDate>
             
             <guid>https://valkiii.github.io/posts/2025/01/connect-4-vs-ai-ensemble/</guid>
-            <description>Challenge our tournament-winning AI system in Connect 4! This isn&amp;rsquo;t just any AI - it&amp;rsquo;s an ensemble of 5 neural networks that dominated a comprehensive tournament against 35+ other AI opponents.
+            <description>Challenge a tournament-winning AI system in Connect 4. This ensemble of 5 neural networks dominated a comprehensive tournament against 35+ other AI opponents.
 The AI Opponent You&amp;rsquo;re playing against &amp;ldquo;Custom-Ensemble-Top5Models-q&amp;rdquo; - a sophisticated AI system that:
-Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-value averaging for strategic decision making Achieved #1 ranking with 63.4% win rate in tournament play Applies weighted strategy (30%, 20%, 20%, 15%, 15%) based on model performance 🤗 Your Opponent: Real AI Ensemble Playing against the actual tournament-winning neural networks hosted on Hugging Face Spaces.</description>
-            <content type="html"><![CDATA[<p>Challenge our tournament-winning AI system in Connect 4! This isn&rsquo;t just any AI - it&rsquo;s an ensemble of 5 neural networks that dominated a comprehensive tournament against 35+ other AI opponents.</p>
+Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-value averaging for strategic decision making Achieved #1 ranking with 63.4% win rate in tournament play Applies weighted strategy (30%, 20%, 20%, 15%, 15%) based on model performance Your Opponent: Tournament AI Ensemble Playing against tournament-winning neural networks hosted on Hugging Face Spaces.</description>
+            <content type="html"><![CDATA[<p>Challenge a tournament-winning AI system in Connect 4. This ensemble of 5 neural networks dominated a comprehensive tournament against 35+ other AI opponents.</p>
 <h2 id="the-ai-opponent">The AI Opponent</h2>
 <p>You&rsquo;re playing against <strong>&ldquo;Custom-Ensemble-Top5Models-q&rdquo;</strong> - a sophisticated AI system that:</p>
 <ul>
@@ -42,19 +42,19 @@ Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-valu
 
 <div class="game-info">
     <div class="ai-info">
-        <h3>🤗 Your Opponent: Real AI Ensemble</h3>
-        <p>Playing against the actual tournament-winning neural networks hosted on Hugging Face Spaces.</p>
-        <p><strong>Live AI:</strong> Custom-Ensemble-Top5Models-q with 5 CNN models and Q-value averaging</p>
-        <p id="connection-status" style="color: orange;">🔄 Connecting to tournament AI...</p>
+        <h3>Your Opponent: Tournament AI Ensemble</h3>
+        <p>Playing against tournament-winning neural networks hosted on Hugging Face Spaces.</p>
+        <p><strong>AI System:</strong> Custom-Ensemble-Top5Models-q with 5 CNN models and Q-value averaging</p>
+        <p id="connection-status" style="color: orange;">Connecting to tournament AI...</p>
     </div>
     
     <div class="game-status">
         <div class="current-player">
-            <span id="player-indicator">Your turn! 🔴</span>
+            <span id="player-indicator">Your turn</span>
         </div>
         <div class="game-controls">
             <button id="new-game-btn" onclick="startNewGame()">New Game</button>
-            <button id="hint-btn" onclick="getHint()" disabled>💡 Hint</button>
+            <button id="hint-btn" onclick="getHint()" disabled>Hint</button>
         </div>
     </div>
 </div>
@@ -89,13 +89,13 @@ Combines 5 CNN-based Deep Q-Networks trained on 150k-750k games each Uses Q-valu
 <script src="/js/connect4-huggingface-ai.js"></script>
 <script src="/js/game.js"></script>
 <h2 id="how-the-ai-works">How the AI Works</h2>
-<h3 id="-ensemble-architecture">🔗 Ensemble Architecture</h3>
+<h3 id="ensemble-architecture">Ensemble Architecture</h3>
 <p>Combines 5 CNN-based Deep Q-Networks trained on different amounts of gameplay experience (150k-750k episodes each)</p>
-<h3 id="-q-value-averaging">🎯 Q-Value Averaging</h3>
+<h3 id="q-value-averaging">Q-Value Averaging</h3>
 <p>Each model predicts Q-values for all moves, then weights are applied and averaged for final decision</p>
-<h3 id="-weighted-strategy">⚖️ Weighted Strategy</h3>
+<h3 id="weighted-strategy">Weighted Strategy</h3>
 <p>Model weights: 30%, 20%, 20%, 15%, 15% based on training progression and performance</p>
-<h3 id="-tournament-proven">🏆 Tournament Proven</h3>
+<h3 id="tournament-proven">Tournament Proven</h3>
 <p>Winner of comprehensive tournament against 35+ AI opponents including other ensembles and individual models</p>
 <hr>
 <p><strong>Controls:</strong> Click columns to drop pieces, or use keyboard shortcuts 1-7. Press &lsquo;H&rsquo; for hints, &lsquo;N&rsquo; for new game.</p>
