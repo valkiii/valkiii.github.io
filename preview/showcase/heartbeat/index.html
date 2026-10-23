@@ -8,6 +8,7 @@
 <meta name="description" content="53 minutes of a run, one heart-rate reading at a time, turned into a visibility graph.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: a night-time cardiac monitor. Readout band on top, the graph as the big screen, the run as a scrubbable strip below. One dark world by design. */
@@ -39,7 +40,7 @@ body {
 .embed body, body.embed { padding-block: 10px; }
 body.embed .story { display: none; }
 
-header.intro { display: grid; gap: 10px; max-width: 760px; }
+header.intro { display: grid; gap: 10px; max-width: 720px; width: 100%; margin: 0 auto; }
 .eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
 h1 { font: 800 clamp(44px, 7vw, 86px)/.92 var(--display); letter-spacing: .005em; margin: 0; text-wrap: balance; text-transform: uppercase; }
 h1 em { font-style: normal; color: var(--heart); }
@@ -119,16 +120,83 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--ink-3); margin-top: 6p
   .cols { grid-template-columns: 1fr; }
   .stage { height: min(70vh, 480px); }
 }
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+
+/* ---------- essay ---------- */
+.essay { max-width: 720px; margin: 0 auto; width: 100%; display: grid; gap: 18px; font-size: 19px; line-height: 1.7; color: var(--ink-2); }
+.essay p, .essay ol { margin: 0; }
+.essay b, .essay strong { color: var(--ink); font-weight: 600; }
+.essay h2 { font: 700 clamp(30px, 4vw, 42px)/1.05 var(--display); text-transform: uppercase; color: var(--ink); margin: 34px 0 0; letter-spacing: .01em; }
+.essay h3 { font: 700 24px/1.1 var(--display); text-transform: uppercase; color: var(--ink); margin: 14px 0 0; letter-spacing: .02em; }
+.essay mark { background: color-mix(in srgb, var(--heart) 35%, transparent); color: var(--ink); padding: 0 .15em; }
+.essay ol { padding-left: 1.2em; display: grid; gap: 6px; }
+.essay figure { margin: 10px 0; background: none; border: 0; padding: 0; border-radius: 0; }
+.essay img { height: auto; max-width: 100%; }
+.essay .art img { width: min(420px, 100%); margin: 0 auto; border-radius: 50%; display: block; box-shadow: 0 0 80px rgba(229,53,79,.25); }
+.essay .pic img { width: min(560px, 100%); margin: 0 auto; border-radius: 12px; display: block; }
+.essay .pic.small img { width: min(460px, 100%); margin: 0 auto; }
+.essay figcaption { font: 400 12px/1.5 var(--mono); color: var(--ink-3); text-align: center; margin-top: 8px; }
+.essay blockquote { margin: 6px 0; padding: 14px 18px; border-left: 3px solid var(--heart); background: var(--panel); border-radius: 0 10px 10px 0; color: var(--ink); }
+.essay blockquote.pull { background: none; border: 0; padding: 0; font: 700 clamp(26px, 3.4vw, 36px)/1.1 var(--display); text-transform: uppercase; color: var(--heart); }
+.formula { display: block; margin-top: 8px; color: var(--ink); }
+.essay .embed { width: calc(100% + 160px); margin: 8px -80px; height: 600px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.reveal { margin: 0 auto; width: min(760px, 100%); display: grid; gap: 10px; }
+.reveal iframe { width: 100%; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); display: block; }
+.reveal figcaption { font: 700 clamp(28px, 4vw, 44px)/1 var(--display); text-transform: uppercase; color: var(--heart); text-align: center; opacity: 0; transform: translateY(10px); transition: opacity 1s ease 1.4s, transform 1s ease 1.4s; }
+.reveal.on figcaption { opacity: 1; transform: none; }
+.refs { max-width: 720px; margin: 20px auto 0; font: 400 12px/1.6 var(--mono); color: var(--ink-3); padding-left: 1.6em; display: grid; gap: 4px; }
+body.graph-only { padding: 0; }
+body.graph-only .wrap { max-width: none; gap: 0; }
+body.graph-only .monitor, body.graph-only .toolbar, body.graph-only .strip, body.graph-only .hint { display: none; }
+body.graph-only .screen { border: 0; border-radius: 0; background: transparent; }
+body.graph-only .stage { height: 100vh; min-height: 0; }
+@media (max-width: 820px) { .essay .embed { width: 100%; margin-inline: 0; height: 560px; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } .reveal figcaption { transition: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="intro story">
-    <div class="eyebrow">Visibility graphs · a run on <span id="rundate"></span></div>
+    <div class="eyebrow">An essay with a heartbeat · first published August 2024, rebuilt October 2026</div>
     <h1>My heart beats <em>like a network</em></h1>
-    <p class="lede">Every reading my watch took during a 53-minute run becomes a node. Two readings are linked when they can see each other over the readings in between, like rooftops on a street of skyscrapers. Press play and watch the run build its own graph, beat by beat.</p>
+    <p class="lede">How a 53-minute run, one heart-rate reading at a time, becomes a graph. An introduction to visibility graphs, with my own heart as the example.</p>
   </header>
+
+  <article class="essay story">
+    <figure class="art"><img src="heart-art.jpg" alt="A heart drawn as a network of points and lines" width="1000" height="1000"></figure>
+    <p>I have always been a romantic, probably due to the amount and genre of songs I was exposed to in my childhood. The first song I remember is from an Italian songwriter who sings about how everything he did reminded him of a special someone. Even as a child, I could sense a hint of the emotional struggle in his lyrics, though my young heart had yet to experience the full spectrum of joy and sorrow that comes with love, which governs our heartbeats.</p>
+    <p>But this essay isn't about romance or love; it's about heartbeats, and specifically how we can visualise and understand them with data science. My passion for complex systems and the way they behave has always driven me, as a person and as a data scientist. During my master's I became particularly interested in measuring and quantifying complex systems, extracting any relevant structure from what might at first look like a chaotic mess.</p>
+    <p>The approach here is one of my favourite ways to do that: the <mark>visibility graph</mark>. I will introduce how visibility graphs work, their mathematical side, and an artistic way to look at a heartbeat with them.</p>
+
+    <h2>Understanding visibility graphs through skyscrapers</h2>
+    <p>A visibility graph represents relationships between data points. To make it tangible, picture a city of skyscrapers. Each skyscraper is a data point, and its height is the value of that point. This city is quite particular: all the skyscrapers stand in a line along a single street, just like the points of a time series.</p>
+    <figure class="pic"><img src="cityscape.jpg" alt="A street of skyscrapers of different heights" width="1000" height="1000" loading="lazy"></figure>
+    <p>Now imagine you are standing on the roof of one of these skyscrapers. From there you can see some buildings down the line, while others are hidden by taller ones in between.</p>
+    <h3>The concept of visibility</h3>
+    <p>In our metaphor, visibility means you can see the roof of one skyscraper from the roof of another. For two skyscrapers to see each other there must be no building in between that is as tall or taller than the line of sight. If skyscraper A is 50 metres tall and B, further down the street, is 100 metres, A can see B unless something in between rises above the line joining their roofs. Put a 120-metre tower C between them, and A can no longer see B.</p>
+    <figure class="pic small"><img src="dark-visibility.png" alt="Stick figures on rooftops: one can see over a short building but not over a tall one" loading="lazy"><figcaption>Made with Excalidraw, strongly suggested by Christian te Riet, Excalidraw's evangelist.</figcaption></figure>
+    <p>That is all we need to build a network. Each skyscraper becomes a <b>node</b>, and an <b>edge</b> joins two nodes whenever their roofs can see each other. Try it: drag the roofs up and down, or click a building to see what it can see.</p>
+    <iframe class="embed" data-src="../skyline/" title="A street of skyscrapers and its visibility graph" loading="lazy"></iframe>
+
+    <h2>The maths behind it</h2>
+    <p>Non-metaphorically, a visibility graph turns a time series into a network: each data point is a node, and two nodes are linked when they have a clear line of sight. Quoting the original paper [1]:</p>
+    <blockquote>Given a time series, two data values (t<sub>a</sub>, y<sub>a</sub>) and (t<sub>b</sub>, y<sub>b</sub>) are connected if any other value (t<sub>c</sub>, y<sub>c</sub>) between them fulfils
+      <span class="formula">$$y_c < y_b + (y_a - y_b)\,\frac{t_b - t_c}{t_b - t_a}$$</span></blockquote>
+    <p>By construction, the graph is always:</p>
+    <ol>
+      <li><b>Connected:</b> each node sees at least its nearest neighbours, left and right.</li>
+      <li><b>Undirected:</b> the algorithm defines no direction for the links.</li>
+      <li><b>Invariant under affine transformations:</b> rescaling or shifting either axis doesn't change who sees whom.</li>
+    </ol>
+    <p>The straightforward algorithm takes $O(N^2)$ time for $N$ points; faster methods, such as the horizontal visibility graph, bring that down to $O(N \log N)$ [2, 3].</p>
+    <h3>Why bother?</h3>
+    <p>Visibility graphs capture both local and global properties of a series. The degree of a node describes its immediate neighbourhood; the average path length and the clustering coefficient describe the structure as a whole [4]. For fractal time series, the degree distribution follows a power law, $P(k) \sim k^{-\gamma}$, which has been used to characterise the complexity and self-similarity of a series [5].</p>
+    <p>They have found uses well beyond the textbook: in finance, to study market dynamics and exchange rates [6]; in neuroscience, to turn EEG or fMRI signals into networks and characterise how brain regions connect and synchronise [7].</p>
+
+    <h2>You make my heart beat</h2>
+    <p>Now we know how visibility graphs work. I hope I didn't lose too many of you in the serious part, but it makes the next bit easier to appreciate. When I had some time, I used to go for a run around the neighbourhood and record it with my sports watch. Among everything it records, there is the heartbeat.</p>
+    <blockquote class="pull">The heartbeat time series becomes a graph, an object I studied for many years of my life.</blockquote>
+    <p>Ever since I first heard about visibility graphs, I wanted to analyse something unseen and see what it would actually look like. The heartbeat was one of those things, but during my PhD I had neither a good smartwatch nor a proper way to measure it. Below is one of my runs: 691 readings over 53 minutes. Press play and watch the graph fill up as the run goes on. The heart in the corner beats at the rate of the moment being replayed.</p>
+  </article>
 
   <section class="monitor" aria-label="Heart-rate monitor">
     <div class="heartbox"><canvas id="heart" aria-hidden="true"></canvas></div>
@@ -174,6 +242,7 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--ink-3); margin-top: 6p
     <div class="facts" id="facts"></div>
     <div class="cols">
       <div>
+        <p class="eyebrow">Added in 2026 · what the graph says</p>
         <h2>Peaks become hubs</h2>
         <p>A reading sees far when it stands taller than its neighbours. So the hardest moments of the run turn into the graph's hubs: <strong id="hubline"></strong> The flat, steady stretches only see the readings next to them, and they knit into tight local clusters.</p>
         <p>That is why the network breaks so cleanly into communities: each one is a stretch of the run with its own rhythm. Switch the colour to <em>Communities</em> and they line up along the strip almost in order of time.</p>
@@ -185,7 +254,25 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--ink-3); margin-top: 6p
         <figcaption>How many readings each reading can see (degree k), log-binned. Dashed: least-squares power-law fit on the binned tail.</figcaption>
       </figure>
     </div>
-    <p class="foot">Data: one Garmin TCX export, heart rate only (GPS removed). Visibility follows Lacasa et al., PNAS 2008, using real elapsed seconds as the x axis (the watch samples every ~4.6 s, unevenly). Communities: Louvain, seed 7. Layouts: seeded force layout with a pull towards each community, and a parametric heart where time runs clockwise from the tip.</p>
+    <article class="essay">
+      <h2>Conclusions</h2>
+      <p>There is not much deep meaning in this piece of analysis. I made it to introduce a concept I love, the visibility graph, to a wider audience, and to combine it with something out of the ordinary, a heartbeat, into something almost artistic.</p>
+      <p>As a final note, I played around with the layout of the network and found a small surprise. Keep scrolling and watch my heartbeat graph…</p>
+    </article>
+    <figure class="reveal" id="reveal">
+      <iframe data-src="./?embed=graph&amp;layout=net&amp;at=1&amp;autoplay=0" title="The heartbeat graph, rearranged" id="revealframe"></iframe>
+      <figcaption id="revealcap">…was hiding a heart.</figcaption>
+    </figure>
+    <ol class="refs">
+      <li>Lacasa, Luque, Ballesteros, Luque &amp; Nuño (2008). From time series to complex networks: the visibility graph. <i>PNAS</i> 105(13), 4972–4975.</li>
+      <li>Luque, Lacasa, Ballesteros &amp; Luque (2009). Horizontal visibility graphs: exact results for random time series. <i>Physical Review E</i> 80(4), 046103.</li>
+      <li>Lan, Mo, Chen, Liu &amp; Deng (2015). Fast transformation from time series to visibility graphs. <i>Chaos</i> 25(8), 083105.</li>
+      <li>Ahmadlou, Adeli &amp; Adeli (2010). New diagnostic EEG markers of the Alzheimer's disease using visibility graph. <i>Journal of Neural Transmission</i> 117(9), 1099–1109.</li>
+      <li>Lacasa &amp; Toral (2010). Description of stochastic and chaotic series using visibility graphs. <i>Physical Review E</i> 82(3), 036120.</li>
+      <li>Yang, Wang, Yang &amp; Mang (2009). Visibility graph approach to exchange rate series. <i>Physica A</i> 388(20), 4431–4437.</li>
+      <li>Ahmadlou, Ahmadi, Rezazade &amp; Azad-Marzabadi (2013). Global organization of functional brain connectivity in methamphetamine abusers. <i>Clinical Neurophysiology</i> 124(6), 1122–1131.</li>
+    </ol>
+    <p class="foot">Data: one Garmin TCX export, heart rate only (GPS removed). Visibility follows Lacasa et al., PNAS 2008, using real elapsed seconds as the x axis (the watch samples every ~4.6 s, unevenly). Communities: Louvain, seed 7. Layouts: each community laid out as its own lobe, and a heart where the readings run around the outline in time order.</p>
   </section>
 </div>
 
@@ -195,6 +282,7 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--ink-3); margin-top: 6p
 const D = window.HEART, N = D.hr.length;
 const params = new URLSearchParams(location.search);
 if (params.has("embed")) document.body.classList.add("embed");
+if (params.get("embed") === "graph") document.body.classList.add("graph-only");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = id => document.getElementById(id);
 const fmt = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
@@ -210,7 +298,7 @@ function ramp(u) {
 }
 const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
 $("lgbar").style.background = `linear-gradient(90deg, ${[0, .2, .4, .6, .8, 1].map(u => rgb(ramp(u))).join(",")})`;
-$("rundate").textContent = new Date(D.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+if ($("rundate")) $("rundate").textContent = new Date(D.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
 // ---------- graph structure ----------
 const E = D.edges.slice().sort((a, b) => a[1] - b[1] || a[0] - b[0]); // j = later node; visible prefix grows with time
@@ -597,8 +685,23 @@ if (autoplay && "IntersectionObserver" in window) {
     if (!started && es[0].isIntersecting) { started = true; ob.disconnect(); setTimeout(() => { cursor = 0; playing = true; setPlay(); }, 900); }
   }, { threshold: .35 }).observe($("stage"));
 } else if (!autoplay && qAt === null) { cursor = N; lastShown = N; playing = false; setPlay(); }
+// the surprise: the parent page asks the embedded graph to become a heart
+addEventListener("message", e => { if (e.data && typeof e.data.heart === "boolean") setLayout(e.data.heart ? "heart" : "net"); });
+const rv = document.getElementById("reveal"), rf = document.getElementById("revealframe");
+if (!params.has("embed")) document.querySelectorAll("iframe[data-src]").forEach(f => f.src = f.dataset.src);
+if (rv && rf && !params.has("embed")) {
+  new IntersectionObserver(es => es.forEach(en => {
+    const on = en.intersectionRatio > .55;
+    rv.classList.toggle("on", on);
+    setTimeout(() => rf.contentWindow && rf.contentWindow.postMessage({ heart: on }, "*"), on ? 700 : 0);
+  }), { threshold: [0, .55, 1] }).observe(rv);
+}
 requestAnimationFrame(frame);
 })();
 </script>
-</body>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="document.querySelectorAll('.essay').forEach(el=>renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}))"></script>
+<script>/* end */
+</script>
+<a class="pf-back" href="../../" style="position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:999;background:rgba(23,24,27,.82);color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:9px 13px;border-radius:999px;text-decoration:none;backdrop-filter:blur(6px)" onclick="if(document.referrer.indexOf(location.origin)===0&&history.length>1){history.back();return false}">← Portfolio</a><script>if(window.self!==window.top)document.querySelector('.pf-back').remove()</script></body>
 </html>

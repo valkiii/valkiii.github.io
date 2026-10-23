@@ -43,5 +43,5 @@
   addEventListener('unhandledrejection', (e) => showErr(e.reason && (e.reason.stack || e.reason.message) || e.reason));
 </script>
 <script type="module" src="src/main.js"></script>
-</body>
+<a class="pf-back" href="../../" style="position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:999;background:rgba(23,24,27,.82);color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:9px 13px;border-radius:999px;text-decoration:none;backdrop-filter:blur(6px)" onclick="if(document.referrer.indexOf(location.origin)===0&&history.length>1){history.back();return false}">← Portfolio</a><script>if(window.self!==window.top)document.querySelector('.pf-back').remove()</script></body>
 </html>

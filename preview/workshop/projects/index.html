@@ -351,5 +351,5 @@ document.querySelectorAll(".filters button").forEach(b => b.addEventListener("cl
   document.querySelectorAll(".all > div").forEach(d => d.hidden = b.dataset.uc !== "all" && !d.dataset.uc.split(" ").includes(b.dataset.uc));
 }));
 </script>
-</body>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../atlas/projects/index.html">Atlas</a><a href="../../notebook/projects/index.html">Notebook</a><a href="index.html" aria-current=page>Workshop</a><a href="../../index.html" style="opacity:.7">All 3</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
 </html>

@@ -2095,7 +2095,7 @@ const SCREENS = {
           <button class="btn ${cont ? '' : 'primary'}" data-act="go" data-arg="setup"><span>New game</span><small>Solo, co-op or versus</small></button>
           <button class="btn" data-act="go" data-arg="levels"><span>Jump to a level</span><small>Furthest reached: ${best}</small></button>
           <button class="btn" data-act="go" data-arg="saves"><span>Load game</span><small>${n ? n + ' saved' : 'No saves yet'}</small></button>
-          <button class="btn" data-act="go" data-arg="online"><span>Play online</span><small>${Net.available() ? 'Host or join with a code' : 'Open from the claude.ai link'}</small></button>
+          ${Net.available() ? `<button class="btn" data-act="go" data-arg="online"><span>Play online</span><small>Host or join with a code</small></button>` : ''}
           <button class="btn" data-act="go" data-arg="settings"><span>Settings</span><small>${AGES[S.age].label}${S.custom ? ', customised' : ''}</small></button>
         </nav>
       </section>
@@ -2444,4 +2444,4 @@ function loop(now) {
   Net.init(); cloudInit();
 })();
 </script>
-</body></html>
+<a class="pf-back" href="../../" style="position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:999;background:rgba(23,24,27,.82);color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:9px 13px;border-radius:999px;text-decoration:none;backdrop-filter:blur(6px)" onclick="if(document.referrer.indexOf(location.origin)===0&&history.length>1){history.back();return false}">← Portfolio</a><script>if(window.self!==window.top)document.querySelector('.pf-back').remove()</script></body></html>
