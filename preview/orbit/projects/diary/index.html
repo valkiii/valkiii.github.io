@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Diary · Valerio Ciotti</title>
+<meta name="description" content="Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Hanken+Grotesk:ital,wght@0,300..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-tools)">
+  <header class="story-hero">
+    <div class="bg"><svg class="glow" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="g-bg"/>
+<circle cx="242.03125" cy="85.0" r="4.65625" class="g-n"/><circle cx="82.34375" cy="75.0" r="4.34375" class="g-n"/><line x1="82.34375" y1="75.0" x2="242.03125" y2="85.0" class="g-e"/><circle cx="227.8125" cy="170.0" r="3.953125" class="g-n"/><line x1="227.8125" y1="170.0" x2="82.34375" y2="75.0" class="g-e"/><circle cx="291.25" cy="95.0" r="2.484375" class="g-n"/><line x1="291.25" y1="95.0" x2="227.8125" y2="170.0" class="g-e"/><circle cx="177.5" cy="90.0" r="5.265625" class="g-n"/><line x1="177.5" y1="90.0" x2="291.25" y2="95.0" class="g-e"/><circle cx="175.3125" cy="58.125" r="4.703125" class="g-n"/><line x1="175.3125" y1="58.125" x2="177.5" y2="90.0" class="g-e"/><circle cx="208.125" cy="120.0" r="3.921875" class="g-n"/><line x1="208.125" y1="120.0" x2="175.3125" y2="58.125" class="g-e"/><circle cx="287.96875" cy="134.375" r="1.828125" class="g-n"/><line x1="287.96875" y1="134.375" x2="208.125" y2="120.0" class="g-e"/><circle cx="74.6875" cy="28.75" r="2.34375" class="g-n"/><line x1="74.6875" y1="28.75" x2="287.96875" y2="134.375" class="g-e"/><circle cx="72.5" cy="75.625" r="3.203125" class="g-n"/><line x1="72.5" y1="75.625" x2="74.6875" y2="28.75" class="g-e"/><circle cx="161.09375" cy="52.5" r="4.65625" class="g-n"/><line x1="161.09375" y1="52.5" x2="72.5" y2="75.625" class="g-e"/><circle cx="20.0" cy="157.5" r="4.34375" class="g-n"/><line x1="20.0" y1="157.5" x2="161.09375" y2="52.5" class="g-e"/><circle cx="99.84375" cy="52.5" r="3.953125" class="g-n"/><line x1="99.84375" y1="52.5" x2="20.0" y2="157.5" class="g-e"/><circle cx="45.15625" cy="114.375" r="2.484375" class="g-n"/><line x1="45.15625" y1="114.375" x2="99.84375" y2="52.5" class="g-e"/></svg>
+</div>
+    <div class="wrap">
+      <p class="kicker"><a href="../../">Orbit</a> · Tools · Robots &amp; devices · October 2026</p>
+      <h1>The Diary</h1>
+      <p class="question">What if a paper notebook wrote back?</p>
+    </div>
+  </header>
+  <section class="wrap intro">
+    <p class="lede">Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.</p>
+    <p class="actions">
+<a class="btn" href="https://github.com/valkiii/the_diary" target="_blank" rel="noopener">Code ↗</a>    </p>
+  </section>
+<section class="wrap nums"><div><b>60–85 ms</b><span>to add one pen line on the tablet</span></div><div><b>8–40 s</b><span>before the reply fades</span></div></section>  <section class="wrap block"><h2>The idea</h2><p class="big">A port of Maxime Rivest&#39;s riddle to the Supernote Manta. The magic is that it feels like paper, not like a chat window.
+</p></section>
+  <section class="wrap block"><h2>How it works</h2>
+    <ol class="steps"><li><span class="dot" aria-hidden="true"></span><div><b>Read</b><p>The tablet&#39;s handwriting recognition reads your strokes.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Drink</b><p>Your ink fades while a small bridge asks a model for Tom&#39;s reply.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Write</b><p>The answer appears stroke by stroke in a flowing hand, lingers, and fades away.</p></div></li></ol>
+  </section>
+<section class="wrap block"><h2>What I learned</h2><ul class="learned"><li>The tablet blocks plain HTTP from plugins, so the plugin speaks raw sockets natively.</li></ul></section>  <section class="wrap block"><h2>Built with</h2><p class="stack"><span>TypeScript</span><span>Kotlin</span><span>Supernote plugin SDK</span><span>Claude / Ollama</span></p></section>
+<section class="wrap block"><h2>In the same orbit</h2><div class="rows"><a class="row" href="../../../showcase/precog/" style="--c: var(--uc-vision)">
+  <span class="thumb"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">What if my hands were the mouse?</span>
+    <span class="meta"><b>Precog</b> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../zepplocal/" style="--c: var(--uc-tools)">
+  <span class="thumb"><svg class="glow" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="g-bg"/>
+<circle cx="53.90625" cy="133.125" r="4.953125" class="g-n"/><circle cx="169.84375" cy="168.75" r="5.34375" class="g-n"/><line x1="169.84375" y1="168.75" x2="53.90625" y2="133.125" class="g-e"/><circle cx="280.3125" cy="116.25" r="5.109375" class="g-n"/><line x1="280.3125" y1="116.25" x2="169.84375" y2="168.75" class="g-e"/><circle cx="137.03125" cy="86.875" r="4.859375" class="g-n"/><line x1="137.03125" y1="86.875" x2="280.3125" y2="116.25" class="g-e"/><circle cx="199.375" cy="90.625" r="4.515625" class="g-n"/><line x1="199.375" y1="90.625" x2="137.03125" y2="86.875" class="g-e"/><circle cx="161.09375" cy="21.875" r="2.046875" class="g-n"/><line x1="161.09375" y1="21.875" x2="199.375" y2="90.625" class="g-e"/><circle cx="232.1875" cy="31.25" r="2.3125" class="g-n"/><line x1="232.1875" y1="31.25" x2="161.09375" y2="21.875" class="g-e"/><circle cx="240.9375" cy="63.125" r="2.140625" class="g-n"/><line x1="240.9375" y1="63.125" x2="232.1875" y2="31.25" class="g-e"/><circle cx="213.59375" cy="71.875" r="3.390625" class="g-n"/><line x1="213.59375" y1="71.875" x2="240.9375" y2="63.125" class="g-e"/><circle cx="111.875" cy="178.125" r="2.203125" class="g-n"/><line x1="111.875" y1="178.125" x2="213.59375" y2="71.875" class="g-e"/><circle cx="204.84375" cy="25.625" r="4.953125" class="g-n"/><line x1="204.84375" y1="25.625" x2="111.875" y2="178.125" class="g-e"/><circle cx="224.53125" cy="57.5" r="5.34375" class="g-n"/><line x1="224.53125" y1="57.5" x2="204.84375" y2="25.625" class="g-e"/><circle cx="177.5" cy="26.25" r="5.109375" class="g-n"/><line x1="177.5" y1="26.25" x2="224.53125" y2="57.5" class="g-e"/><circle cx="213.59375" cy="100.625" r="4.859375" class="g-n"/><line x1="213.59375" y1="100.625" x2="177.5" y2="26.25" class="g-e"/></svg>
+</span>
+  <span class="txt">
+    <span class="q">Can I keep my watch data without trusting another app?</span>
+    <span class="meta"><b>ZeppLocal</b> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../xgoduck/" style="--c: var(--uc-robots)">
+  <span class="thumb"><svg class="glow" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-robots)">
+  <rect width="320" height="200" class="g-bg"/>
+<circle cx="192.8125" cy="60.625" r="3.828125" class="g-n"/><circle cx="156.71875" cy="116.875" r="4.03125" class="g-n"/><line x1="156.71875" y1="116.875" x2="192.8125" y2="60.625" class="g-e"/><circle cx="120.625" cy="132.5" r="4.9375" class="g-n"/><line x1="120.625" y1="132.5" x2="156.71875" y2="116.875" class="g-e"/><circle cx="27.65625" cy="153.75" r="2.515625" class="g-n"/><line x1="27.65625" y1="153.75" x2="120.625" y2="132.5" class="g-e"/><circle cx="246.40625" cy="161.875" r="3.421875" class="g-n"/><line x1="246.40625" y1="161.875" x2="27.65625" y2="153.75" class="g-e"/><circle cx="154.53125" cy="174.375" r="4.8125" class="g-n"/><line x1="154.53125" y1="174.375" x2="246.40625" y2="161.875" class="g-e"/><circle cx="106.40625" cy="92.5" r="3.578125" class="g-n"/><line x1="106.40625" y1="92.5" x2="154.53125" y2="174.375" class="g-e"/><circle cx="127.1875" cy="169.375" r="4.78125" class="g-n"/><line x1="127.1875" y1="169.375" x2="106.40625" y2="92.5" class="g-e"/><circle cx="258.4375" cy="68.75" r="1.9375" class="g-n"/><line x1="258.4375" y1="68.75" x2="127.1875" y2="169.375" class="g-e"/><circle cx="131.5625" cy="131.875" r="4.171875" class="g-n"/><line x1="131.5625" y1="131.875" x2="258.4375" y2="68.75" class="g-e"/><circle cx="237.65625" cy="161.25" r="3.828125" class="g-n"/><line x1="237.65625" y1="161.25" x2="131.5625" y2="131.875" class="g-e"/><circle cx="51.71875" cy="121.875" r="4.03125" class="g-n"/><line x1="51.71875" y1="121.875" x2="237.65625" y2="161.25" class="g-e"/><circle cx="164.375" cy="73.75" r="4.9375" class="g-n"/><line x1="164.375" y1="73.75" x2="51.71875" y2="121.875" class="g-e"/><circle cx="24.375" cy="158.75" r="2.515625" class="g-n"/><line x1="24.375" y1="158.75" x2="164.375" y2="73.75" class="g-e"/></svg>
+</span>
+  <span class="txt">
+    <span class="q">Can a 3D-printed duck learn to walk on a Pi Zero?</span>
+    <span class="meta"><b>XGO-Duck on a Pi</b> · Oct 2026 · building</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="index.html" aria-current=page>Orbit</a><a href="../../../playground/projects/diary/index.html">Playground</a><a href="../../../reel/projects/diary/index.html">Reel</a><a href="../../../atlas/projects/diary/index.html">Atlas</a><a href="../../../notebook/projects/diary/index.html">Notebook</a><a href="../../../workshop/projects/diary/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

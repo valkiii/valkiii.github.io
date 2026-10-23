@@ -198,3 +198,5 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .row-scroll > .row { grid-auto-columns: 78vw; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card, .card .media img, .block, .post-card { transition: none; } }
+
+[hidden] { display: none !important; }

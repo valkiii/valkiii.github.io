@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PULP · Valerio Ciotti</title>
+<meta name="description" content="A Fruit Ninja style browser game. Your fingertips become blades, and an experimental mode lets you slice with your gaze.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../"><span class="blob" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Play</a><a href="../" aria-current="page">Everything</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-play)">
+  <header class="story-hero">
+    <div class="wrap">
+      <p class="kicker"><a href="../../">Play</a> · Games · Seeing · October 2026</p>
+      <h1>PULP</h1>
+      <p class="question">Can you play Fruit Ninja with your eyes?</p>
+      <p class="actions">
+<a class="btn primary" href="../../../play/pulp/">Play it (needs a webcam)</a><a class="btn" href="https://github.com/valkiii/fruit_ninja" target="_blank" rel="noopener">Code ↗</a>      </p>
+    </div>
+  </header>
+  <figure class="wrap hero-pic"><svg class="shape wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-play)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="133.125" cy="61.25" r="86.09375" class="s-a"/>
+  <rect x="178.28125" y="88.75" width="100.6640625" height="100.6640625" rx="22" class="s-b" transform="rotate(-5.625 200 100)"/>
+  <text x="22" y="178" class="s-t">PULP</text>
+</svg>
+</figure>
+  <section class="wrap lead"><p>A Fruit Ninja style browser game. Your fingertips become blades, and an experimental mode lets you slice with your gaze.</p></section>
+<section class="wrap nums"><div><b>60</b><span>fps canvas</span></div><div><b>13 + 7</b><span>calibration and validation dots</span></div><div><b>0</b><span>servers: it all runs in the browser</span></div></section>  <section class="wrap duo-text"><h2>The idea</h2><p class="big">After Precog, the obvious next question was a game. Then a harder one: what if you only had your eyes?
+</p></section>
+  <section class="wrap"><h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">1</span><b>Hands</b><p>MediaPipe&#39;s hand landmarker runs in the browser. Only fast swipes cut; slow movement doesn&#39;t.</p></li><li><span class="n">2</span><b>Eyes</b><p>A face mesh with irises, calibrated each session on 13 dots and checked on 7 more.</p></li><li><span class="n">3</span><b>Fit</b><p>A small ridge regression maps eye features to the screen; leave-one-dot-out cross-validation picks the model.</p></li><li><span class="n">4</span><b>Cut</b><p>In eye mode a cut is a quick saccade flick or a dwell. Blinks are filtered out.</p></li></ol>
+  </section>
+<section class="wrap duo-text"><h2>What I learned</h2><ul class="learned"><li>Moving from Python to the browser removed a whole class of driver and GPU problems, and gave a smooth 60 fps.</li><li>Gaze is noisy. Calibration you can verify matters more than a clever model.</li></ul></section>  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>JavaScript</span><span>MediaPipe Tasks (wasm)</span><span>Canvas</span><span>WebAudio</span></p></section>
+<section class="wrap"><h2 class="h2">More like this</h2><div class="grid"><a class="tile " href="../../../showcase/precog/" style="--c: var(--uc-vision)">
+  <span class="pic"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="cap"><b>Precog</b><span>What if my hands were the mouse?</span></span>
+</a>
+<a class="tile " href="../spellstorm/" style="--c: var(--uc-play)">
+  <span class="pic"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="cap"><b>Spellstorm</b><span>Can a survivors-style game work for a five-year-old and a teenager?</span></span>
+</a>
+<a class="tile " href="../drawbluff/" style="--c: var(--uc-play)">
+  <span class="pic"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="cap"><b>Drawbluff</b><span>Can I host a Drawful-style party game from a laptop?</span></span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <div class="marquee small" aria-hidden="true"><div><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span></div></div>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/pulp/index.html">Orbit</a><a href="index.html" aria-current=page>Playground</a><a href="../../../reel/projects/pulp/index.html">Reel</a><a href="../../../atlas/projects/pulp/index.html">Atlas</a><a href="../../../notebook/projects/pulp/index.html">Notebook</a><a href="../../../workshop/projects/pulp/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

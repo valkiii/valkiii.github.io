@@ -67,6 +67,18 @@
     });
   }
   draw();
+  // a slow drift around each settled position, so the map floats
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  nodes.forEach((d, i) => { d.ph = i * 1.7; d.bx = d.x; d.by = d.y; });
+  let hovering = false;
+  svg.on("pointerenter.drift", () => hovering = true).on("pointerleave.drift", () => hovering = false);
+  if (!reduceMotion) d3.timer(ms => {
+    if (hovering) return;
+    const t = ms / 1000;
+    nodes.forEach(d => { const a = d.hub ? 3 : 6; d.x = d.bx + Math.sin(t * .35 + d.ph) * a; d.y = d.by + Math.cos(t * .3 + d.ph * 1.3) * a; });
+    lk.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    nd.attr("transform", d => `translate(${d.x},${d.y})`);
+  });
   // hover: the node, its links and neighbours
   const nb = new Map(nodes.map(n => [n.id, new Set([n.id])]));
   links.forEach(l => { nb.get(l.source.id).add(l.target.id); nb.get(l.target.id).add(l.source.id); });
@@ -98,5 +110,5 @@
     lk.classed("faded", l => uc !== "all" && !(l.source.uc === uc || l.target.uc === uc || (l.source.p && l.source.p.uc.includes(uc) && l.target.p && l.target.p.uc.includes(uc))));
   }
   buttons.forEach(b => b.addEventListener("click", () => filter(b.dataset.uc)));
-  addEventListener("resize", () => { size(); fit(); draw(); });
+  addEventListener("resize", () => { size(); fit(); draw(); nodes.forEach(d => { d.bx = d.x; d.by = d.y; }); });
 })();

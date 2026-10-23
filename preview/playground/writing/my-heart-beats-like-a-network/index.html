@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My heart beats like a network · Valerio Ciotti</title>
+<meta name="description" content="A heartbeat time series becomes a network. An introduction to visibility graphs, with my own run.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"></head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../"><span class="blob" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Play</a><a href="../../projects/">Everything</a><a href="../" aria-current="page">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="post wrap">
+  <header>
+    <p class="kicker"><a href="../">Writing</a> · August 2024</p>
+    <h1>My heart beats like a network</h1>
+<p class="tags"><span>Visibility Graph</span><span>Timeseries</span><span>Art</span><span>Methodology</span></p>  </header>
+  <div class="prose"><p align="center">
+  <img src="featured.png" alt="A heart drawn as a network" width="500" height="500">
+</p>
+
+<p>I have always been a romantic, probably due to the amount and genre of songs I was exposed to in my childhood. The first song I remember is from an Italian songwriter who sings about how everything he did reminded him of a special someone. Even as a child, I could sense a hint of the emotional struggle in his lyrics, though my young heart had yet to experience the full spectrum of joy and sorrow that comes with love, which governs our heartbeats.</p>
+<p>But this post isn't about romance or love; it's actually about heartbeats—specifically, how we can visualize and understand them using data science techniques. Let me start from the beginning. My passion for complex systems and the ways they behave has always driven me, both as a person and as a data scientist. I have always been interested in understanding how things work. During my master's, I became particularly interested in evaluating, measuring, and quantifying complex systems, extracting any relevant structure from what might initially seem like a chaotic mess.</p>
+<p>The approach we will discuss in this blog post represents an innovative method for extracting valuable insights from complex datasets: the concept of visibility graphs. I will introduce the fundamentals of visibility graphs, explore their mathematical significance, and demonstrate an artistic way to visualize heartbeats. By leveraging the theory behind visibility graphs, we can extract meaningful insights from complex datasets, offering a unique and innovative approach to data visualization.</p>
+<h3>Understanding Visibility Graphs through Skyscrapers</h3>
+<p>A visibility graph is a powerful tool for representing relationships between data points. To help any reader better understand how they work, let's use a more tangible metaphor: skyscrapers in a bustling city.</p>
+<p>Picture yourself in a city filled with towering skyscrapers. Each skyscraper represents a data point. The height of each skyscraper corresponds to the magnitude of the data point it represents. This city is quite particular; in fact, all skyscrapers are arranged in a line along a single street, much like data points along a time series.</p>
+<p align="center">
+  <img src="cityscape.png" alt="A street of skyscrapers of different heights" width="400" height="400">
+</p>
+
+<p>Now, imagine you are standing on the roof of one of these skyscrapers. From your vantage point, you can see some buildings down the line, while others are obscured by taller structures in between. This scenario is a perfect analogy for understanding visibility graphs.</p>
+<h3>The Concept of Visibility</h3>
+<p>In our metaphor, <mark>visibility</mark> means whether you can see the roof of one skyscraper from the roof of another. For two skyscrapers to see each other (i.e., to have a line of sight), there must be no other skyscraper in between that is as tall or taller. This is analogous to checking if one data point can "see" another without being obscured by an intermediate point.</p>
+<p>This means that if skyscraper A is 50 meters tall and skyscraper B, further down the street, is 100 meters tall, you can see B from A if no other skyscraper in between is taller than 50 meters at the point it blocks the line of sight.</p>
+<figure>
+  <img src="visibility_xkcd_example.png" alt="Three skyscrapers: A can see B over a shorter building, but not over a taller one" width="400" height="300">
+  <figcaption>Made with Excalidraw, strongly suggested by Christian te Riet, Excalidraw's evangelist.</figcaption>
+</figure>
+
+<p>However, if there's a skyscraper C that is 120 meters tall between A and B, then A cannot see B. This blockage happens because C's height interferes with the direct line of sight from A to B.</p>
+<p>Given these instructions, we can now pass to building a network. To construct a visibility graph from this setup, we create:</p>
+<ul>
+<li>
+<p><b>Nodes</b>: Each node represents a skyscraper (or a data point in our time series). In the example below, the horizontal position of a node corresponds to the position of the skyscraper on the street, and the vertical position represents its height. For larger networks and the heartbeat example, nodes' positions will be defined based on the layout we choose, without respecting the 1-on-1 relationship with the time series like the image below.</p>
+</li>
+<li>
+<p><b>Edges</b>: An edge between two nodes indicates a clear line of sight between the corresponding skyscrapers. If skyscraper A can see skyscraper B, an edge is drawn between the nodes representing these two skyscrapers.</p>
+</li>
+</ul>
+<p>Drag the roofs up and down below, or click a building to see what it can see.</p>
+<iframe class="embed" src="../../../showcase/skyline/" height="620" title="A street of skyscrapers and its visibility graph" loading="lazy"></iframe>
+
+<h3>Visibility Graphs and the maths behind</h3>
+<p>This visualization technique is particularly useful in analyzing time series data, where understanding the relationships and dependencies between different data points is crucial. For instance, in financial data analysis, a visibility graph can help identify periods where market behaviors are similar or influenced by similar factors, despite potential intervening data points.</p>
+<p>Non-metaphorically speaking, at its core, a visibility graph is a representation of a time series or a spatial dataset where each data point is treated as a node, and an edge is created between two nodes if they have a clear line of sight. Quoting directly from the original paper [1]:</p>
+<blockquote>
+given a time series ${x_i}_{(a=1)}^{N}$, a visibility graph is constructed by connecting two arbitrary data values $(t_a, y_a)$ and $(t_b, y_b)$ if they have visibility, such that if any other data $(t_c, y_c)$ placed between them fulfills $$y_c < y_b + (y_a-y_b) \frac{t_b-t_c}{t_b-t_a}$$ 
+</blockquote>
+
+<p>We can easily check that by means of the present algorithm, the associated graph extracted from a time series is always:</p>
+<ol>
+<li>Connected: each node sees at least its nearest neighbors (left and right).</li>
+<li>Undirected: the way the algorithm is built up, there is no direction defined in the links.</li>
+<li>Invariant under affine transformations of the series data: the visibility criterion is invariant under rescaling of both horizontal and vertical axes, and under horizontal and vertical translations.</li>
+</ol>
+<p>This formulation ensures that two nodes are connected if no intermediate data point obscures their visibility. The resulting graph encodes the structural properties of the original dataset, revealing patterns and relationships that may not be immediately apparent.</p>
+<p>The construction of visibility graphs relies on the visibility algorithm, which efficiently computes the edges between nodes. The algorithm has a time complexity of $O(N^2)$, where $N$ is the number of data points. However, recent advancements have led to the development of more efficient algorithms, such as the horizontal visibility graph algorithm, which reduces the time complexity to $O(N log N)$ [3].</p>
+<h3>Visibility Graphs, why bother?</h3>
+<p>One of the key advantages of visibility graphs lies in their ability to capture both local and global properties of the dataset. Local properties, such as the degree distribution of nodes, provide insights into the immediate neighborhood of each data point. On the other hand, global properties, such as the average path length and clustering coefficient, reveal the overall structure and connectivity of the graph [4].</p>
+<p>From a mathematical perspective, visibility graphs exhibit intriguing properties that have been extensively studied. For instance, the degree distribution of visibility graphs constructed from fractal time series follows a power law, $P(k) ~ k^(-\gamma)$, where $k$ is the degree and $\gamma$ is the scaling exponent [5]. This property has been leveraged to characterize the complexity and self-similarity of time series data.</p>
+<p>Moreover, visibility graphs have found applications in various domains, ranging from finance to neuroscience. In finance, visibility graphs have been used to analyze stock market dynamics, detect market inefficiencies, and predict future price movements [6]. By constructing visibility graphs from stock price time series, researchers have uncovered hidden patterns and correlations that traditional methods may overlook.</p>
+<p>In neuroscience, visibility graphs have been employed to study the complex dynamics of brain activity. By transforming brain signals, such as EEG or fMRI data, into visibility graphs, researchers can characterize the functional connectivity and synchronization of different brain regions [7]. This approach has shed light on the intricate workings of the brain and has potential implications for understanding neurological disorders.</p>
+<h3>You make my heart beat</h3>
+<p>Now we understand how visibility graphs work. I hope I didn't lose too many of you with the serious talk in the previous section, but I felt it necessary to better appreciate the results that I am about to show you. Last year, when I had some time, I used to go for a run around the neighborhood and record my run with my sport watch. Among the different parameters that you can register, the heartbeat is one of them.</p>
+<blockquote class="pull">The heartbeat time series becomes a graph, an object that I studied for many years of my life.</blockquote>
+
+<p>Since I heard about visibility graphs, I have always been interested in analyzing something unseen before and seeing what it would actually look like. The heartbeat was one of them, but during my PhD time, I didn't have a top smartwatch (nor a proper algorithm to measure heartbeat was around) to properly analyze the heartbeat like I have today. The result of my run is shown in the interactive graph below.</p>
+
+<iframe class="embed" src="../../../showcase/heartbeat/?embed&amp;layout=net" height="1010" title="My run as a visibility graph" loading="lazy"></iframe>
+
+<p class="note">Updated in October 2026: I rebuilt this graphic from the raw watch export. It now beats at the heart rate of the moment it is replaying. <a href="../../../showcase/heartbeat/">Open it full screen</a>.</p>
+
+<p>It's nothing special, except for the fact that I can actually visualize how my heartbeat's time series becomes a graph, an object that I studied for many years of my life. I find this result to be quite fascinating and artistic.</p>
+<p>Press play to watch the graph fill up as the run goes on. Switch the colour to Communities to see the network communities, groups of nodes more densely connected to each other than to the rest of the network. Each one turns out to be a stretch of the run with its own rhythm.</p>
+<h3>Conclusions</h3>
+<p>There is not much of a deep meaning to be found in this piece of analysis. It was made for the sake of introducing a nice concept like the visibility graph methodology to a wider audience and combining it with something out of the common like a heartbeat time series into something almost artistic.</p>
+<p>As a final note, I made a small surprise playing around with the network layout. In the graph above, press <strong>Heart</strong> and...</p>
+<p>... my heartbeat graph was hiding a heart!</p>
+<hr />
+<h2>References</h2>
+<p>[1] Lacasa, L., Luque, B., Ballesteros, F., Luque, J., &amp; Nuno, J. C. (2008). From time series to complex networks: The visibility graph. Proceedings of the National Academy of Sciences, 105(13), 4972-4975.</p>
+<p>[2] Luque, B., Lacasa, L., Ballesteros, F., &amp; Luque, J. (2009). Horizontal visibility graphs: Exact results for random time series. Physical Review E, 80(4), 046103.</p>
+<p>[3] Lan, X., Mo, H., Chen, S., Liu, Q., &amp; Deng, Y. (2015). Fast transformation from time series to visibility graphs. Chaos: An Interdisciplinary Journal of Nonlinear Science, 25(8), 083105.</p>
+<p>[4] Ahmadlou, M., Adeli, H., &amp; Adeli, A. (2010). New diagnostic EEG markers of the Alzheimer's disease using visibility graph. Journal of Neural Transmission, 117(9), 1099-1109.</p>
+<p>[5] Lacasa, L., &amp; Toral, R. (2010). Description of stochastic and chaotic series using visibility graphs. Physical Review E, 82(3), 036120.</p>
+<p>[6] Yang, Y., Wang, J., Yang, H., &amp; Mang, J. (2009). Visibility graph approach to exchange rate series. Physica A: Statistical Mechanics and its Applications, 388(20), 4431-4437.</p>
+<p>[7] Ahmadlou, M., Ahmadi, K., Rezazade, M., &amp; Azad-Marzabadi, E. (2013). Global organization of functional brain connectivity in methamphetamine abusers. Clinical Neurophysiology, 124(6), 1122-1131.</p></div>
+</article>
+</main>
+<footer class="foot">
+  <div class="marquee small" aria-hidden="true"><div><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span></div></div>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.querySelector('.prose'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/writing/my-heart-beats-like-a-network/index.html">Orbit</a><a href="index.html" aria-current=page>Playground</a><a href="../../../reel/writing/my-heart-beats-like-a-network/index.html">Reel</a><a href="../../../atlas/writing/my-heart-beats-like-a-network/index.html">Atlas</a><a href="../../../notebook/writing/my-heart-beats-like-a-network/index.html">Notebook</a><a href="../../../workshop/writing/my-heart-beats-like-a-network/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

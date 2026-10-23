@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>XGO-Duck on a Pi · Valerio Ciotti</title>
+<meta name="description" content="Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Albert+Sans:ital,wght@0,400..800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="mast">
+  <a class="title" href="../../">The Reel</a>
+  <span class="line">Valerio Ciotti · ideas and use cases · 2021–2026</span>
+  <nav aria-label="Sections">
+<a href="../../">Reel</a><a href="../" aria-current="page">Contents</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="feature">
+  <header class="wrap fhead">
+    <p class="kicker"><a href="../../">The Reel</a> · Robots &amp; devices</p>
+    <h1>XGO-Duck on a Pi</h1>
+    <p class="stand">Can a 3D-printed duck learn to walk on a Pi Zero?</p>
+  </header>
+  <figure class="bleed"><svg class="plate " viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="320" height="200" class="p-bg"/>
+  <text x="160" y="150" text-anchor="middle" class="p-q">X</text>
+  <line x1="24" y1="176" x2="296" y2="176" class="p-l"/>
+  <text x="24" y="30" class="p-m">XGO-DUCK ON A PI</text>
+</svg>
+<figcaption class="wrap">Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.</figcaption></figure>
+  <div class="wrap body">
+    <aside class="side">
+      <dl>
+        <dt>When</dt><dd>October 2026</dd>
+        <dt>Status</dt><dd>building</dd>
+        <dt>Made with</dt><dd>Raspberry Pi Zero 2W, Feetech bus servos, ONNX policies, Python</dd>
+      </dl>
+      <p class="links">
+      </p>
+    </aside>
+    <div class="text">
+      <p class="drop">The duck walks with reinforcement-learned policies. Swapping its controller for a Pi means rewriting the loop that talks to the servos, not the brain.
+</p>
+<div class="figs"><div><b>15</b><span>servos</span></div><div><b>50 Hz</b><span>walking policy</span></div><div><b>34</b><span>tests in simulation</span></div></div>      <h2>How it works</h2>
+      <ol class="how"><li><span class="n">1</span><div><b>Port.</b> The microcontroller sketch rewritten in Python, behind the same interface, so the upstream code runs unchanged.</div></li><li><span class="n">2</span><div><b>Simulate.</b> A simulated servo bus and robot, so everything is tested before the hardware arrives.</div></li><li><span class="n">3</span><div><b>Guide.</b> A step-by-step setup wizard: parts, servo IDs, wiring scan, SSH, IMU axes, calibration.</div></li></ol>
+<h2>What I learned</h2><blockquote>Check the bearings list twice.</blockquote>    </div>
+  </div>
+  <section class="wrap more"><h2>Also in the reel</h2><div class="more-row"><a href="../diary/"><span class="th"><svg class="plate " viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="320" height="200" class="p-bg"/>
+  <text x="160" y="150" text-anchor="middle" class="p-q">T</text>
+  <line x1="24" y1="176" x2="296" y2="176" class="p-l"/>
+  <text x="24" y="30" class="p-m">THE DIARY</text>
+</svg>
+</span><b>What if a paper notebook wrote back?</b><span>The Diary</span></a><a href="../../../showcase/robot/"><span class="th"><img class="" src="../../../media/covers/robot.jpg" alt="" loading="lazy"></span><b>Could a robot arm sit across the table from me?</b><span>Someone to play with</span></a></div></section>
+</article>
+</main>
+<footer class="foot">
+  <p class="sign">Imagine, try, solve.</p>
+  <p class="cols"><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><span>© Valerio Ciotti</span></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/xgoduck/index.html">Orbit</a><a href="../../../playground/projects/xgoduck/index.html">Playground</a><a href="index.html" aria-current=page>Reel</a><a href="../../../atlas/projects/xgoduck/index.html">Atlas</a><a href="../../../notebook/projects/xgoduck/index.html">Notebook</a><a href="../../../workshop/projects/xgoduck/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

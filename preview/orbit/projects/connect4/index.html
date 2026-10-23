@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Four in a row vs five networks · Valerio Ciotti</title>
+<meta name="description" content="Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Hanken+Grotesk:ital,wght@0,300..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-play)">
+  <header class="story-hero">
+    <div class="bg"><img src="../../../media/covers/connect4.jpg" alt=""></div>
+    <div class="wrap">
+      <p class="kicker"><a href="../../">Orbit</a> · Games · Data science · September 2025</p>
+      <h1>Four in a row vs five networks</h1>
+      <p class="question">Can I teach a computer to beat me at Connect 4?</p>
+    </div>
+  </header>
+  <section class="wrap intro">
+    <p class="lede">Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.</p>
+    <p class="actions">
+<a class="btn primary" href="../../../play/connect4/">Play the ensemble</a><a class="btn" href="https://github.com/valkiii/forza_quatto" target="_blank" rel="noopener">Code ↗</a>    </p>
+  </section>
+<section class="wrap nums"><div><b>750k</b><span>training games for the strongest model</span></div><div><b>35+</b><span>AI opponents in the tournament</span></div><div><b>5</b><span>networks voting on every move</span></div></section>  <section class="wrap block"><h2>The idea</h2><p class="big">Connect 4 is small enough to learn and big enough that nothing can memorise it: about 4.5 trillion positions. It is the perfect sandbox to see what reinforcement learning really needs.
+</p></section>
+  <section class="wrap block"><h2>How it works</h2>
+    <ol class="steps"><li><span class="dot" aria-hidden="true"></span><div><b>Opponents</b><p>A random player and a rule-based one set the bar. The rules player beats random 99% of the time.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Learn</b><p>Dueling Double DQNs, first on flat boards, then convolutional networks that see lines like a person does.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Stabilise</b><p>Curriculum learning, reservoir replay and slow target updates against catastrophic forgetting.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Combine</b><p>The five best checkpoints average their Q-values with fixed weights. In this page they run in your browser.</p></div></li></ol>
+  </section>
+<section class="wrap block"><h2>What I learned</h2><ul class="learned"><li>An agent only gets as good as its sparring partners.</li><li>Ensembles of checkpoints are a cheap way to smooth over a single model&#39;s blind spots.</li></ul></section>  <section class="wrap block"><h2>Built with</h2><p class="stack"><span>PyTorch</span><span>Dueling Double DQN</span><span>CNNs</span><span>curriculum learning</span><span>JavaScript</span></p></section>
+<section class="wrap block"><h2>In the same orbit</h2><div class="rows"><a class="row" href="../pulp/" style="--c: var(--uc-play)">
+  <span class="thumb"><svg class="glow" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-play)">
+  <rect width="320" height="200" class="g-bg"/>
+<circle cx="112.96875" cy="22.5" r="4.765625" class="g-n"/><circle cx="272.65625" cy="81.25" r="3.0" class="g-n"/><line x1="272.65625" y1="81.25" x2="112.96875" y2="22.5" class="g-e"/><circle cx="225.625" cy="118.125" r="3.8125" class="g-n"/><line x1="225.625" y1="118.125" x2="272.65625" y2="81.25" class="g-e"/><circle cx="120.625" cy="99.375" r="2.578125" class="g-n"/><line x1="120.625" y1="99.375" x2="225.625" y2="118.125" class="g-e"/><circle cx="232.1875" cy="112.5" r="1.625" class="g-n"/><line x1="232.1875" y1="112.5" x2="120.625" y2="99.375" class="g-e"/><circle cx="40.78125" cy="159.375" r="4.828125" class="g-n"/><line x1="40.78125" y1="159.375" x2="232.1875" y2="112.5" class="g-e"/><circle cx="122.8125" cy="146.25" r="3.9375" class="g-n"/><line x1="122.8125" y1="146.25" x2="40.78125" y2="159.375" class="g-e"/><circle cx="242.03125" cy="40.625" r="3.890625" class="g-n"/><line x1="242.03125" y1="40.625" x2="122.8125" y2="146.25" class="g-e"/><circle cx="292.34375" cy="38.125" r="2.53125" class="g-n"/><line x1="292.34375" y1="38.125" x2="242.03125" y2="40.625" class="g-e"/><circle cx="173.125" cy="140.0" r="3.34375" class="g-n"/><line x1="173.125" y1="140.0" x2="292.34375" y2="38.125" class="g-e"/><circle cx="233.28125" cy="70.625" r="4.765625" class="g-n"/><line x1="233.28125" y1="70.625" x2="173.125" y2="140.0" class="g-e"/><circle cx="289.0625" cy="81.25" r="3.0" class="g-n"/><line x1="289.0625" y1="81.25" x2="233.28125" y2="70.625" class="g-e"/><circle cx="170.9375" cy="58.75" r="3.8125" class="g-n"/><line x1="170.9375" y1="58.75" x2="289.0625" y2="81.25" class="g-e"/><circle cx="156.71875" cy="23.125" r="2.578125" class="g-n"/><line x1="156.71875" y1="23.125" x2="170.9375" y2="58.75" class="g-e"/></svg>
+</span>
+  <span class="txt">
+    <span class="q">Can you play Fruit Ninja with your eyes?</span>
+    <span class="meta"><b>PULP</b> · Oct 2026 · beta</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../spellstorm/" style="--c: var(--uc-play)">
+  <span class="thumb"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Can a survivors-style game work for a five-year-old and a teenager?</span>
+    <span class="meta"><b>Spellstorm</b> · Oct 2026 · playable</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../drawbluff/" style="--c: var(--uc-play)">
+  <span class="thumb"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Can I host a Drawful-style party game from a laptop?</span>
+    <span class="meta"><b>Drawbluff</b> · Oct 2026 · playable</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="index.html" aria-current=page>Orbit</a><a href="../../../playground/projects/connect4/index.html">Playground</a><a href="../../../reel/projects/connect4/index.html">Reel</a><a href="../../../atlas/projects/connect4/index.html">Atlas</a><a href="../../../notebook/projects/connect4/index.html">Notebook</a><a href="../../../workshop/projects/connect4/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

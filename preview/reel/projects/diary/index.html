@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Diary · Valerio Ciotti</title>
+<meta name="description" content="Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Albert+Sans:ital,wght@0,400..800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="mast">
+  <a class="title" href="../../">The Reel</a>
+  <span class="line">Valerio Ciotti · ideas and use cases · 2021–2026</span>
+  <nav aria-label="Sections">
+<a href="../../">Reel</a><a href="../" aria-current="page">Contents</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="feature">
+  <header class="wrap fhead">
+    <p class="kicker"><a href="../../">The Reel</a> · Tools · Robots &amp; devices</p>
+    <h1>The Diary</h1>
+    <p class="stand">What if a paper notebook wrote back?</p>
+  </header>
+  <figure class="bleed"><svg class="plate " viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="320" height="200" class="p-bg"/>
+  <text x="160" y="150" text-anchor="middle" class="p-q">T</text>
+  <line x1="24" y1="176" x2="296" y2="176" class="p-l"/>
+  <text x="24" y="30" class="p-m">THE DIARY</text>
+</svg>
+<figcaption class="wrap">Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.</figcaption></figure>
+  <div class="wrap body">
+    <aside class="side">
+      <dl>
+        <dt>When</dt><dd>October 2026</dd>
+        <dt>Status</dt><dd>prototype</dd>
+        <dt>Made with</dt><dd>TypeScript, Kotlin, Supernote plugin SDK, Claude / Ollama</dd>
+      </dl>
+      <p class="links">
+<a href="https://github.com/valkiii/the_diary" target="_blank" rel="noopener">Code on GitHub ↗</a>      </p>
+    </aside>
+    <div class="text">
+      <p class="drop">A port of Maxime Rivest&#39;s riddle to the Supernote Manta. The magic is that it feels like paper, not like a chat window.
+</p>
+<div class="figs"><div><b>60–85 ms</b><span>to add one pen line on the tablet</span></div><div><b>8–40 s</b><span>before the reply fades</span></div></div>      <h2>How it works</h2>
+      <ol class="how"><li><span class="n">1</span><div><b>Read.</b> The tablet&#39;s handwriting recognition reads your strokes.</div></li><li><span class="n">2</span><div><b>Drink.</b> Your ink fades while a small bridge asks a model for Tom&#39;s reply.</div></li><li><span class="n">3</span><div><b>Write.</b> The answer appears stroke by stroke in a flowing hand, lingers, and fades away.</div></li></ol>
+<h2>What I learned</h2><blockquote>The tablet blocks plain HTTP from plugins, so the plugin speaks raw sockets natively.</blockquote>    </div>
+  </div>
+  <section class="wrap more"><h2>Also in the reel</h2><div class="more-row"><a href="../../../showcase/precog/"><span class="th"><img class="" src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span><b>What if my hands were the mouse?</b><span>Precog</span></a><a href="../zepplocal/"><span class="th"><svg class="plate " viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="320" height="200" class="p-bg"/>
+  <text x="160" y="150" text-anchor="middle" class="p-q">Z</text>
+  <line x1="24" y1="176" x2="296" y2="176" class="p-l"/>
+  <text x="24" y="30" class="p-m">ZEPPLOCAL</text>
+</svg>
+</span><b>Can I keep my watch data without trusting another app?</b><span>ZeppLocal</span></a><a href="../xgoduck/"><span class="th"><svg class="plate " viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="320" height="200" class="p-bg"/>
+  <text x="160" y="150" text-anchor="middle" class="p-q">X</text>
+  <line x1="24" y1="176" x2="296" y2="176" class="p-l"/>
+  <text x="24" y="30" class="p-m">XGO-DUCK ON A PI</text>
+</svg>
+</span><b>Can a 3D-printed duck learn to walk on a Pi Zero?</b><span>XGO-Duck on a Pi</span></a></div></section>
+</article>
+</main>
+<footer class="foot">
+  <p class="sign">Imagine, try, solve.</p>
+  <p class="cols"><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><span>© Valerio Ciotti</span></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/diary/index.html">Orbit</a><a href="../../../playground/projects/diary/index.html">Playground</a><a href="index.html" aria-current=page>Reel</a><a href="../../../atlas/projects/diary/index.html">Atlas</a><a href="../../../notebook/projects/diary/index.html">Notebook</a><a href="../../../workshop/projects/diary/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marquee · Valerio Ciotti</title>
+<meta name="description" content="A small Plex-style media server for the Pi. Browse films and shows, resume where you stopped, and play on a laptop, iPhone or Chromecast, at home or away.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../"><span class="blob" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Play</a><a href="../" aria-current="page">Everything</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-home)">
+  <header class="story-hero">
+    <div class="wrap">
+      <p class="kicker"><a href="../../">Play</a> · Home lab · October 2026</p>
+      <h1>Marquee</h1>
+      <p class="question">Can a Raspberry Pi be my Plex?</p>
+      <p class="actions">
+      </p>
+    </div>
+  </header>
+  <figure class="wrap hero-pic"><svg class="shape wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-home)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="117.5" cy="71.5625" r="75.46875" class="s-a"/>
+  <rect x="158.359375" y="59.375" width="89.53125" height="89.53125" rx="22" class="s-b" transform="rotate(-19.6875 200 100)"/>
+  <text x="22" y="178" class="s-t">Marquee</text>
+</svg>
+</figure>
+  <section class="wrap lead"><p>A small Plex-style media server for the Pi. Browse films and shows, resume where you stopped, and play on a laptop, iPhone or Chromecast, at home or away.</p></section>
+<section class="wrap nums"><div><b>0.1×</b><span>realtime: why it never transcodes video</span></div><div><b>7×</b><span>realtime audio conversion</span></div><div><b>0</b><span>ports open to the internet</span></div></section>  <section class="wrap duo-text"><h2>The idea</h2><p class="big">Remote playback in Plex stopped working for me. A server that only does what I need, over my private network, looked smaller than debugging it.
+</p></section>
+  <section class="wrap"><h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">1</span><b>Never transcode</b><p>The Pi decodes HEVC at a tenth of real time, so video is always copied as is and only audio is converted.</p></li><li><span class="n">2</span><b>Cut cleanly</b><p>Segments start on keyframes from a precomputed index, so seeking is instant.</p></li><li><span class="n">3</span><b>Reach</b><p>Tailscale makes it work the same at home and away, with HTTPS and nothing exposed.</p></li></ol>
+  </section>
+<section class="wrap duo-text"><h2>What I learned</h2><ul class="learned"><li>Knowing the hardware&#39;s limits up front shapes the whole design.</li></ul></section>  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>Python</span><span>ffmpeg</span><span>HLS (fMP4)</span><span>hls.js</span><span>Tailscale</span><span>Chromecast</span></p></section>
+<section class="wrap"><h2 class="h2">More like this</h2><div class="grid"><a class="tile " href="../market/" style="--c: var(--uc-home)">
+  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-home)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="148.75" cy="64.375" r="53.59375" class="s-a"/>
+  <rect x="203.28125" y="85.3125" width="111.796875" height="111.796875" rx="22" class="s-b" transform="rotate(14.53125 200 100)"/>
+  <text x="22" y="178" class="s-t">Market dashboard</text>
+</svg>
+</span>
+  <span class="cap"><b>Market dashboard</b><span>What are my shares doing, in euros, from sources I can trust?</span></span>
+</a>
+<a class="tile " href="../kindlebot/" style="--c: var(--uc-home)">
+  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-home)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="105.625" cy="80.3125" r="60.625" class="s-a"/>
+  <rect x="186.875" y="89.375" width="83.28125" height="83.28125" rx="22" class="s-b" transform="rotate(-10.3125 200 100)"/>
+  <text x="22" y="178" class="s-t">Books to my Kindle</text>
+</svg>
+</span>
+  <span class="cap"><b>Books to my Kindle</b><span>Can a chat message put a classic on my Kindle?</span></span>
+</a>
+<a class="tile " href="../finance/" style="--c: var(--uc-home)">
+  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-home)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="89.375" cy="135.625" r="77.96875" class="s-a"/>
+  <rect x="225.546875" y="104.0625" width="84.2578125" height="84.2578125" rx="22" class="s-b" transform="rotate(6.25 200 100)"/>
+  <text x="22" y="178" class="s-t">Household finance dashboard</text>
+</svg>
+</span>
+  <span class="cap"><b>Household finance dashboard</b><span>Where does the money go, month by month?</span></span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <div class="marquee small" aria-hidden="true"><div><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span></div></div>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/marquee/index.html">Orbit</a><a href="index.html" aria-current=page>Playground</a><a href="../../../reel/projects/marquee/index.html">Reel</a><a href="../../../atlas/projects/marquee/index.html">Atlas</a><a href="../../../notebook/projects/marquee/index.html">Notebook</a><a href="../../../workshop/projects/marquee/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

@@ -206,3 +206,5 @@ p { margin: 0; }
   .entry { padding-block: 30px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .entry .pic, .small .pic { transition: none; } }
+
+[hidden] { display: none !important; }

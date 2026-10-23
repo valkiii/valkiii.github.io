@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spindle · Valerio Ciotti</title>
+<meta name="description" content="A native macOS album-art widget for Spotify and Apple Music, with hover controls and a mini player that lives around the notch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../"><span class="blob" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Play</a><a href="../" aria-current="page">Everything</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-tools)">
+  <header class="story-hero">
+    <div class="wrap">
+      <p class="kicker"><a href="../../">Play</a> · Tools · September 2026</p>
+      <h1>Spindle</h1>
+      <p class="question">Can I make the Mac widget I wanted, for less?</p>
+      <p class="actions">
+      </p>
+    </div>
+  </header>
+  <figure class="wrap hero-pic"><img src="../../../media/covers/spindle.jpg" alt="Spindle"></figure>
+  <section class="wrap lead"><p>A native macOS album-art widget for Spotify and Apple Music, with hover controls and a mini player that lives around the notch.</p></section>
+<section class="wrap nums"><div><b>0</b><span>API keys or logins</span></div><div><b>7</b><span>day trial before a licence</span></div></section>  <section class="wrap duo-text"><h2>The idea</h2><p class="big">Small Mac utilities are often good and slightly too expensive. Spindle is my take on the album-art widget, priced lower.
+</p></section>
+  <section class="wrap"><h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">1</span><b>Listen</b><p>AppleScript asks Spotify or Music what&#39;s playing every second; no accounts involved.</p></li><li><span class="n">2</span><b>Show</b><p>A desktop tile with the cover, controls on hover, and a notch player that expands.</p></li><li><span class="n">3</span><b>Sell</b><p>A licence check with a trial, built to work offline.</p></li></ol>
+  </section>
+<section class="wrap duo-text"><h2>What I learned</h2><ul class="learned"><li>Swift swallows AppleScript syntax errors into vague runtime failures; test the script on its own first.</li></ul></section>  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>Swift</span><span>SwiftUI</span><span>AppKit</span><span>AppleScript</span></p></section>
+<section class="wrap"><h2 class="h2">More like this</h2><div class="grid"><a class="tile " href="../../../showcase/precog/" style="--c: var(--uc-vision)">
+  <span class="pic"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="cap"><b>Precog</b><span>What if my hands were the mouse?</span></span>
+</a>
+<a class="tile " href="../zepplocal/" style="--c: var(--uc-tools)">
+  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="99.375" cy="116.5625" r="71.40625" class="s-a"/>
+  <rect x="232.96875" y="104.375" width="100.078125" height="100.078125" rx="22" class="s-b" transform="rotate(-3.28125 200 100)"/>
+  <text x="22" y="178" class="s-t">ZeppLocal</text>
+</svg>
+</span>
+  <span class="cap"><b>ZeppLocal</b><span>Can I keep my watch data without trusting another app?</span></span>
+</a>
+<a class="tile " href="../diary/" style="--c: var(--uc-tools)">
+  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="s-bg"/>
+  <circle cx="206.875" cy="92.5" r="58.90625" class="s-a"/>
+  <rect x="174.375" y="89.375" width="116.875" height="116.875" rx="22" class="s-b" transform="rotate(18.75 200 100)"/>
+  <text x="22" y="178" class="s-t">The Diary</text>
+</svg>
+</span>
+  <span class="cap"><b>The Diary</b><span>What if a paper notebook wrote back?</span></span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <div class="marquee small" aria-hidden="true"><div><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span></div></div>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/spindle/index.html">Orbit</a><a href="index.html" aria-current=page>Playground</a><a href="../../../reel/projects/spindle/index.html">Reel</a><a href="../../../atlas/projects/spindle/index.html">Atlas</a><a href="../../../notebook/projects/spindle/index.html">Notebook</a><a href="../../../workshop/projects/spindle/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

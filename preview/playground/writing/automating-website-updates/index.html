@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Automating Your Website Updates with Hugo and GitHub Pages · Valerio Ciotti</title>
+<meta name="description" content="I was looking for a way to automate the process behind updating my site, and I found one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"></head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../"><span class="blob" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Play</a><a href="../../projects/">Everything</a><a href="../" aria-current="page">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="post wrap">
+  <header>
+    <p class="kicker"><a href="../">Writing</a> · July 2024</p>
+    <h1>Automating Your Website Updates with Hugo and GitHub Pages</h1>
+<p class="tags"><span>Optimization</span><span>Bash</span><span>Coding</span></p>  </header>
+  <div class="prose"><p>I am grateful that Hugo and GitHub (and their community of developers) exist; otherwise, I would not have been able to create this website in the first place. However, if you do not spend enough time digging into how everything works, you may end up feeling lost.</p>
+<p>I always had a hard time figuring out all the different steps to modify my website locally, push the changes to my repository, and then see them appear (magically) on my GitHub Pages site. To be honest, investing a bit of time understanding how all parts interact with one another is not that difficult. But let's be honest, I always dirty my hands first until I can't take it anymore and finally end up reading about how things are built and meant to work. Note to self: <mark>investing time studying is always the right starting point</mark>.</p>
+<p>I think I finally found a way to help myself by automating the process of updating my blog (and hopefully keep writing on it more than before) using a single Bash function.</p>
+<hr />
+<h2>How I structured the web site</h2>
+<p>To keep things easy, I have now two repos:
+- One where I develop my website locally using the theme from Wowchemy, which goes under the name <code>blog</code>.
+- One that has the website name <code>valkiii.github.io</code> and where I transfer the <code>public</code> content of the <code>blog</code> repo.</p>
+<hr />
+<p>I decided that I wanted a simple command to run all this. To do so, I wrote a simple Bash function in my <code>.bashrc</code> file containing the following:</p>
+<p><img alt="The update function in my .bashrc" src="bash_update.svg" /></p>
+<p>Let's break down what this function does: First it launches <code>hugo</code> to build the website, generating the static files in the public directory. Then I run <code>rsync -a public/* ../valkiii.github.io/.</code> to sync the contents of the public directory to the root of my GitHub Pages repository (<code>valkiii.github.io</code> in this example). I added the <code>-a</code> flag to ensure that all files and directories are copied recursively while preserving permissions and other attributes.</p>
+<blockquote class="pull">Investing time studying is always the right starting point.</blockquote>
+
+<p>Then it's time to add all changes in the current directory (my Hugo project directory) for committing with <code>git add --all</code>. There is not a <code>git add</code> without a following <code>git commit -m "$1"</code> with the only exception that the message that we add the commit get provided as the first argument to the function (<code>$1</code>).</p>
+
+<p>These two commands are naturally followed by a <code>git push</code> that pushes the changes to the remote repository, updating the Hugo project repository.</p>
+<p>Then I want to actually update my repository on github, to be sure that the day my computer dies, I am still able to continue updating this website. To do so I first go back to my repo folder with <code>cd ../valkiii.github.io</code>, then, like before, I git add, commit, and push all changes with <code>git add --all</code>, <code>git commit -m "$1"</code> and <code>git push</code>. Finally, I go back to the blog folder to continue modifying and rendering my website locally with <code>cd ../blog/</code>.</p>
+<p>To use this function, save it in your <code>.bashrc</code> or <code>.bash_profile</code> file and source the file using source <code>~/.bashrc</code> to make the function available in your terminal session. Then, you can simply run update_website "Your commit message" whenever you want to build and deploy your website with a single command.</p>
+<p>Note that this script assumes that your blog and <code>valkiii.github.io</code> repositories are in the same parent directory.</p>
+<p>By automating the build and deployment process with a Bash function, you can save time and ensure consistency in your website updates. Give it a try and adapt it to fit your own website setup!</p></div>
+</article>
+</main>
+<footer class="foot">
+  <div class="marquee small" aria-hidden="true"><div><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span><span>Imagine, try, solve.</span></div></div>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.querySelector('.prose'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/writing/automating-website-updates/index.html">Orbit</a><a href="index.html" aria-current=page>Playground</a><a href="../../../reel/writing/automating-website-updates/index.html">Reel</a><a href="../../../atlas/writing/automating-website-updates/index.html">Atlas</a><a href="../../../notebook/writing/automating-website-updates/index.html">Notebook</a><a href="../../../workshop/writing/automating-website-updates/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seeing the Invisible</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Eulerian video magnification: how a webcam can see your pulse and a baby's breathing, explained with live demos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500..800;1,6..96,500..700&family=Public+Sans:ital,wght@0,300..700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lab notebook for light and time. One reading column; each idea gets a live instrument beside or below it.
+   Skin tone for colour (the pulse), blue for motion (the sway). */
+:root {
+  --paper: #f3f5f6; --card: #ffffff; --ink: #121a1f; --ink-2: #4d5961; --ink-3: #87939a; --rule: #d8dee1;
+  --skin: #c8714f; --sway: #2f6fed; --scene: #3e3836;
+  --display: "Bodoni Moda", "Didot", Georgia, serif;
+  --body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #0c1114; --card: #141b20; --ink: #e9eef0; --ink-2: #aab5bb; --ink-3: #6e7a81; --rule: #253036; --skin: #e48d6a; --sway: #6d9bff; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #0c1114; --card: #141b20; --ink: #e9eef0; --ink-2: #aab5bb; --ink-3: #6e7a81; --rule: #253036; --skin: #e48d6a; --sway: #6d9bff; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 19px/1.7 var(--body);
+  padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); padding-block: 0 80px; }
+a { color: var(--sway); }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--sway); outline-offset: 3px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; font-weight: 600; }
+p { margin: 0; }
+.col { max-width: 720px; margin: 0 auto; display: grid; gap: 20px; }
+.wide { max-width: 1100px; margin: 0 auto; }
+.kicker { font: 500 12px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.mono { font-family: var(--mono); font-size: .82em; }
+b, strong { font-weight: 600; }
+.skin { color: var(--skin); } .sway { color: var(--sway); }
+
+/* hero */
+.hero { min-height: min(100vh, 900px); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 40px; align-items: center; max-width: 1240px; margin: 0 auto; padding-block: 40px; }
+.hero h1 { font: 700 clamp(56px, 8vw, 118px)/.92 var(--display); letter-spacing: -.02em; }
+.hero h1 i { font-weight: 500; color: var(--skin); }
+.hero .lede { font-size: clamp(19px, 1.8vw, 23px); color: var(--ink-2); max-width: 28em; margin-top: 22px; font-weight: 300; }
+.scene { position: relative; border-radius: 22px; overflow: hidden; background: var(--scene); aspect-ratio: 16 / 9; box-shadow: 0 40px 80px -40px rgba(0,0,0,.5); }
+.scene canvas { width: 100%; height: 100%; display: block; }
+.scene .badge { position: absolute; left: 14px; top: 12px; font: 500 11px/1.3 var(--mono); color: rgba(255,255,255,.75); letter-spacing: .06em; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 14px; font: 400 13px/1.3 var(--mono); color: var(--ink-2); }
+.ctrl label { display: flex; gap: 10px; align-items: center; }
+.ctrl input[type=range] { width: 160px; accent-color: var(--skin); }
+.ctrl output { min-width: 4ch; color: var(--ink); font-weight: 500; }
+.toggle { font: 500 13px/1 var(--body); border: 1px solid var(--rule); background: var(--card); color: var(--ink); padding: 9px 14px; border-radius: 999px; cursor: pointer; }
+.toggle[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* chapters */
+.ch { padding-block: 90px 10px; display: grid; gap: 34px; }
+.ch h2 { font: 700 clamp(36px, 5vw, 60px)/1 var(--display); letter-spacing: -.015em; }
+.ch h2 i { font-weight: 500; }
+.ch p { color: var(--ink-2); }
+.ch p b { color: var(--ink); }
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: 20px; padding: 20px; display: grid; gap: 10px; }
+.panel canvas { width: 100%; display: block; }
+.cap { font: 400 13px/1.5 var(--mono); color: var(--ink-3); }
+.pipe { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+.pipe div { background: var(--card); border: 1px solid var(--rule); border-radius: 16px; padding: 16px; display: grid; gap: 6px; align-content: start; position: relative; }
+.pipe div::before { counter-increment: s; content: counter(s); font: 700 28px/1 var(--display); color: var(--skin); }
+.pipe b { font-size: 16px; }
+.pipe span { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.vs div { background: var(--card); border: 1px solid var(--rule); border-radius: 16px; padding: 18px; display: grid; gap: 6px; }
+.vs b { font: 700 22px/1.1 var(--display); }
+.vs span { font-size: 15.5px; color: var(--ink-2); }
+.figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.figs div { border-top: 2px solid var(--ink); padding-top: 10px; display: grid; gap: 4px; }
+.figs b { font: 700 44px/1 var(--display); }
+.figs span { font-size: 14px; color: var(--ink-2); }
+.slices { display: grid; gap: 10px; }
+.slices .row { display: grid; grid-template-columns: repeat(3, 1fr); font: 500 12px/1 var(--mono); color: var(--ink-3); text-align: center; letter-spacing: .06em; text-transform: uppercase; }
+.charts2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.learned { margin: 0; padding-left: 1.2em; display: grid; gap: 12px; color: var(--ink-2); }
+.learned b { color: var(--ink); }
+.refs { font: 400 13px/1.6 var(--mono); color: var(--ink-3); display: grid; gap: 4px; margin: 0; padding-left: 1.4em; }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--paper); font: 400 12px/1.4 var(--mono); padding: 6px 9px; border-radius: 6px; z-index: 9; }
+
+@media (max-width: 880px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 26px; padding-top: 26px; }
+  .pipe { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .vs, .charts2, .figs { grid-template-columns: minmax(0, 1fr); }
+  .ch { padding-top: 64px; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div>
+    <p class="kicker">Eulerian video magnification · October 2026</p>
+    <h1>Seeing the <i>invisible</i></h1>
+    <p class="lede">Your skin flushes a little with every heartbeat. A sleeping baby's chest rises by a fraction of a pixel. A video records both, and your eyes see neither. This is how I made a laptop show them, live.</p>
+  </div>
+  <div>
+    <div class="scene"><span class="badge" id="badge">SIMULATED SCENE · 72 BPM PULSE · 0.25 PX SWAY</span><canvas id="scene" aria-label="A skin-coloured oval that flushes with a pulse, and a bar that sways slightly"></canvas></div>
+    <div class="ctrl">
+      <button class="toggle" id="magnify" type="button" aria-pressed="true">Magnification on</button>
+      <label for="alphaC">colour ×<output id="aC">60</output><input id="alphaC" type="range" min="1" max="100" value="60"></label>
+      <label for="alphaM">motion ×<output id="aM">20</output><input id="alphaM" type="range" min="1" max="40" value="20"></label>
+    </div>
+  </div>
+</header>
+
+<section class="ch">
+  <div class="col">
+    <p class="kicker">The signal</p>
+    <h2>Half a grey level</h2>
+    <p>Blood flowing into the skin changes its colour, mostly in the green channel, by tiny amounts. In MIT's reference face clip, the average green of the skin moves by about <b>half a grey level out of 255</b>. On a normal scale it is a flat line; zoom in two hundred times and the heartbeat is there, buried in noise.</p>
+  </div>
+  <div class="col panel">
+    <canvas id="stages" height="420" aria-label="The skin's green value over ten seconds, at four stages"></canvas>
+    <div class="ctrl"><label for="alphaS">amplify ×<output id="aS">60</output><input id="alphaS" type="range" min="1" max="120" value="60"></label></div>
+    <p class="cap">Real data: mean green of the forehead and cheeks in MIT's face clip, 10 s at 30 fps. Rows: as recorded on the 0–255 scale; the same zoomed in; band-passed to the pulse frequencies; added back, multiplied.</p>
+  </div>
+</section>
+
+<section class="ch">
+  <div class="col">
+    <p class="kicker">The trick</p>
+    <h2>Watch each pixel through <i>time</i></h2>
+    <p>Wu and colleagues at MIT had a simple idea in 2012. Don't track objects. Treat <b>every pixel as a time series</b>, keep only the frequencies you care about, make them bigger and add them back. Because it looks at fixed places rather than moving things, they called it Eulerian, after the way fluid dynamics describes flow.</p>
+  </div>
+  <div class="wide pipe">
+    <div><b>Blur in space</b><span>A Gaussian or Laplacian pyramid. Heavy blur averages away noise; a pulse covers whole patches of skin anyway.</span></div>
+    <div><b>Filter in time</b><span>A band-pass for each pixel: 0.8 to 2 Hz for a pulse, 0.4 to 3 Hz for breathing.</span></div>
+    <div><b>Amplify</b><span>Multiply what is left by α: about 50 to 80 for colour, 10 to 20 for motion.</span></div>
+    <div><b>Add back</b><span>Put the amplified change on top of the original frame.</span></div>
+    <div><b>Collapse</b><span>Rebuild the image from the pyramid. The invisible is now visible.</span></div>
+  </div>
+  <div class="col">
+    <p>Everything runs locally on the CPU with NumPy, SciPy and OpenCV. At 640 pixels wide it takes about <b>10 ms a frame for colour and 13 ms for motion</b>, so a live 30 fps camera keeps up.</p>
+  </div>
+</section>
+
+<section class="ch">
+  <div class="col">
+    <p class="kicker">Reading the heartbeat</p>
+    <h2>From colour to <i>beats per minute</i></h2>
+    <p>To read the rate, the forehead and cheeks are averaged every frame and turned into a pulse wave with the POS method (Wang et al., 2017), which is robust to lighting and small movements. The strongest frequency between 42 and 210 bpm is the heart rate. On the MIT clip it reads <b><span id="bpm">52.7</span> bpm</b>; the paper reports 50 to 60.</p>
+  </div>
+  <div class="col panel">
+    <canvas id="wave" height="170" aria-label="The pulse wave over ten seconds"></canvas>
+    <canvas id="spec" height="190" aria-label="Power spectrum of the pulse wave with a peak near 53 bpm"></canvas>
+    <p class="cap">Real data from the same clip. Top: the POS pulse wave. Bottom: its spectrum between 42 and 210 bpm; the dot marks the peak.</p>
+  </div>
+</section>
+
+<section class="ch">
+  <div class="col">
+    <p class="kicker">Why the textbook version fails live</p>
+    <h2>Coherent <i>colour</i></h2>
+    <p>Plain EVM amplifies everything in the pulse band. On a live webcam, a small head movement at about 1 Hz is in that band and is far stronger than the pulse, so it explodes into blotches of colour. My first live test looked exactly like that.</p>
+    <p>The fix uses the pulse itself as a reference. The face's pulse wave is computed live, and every pixel keeps a running regression against it over about three seconds. Only the part of each pixel that <b>follows the heartbeat</b> is amplified. Movement and noise don't follow it, so they drop out, and so do background and hair. A sudden jump pauses the learning for about a second.</p>
+  </div>
+  <div class="wide figs">
+    <div><b>20 → 5</b><span>grey levels of change caused by motion on a shaky test clip, live (42 → 5 offline)</span></div>
+    <div><b>~70%</b><span>of the pulse signal kept at the same gain</span></div>
+    <div><b>±0.12</b><span>soft limit on the added colour, so nothing saturates</span></div>
+  </div>
+</section>
+
+<section class="ch">
+  <div class="col">
+    <p class="kicker">Motion</p>
+    <h2>Move the edges, not the <i>brightness</i></h2>
+    <p>For motion, the original method amplifies intensity changes. It works for tiny movements, but as α grows the edges grow halos and the noise grows with them. The phase-based method (Wadhwa et al., 2014) measures where each edge is, using a Riesz pyramid, and moves the edge itself. Try it: the bar below really moves 0.25 px.</p>
+  </div>
+  <div class="col panel">
+    <canvas id="motion" height="300" aria-label="A bar moving a quarter of a pixel, magnified two ways"></canvas>
+    <div class="ctrl"><label for="alphaP">α ×<output id="aP">20</output><input id="alphaP" type="range" min="1" max="40" value="20"></label></div>
+    <p class="cap">Simulation of one row of pixels. Top: as filmed. Middle: linear magnification, brightness change × α, clipped to the screen range. Bottom: phase magnification, the edge moved × α.</p>
+  </div>
+  <div class="col">
+    <p>On MIT's sleeping-baby clip, the zipper of the onesie sways 0.4 px. I measured how far it moves after magnification and how much a still patch of blanket flickers:</p>
+  </div>
+  <div class="col charts2">
+    <div class="panel"><canvas id="swaybars" height="230" aria-label="Sway in pixels for each method"></canvas><p class="cap">Sway of the zipper line (px)</p></div>
+    <div class="panel"><canvas id="noisebars" height="230" aria-label="Noise in a still area for each method"></canvas><p class="cap">Noise in a still area (grey levels)</p></div>
+  </div>
+  <div class="col slices">
+    <div class="row"><span>original</span><span>linear</span><span>phase</span></div>
+    <img src="slices.jpg" alt="Three space-time slices of the baby clip: almost flat in the original, small ripples with linear magnification, clear breathing peaks with phase magnification" width="915" height="544">
+    <p class="cap">Space-time slices: one column of pixels across the chest, stacked over time from left to right. Each bump is a breath.</p>
+  </div>
+</section>
+
+<section class="ch">
+  <div class="col">
+    <p class="kicker">In practice</p>
+    <h2>A live <i>instrument</i></h2>
+    <p>The same code runs on clips, on the webcam, or on any stream (an RTSP camera, say), and can serve the result to a browser. With Tailscale, I can watch it on my phone. Keys switch between colour and motion, the method, the gain and the view: side by side, magnified, original, or a <b>heat map</b> where every pixel shows how much it pulses in step with the face. Skin lights up; moving edges, strong but out of step, stay dark.</p>
+    <h3 style="font: 700 26px/1.1 var(--display); margin-top: 18px">What I learned</h3>
+    <ol class="learned">
+      <li><b>Running averages need bias correction.</b> Without it, the first seconds come out about ten times too strong.</li>
+      <li><b>Go deep in the pyramid.</b> With levels down to 16 px, most of the motion stayed in the unmagnified residual and the gain collapsed. Going to 4 px fixed it.</li>
+      <li><b>Measure the right thing.</b> To compare motion methods, track the position of an edge. Counting changed pixels rewards the halos of the worse method.</li>
+    </ol>
+    <p class="cap">References: Wu, Rubinstein, Shih, Guttag, Durand &amp; Freeman, Eulerian Video Magnification for Revealing Subtle Changes in the World, SIGGRAPH 2012 · Wadhwa, Rubinstein, Durand &amp; Freeman, Riesz Pyramids for Fast Phase-Based Video Magnification, ICCP 2014 · Wang, den Brinker, Stuijk &amp; de Haan, Algorithmic Principles of Remote PPG (POS), IEEE TBME 2017. Test clips: MIT's reference videos.</p>
+  </div>
+</section>
+
+<div class="tip" id="tip" hidden></div>
+<script src="pulse.js"></script>
+<script>
+(() => {
+"use strict";
+const D = window.EVM_PULSE;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function sized(c, hCss) {
+  const r = c.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+  c.style.height = hCss + "px";
+  const w = Math.round(r.width * dpr), h = Math.round(hCss * dpr);
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  return { ctx: c.getContext("2d"), w, h, dpr };
+}
+const bind = (id, out, cb) => { const el = $(id); el.addEventListener("input", () => { $(out).textContent = el.value; cb && cb(); }); return () => +el.value; };
+
+// ---------- hero: the test clip, recreated ----------
+let magOn = true;
+const aC = bind("alphaC", "aC"), aM = bind("alphaM", "aM");
+$("magnify").onclick = () => { magOn = !magOn; $("magnify").setAttribute("aria-pressed", magOn); $("magnify").textContent = magOn ? "Magnification on" : "Magnification off"; };
+function scene(t) {
+  const c = $("scene"), r = c.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+  const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr); if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  const ctx = c.getContext("2d");
+  const k = w / 640, ac = magOn ? aC() : 1, am = magOn ? aM() : 1;
+  ctx.fillStyle = "#3e3836"; ctx.fillRect(0, 0, w, h);
+  // pulse: about 0.5 grey level of green (less in red and blue), at 72 bpm
+  const p = Math.sin(2 * Math.PI * 1.2 * t), d = 0.5 * ac * p;
+  const col = [205 + d * .55, 152 + d, 121 + d * .35].map(v => Math.max(0, Math.min(255, v)) | 0);
+  ctx.fillStyle = `rgb(${col})`;
+  ctx.beginPath(); ctx.ellipse(220 * k, 180 * k, 110 * k, 140 * k, 0, 0, 7); ctx.fill();
+  // sway: a quarter of a pixel at 0.3 Hz, like breathing
+  const x = 470 + 0.25 * am * Math.sin(2 * Math.PI * .3 * t);
+  ctx.fillStyle = "#eef0f0"; ctx.fillRect(x * k, 60 * k, 20 * k, 240 * k);
+  $("badge").textContent = magOn ? `SIMULATED SCENE · COLOUR ×${ac} · MOTION ×${am}` : "SIMULATED SCENE · AS FILMED: 72 BPM PULSE, 0.25 PX SWAY";
+}
+
+// ---------- the four stages of one pixel ----------
+const aS = bind("alphaS", "aS", () => stages());
+function bandpass(x) { // the band-passed pulse, scaled to the green channel's own size
+  const m = x.reduce((a, b) => a + b) / x.length, sd = Math.sqrt(x.reduce((a, b) => a + (b - m) ** 2, 0) / x.length);
+  return D.wave.map(v => v * sd * 1.2);
+}
+function stages() {
+  const c = $("stages"), { ctx, w, h, dpr } = sized(c, 420);
+  ctx.clearRect(0, 0, w, h);
+  const g = D.green, n = g.length, bp = bandpass(g), mean = g.reduce((a, b) => a + b) / n, a = aS();
+  const rows = [
+    ["as recorded (0–255)", g, 0, 255],
+    ["zoomed in ×200", g, mean - 1.6, mean + 1.6],
+    ["band-passed 0.8–2 Hz", bp.map(v => v + mean), mean - 1.6, mean + 1.6],
+    [`added back ×${a} (0–255)`, g.map((v, i) => v + a * bp[i]), 0, 255],
+  ];
+  const lh = h / 4, padL = 10 * dpr, padR = 10 * dpr;
+  rows.forEach(([label, ys, lo, hi], r) => {
+    const y0 = r * lh + 22 * dpr, y1 = (r + 1) * lh - 10 * dpr;
+    ctx.fillStyle = css("--ink-3"); ctx.font = `500 ${11 * dpr}px "IBM Plex Mono", monospace`; ctx.fillText(label.toUpperCase(), padL, r * lh + 14 * dpr);
+    ctx.strokeStyle = css("--rule"); ctx.lineWidth = 1 * dpr; ctx.beginPath(); ctx.moveTo(padL, y1); ctx.lineTo(w - padR, y1); ctx.stroke();
+    ctx.strokeStyle = r === 3 ? css("--skin") : r === 2 ? css("--skin") : css("--ink"); ctx.lineWidth = 2 * dpr; ctx.beginPath();
+    ys.forEach((v, i) => { const x = padL + i / (n - 1) * (w - padL - padR), y = y1 - (Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo) * (y1 - y0); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+    ctx.stroke();
+  });
+}
+
+// ---------- pulse wave and spectrum ----------
+function line(c, hCss, xs, ys, color, opts = {}) {
+  const { ctx, w, h, dpr } = sized(c, hCss);
+  ctx.clearRect(0, 0, w, h);
+  const pl = 40 * dpr, pr = 12 * dpr, pt = 12 * dpr, pb = 26 * dpr;
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = opts.y0 ?? Math.min(...ys), y1 = opts.y1 ?? Math.max(...ys);
+  const X = v => pl + (v - x0) / (x1 - x0) * (w - pl - pr), Y = v => h - pb - (v - y0) / (y1 - y0) * (h - pt - pb);
+  ctx.strokeStyle = css("--rule"); ctx.lineWidth = 1 * dpr; ctx.beginPath(); ctx.moveTo(pl, h - pb); ctx.lineTo(w - pr, h - pb); ctx.stroke();
+  ctx.fillStyle = css("--ink-3"); ctx.font = `400 ${11 * dpr}px "IBM Plex Mono", monospace`; ctx.textAlign = "center";
+  (opts.ticks || []).forEach(tk => ctx.fillText(opts.fmt ? opts.fmt(tk) : tk, X(tk), h - 8 * dpr));
+  ctx.strokeStyle = color; ctx.lineWidth = 2 * dpr; ctx.lineJoin = "round"; ctx.beginPath();
+  xs.forEach((x, i) => i ? ctx.lineTo(X(x), Y(ys[i])) : ctx.moveTo(X(x), Y(ys[i]))); ctx.stroke();
+  if (opts.fill) { ctx.lineTo(X(xs[xs.length - 1]), h - pb); ctx.lineTo(X(xs[0]), h - pb); ctx.closePath(); ctx.fillStyle = color + "22"; ctx.fill(); }
+  return { X, Y, dpr, ctx };
+}
+function pulseCharts() {
+  const t = D.wave.map((_, i) => i / D.fps);
+  line($("wave"), 170, t, D.wave, css("--skin"), { ticks: [0, 2, 4, 6, 8, 10], fmt: v => v + " s" });
+  const s = line($("spec"), 190, D.spec_bpm, D.spec_p, css("--skin"), { ticks: [60, 90, 120, 150, 180, 210], fmt: v => v + " bpm", fill: true, y0: 0, y1: 1.05 });
+  const i = D.spec_p.indexOf(Math.max(...D.spec_p));
+  s.ctx.fillStyle = css("--ink"); s.ctx.beginPath(); s.ctx.arc(s.X(D.spec_bpm[i]), s.Y(D.spec_p[i]), 5 * s.dpr, 0, 7); s.ctx.fill();
+  s.ctx.textAlign = "left"; s.ctx.font = `500 ${12 * s.dpr}px "IBM Plex Mono", monospace`; s.ctx.fillText(`${D.bpm} bpm`, s.X(D.spec_bpm[i]) + 10 * s.dpr, s.Y(D.spec_p[i]) + 4 * s.dpr);
+  $("bpm").textContent = D.bpm;
+}
+
+// ---------- motion: linear vs phase, one row of pixels ----------
+const aP = bind("alphaP", "aP");
+function motion(t) {
+  const c = $("motion"), { ctx, w, h, dpr } = sized(c, 300);
+  ctx.clearRect(0, 0, w, h);
+  const a = aP(), N = 220, bar = (x, s) => { const e = 1.2; return 1 / (1 + Math.exp(-(x - (100 + s)) / e)) - 1 / (1 + Math.exp(-(x - (120 + s)) / e)); };
+  const d = 0.25 * Math.sin(2 * Math.PI * .3 * t);
+  const rows = [["as filmed", x => bar(x, d)], [`linear ×${a}`, x => bar(x, 0) + a * (bar(x, d) - bar(x, 0))], [`phase ×${a}`, x => bar(x, a * d)]];
+  const lh = h / 3, cw = (w - 120 * dpr) / N;
+  rows.forEach(([label, f], r) => {
+    const y = r * lh + 10 * dpr, hh = lh - 22 * dpr;
+    ctx.fillStyle = css("--ink-3"); ctx.font = `500 ${11 * dpr}px "IBM Plex Mono", monospace`; ctx.textAlign = "left"; ctx.fillText(label.toUpperCase(), 0, y + hh / 2 + 4 * dpr);
+    for (let i = 0; i < N; i++) {
+      const v = f(i), clipped = Math.max(0, Math.min(1, v));
+      const g = Math.round(40 + clipped * 200);
+      ctx.fillStyle = v > 1.02 || v < -.02 ? (r === 1 ? css("--skin") : `rgb(${g},${g},${g})`) : `rgb(${g},${g},${g})`;
+      ctx.fillRect(120 * dpr + i * cw, y, Math.ceil(cw) + .5, hh);
+    }
+  });
+}
+
+// ---------- measured results ----------
+function bars(id, labels, vals, color, unit) {
+  const c = $(id), { ctx, w, h, dpr } = sized(c, 230);
+  ctx.clearRect(0, 0, w, h);
+  const pl = 110 * dpr, pr = 70 * dpr, bh = (h - 10 * dpr) / labels.length, max = Math.max(...vals);
+  labels.forEach((l, i) => {
+    const y = i * bh + 6 * dpr, bw = (w - pl - pr) * vals[i] / max;
+    ctx.fillStyle = css("--ink-2"); ctx.font = `400 ${12 * dpr}px "IBM Plex Mono", monospace`; ctx.textAlign = "right"; ctx.fillText(l, pl - 10 * dpr, y + bh * .6);
+    ctx.fillStyle = i === 0 ? css("--ink-3") : color; ctx.beginPath(); ctx.roundRect(pl, y + bh * .18, Math.max(2, bw), bh * .6, [0, 4 * dpr, 4 * dpr, 0]); ctx.fill();
+    ctx.fillStyle = css("--ink"); ctx.textAlign = "left"; ctx.fillText(vals[i].toFixed(1) + unit, pl + bw + 6 * dpr, y + bh * .6);
+  });
+}
+function results() {
+  const L = ["original", "linear α10", "linear α20", "phase α10", "phase α20", "phase α40"];
+  bars("swaybars", L, [0.4, 1.8, 1.9, 3.2, 7.0, 10.6], css("--sway"), " px");
+  bars("noisebars", L, [1.6, 3.8, 6.7, 1.9, 2.3, 3.0], css("--skin"), "");
+}
+
+function all() { stages(); pulseCharts(); results(); }
+all(); addEventListener("resize", all);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", all);
+const t0 = performance.now();
+(function loop() {
+  const t = reduce ? 1.1 : (performance.now() - t0) / 1000;
+  scene(t); motion(t);
+  if (!reduce) requestAnimationFrame(loop);
+})();
+})();
+</script>
+<a class="pf-back" href="../../" style="position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:999;background:rgba(23,24,27,.82);color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:9px 13px;border-radius:999px;text-decoration:none;backdrop-filter:blur(6px)" onclick="if(document.referrer.indexOf(location.origin)===0&&history.length>1){history.back();return false}">← Portfolio</a><script>if(window.self!==window.top)document.querySelector('.pf-back').remove()</script></body>
+</html>
