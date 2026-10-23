@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PULP · Valerio Ciotti</title>
+<meta name="description" content="A Fruit Ninja style browser game. Your fingertips become blades, and an experimental mode lets you slice with your gaze.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-play); --on: var(--on-play)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#play">Games</a></p>
+      <h1>PULP</h1>
+      <p class="question">Can you play Fruit Ninja with your eyes?</p>
+      <p class="lede">A Fruit Ninja style browser game. Your fingertips become blades, and an experimental mode lets you slice with your gaze.</p>
+      <p class="actions">
+<a class="btn primary" href="../../../play/pulp/">Play it (needs a webcam)</a><a class="btn" href="https://github.com/valkiii/fruit_ninja" target="_blank" rel="noopener">GitHub ↗</a>      </p>
+      <p class="facts"><span>October 2026</span><span class="status s-beta">beta</span><span>Games</span><span>Seeing</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><svg class="poster wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--c: var(--uc-play); --on: var(--on-play)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-30.0390625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="33.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="97.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="161.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="225.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="289.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/>  <circle cx="254.140625" cy="92.96875" r="57.625" class="p-disc"/>
+  <text x="24" y="172" class="p-title">PULP</text>
+</svg>
+</figure>
+
+<section class="wrap tiles"><div><b>60</b><span>fps canvas</span></div><div><b>13 + 7</b><span>calibration and validation dots</span></div><div><b>0</b><span>servers: it all runs in the browser</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">After Precog, the obvious next question was a game. Then a harder one: what if you only had your eyes?
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>Hands</b><p>MediaPipe&#39;s hand landmarker runs in the browser. Only fast swipes cut; slow movement doesn&#39;t.</p></li><li><span class="n">02</span><b>Eyes</b><p>A face mesh with irises, calibrated each session on 13 dots and checked on 7 more.</p></li><li><span class="n">03</span><b>Fit</b><p>A small ridge regression maps eye features to the screen; leave-one-dot-out cross-validation picks the model.</p></li><li><span class="n">04</span><b>Cut</b><p>In eye mode a cut is a quick saccade flick or a dwell. Blinks are filtered out.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>Moving from Python to the browser removed a whole class of driver and GPU problems, and gave a smooth 60 fps.</li><li>Gaze is noisy. Calibration you can verify matters more than a clever model.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>JavaScript</span><span>MediaPipe Tasks (wasm)</span><span>Canvas</span><span>WebAudio</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../../../showcase/precog/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../spellstorm/" style="--c: var(--uc-play); --on: var(--on-play)">
+  <span class="media"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Games</span><span class="meta">Oct 2026</span></span>
+    <b>Spellstorm</b>
+    <span class="q">Can a survivors-style game work for a five-year-old and a teenager?</span>
+    <span class="status s-playable">playable</span>
+  </span>
+</a>
+<a class="card " href="../drawbluff/" style="--c: var(--uc-play); --on: var(--on-play)">
+  <span class="media"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Games</span><span class="meta">Oct 2026</span></span>
+    <b>Drawbluff</b>
+    <span class="q">Can I host a Drawful-style party game from a laptop?</span>
+    <span class="status s-playable">playable</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>

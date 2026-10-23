@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PULP</title>
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+<video id="video" playsinline muted></video>
+
+<div id="overlay">
+  <h1>PULP</h1>
+  <p class="tag">Slice fruit with your hands. Or with your eyes.</p>
+  <button id="start">Click or press any key to start</button>
+  <p class="small">Allow the camera when the browser asks. Point at the screen with your index finger and swipe through the fruit.</p>
+</div>
+<div id="status"></div>
+
+<div id="help">
+  <h2>How to play</h2>
+  <p><b>Hands</b> — your index fingertips are blades. Swipe fast through fruit; slow moves don't cut. Both hands work. Don't slice bombs. Let 3 fruit fall in Classic and it's over. Zen has no bombs, 90 seconds.</p>
+  <p><b>Eyes (beta)</b> — calibrate first (follow the dot). Then a fruit is cut by <i>flicking</i> your eyes across it or by <i>staring</i> at it for a moment. A bomb costs a life instead of the game. Close your eyes for a second to pause.</p>
+  <table>
+    <tr><td>SPACE</td><td>pause</td><td>ESC</td><td>menu</td></tr>
+    <tr><td>F</td><td>fullscreen</td><td>V</td><td>camera thumbnail</td></tr>
+    <tr><td>G</td><td>camera as background</td><td>C</td><td>next camera</td></tr>
+    <tr><td>H / E / M</td><td>hands / eyes / mouse</td><td>1 / 2</td><td>classic / zen</td></tr>
+    <tr><td>K</td><td>recalibrate eyes</td><td>D</td><td>re-centre gaze (look at the dot)</td></tr>
+    <tr><td>X</td><td>eye slicing: flick+dwell / flick / dwell</td><td>O</td><td>show / hide gaze ring</td></tr>
+  </table>
+  <p class="small">Press ? to close.</p>
+</div>
+
+<script>
+  // Show script errors on the page (no devtools needed to see why something broke).
+  const showErr = (m) => { const el = document.getElementById('status'); el.textContent = 'Error: ' + m; el.style.color = '#ff8a6a'; };
+  addEventListener('error', (e) => showErr(e.message + (e.filename ? ' @ ' + e.filename.split('/').pop() + ':' + e.lineno : '')));
+  addEventListener('unhandledrejection', (e) => showErr(e.reason && (e.reason.stack || e.reason.message) || e.reason));
+</script>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

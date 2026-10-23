@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>By use · Valerio Ciotti</title>
+<meta name="description" content="I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../">Journal</a><a href="./" aria-current="page">By use</a><a href="../writing/">Writing</a><a href="../research/">Research</a><a href="../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<section class="wrap pagehead">
+  <p class="kicker">the same notebook, sorted by use</p>
+  <h1>What each idea is for</h1>
+</section>
+<section class="wrap shelf" id="play" style="--w: var(--w-play)">
+  <h2><span class="swatch" aria-hidden="true"></span>Games</h2>
+  <p class="hand blurb">things to play, alone or with a room full of people.</p>
+  <div class="smalls"><a class="small" href="pulp/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--w: var(--w-play)">
+  <ellipse cx="183.203125" cy="120.46875" rx="156.09375" ry="87.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="278.75" cy="168.3984375" rx="80.78125" ry="59.921875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="175.578125" text-anchor="middle" class="init">P</text>
+  <path d="M83.125 210 q 80 -11.0390625 160 0 t 120 2.96875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>PULP</b>
+  <span>Can you play Fruit Ninja with your eyes?</span>
+</a>
+<a class="small" href="spellstorm/">
+  <span class="pic"><img src="../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Spellstorm</b>
+  <span>Can a survivors-style game work for a five-year-old and a teenager?</span>
+</a>
+<a class="small" href="drawbluff/">
+  <span class="pic"><img src="../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Drawbluff</b>
+  <span>Can I host a Drawful-style party game from a laptop?</span>
+</a>
+<a class="small" href="wisecrack/">
+  <span class="pic"><img src="../../media/covers/wisecrack.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Wisecrack</b>
+  <span>And a Quiplash one, while I&#39;m at it?</span>
+</a>
+<a class="small" href="../../showcase/robot/">
+  <span class="pic"><img src="../../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2026</span>
+  <b>Someone to play with</b>
+  <span>Could a robot arm sit across the table from me?</span>
+</a>
+<a class="small" href="connect4/">
+  <span class="pic"><img src="../../media/covers/connect4.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2025</span>
+  <b>Four in a row vs five networks</b>
+  <span>Can I teach a computer to beat me at Connect 4?</span>
+</a>
+<a class="small" href="risk/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Risk engine" style="--w: var(--w-play)">
+  <ellipse cx="167.96875" cy="126.5625" rx="149.21875" ry="82.03125" class="w1" filter="url(#wc)"/>
+  <ellipse cx="296.875" cy="151.0546875" rx="82.65625" ry="63.046875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="174.5625" text-anchor="middle" class="init">R</text>
+  <path d="M63.125 210 q 80 -21.265625 160 0 t 120 -3.4375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">aug 2025</span>
+  <b>Risk engine</b>
+  <span>Can agents learn to conquer the world?</span>
+</a>
+<a class="small" href="early/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Early experiments" style="--w: var(--w-robots)">
+  <ellipse cx="163.671875" cy="147.7734375" rx="120.625" ry="86.015625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="259.6875" cy="159.7265625" rx="83.359375" ry="69.765625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="170.6953125" text-anchor="middle" class="init">E</text>
+  <path d="M84.21875 210 q 80 -23.453125 160 0 t 120 2.0625" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">may 2021</span>
+  <b>Early experiments</b>
+  <span>Where did it start?</span>
+</a>
+</div>
+</section>
+<section class="wrap shelf" id="vision" style="--w: var(--w-vision)">
+  <h2><span class="swatch" aria-hidden="true"></span>Seeing</h2>
+  <p class="hand blurb">cameras that understand hands, eyes and a pulse.</p>
+  <div class="smalls"><a class="small" href="../../showcase/precog/">
+  <span class="pic"><img src="../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Precog</b>
+  <span>What if my hands were the mouse?</span>
+</a>
+<a class="small" href="pulp/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--w: var(--w-play)">
+  <ellipse cx="183.203125" cy="120.46875" rx="156.09375" ry="87.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="278.75" cy="168.3984375" rx="80.78125" ry="59.921875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="175.578125" text-anchor="middle" class="init">P</text>
+  <path d="M83.125 210 q 80 -11.0390625 160 0 t 120 2.96875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>PULP</b>
+  <span>Can you play Fruit Ninja with your eyes?</span>
+</a>
+<a class="small" href="eulerian/">
+  <span class="pic"><img src="../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Seeing the invisible</b>
+  <span>Can a webcam see your pulse?</span>
+</a>
+<a class="small" href="../../showcase/robot/">
+  <span class="pic"><img src="../../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2026</span>
+  <b>Someone to play with</b>
+  <span>Could a robot arm sit across the table from me?</span>
+</a>
+</div>
+</section>
+<section class="wrap shelf" id="robots" style="--w: var(--w-robots)">
+  <h2><span class="swatch" aria-hidden="true"></span>Robots &amp; devices</h2>
+  <p class="hand blurb">hardware that moves, listens or sits on the desk.</p>
+  <div class="smalls"><a class="small" href="diary/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The Diary" style="--w: var(--w-tools)">
+  <ellipse cx="229.296875" cy="132.1875" rx="128.90625" ry="86.875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="279.375" cy="178.125" rx="99.0625" ry="59.375" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.625" text-anchor="middle" class="init">T</text>
+  <path d="M77.5 210 q 80 -17.765625 160 0 t 120 -2.09375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>The Diary</b>
+  <span>What if a paper notebook wrote back?</span>
+</a>
+<a class="small" href="xgoduck/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="XGO-Duck on a Pi" style="--w: var(--w-robots)">
+  <ellipse cx="211.71875" cy="127.6171875" rx="139.53125" ry="92.109375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="248.75" cy="171.09375" rx="70.8203125" ry="66.71875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="176.0859375" text-anchor="middle" class="init">X</text>
+  <path d="M95.46875 210 q 80 -16.7265625 160 0 t 120 3.71875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>XGO-Duck on a Pi</b>
+  <span>Can a 3D-printed duck learn to walk on a Pi Zero?</span>
+</a>
+<a class="small" href="../../showcase/robot/">
+  <span class="pic"><img src="../../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2026</span>
+  <b>Someone to play with</b>
+  <span>Could a robot arm sit across the table from me?</span>
+</a>
+<a class="small" href="omi/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A local Omi" style="--w: var(--w-tools)">
+  <ellipse cx="171.484375" cy="141.6796875" rx="129.53125" ry="89.375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="224.375" cy="157.03125" rx="93.203125" ry="51.640625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="177.453125" text-anchor="middle" class="init">A</text>
+  <path d="M68.4375 210 q 80 -11.421875 160 0 t 120 -2.25" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">aug 2026</span>
+  <b>A local Omi</b>
+  <span>Can a wearable assistant work with no cloud at all?</span>
+</a>
+<a class="small" href="early/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Early experiments" style="--w: var(--w-robots)">
+  <ellipse cx="163.671875" cy="147.7734375" rx="120.625" ry="86.015625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="259.6875" cy="159.7265625" rx="83.359375" ry="69.765625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="170.6953125" text-anchor="middle" class="init">E</text>
+  <path d="M84.21875 210 q 80 -23.453125 160 0 t 120 2.0625" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">may 2021</span>
+  <b>Early experiments</b>
+  <span>Where did it start?</span>
+</a>
+</div>
+</section>
+<section class="wrap shelf" id="data" style="--w: var(--w-data)">
+  <h2><span class="swatch" aria-hidden="true"></span>Data science</h2>
+  <p class="hand blurb">methods, models and the research behind them.</p>
+  <div class="smalls"><a class="small" href="../../showcase/clustering/">
+  <span class="pic"><img src="../../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Cluster the reasons</b>
+  <span>How do you turn a gut-feeling rule into personas a team can use?</span>
+</a>
+<a class="small" href="eulerian/">
+  <span class="pic"><img src="../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Seeing the invisible</b>
+  <span>Can a webcam see your pulse?</span>
+</a>
+<a class="small" href="market/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Market dashboard" style="--w: var(--w-home)">
+  <ellipse cx="192.96875" cy="121.640625" rx="123.59375" ry="92.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="275.3125" cy="175.078125" rx="95.8984375" ry="52.265625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.78125" text-anchor="middle" class="init">M</text>
+  <path d="M67.8125 210 q 80 -22.6875 160 0 t 120 -2.34375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Market dashboard</b>
+  <span>What are my shares doing, in euros, from sources I can trust?</span>
+</a>
+<a class="small" href="zepplocal/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--w: var(--w-tools)">
+  <ellipse cx="162.109375" cy="141.2109375" rx="141.40625" ry="98.59375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="294.375" cy="168.046875" rx="82.5390625" ry="58.359375" class="w2" filter="url(#wc)"/>
+  <text x="200" y="174.40625" text-anchor="middle" class="init">Z</text>
+  <path d="M77.65625 210 q 80 -17.0546875 160 0 t 120 -3.90625" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>ZeppLocal</b>
+  <span>Can I keep my watch data without trusting another app?</span>
+</a>
+<a class="small" href="maieutica/">
+  <span class="pic"><img src="../../media/covers/maieutica.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2026</span>
+  <b>Maieutica</b>
+  <span>Who can do this, and what breaks if someone leaves?</span>
+</a>
+<a class="small" href="finance/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Household finance dashboard" style="--w: var(--w-home)">
+  <ellipse cx="155.859375" cy="148.359375" rx="147.96875" ry="97.109375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="294.0625" cy="158.5546875" rx="89.6875" ry="67.5" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.078125" text-anchor="middle" class="init">H</text>
+  <path d="M86.25 210 q 80 -18.0390625 160 0 t 120 -0.59375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2026</span>
+  <b>Household finance dashboard</b>
+  <span>Where does the money go, month by month?</span>
+</a>
+<a class="small" href="connect4/">
+  <span class="pic"><img src="../../media/covers/connect4.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2025</span>
+  <b>Four in a row vs five networks</b>
+  <span>Can I teach a computer to beat me at Connect 4?</span>
+</a>
+<a class="small" href="pydata/">
+  <span class="pic"><img src="../../media/covers/pydata.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2024</span>
+  <b>Hunting unicorns with networks</b>
+  <span>Can the network of who-worked-where predict the next unicorn?</span>
+</a>
+<a class="small" href="../../showcase/heartbeat/">
+  <span class="pic"><img src="../../media/covers/heartbeat.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">aug 2024</span>
+  <b>My heart beats like a network</b>
+  <span>What does a heartbeat look like as a network?</span>
+</a>
+<a class="small" href="early/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Early experiments" style="--w: var(--w-robots)">
+  <ellipse cx="163.671875" cy="147.7734375" rx="120.625" ry="86.015625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="259.6875" cy="159.7265625" rx="83.359375" ry="69.765625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="170.6953125" text-anchor="middle" class="init">E</text>
+  <path d="M84.21875 210 q 80 -23.453125 160 0 t 120 2.0625" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">may 2021</span>
+  <b>Early experiments</b>
+  <span>Where did it start?</span>
+</a>
+</div>
+</section>
+<section class="wrap shelf" id="home" style="--w: var(--w-home)">
+  <h2><span class="swatch" aria-hidden="true"></span>Home lab</h2>
+  <p class="hand blurb">services i run myself, on a raspberry pi at home.</p>
+  <div class="smalls"><a class="small" href="marquee/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Marquee" style="--w: var(--w-home)">
+  <ellipse cx="173.4375" cy="124.3359375" rx="145.46875" ry="83.671875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="249.375" cy="161.71875" rx="70.234375" ry="50.3125" class="w2" filter="url(#wc)"/>
+  <text x="200" y="176.9453125" text-anchor="middle" class="init">M</text>
+  <path d="M72.96875 210 q 80 -18.8046875 160 0 t 120 0.4375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Marquee</b>
+  <span>Can a Raspberry Pi be my Plex?</span>
+</a>
+<a class="small" href="market/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Market dashboard" style="--w: var(--w-home)">
+  <ellipse cx="192.96875" cy="121.640625" rx="123.59375" ry="92.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="275.3125" cy="175.078125" rx="95.8984375" ry="52.265625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.78125" text-anchor="middle" class="init">M</text>
+  <path d="M67.8125 210 q 80 -22.6875 160 0 t 120 -2.34375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Market dashboard</b>
+  <span>What are my shares doing, in euros, from sources I can trust?</span>
+</a>
+<a class="small" href="kindlebot/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Books to my Kindle" style="--w: var(--w-home)">
+  <ellipse cx="166.015625" cy="127.6171875" rx="130.625" ry="89.375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="279.375" cy="157.96875" rx="77.265625" ry="61.171875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="172.453125" text-anchor="middle" class="init">B</text>
+  <path d="M67.8125 210 q 80 -19.2421875 160 0 t 120 3.46875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Books to my Kindle</b>
+  <span>Can a chat message put a classic on my Kindle?</span>
+</a>
+<a class="small" href="finance/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Household finance dashboard" style="--w: var(--w-home)">
+  <ellipse cx="155.859375" cy="148.359375" rx="147.96875" ry="97.109375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="294.0625" cy="158.5546875" rx="89.6875" ry="67.5" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.078125" text-anchor="middle" class="init">H</text>
+  <path d="M86.25 210 q 80 -18.0390625 160 0 t 120 -0.59375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2026</span>
+  <b>Household finance dashboard</b>
+  <span>Where does the money go, month by month?</span>
+</a>
+</div>
+</section>
+<section class="wrap shelf" id="tools" style="--w: var(--w-tools)">
+  <h2><span class="swatch" aria-hidden="true"></span>Tools</h2>
+  <p class="hand blurb">small apps that each fix one annoyance.</p>
+  <div class="smalls"><a class="small" href="../../showcase/precog/">
+  <span class="pic"><img src="../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Precog</b>
+  <span>What if my hands were the mouse?</span>
+</a>
+<a class="small" href="zepplocal/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--w: var(--w-tools)">
+  <ellipse cx="162.109375" cy="141.2109375" rx="141.40625" ry="98.59375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="294.375" cy="168.046875" rx="82.5390625" ry="58.359375" class="w2" filter="url(#wc)"/>
+  <text x="200" y="174.40625" text-anchor="middle" class="init">Z</text>
+  <path d="M77.65625 210 q 80 -17.0546875 160 0 t 120 -3.90625" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>ZeppLocal</b>
+  <span>Can I keep my watch data without trusting another app?</span>
+</a>
+<a class="small" href="diary/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The Diary" style="--w: var(--w-tools)">
+  <ellipse cx="229.296875" cy="132.1875" rx="128.90625" ry="86.875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="279.375" cy="178.125" rx="99.0625" ry="59.375" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.625" text-anchor="middle" class="init">T</text>
+  <path d="M77.5 210 q 80 -17.765625 160 0 t 120 -2.09375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>The Diary</b>
+  <span>What if a paper notebook wrote back?</span>
+</a>
+<a class="small" href="kindlebot/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Books to my Kindle" style="--w: var(--w-home)">
+  <ellipse cx="166.015625" cy="127.6171875" rx="130.625" ry="89.375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="279.375" cy="157.96875" rx="77.265625" ry="61.171875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="172.453125" text-anchor="middle" class="init">B</text>
+  <path d="M67.8125 210 q 80 -19.2421875 160 0 t 120 3.46875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Books to my Kindle</b>
+  <span>Can a chat message put a classic on my Kindle?</span>
+</a>
+<a class="small" href="maieutica/">
+  <span class="pic"><img src="../../media/covers/maieutica.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2026</span>
+  <b>Maieutica</b>
+  <span>Who can do this, and what breaks if someone leaves?</span>
+</a>
+<a class="small" href="retro/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Team retro, facilitated" style="--w: var(--w-tools)">
+  <ellipse cx="171.09375" cy="124.5703125" rx="152.34375" ry="91.796875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="296.875" cy="151.640625" rx="72.34375" ry="67.03125" class="w2" filter="url(#wc)"/>
+  <text x="200" y="170.0703125" text-anchor="middle" class="init">T</text>
+  <path d="M82.5 210 q 80 -22.46875 160 0 t 120 -3.53125" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2026</span>
+  <b>Team retro, facilitated</b>
+  <span>Can an AI facilitator keep a 60-minute retro on time?</span>
+</a>
+<a class="small" href="spindle/">
+  <span class="pic"><img src="../../media/covers/spindle.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2026</span>
+  <b>Spindle</b>
+  <span>Can I make the Mac widget I wanted, for less?</span>
+</a>
+<a class="small" href="omi/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A local Omi" style="--w: var(--w-tools)">
+  <ellipse cx="171.484375" cy="141.6796875" rx="129.53125" ry="89.375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="224.375" cy="157.03125" rx="93.203125" ry="51.640625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="177.453125" text-anchor="middle" class="init">A</text>
+  <path d="M68.4375 210 q 80 -11.421875 160 0 t 120 -2.25" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">aug 2026</span>
+  <b>A local Omi</b>
+  <span>Can a wearable assistant work with no cloud at all?</span>
+</a>
+<a class="small" href="voicetranscriber/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Local Voice Transcriber" style="--w: var(--w-tools)">
+  <ellipse cx="155.46875" cy="132.890625" rx="151.875" ry="81.40625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="292.5" cy="174.9609375" rx="95.1953125" ry="57.578125" class="w2" filter="url(#wc)"/>
+  <text x="200" y="175.96875" text-anchor="middle" class="init">L</text>
+  <path d="M62.03125 210 q 80 -23.453125 160 0 t 120 1.4375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2025</span>
+  <b>Local Voice Transcriber</b>
+  <span>Can dictation be private and pretty?</span>
+</a>
+</div>
+</section>
+<section class="wrap shelf" id="teach" style="--w: var(--w-teach)">
+  <h2><span class="swatch" aria-hidden="true"></span>Teaching</h2>
+  <p class="hand blurb">workshops and courses for other people to learn from.</p>
+  <div class="smalls"><a class="small" href="sqlsprint/">
+  <span class="pic"><img src="../../media/covers/sqlsprint.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>SQL Sprint</b>
+  <span>Can you prepare for a live SQL interview in a week?</span>
+</a>
+<a class="small" href="agentworkshop/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Build your own agent" style="--w: var(--w-teach)">
+  <ellipse cx="191.015625" cy="133.359375" rx="135.46875" ry="88.046875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="263.125" cy="158.671875" rx="80.1953125" ry="66.171875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="171.984375" text-anchor="middle" class="init">B</text>
+  <path d="M81.40625 210 q 80 -18.203125 160 0 t 120 3.0" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2026</span>
+  <b>Build your own agent</b>
+  <span>What is an agent, once you take the cloud away?</span>
+</a>
+<a class="small" href="retro/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Team retro, facilitated" style="--w: var(--w-tools)">
+  <ellipse cx="171.09375" cy="124.5703125" rx="152.34375" ry="91.796875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="296.875" cy="151.640625" rx="72.34375" ry="67.03125" class="w2" filter="url(#wc)"/>
+  <text x="200" y="170.0703125" text-anchor="middle" class="init">T</text>
+  <path d="M82.5 210 q 80 -22.46875 160 0 t 120 -3.53125" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2026</span>
+  <b>Team retro, facilitated</b>
+  <span>Can an AI facilitator keep a 60-minute retro on time?</span>
+</a>
+<a class="small" href="pydata/">
+  <span class="pic"><img src="../../media/covers/pydata.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2024</span>
+  <b>Hunting unicorns with networks</b>
+  <span>Can the network of who-worked-where predict the next unicorn?</span>
+</a>
+</div>
+</section>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

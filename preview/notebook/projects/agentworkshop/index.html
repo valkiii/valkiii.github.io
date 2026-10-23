@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Build your own agent · Valerio Ciotti</title>
+<meta name="description" content="A 3-hour hands-on workshop. A local, CPU-only agent reads your feeds, keeps what matches your interests and builds an EPUB with a quiz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Journal</a><a href="../" aria-current="page">By use</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--w: var(--w-teach)">
+  <header class="wrap story-head">
+    <p class="hand crumbs"><a href="../../">notebook</a> · september 2026 · shipped</p>
+    <h1>Build your own agent</h1>
+    <p class="question">What is an agent, once you take the cloud away?</p>
+    <p class="lede">A 3-hour hands-on workshop. A local, CPU-only agent reads your feeds, keeps what matches your interests and builds an EPUB with a quiz.</p>
+    <p class="actions">
+<a class="btn" href="https://github.com/valkiii/build_your_agent_workshop" target="_blank" rel="noopener">code on github ↗</a>    </p>
+    <span class="tags"><span class="tag" style="--w: var(--w-teach)">teaching</span></span>
+  </header>
+
+  <figure class="wrap taped">
+    <span class="tape l" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+<svg class="wash-cover wide" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Build your own agent" style="--w: var(--w-teach)">
+  <ellipse cx="191.015625" cy="133.359375" rx="135.46875" ry="88.046875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="263.125" cy="158.671875" rx="80.1953125" ry="66.171875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="171.984375" text-anchor="middle" class="init">B</text>
+  <path d="M81.40625 210 q 80 -18.203125 160 0 t 120 3.0" class="line" filter="url(#rough)"/>
+</svg>
+  </figure>
+
+  <section class="wrap ch">
+    <div class="txt">
+      <p class="kicker">the idea</p>
+      <p class="big">Agent demos usually start with an API key and a credit card. This one runs offline on a laptop, so everyone in the room can follow every step.
+</p>
+    </div>
+    <ul class="nums"><li><b>4</b><span class="hand">steps: perceive, extract, decide, act</span></li><li><b>0</b><span class="hand">API keys</span></li></ul>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">how it works</p>
+    <ol class="steps">
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">1</text></svg>
+        <div><h3>Perceive</h3><p>Read blog and RSS sources for recent articles.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">2</text></svg>
+        <div><h3>Extract</h3><p>Pull the text and summarise it with a small local model.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">3</text></svg>
+        <div><h3>Decide</h3><p>Judge each summary against an interest written in plain English.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">4</text></svg>
+        <div><h3>Act</h3><p>Compile the keepers into an EPUB with tags and a comprehension quiz.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">notes to self</p>
+    <ul class="notes"><li class="hand">Small local models are enough to teach the loop. The loop is the lesson.</li></ul>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">made with</p>
+    <p class="made"><span>Python</span><span>local LLMs</span><span>RSS</span><span>EPUB</span></p>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">on nearby pages</p>
+    <div class="smalls"><a class="small" href="../sqlsprint/">
+  <span class="pic"><img src="../../../media/covers/sqlsprint.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>SQL Sprint</b>
+  <span>Can you prepare for a live SQL interview in a week?</span>
+</a>
+<a class="small" href="../retro/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Team retro, facilitated" style="--w: var(--w-tools)">
+  <ellipse cx="171.09375" cy="124.5703125" rx="152.34375" ry="91.796875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="296.875" cy="151.640625" rx="72.34375" ry="67.03125" class="w2" filter="url(#wc)"/>
+  <text x="200" y="170.0703125" text-anchor="middle" class="init">T</text>
+  <path d="M82.5 210 q 80 -22.46875 160 0 t 120 -3.53125" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">sep 2026</span>
+  <b>Team retro, facilitated</b>
+  <span>Can an AI facilitator keep a 60-minute retro on time?</span>
+</a>
+<a class="small" href="../pydata/">
+  <span class="pic"><img src="../../../media/covers/pydata.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">sep 2024</span>
+  <b>Hunting unicorns with networks</b>
+  <span>Can the network of who-worked-where predict the next unicorn?</span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

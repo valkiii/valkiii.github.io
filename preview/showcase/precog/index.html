@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Precog</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A hand-gesture interface for macOS, explained in a page you can steer with your own hands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a scroll-down story. Scenes alternate text and a live panel, act dividers break it into three parts,
+   a thin rail on the left tracks the acts. Look: milk glass, ink skeletons, amber for motion, one red for "it fired". */
+:root {
+  --bg: #e6ecec;
+  --surface: #f4f7f6;
+  --sunk: #dbe3e3;
+  --ink: #0f1d24;
+  --ink-2: #46565d;
+  --ink-3: #75848a;
+  --line: #c4cfcf;
+  --amber: #c9700f;
+  --fired: #c2362b;
+  --violet: #6a4fd0;
+  --green: #22875a;
+  --display: "Bricolage Grotesque", "Avenir Next Condensed", "Helvetica Neue", sans-serif;
+  --body: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1214; --surface: #111b1e; --sunk: #0e171a; --ink: #e2ebeb; --ink-2: #a2b1b4; --ink-3: #6c7b80;
+    --line: #23323a; --amber: #f0a240; --fired: #ff5b4b; --violet: #9c88ff; --green: #4cc38a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1214; --surface: #111b1e; --sunk: #0e171a; --ink: #e2ebeb; --ink-2: #a2b1b4; --ink-3: #6c7b80;
+  --line: #23323a; --amber: #f0a240; --fired: #ff5b4b; --violet: #9c88ff; --green: #4cc38a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 19px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+canvas { display: block; width: 100%; height: 100%; }
+
+/* ---------- story frame ---------- */
+.story { max-width: 1240px; margin: 0 auto; padding-left: 56px; position: relative; }
+.scene { padding-block: 72px; display: grid; min-width: 0; scroll-margin-top: 20px; }
+.split { grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 64px; align-items: center; }
+.split.flip > .text { order: 2; }
+.split .text { display: grid; gap: 20px; align-content: center; min-width: 0; }
+.split .viz { height: 540px; position: relative; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; position: relative; overflow: hidden; }
+.cover { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: stretch; padding-block: 40px 72px; }
+.cover .text { display: grid; gap: 34px; align-content: center; }
+.cover .viz { height: min(70vh, 620px); min-height: 420px; }
+.act { padding-block: 96px 24px; display: grid; gap: 10px; justify-items: start; }
+.act .num { font: 500 15px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--amber); }
+.act h2 { font-size: clamp(64px, 11vw, 150px); line-height: .85; letter-spacing: -.04em; }
+.act p { font-size: 20px; }
+.rail { position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--line), var(--line)) center / 2px 100% no-repeat; }
+.rail i { position: absolute; left: -6px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--ink-3); transition: background .3s, border-color .3s; }
+.rail i.on { background: var(--amber); border-color: var(--amber); }
+.rail .fill { position: absolute; left: 0; top: 0; width: 2px; background: var(--ink); }
+
+/* ---------- type ---------- */
+.kicker { font: 500 14px/1.3 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.kicker b { color: var(--amber); font-weight: 500; }
+h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: -.02em; margin: 0; text-wrap: balance; font-variation-settings: "wdth" 80; }
+h1 { font-size: clamp(110px, 16vw, 210px); line-height: .82; font-weight: 800; letter-spacing: -.045em; }
+h2 { font-size: clamp(38px, 4.4vw, 60px); line-height: 1; }
+p { margin: 0; max-width: 36em; color: var(--ink-2); }
+p strong { color: var(--ink); font-weight: 600; }
+code { font: 400 .82em var(--mono); background: var(--sunk); padding: .08em .35em; border-radius: 5px; color: var(--ink); }
+.note { font: 400 14px/1.55 var(--mono); color: var(--ink-3); }
+.cover .sub { font: 400 clamp(24px, 2.6vw, 32px)/1.28 var(--body); color: var(--ink); max-width: 16em; }
+.cover .sub em { font-style: normal; color: var(--amber); }
+
+/* ---------- components ---------- */
+.cta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 14px 22px; font: 500 17px/1 var(--body); cursor: pointer; display: inline-flex; gap: 10px; align-items: center; }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--fired); }
+.figs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.figs div { padding: 18px 0 0; display: grid; gap: 6px; }
+.figs b { font: 700 58px/1 var(--display); font-variation-settings: "wdth" 78; font-variant-numeric: tabular-nums; }
+.figs span { font: 400 14px/1.3 var(--mono); color: var(--ink-3); }
+.does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 30px; }
+.does li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; color: var(--ink-2); font-size: 18px; line-height: 1.45; }
+.does li i { font: 500 13px/26px var(--mono); color: var(--amber); font-style: normal; }
+.three { gap: 34px; }
+.head2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: end; }
+.three .row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.card { display: grid; grid-template-rows: 360px auto; }
+.card .cap { padding: 18px 22px 22px; display: grid; gap: 6px; border-top: 1px solid var(--line); align-content: start; }
+.card .cap b { font: 600 21px/1.2 var(--body); }
+.card .cap span { font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+.tag { position: absolute; left: 18px; top: 16px; font: 500 12px/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); z-index: 1; }
+.readout { position: absolute; right: 18px; top: 14px; font: 500 14px/1.3 var(--mono); color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; z-index: 1; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tabs button { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 9px 14px; font: 500 14px/1 var(--mono); cursor: pointer; color: var(--ink-2); }
+.tabs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.modes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
+.mode { display: grid; grid-template-rows: 200px auto; }
+.mode .cap { padding: 16px 18px 20px; display: grid; gap: 8px; border-top: 1px solid var(--line); align-content: start; }
+.mode .cap b { font: 600 19px/1.1 var(--body); display: flex; align-items: center; gap: 8px; }
+.mode .cap b i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.mode .cap span { font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.mode .cap small { font: 400 13px/1.4 var(--mono); color: var(--ink-3); }
+.log { position: absolute; left: 18px; bottom: 16px; font: 400 14px/1.55 var(--mono); color: var(--ink-3); }
+.log .ok { color: var(--green); } .log .no { color: var(--fired); }
+.bars { display: grid; gap: 14px; }
+.bar { display: grid; grid-template-columns: 130px minmax(0, 1fr) 70px; gap: 14px; align-items: center; font: 400 14px/1.2 var(--mono); color: var(--ink-2); }
+.bar .track { position: relative; height: 12px; border-radius: 6px; background: var(--sunk); }
+.bar .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: var(--ink-3); width: 0; transition: width .12s linear; }
+.bar .thr { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--ink); left: 66.6%; }
+.bar.hot .fill { background: var(--amber); }
+.bar.fired .fill { background: var(--fired); }
+.bar output { text-align: right; font-variant-numeric: tabular-nums; }
+.links { display: flex; flex-wrap: wrap; gap: 18px; }
+.links a { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--amber); font-weight: 500; }
+.epilogue { gap: 44px; padding-block: 96px 140px; }
+.epilogue .text { display: grid; gap: 20px; max-width: 760px; }
+.lessons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 32px; }
+.lessons div { display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 16px; }
+.lessons b { font: 600 20px/1.25 var(--body); }
+.lessons span { font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+
+/* ---------- chrome ---------- */
+.progress { position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); height: 3px; z-index: 9; pointer-events: none; }
+.progress i { display: block; height: 100%; width: 0; background: var(--amber); }
+.dock { position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 10px; z-index: 6; }
+.chip { border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(8px); height: 42px; border-radius: 999px; padding: 0 16px; cursor: pointer; display: flex; gap: 8px; align-items: center; font: 500 14px/1 var(--mono); }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); }
+.chip[data-state="on"] .dot { background: var(--green); box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 25%, transparent); }
+.chip[data-state="standby"] .dot { background: var(--fired); }
+.pip { position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(72px + env(safe-area-inset-bottom, 0px)); width: 240px; height: 160px; z-index: 6;
+  background: color-mix(in srgb, var(--surface) 85%, transparent); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.pip .tag { left: 12px; top: 10px; font-size: 11px; }
+.toast { position: fixed; left: 50%; top: calc(22px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -20px); opacity: 0; z-index: 7;
+  background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 999px; font: 500 15px/1 var(--mono); transition: opacity .25s, transform .25s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.laser { position: fixed; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--fired); box-shadow: 0 0 0 8px color-mix(in srgb, var(--fired) 25%, transparent), 0 0 30px var(--fired); pointer-events: none; z-index: 8; }
+.grid-view { position: fixed; inset: 0; overflow: auto; z-index: 8; background: color-mix(in srgb, var(--bg) 96%, transparent); backdrop-filter: blur(6px);
+  padding: calc(48px + env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) 48px max(24px, env(safe-area-inset-left, 0px)); display: none; }
+.contents .grid-view { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; align-content: start; }
+.grid-view button { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 18px; cursor: pointer; display: grid; gap: 8px; min-height: 110px; align-content: start; }
+.grid-view button b { font: 600 20px/1.2 var(--display); }
+.grid-view button span { font: 400 13px/1 var(--mono); color: var(--ink-3); }
+.grid-view button.cur { border-color: var(--ink); }
+
+@media (max-width: 900px) {
+  body { font-size: 17px; }
+  .story { padding-left: 0; }
+  .rail { display: none; }
+  .scene { padding-block: 48px; }
+  .split, .cover, .head2 { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .split.flip > .text { order: 0; }
+  .split .viz, .cover .viz { height: 380px; min-height: 0; }
+  .figs { grid-template-columns: 1fr 1fr; } .figs b { font-size: 44px; }
+  .does, .lessons { grid-template-columns: 1fr; }
+  .three .row, .modes { grid-template-columns: minmax(0, 1fr); }
+  .card { grid-template-rows: 320px auto; }
+  .mode { grid-template-rows: 150px auto; }
+  .bar { grid-template-columns: 100px minmax(0, 1fr) 54px; font-size: 13px; }
+  .readout { top: 34px; left: 18px; right: auto; text-align: left; font-size: 13px; }
+  .act { padding-block: 64px 8px; }
+  .cam-only, .pip { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+<main class="story" id="story">
+<div class="rail" id="rail" aria-hidden="true"><span class="fill" id="railfill"></span></div>
+
+  <section class="scene cover" data-title="Precog">
+    <div class="text">
+      <div class="kicker"><b>●</b> A hand-gesture interface for macOS · October 2026</div>
+      <div style="display:grid;gap:26px">
+        <h1>Precog</h1>
+        <p class="sub">Wave at your Mac. Swipe between desktops in mid-air, pinch to click, <em>grab a window and throw it</em> to the other screen.</p>
+      </div>
+      <div style="display:grid;gap:16px">
+        <div class="cta cam-only">
+          <button class="btn primary" type="button" data-cam><span class="dot"></span>Steer this page with your hands</button>
+          <span class="note">or just scroll</span>
+        </div>
+        <p class="note">Python · OpenCV · MediaPipe · PyObjC. Runs locally; no video leaves the machine. The hand on the right is one of my real recordings.</p>
+      </div>
+    </div>
+    <div class="viz panel"><span class="tag">recording · swipe left · <span data-out="cover-sample">take 1 of 6</span></span><canvas data-viz="cover"></canvas></div>
+  </section>
+
+  <section class="scene split" data-title="The film interface, on a laptop">
+    <div class="text">
+      <div class="kicker">Prologue</div>
+      <h2>The interface from the film, on a laptop</h2>
+      <p>In <em>Minority Report</em>, detectives sort evidence by sweeping their hands through the air. The film needed gloves and a wall of glass. Today a laptop camera and an open hand-tracking model are enough to try the same idea on an ordinary desk.</p>
+      <p>Precog turns each camera frame into 21 points per hand, compares them with gestures I recorded, and acts on macOS directly.</p>
+    </div>
+    <div class="text" style="align-content:center;gap:44px">
+      <div class="figs"><div><b>21</b><span>landmarks per hand</span></div><div><b>~30</b><span>frames per second</span></div><div><b>2</b><span>hands at once</span></div><div><b>0</b><span>extra hardware</span></div></div>
+      <ul class="does">
+        <li><i>01</i>Swipe desktops with three fingers, the way a trackpad does it.</li>
+        <li><i>02</i>Point and pinch to click, right-click and drag windows.</li>
+        <li><i>03</i>Switch apps from a strip of icons that follows your hand.</li>
+        <li><i>04</i>Snap windows to halves and quarters by pulling your hands apart.</li>
+        <li><i>05</i>Pause everything by showing ten spread fingers.</li>
+        <li><i>06</i>Teach your own poses and movements, bound to any action.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="act" data-act="I"><span class="num">Act I</span><h2>Seeing</h2><p>From camera pixels to a hand you can measure.</p></div>
+
+  <section class="scene split flip" data-title="Twenty-one points per hand">
+    <div class="text">
+      <div class="kicker">Hand tracking</div>
+      <h2>Twenty-one points per hand</h2>
+      <p>Every frame goes through Google's MediaPipe hand landmarker. It returns the wrist, four joints on the thumb and four on each finger, plus a guess at left or right.</p>
+      <p><strong>Precog never looks at pixels after this step.</strong> Poses, swipes, pinches and the standby check are all geometry on these points.</p>
+      <p class="note">Hover a point for its name. Amber: the hand-size ruler, wrist to middle knuckle. Circle: the palm centre.</p>
+    </div>
+    <div class="viz panel"><span class="tag">recording · pointer pose</span><span class="readout" data-out="lm-name">point 8 · index tip</span><canvas data-viz="landmarks"></canvas></div>
+  </section>
+
+  <section class="scene split" data-title="Near or far, the same hand">
+    <div class="text">
+      <div class="kicker">Making hands comparable</div>
+      <h2>Near or far, the same hand</h2>
+      <p>A hand close to the camera looks twice as big as one at arm's length. So every hand is redrawn relative to its own wrist and divided by its own size: the distance from the wrist to the middle-finger knuckle.</p>
+      <p>Movement is measured the same way. The palm travels in <strong>hand-widths</strong>, not pixels, so a swipe is the same swipe whether you sit close or lean back.</p>
+    </div>
+    <div class="viz panel"><span class="tag" data-out="norm-step">1 · as the camera sees them</span><span class="readout" data-out="norm-dist"></span><canvas data-viz="normalize"></canvas></div>
+  </section>
+
+  <div class="act" data-act="II"><span class="num">Act II</span><h2>Recognising</h2><p>Comparing what the camera sees with what you taught it.</p></div>
+
+  <section class="scene three" data-title="Poses, movements, two hands">
+    <div class="head2">
+      <div style="display:grid;gap:18px"><div class="kicker">Three kinds of gesture</div><h2>Poses, movements, and both hands</h2></div>
+      <p>Three kinds of gesture, all recorded by example, about six takes each. Below are my own recordings, replayed exactly as the camera saw them.</p>
+    </div>
+    <div class="row">
+      <div class="card panel"><div style="position:relative;min-height:0"><span class="tag">pose · app switch</span><span class="readout" data-out="hold"></span><canvas data-viz="kind-pose"></canvas></div><div class="cap"><b>Pose</b><span>A hand shape held still. Fires after 0.45 s with the palm nearly still, and not again until you let go.</span></div></div>
+      <div class="card panel"><div style="position:relative;min-height:0"><span class="tag">movement · swipe right</span><canvas data-viz="kind-motion"></canvas></div><div class="cap"><b>Movement</b><span>A shape plus a path. Precog keeps the last seconds of each hand and keeps asking if the recent stretch looks like a recording.</span></div></div>
+      <div class="card panel"><div style="position:relative;min-height:0"><span class="tag">two hands · expand</span><canvas data-viz="kind-two"></canvas></div><div class="cap"><b>Two hands</b><span>Adds the gap between the hands and the path of their midpoint. "Expand" is mostly a growing gap.</span></div></div>
+    </div>
+  </section>
+
+  <section class="scene split flip" data-title="Dynamic time warping">
+    <div class="text">
+      <div class="kicker">Dynamic time warping</div>
+      <h2>A slow swipe and a fast swipe are the same swipe</h2>
+      <p>People never repeat a movement at the same speed. Precog resamples every movement to 16 steps, then lines them up with <strong>dynamic time warping</strong>: each step is paired with the step it resembles most, as long as the order is kept.</p>
+      <p>The cost of a pair is the difference in hand shape plus 0.35 × the difference in path. Averaged along the cheapest route through the grid, that gives one distance.</p>
+      <p class="note" data-out="dtw-note"></p>
+    </div>
+    <div class="viz panel"><span class="tag">two of my swipe-left takes</span><span class="readout" data-out="dtw-dist"></span><canvas data-viz="dtw"></canvas></div>
+  </section>
+
+  <section class="scene split" data-title="Six takes set the threshold">
+    <div class="text">
+      <div class="kicker">Teaching it</div>
+      <h2>Six takes set the threshold</h2>
+      <p>For each take, Precog measures how far it is from its nearest other take. A take far from the rest (a misread hand, a much slower attempt) is set aside. The threshold comes from the spread of what's left, with a floor and a ceiling.</p>
+      <div class="tabs" role="group" aria-label="Gesture" data-tabs="thr"></div>
+      <p class="note" data-out="thr-note"></p>
+    </div>
+    <div class="viz panel"><span class="tag">distance to nearest other take</span><span class="readout" data-out="thr-formula"></span><canvas data-viz="threshold"></canvas></div>
+  </section>
+
+  <div class="act" data-act="III"><span class="num">Act III</span><h2>Acting</h2><p>Desktops, windows, apps and clicks, driven by your hands.</p></div>
+
+  <section class="scene three" data-title="Five modes, five colours">
+    <div class="head2">
+      <div style="display:grid;gap:18px"><div class="kicker">Five modes, five colours</div><h2>Precog always shows which mode it is in</h2></div>
+      <p>The colour of the hand skeleton in the corner of the screen says what your hands will do right now. Most of the time you are in gesture mode; the others open for one task and close again.</p>
+    </div>
+    <div class="modes">
+      <div class="mode panel"><canvas data-viz="mode" data-color="ink" data-pose="swipe left"></canvas><div class="cap"><b><i style="background:var(--ink)"></i>Gesture</b><span>Recorded gestures and the built-in three-finger swipe are live.</span><small>default mode</small></div></div>
+      <div class="mode panel"><canvas data-viz="mode" data-color="amber" data-pose="pointer"></canvas><div class="cap"><b><i style="background:var(--amber)"></i>Manipulate</b><span>Your knuckles steer the cursor. Pinch to click, pinch and move to drag.</span><small>enter: "pointer" pose</small></div></div>
+      <div class="mode panel"><canvas data-viz="mode" data-color="violet" data-pose="app switch"></canvas><div class="cap"><b><i style="background:var(--violet)"></i>App switcher</b><span>A strip of recent apps follows your hand. Pinch to open one.</span><small>enter: "telephone" pose</small></div></div>
+      <div class="mode panel"><canvas data-viz="mode" data-color="green" data-pose="expand"></canvas><div class="cap"><b><i style="background:var(--green)"></i>Layout</b><span>A 3 × 3 grid of window layouts with a live preview.</span><small>enter: expand, two hands</small></div></div>
+      <div class="mode panel"><canvas data-viz="mode" data-color="fired" data-pose="spread"></canvas><div class="cap"><b><i style="background:var(--fired)"></i>Standby</b><span>Ignores everything except the gesture that wakes it.</span><small>enter and leave: ten fingers</small></div></div>
+    </div>
+  </section>
+
+  <section class="scene split flip" data-title="Sliding desktops">
+    <div class="text">
+      <div class="kicker">Under the trackpad</div>
+      <h2>Sliding desktops the way a trackpad does</h2>
+      <p>The obvious approach, pressing Ctrl+→ in software, does nothing: macOS ignores synthetic key presses for switching desktops. A real three-finger swipe sends a private "dock swipe" event with a progress value instead.</p>
+      <p>Precog sends that same sequence: <code>Began</code>, a stream of <code>Changed</code> as your hand moves, then <code>Ended</code> to commit or <code>Cancelled</code> to spring back. Past a third of the way, or with a flick, it commits.</p>
+      <p class="note">Drag the desktop on the right to try the rule.</p>
+    </div>
+    <div class="viz panel"><span class="tag">progress follows the hand · 4 hand-widths = one desktop</span><span class="readout" data-out="swipe-p">progress 0.00</span><canvas data-viz="spaces"></canvas><div class="log" data-out="swipe-log"></div></div>
+  </section>
+
+  <section class="scene split" data-title="A pinch that behaves like a mouse button">
+    <div class="text">
+      <div class="kicker">Clicking in mid-air</div>
+      <h2>A pinch that behaves like a mouse button</h2>
+      <p>The cursor follows your knuckles, which barely move when you pinch. As thumb and index close in, the cursor slows down; once they touch, it freezes, so the click lands where you aimed.</p>
+      <p>Press and release use different distances (<strong>0.32</strong> and <strong>0.48</strong> hand sizes), so a trembling pinch can't click twice. It only becomes a drag after 45 px of movement.</p>
+      <p class="note">Illustrative signal; the thresholds are Precog's real settings.</p>
+    </div>
+    <div class="viz panel"><span class="tag">thumb-to-index distance ÷ hand size</span><span class="readout" data-out="pinch-state"></span><canvas data-viz="pinch"></canvas></div>
+  </section>
+
+  <section class="scene split flip" data-title="Ten fingers: standby">
+    <div class="text">
+      <div class="kicker">Off switch</div>
+      <h2>Ten spread fingers put it to sleep</h2>
+      <p>A gesture interface needs a way to say "not now". Both hands, all fingers out and spread wider than a normal open hand, held still for 0.8 s: Precog stops listening until you do it again.</p>
+      <p>Wider than normal is measured, not guessed. <code>./precog-run calibrate</code> records your relaxed open hand; my own sits at a finger gap of 0.45 at the 99th percentile, so the switch needs 0.46.</p>
+    </div>
+    <div class="viz panel"><span class="tag">standby check</span><span class="readout" data-out="spread-read"></span><canvas data-viz="standby"></canvas></div>
+  </section>
+
+  <section class="scene split" data-title="Try it">
+    <div class="text">
+      <div class="kicker">Live</div>
+      <h2>The recogniser, running in this page</h2>
+      <p>This is Precog's matcher ported to JavaScript, loaded with my real recordings. Each bar is the best distance to one gesture; the black tick is its threshold. Cross it and the gesture fires.</p>
+      <p data-out="live-mode">Without a camera, it is watching a stream of my recordings. <span class="cam-only">Turn the camera on and it watches you: swipe left or right to jump between sections, expand both hands for the contents, ten fingers for standby.</span></p>
+      <div class="cta cam-only"><button class="btn primary" type="button" data-cam><span class="dot"></span>Use my camera</button><span class="note">Nothing is recorded or sent.</span></div>
+      <div class="bars" data-out="bars"></div>
+    </div>
+    <div class="viz panel"><span class="tag" data-out="live-tag">demo stream · recorded takes</span><span class="readout" data-out="live-fired"></span><canvas data-viz="live"></canvas></div>
+  </section>
+
+  <section class="scene epilogue" data-title="What it took">
+    <div class="text">
+      <div class="kicker">Epilogue</div>
+      <h2>What it took</h2>
+      <p>Built over a long weekend. Most of the work was not the model; it was making a Mac accept input it was never designed for.</p>
+      <div class="links">
+        <a href="https://github.com/valkiii/precog_hand" target="_blank" rel="noopener">Code on GitHub ↗</a>
+        <a href="../../play/pulp/" target="_blank" rel="noopener">PULP: the same hands, as a game ↗</a>
+      </div>
+    </div>
+    <div class="lessons">
+      <div><b>Synthetic keys are ignored</b><span>Desktop switching only listens to real trackpad events, so Precog posts dock-swipe events with the hardware payload, ported from the open-source tool <em>iss</em>.</span></div>
+      <div><b>Pinned to an older model runtime</b><span>MediaPipe 1.x crashes on macOS 27 (Metal service unavailable), so Precog stays on 0.10.21.</span></div>
+      <div><b>Pick the camera that is actually live</b><span>An iPhone Continuity Camera can take the default slot while the built-in one stays black. Precog tries each and keeps the first with a real image.</span></div>
+      <div><b>Tested by replaying hands</b><span>Recorded gestures replay through the real loop with a fake tracker, so changes to matching are checked without waving at the screen.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<div class="grid-view" id="grid" aria-label="Contents"></div>
+<div class="dock">
+  <button class="chip" id="ovbtn" type="button">Contents</button>
+  <button class="chip cam-only" type="button" data-cam data-state="off" id="cambtn"><span class="dot"></span><span data-out="cam-label">Camera off</span></button>
+</div>
+<div class="pip" id="pip" hidden><span class="tag" data-out="pip-tag">gesture mode</span><canvas id="pipc"></canvas></div>
+<div class="toast" id="toast" role="status"></div>
+<div class="laser" id="laser" hidden></div>
+
+<script src="gestures.js"></script>
+<script src="precog-core.js"></script>
+<script src="story.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Diary · Valerio Ciotti</title>
+<meta name="description" content="Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#tools">Tools</a></p>
+      <h1>The Diary</h1>
+      <p class="question">What if a paper notebook wrote back?</p>
+      <p class="lede">Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.</p>
+      <p class="actions">
+<a class="btn" href="https://github.com/valkiii/the_diary" target="_blank" rel="noopener">GitHub ↗</a>      </p>
+      <p class="facts"><span>October 2026</span><span class="status s-prototype">prototype</span><span>Tools</span><span>Robots &amp; devices</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><svg class="poster wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The Diary" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-16.2109375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="47.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="111.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="175.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="239.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="303.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/>  <circle cx="213.359375" cy="90.625" r="57.8125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">The Diary</text>
+</svg>
+</figure>
+
+<section class="wrap tiles"><div><b>60–85 ms</b><span>to add one pen line on the tablet</span></div><div><b>8–40 s</b><span>before the reply fades</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">A port of Maxime Rivest&#39;s riddle to the Supernote Manta. The magic is that it feels like paper, not like a chat window.
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>Read</b><p>The tablet&#39;s handwriting recognition reads your strokes.</p></li><li><span class="n">02</span><b>Drink</b><p>Your ink fades while a small bridge asks a model for Tom&#39;s reply.</p></li><li><span class="n">03</span><b>Write</b><p>The answer appears stroke by stroke in a flowing hand, lingers, and fades away.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>The tablet blocks plain HTTP from plugins, so the plugin speaks raw sockets natively.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>TypeScript</span><span>Kotlin</span><span>Supernote plugin SDK</span><span>Claude / Ollama</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../../../showcase/precog/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../zepplocal/" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-36.3671875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="27.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="91.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="155.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="219.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="283.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/>  <circle cx="232.109375" cy="125.78125" r="62.3125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">ZeppLocal</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Tools</span><span class="meta">Oct 2026</span></span>
+    <b>ZeppLocal</b>
+    <span class="q">Can I keep my watch data without trusting another app?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../xgoduck/" style="--c: var(--uc-robots); --on: var(--on-robots)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="XGO-Duck on a Pi" style="--c: var(--uc-robots); --on: var(--on-robots)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-21.484375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="42.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="106.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="170.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="234.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="298.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/>  <circle cx="229.296875" cy="106.328125" r="48.625" class="p-disc"/>
+  <text x="24" y="172" class="p-title">XGO-Duck on a Pi</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Robots &amp; devices</span><span class="meta">Oct 2026</span></span>
+    <b>XGO-Duck on a Pi</b>
+    <span class="q">Can a 3D-printed duck learn to walk on a Pi Zero?</span>
+    <span class="status s-building">building</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skyline Visibility</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: the street on top (drag the roofs), the visibility graph it makes underneath, one shared x axis. */
+:root {
+  --bg: #ffffff; --ink: #1d1b1f; --ink-2: #5d5a63; --ink-3: #9a96a1; --line: #e6e3ea;
+  --bldg: #d9d5df; --sel: #e5354f; --seen: #f4a3b1; --sight: rgba(229,53,79,.55);
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #15121a; --ink: #f1edf5; --ink-2: #b9b3c2; --ink-3: #7f7889; --line: #2b2633; --bldg: #3a3443; --seen: #8f3a4a; --sight: rgba(255,120,140,.6); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #15121a; --ink: #f1edf5; --ink-2: #b9b3c2; --ink-3: #7f7889; --line: #2b2633; --bldg: #3a3443; --seen: #8f3a4a; --sight: rgba(255,120,140,.6); color-scheme: dark; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 400 13px/1.5 var(--mono);
+  padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-block: 10px; color: var(--ink-2); }
+.bar b { color: var(--ink); font-weight: 600; }
+button { font: 600 12px/1 var(--mono); color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+.spacer { flex: 1; }
+canvas { width: 100%; height: 100%; display: block; touch-action: none; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <span>building <b id="sel">8</b> sees <b id="cnt">0</b> others · <b id="edges">0</b> links in the graph</span>
+  <span class="spacer"></span>
+  <button type="button" id="shuffle">New street</button>
+</div>
+<canvas id="c" aria-label="Skyscrapers along a street. Drag a roof to change its height; click a building to see its lines of sight. Below, the visibility graph with one node per building."></canvas>
+<script>
+(() => {
+const N = 15, cv = document.getElementById("c"), ctx = cv.getContext("2d");
+let H = [], sel = 7, drag = -1;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function rnd() { H = Array.from({ length: N }, () => 2 + Math.round(Math.random() * 8)); }
+function sees(a, b) {
+  if (a > b) [a, b] = [b, a];
+  for (let k = a + 1; k < b; k++) if (H[k] >= H[b] + (H[a] - H[b]) * (b - k) / (b - a)) return false;
+  return true;
+}
+let lay = {};
+function layout() {
+  const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+  cv.width = r.width * dpr; cv.height = r.height * dpr;
+  const W = cv.width, Hh = cv.height, pad = 24 * dpr;
+  const streetBottom = Hh * .55, top = 18 * dpr, slot = (W - 2 * pad) / N;
+  lay = { dpr, W, Hh, pad, slot, streetBottom, top, unit: (streetBottom - top) / 11, graphY: Hh * .8 };
+}
+const X = i => lay.pad + lay.slot * (i + .5);
+const Y = h => lay.streetBottom - h * lay.unit;
+function draw() {
+  const { dpr, W, Hh, slot, streetBottom, graphY } = lay;
+  ctx.clearRect(0, 0, W, Hh);
+  const seen = new Set(); let edges = 0;
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (sees(i, j)) { edges++; if (i === sel) seen.add(j); if (j === sel) seen.add(i); }
+  // buildings
+  for (let i = 0; i < N; i++) {
+    ctx.fillStyle = i === sel ? css("--sel") : seen.has(i) ? css("--seen") : css("--bldg");
+    const w = slot * .62;
+    ctx.beginPath(); ctx.roundRect(X(i) - w / 2, Y(H[i]), w, H[i] * lay.unit, [4 * dpr, 4 * dpr, 0, 0]); ctx.fill();
+    ctx.fillStyle = css("--ink-3"); ctx.font = `${11 * dpr}px "JetBrains Mono", monospace`; ctx.textAlign = "center";
+    ctx.fillText(H[i], X(i), Y(H[i]) - 6 * dpr);
+  }
+  ctx.strokeStyle = css("--line"); ctx.lineWidth = 1.5 * dpr; ctx.beginPath(); ctx.moveTo(lay.pad, streetBottom); ctx.lineTo(W - lay.pad, streetBottom); ctx.stroke();
+  // lines of sight from the selected roof
+  ctx.strokeStyle = css("--sight"); ctx.lineWidth = 1.5 * dpr; ctx.setLineDash([5 * dpr, 4 * dpr]);
+  for (const j of seen) { ctx.beginPath(); ctx.moveTo(X(sel), Y(H[sel])); ctx.lineTo(X(j), Y(H[j])); ctx.stroke(); }
+  ctx.setLineDash([]);
+  // the graph: nodes in street order, links as arcs above the line
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (sees(i, j)) {
+    const on = i === sel || j === sel;
+    ctx.strokeStyle = on ? css("--sel") : css("--ink-3"); ctx.globalAlpha = on ? 1 : .45; ctx.lineWidth = (on ? 2 : 1) * dpr;
+    const mx = (X(i) + X(j)) / 2, rx = (X(j) - X(i)) / 2;
+    ctx.beginPath(); ctx.ellipse(mx, graphY, rx, Math.min(rx * .55, graphY - streetBottom - 30 * dpr), 0, Math.PI, 2 * Math.PI); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  for (let i = 0; i < N; i++) {
+    ctx.fillStyle = i === sel ? css("--sel") : seen.has(i) ? css("--seen") : css("--bg");
+    ctx.strokeStyle = css("--ink"); ctx.lineWidth = 1.5 * dpr;
+    ctx.beginPath(); ctx.arc(X(i), graphY, 7 * dpr, 0, 7); ctx.fill(); ctx.stroke();
+  }
+  ctx.fillStyle = css("--ink-3"); ctx.textAlign = "left"; ctx.font = `${11 * dpr}px "JetBrains Mono", monospace`;
+  ctx.fillText("the street (drag a roof)", lay.pad, 14 * dpr);
+  ctx.fillText("its visibility graph", lay.pad, streetBottom + 24 * dpr);
+  document.getElementById("sel").textContent = sel + 1;
+  document.getElementById("cnt").textContent = seen.size;
+  document.getElementById("edges").textContent = edges;
+}
+function hit(ev) {
+  const r = cv.getBoundingClientRect(), x = (ev.clientX - r.left) * lay.dpr, y = (ev.clientY - r.top) * lay.dpr;
+  const i = Math.max(0, Math.min(N - 1, Math.floor((x - lay.pad) / lay.slot)));
+  return { i, y };
+}
+cv.addEventListener("pointerdown", ev => {
+  const { i, y } = hit(ev); sel = i;
+  if (y < lay.streetBottom + 8 * lay.dpr && Math.abs(y - Y(H[i])) < 26 * lay.dpr) { drag = i; cv.setPointerCapture(ev.pointerId); }
+  draw();
+});
+cv.addEventListener("pointermove", ev => {
+  if (drag < 0) { const { i, y } = hit(ev); cv.style.cursor = y < lay.streetBottom && Math.abs(y - Y(H[i])) < 26 * lay.dpr ? "ns-resize" : "pointer"; return; }
+  const { y } = hit(ev);
+  H[drag] = Math.max(1, Math.min(10, Math.round((lay.streetBottom - y) / lay.unit)));
+  draw();
+});
+cv.addEventListener("pointerup", () => drag = -1);
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") sel = Math.max(0, sel - 1);
+  else if (e.key === "ArrowRight") sel = Math.min(N - 1, sel + 1);
+  else if (e.key === "ArrowUp") H[sel] = Math.min(10, H[sel] + 1);
+  else if (e.key === "ArrowDown") H[sel] = Math.max(1, H[sel] - 1);
+  else return;
+  e.preventDefault(); draw();
+});
+document.getElementById("shuffle").onclick = () => { rnd(); draw(); };
+H = [4, 7, 3, 5, 9, 2, 6, 8, 3, 4, 10, 5, 2, 7, 6];
+layout(); draw();
+addEventListener("resize", () => { layout(); draw(); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+})();
+</script>
+</body>
+</html>

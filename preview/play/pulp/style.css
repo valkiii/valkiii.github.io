@@ -1,0 +1,28 @@
+:root { --ink: #fff4dc; --gold: #ffd54a; --wood: #24140a; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #140a04; color: var(--ink);
+  font-family: -apple-system, "Helvetica Neue", sans-serif; }
+canvas#game { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; cursor: crosshair; touch-action: none; }
+video#video { position: fixed; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+
+#overlay { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; background: radial-gradient(ellipse at center, rgba(40,20,8,0.75), rgba(10,4,0,0.95)); text-align: center; padding: 16px; cursor: pointer; }
+#overlay.hidden { display: none; }
+#overlay h1 { font-family: "Bungee", "Arial Black", sans-serif; font-weight: 400; font-size: clamp(72px, 16vw, 180px); margin: 0;
+  color: var(--gold); text-shadow: 0 0 40px #ff7a1a, 0 6px 0 #3a1a06; letter-spacing: 0.02em; }
+#overlay .tag { font-size: clamp(16px, 2.4vw, 24px); margin: 0; }
+#overlay button { font: inherit; font-size: 18px; padding: 14px 28px; border-radius: 999px; border: 2px solid var(--gold);
+  background: rgba(255,213,74,0.12); color: var(--ink); cursor: pointer; }
+#overlay button:hover { background: rgba(255,213,74,0.25); }
+.small { font-size: 13px; opacity: 0.7; max-width: 520px; }
+
+#status { position: fixed; left: 16px; bottom: 14px; font-size: 13px; opacity: 0.8; pointer-events: none; }
+
+#help { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(640px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px); overflow: auto; background: rgba(20,10,4,0.95); border: 1px solid rgba(255,213,74,0.4);
+  border-radius: 14px; padding: 20px 24px; display: none; font-size: 15px; line-height: 1.45; }
+#help.show { display: block; }
+#help h2 { font-family: "Bungee", sans-serif; font-weight: 400; color: var(--gold); margin: 0 0 8px; }
+#help table { border-collapse: collapse; font-size: 13px; width: 100%; }
+#help td { padding: 3px 8px 3px 0; vertical-align: top; }
+#help td:nth-child(odd) { color: var(--gold); white-space: nowrap; font-weight: 600; }

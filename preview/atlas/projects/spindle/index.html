@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spindle · Valerio Ciotti</title>
+<meta name="description" content="A native macOS album-art widget for Spotify and Apple Music, with hover controls and a mini player that lives around the notch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../" aria-label="Valerio Ciotti, home">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 22 L16 8 L25 20 L7 22 M16 8 L16 26"/></g><g fill="currentColor"><circle cx="7" cy="22" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="25" cy="20" r="3"/><circle cx="16" cy="26" r="2.2"/></g></svg>
+    <span>Valerio Ciotti</span>
+  </a>
+  <nav aria-label="Sections">
+<a href="../../">Map</a><a href="../" aria-current="page">Index</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-tools)">
+  <header class="wrap story-head">
+    <p class="crumbs"><a href="../../">Map</a> / <a href="../#tools">Tools</a> / Spindle</p>
+    <div class="meta-row"><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span><span class="mono">September 2026 · in progress</span></div>
+    <h1>Spindle</h1>
+    <p class="question">Can I make the Mac widget I wanted, for less?</p>
+    <p class="lede">A native macOS album-art widget for Spotify and Apple Music, with hover controls and a mini player that lives around the notch.</p>
+    <p class="actions">
+    </p>
+  </header>
+
+  <figure class="wrap hero-media"><img src="../../../media/covers/spindle.jpg" alt="Spindle"></figure>
+
+  <section class="wrap numbers" aria-label="In numbers">
+<div><b>0</b><span>API keys or logins</span></div><div><b>7</b><span>day trial before a licence</span></div>  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">The idea</h2>
+    <p class="big">Small Mac utilities are often good and slightly too expensive. Spindle is my take on the album-art widget, priced lower.
+</p>
+  </section>
+
+  <section class="wrap route-block">
+    <h2 class="sec">How it works</h2>
+    <ol class="route">
+<li><span class="stop" aria-hidden="true"></span><div><b>Listen</b><p>AppleScript asks Spotify or Music what&#39;s playing every second; no accounts involved.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Show</b><p>A desktop tile with the cover, controls on hover, and a notch player that expands.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Sell</b><p>A licence check with a trial, built to work offline.</p></div></li>    </ol>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">What I learned</h2>
+    <ul class="learned"><li>Swift swallows AppleScript syntax errors into vague runtime failures; test the script on its own first.</li></ul>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">Built with</h2>
+    <p class="stack"><span>Swift</span><span>SwiftUI</span><span>AppKit</span><span>AppleScript</span></p>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">Nearby on the map</h2>
+    <div class="grid"><a class="card" href="../../../showcase/precog/" data-uc="vision tools">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · prototype</span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+  </span>
+</a>
+<a class="card" href="../zepplocal/" data-uc="tools data">
+  <span class="media"><svg class="glyph" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="g-bg"/>
+<line x1="169.84375" y1="168.75" x2="137.03125" y2="86.875" class="g-edge"/><line x1="169.84375" y1="168.75" x2="199.375" y2="90.625" class="g-edge"/><line x1="169.84375" y1="168.75" x2="111.875" y2="178.125" class="g-edge"/><line x1="280.3125" y1="116.25" x2="199.375" y2="90.625" class="g-edge"/><line x1="280.3125" y1="116.25" x2="240.9375" y2="63.125" class="g-edge"/><line x1="280.3125" y1="116.25" x2="213.59375" y2="71.875" class="g-edge"/><line x1="137.03125" y1="86.875" x2="199.375" y2="90.625" class="g-edge"/><line x1="137.03125" y1="86.875" x2="161.09375" y2="21.875" class="g-edge"/><line x1="137.03125" y1="86.875" x2="213.59375" y2="71.875" class="g-edge"/><line x1="137.03125" y1="86.875" x2="111.875" y2="178.125" class="g-edge"/><line x1="199.375" y1="90.625" x2="161.09375" y2="21.875" class="g-edge"/><line x1="199.375" y1="90.625" x2="232.1875" y2="31.25" class="g-edge"/><line x1="199.375" y1="90.625" x2="240.9375" y2="63.125" class="g-edge"/><line x1="199.375" y1="90.625" x2="213.59375" y2="71.875" class="g-edge"/><line x1="161.09375" y1="21.875" x2="232.1875" y2="31.25" class="g-edge"/><line x1="161.09375" y1="21.875" x2="240.9375" y2="63.125" class="g-edge"/><line x1="161.09375" y1="21.875" x2="213.59375" y2="71.875" class="g-edge"/><line x1="232.1875" y1="31.25" x2="240.9375" y2="63.125" class="g-edge"/><line x1="232.1875" y1="31.25" x2="213.59375" y2="71.875" class="g-edge"/><line x1="240.9375" y1="63.125" x2="213.59375" y2="71.875" class="g-edge"/><circle cx="169.84375" cy="168.75" r="8.6484375" class="g-node hub"/><circle cx="280.3125" cy="116.25" r="9.90625" class="g-node"/><circle cx="137.03125" cy="86.875" r="10.5078125" class="g-node"/><circle cx="199.375" cy="90.625" r="10.15234375" class="g-node"/><circle cx="161.09375" cy="21.875" r="6.70703125" class="g-node"/><circle cx="232.1875" cy="31.25" r="5.17578125" class="g-node"/><circle cx="240.9375" cy="63.125" r="4.2734375" class="g-node"/><circle cx="213.59375" cy="71.875" r="6.21484375" class="g-node"/><circle cx="111.875" cy="178.125" r="7.4453125" class="g-node"/></svg>
+</span>
+  <span class="body">
+    <span class="meta">Oct 2026 · prototype</span>
+    <b>ZeppLocal</b>
+    <span class="q">Can I keep my watch data without trusting another app?</span>
+  </span>
+</a>
+<a class="card" href="../diary/" data-uc="tools robots">
+  <span class="media"><svg class="glyph" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The Diary" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="g-bg"/>
+<line x1="82.34375" y1="75.0" x2="175.3125" y2="58.125" class="g-edge"/><line x1="82.34375" y1="75.0" x2="74.6875" y2="28.75" class="g-edge"/><line x1="82.34375" y1="75.0" x2="72.5" y2="75.625" class="g-edge"/><line x1="82.34375" y1="75.0" x2="161.09375" y2="52.5" class="g-edge"/><line x1="82.34375" y1="75.0" x2="99.84375" y2="52.5" class="g-edge"/><line x1="82.34375" y1="75.0" x2="45.15625" y2="114.375" class="g-edge"/><line x1="227.8125" y1="170.0" x2="177.5" y2="90.0" class="g-edge"/><line x1="227.8125" y1="170.0" x2="208.125" y2="120.0" class="g-edge"/><line x1="227.8125" y1="170.0" x2="287.96875" y2="134.375" class="g-edge"/><line x1="291.25" y1="95.0" x2="208.125" y2="120.0" class="g-edge"/><line x1="291.25" y1="95.0" x2="287.96875" y2="134.375" class="g-edge"/><line x1="177.5" y1="90.0" x2="175.3125" y2="58.125" class="g-edge"/><line x1="177.5" y1="90.0" x2="208.125" y2="120.0" class="g-edge"/><line x1="177.5" y1="90.0" x2="161.09375" y2="52.5" class="g-edge"/><line x1="177.5" y1="90.0" x2="99.84375" y2="52.5" class="g-edge"/><line x1="175.3125" y1="58.125" x2="208.125" y2="120.0" class="g-edge"/><line x1="175.3125" y1="58.125" x2="161.09375" y2="52.5" class="g-edge"/><line x1="175.3125" y1="58.125" x2="99.84375" y2="52.5" class="g-edge"/><line x1="208.125" y1="120.0" x2="287.96875" y2="134.375" class="g-edge"/><line x1="208.125" y1="120.0" x2="161.09375" y2="52.5" class="g-edge"/><line x1="74.6875" y1="28.75" x2="72.5" y2="75.625" class="g-edge"/><line x1="74.6875" y1="28.75" x2="161.09375" y2="52.5" class="g-edge"/><line x1="74.6875" y1="28.75" x2="99.84375" y2="52.5" class="g-edge"/><line x1="74.6875" y1="28.75" x2="45.15625" y2="114.375" class="g-edge"/><line x1="72.5" y1="75.625" x2="161.09375" y2="52.5" class="g-edge"/><line x1="72.5" y1="75.625" x2="99.84375" y2="52.5" class="g-edge"/><line x1="72.5" y1="75.625" x2="45.15625" y2="114.375" class="g-edge"/><line x1="161.09375" y1="52.5" x2="99.84375" y2="52.5" class="g-edge"/><line x1="20.0" y1="157.5" x2="45.15625" y2="114.375" class="g-edge"/><line x1="99.84375" y1="52.5" x2="45.15625" y2="114.375" class="g-edge"/><circle cx="82.34375" cy="75.0" r="6.43359375" class="g-node hub"/><circle cx="227.8125" cy="170.0" r="5.75" class="g-node"/><circle cx="291.25" cy="95.0" r="10.2890625" class="g-node"/><circle cx="177.5" cy="90.0" r="5.421875" class="g-node"/><circle cx="175.3125" cy="58.125" r="5.83203125" class="g-node"/><circle cx="208.125" cy="120.0" r="10.97265625" class="g-node"/><circle cx="287.96875" cy="134.375" r="8.921875" class="g-node"/><circle cx="74.6875" cy="28.75" r="9.27734375" class="g-node"/><circle cx="72.5" cy="75.625" r="7.96484375" class="g-node"/><circle cx="161.09375" cy="52.5" r="8.265625" class="g-node"/><circle cx="20.0" cy="157.5" r="7.47265625" class="g-node"/><circle cx="99.84375" cy="52.5" r="9.11328125" class="g-node"/><circle cx="45.15625" cy="114.375" r="5.4765625" class="g-node"/></svg>
+</span>
+  <span class="body">
+    <span class="meta">Oct 2026 · prototype</span>
+    <b>The Diary</b>
+    <span class="q">What if a paper notebook wrote back?</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <span>Valerio Ciotti · Imagine, try, solve.</span>
+  <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Connect 4 vs AI Ensemble · Valerio Ciotti</title>
+<meta name="description" content="Challenge a tournament-winning AI ensemble in Connect 4. This AI combines 5 neural networks trained on 750k games and won first place against 35+ AI opponents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Journal</a><a href="../../projects/">By use</a><a href="../" aria-current="page">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="post wrap">
+  <header>
+    <p class="hand crumbs"><a href="../">writing</a> · january 2025</p>
+    <h1>Connect 4 vs AI Ensemble</h1>
+  </header>
+  <div class="prose"><p>Challenge a tournament-winning AI system in Connect 4. This ensemble of 5 neural networks dominated a comprehensive tournament against 35+ other AI opponents.</p>
+<h2>The AI Opponent</h2>
+<p>You're playing against <strong>"Custom-Ensemble-Top5Models-q"</strong> - a sophisticated AI system that:</p>
+<ul>
+<li><strong>Combines 5 CNN-based Deep Q-Networks</strong> trained on 550k to 750k games each</li>
+<li><strong>Uses Q-value averaging</strong> for strategic decision making  </li>
+<li><strong>Achieved #1 ranking</strong> with 63.4% win rate in tournament play</li>
+<li><strong>Applies weighted strategy</strong> (30%, 20%, 20%, 15%, 15%) based on model performance</li>
+</ul>
+<hr />
+<iframe class="embed" src="../../../play/connect4/?embed" height="1180" title="Connect 4 against the ensemble" loading="lazy"></iframe>
+
+<p class="note">Updated in October 2026: the five networks now run directly in your browser instead of on a server, so the first move is instant. <a href="../../../play/connect4/">Open the game full screen</a>.</p>
+
+<h2>How the AI Works</h2>
+<h3>Ensemble Architecture</h3>
+<p>Combines 5 CNN-based Deep Q-Networks trained on different amounts of gameplay experience (550k to 750k episodes each)</p>
+<h3>Q-Value Averaging</h3>
+<p>Each model predicts Q-values for all moves, then weights are applied and averaged for final decision</p>
+<h3>Weighted Strategy</h3>
+<p>Model weights: 30%, 20%, 20%, 15%, 15% based on training progression and performance</p>
+<h3>Tournament Proven</h3>
+<p>Winner of comprehensive tournament against 35+ AI opponents including other ensembles and individual models</p>
+<hr />
+<p><strong>Controls:</strong> click a column to drop a disc, or press 1–7. Press H for a hint, N for a new game.</p></div>
+</article>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

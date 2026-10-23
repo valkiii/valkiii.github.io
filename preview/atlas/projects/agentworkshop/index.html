@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Build your own agent · Valerio Ciotti</title>
+<meta name="description" content="A 3-hour hands-on workshop. A local, CPU-only agent reads your feeds, keeps what matches your interests and builds an EPUB with a quiz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../" aria-label="Valerio Ciotti, home">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 22 L16 8 L25 20 L7 22 M16 8 L16 26"/></g><g fill="currentColor"><circle cx="7" cy="22" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="25" cy="20" r="3"/><circle cx="16" cy="26" r="2.2"/></g></svg>
+    <span>Valerio Ciotti</span>
+  </a>
+  <nav aria-label="Sections">
+<a href="../../">Map</a><a href="../" aria-current="page">Index</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-teach)">
+  <header class="wrap story-head">
+    <p class="crumbs"><a href="../../">Map</a> / <a href="../#teach">Teaching</a> / Build your own agent</p>
+    <div class="meta-row"><span class="chips"><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span><span class="mono">September 2026 · shipped</span></div>
+    <h1>Build your own agent</h1>
+    <p class="question">What is an agent, once you take the cloud away?</p>
+    <p class="lede">A 3-hour hands-on workshop. A local, CPU-only agent reads your feeds, keeps what matches your interests and builds an EPUB with a quiz.</p>
+    <p class="actions">
+<a class="btn" href="https://github.com/valkiii/build_your_agent_workshop" target="_blank" rel="noopener">Code on GitHub ↗</a>    </p>
+  </header>
+
+  <figure class="wrap hero-media"><svg class="glyph wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Build your own agent" style="--c: var(--uc-teach)">
+  <rect width="320" height="200" class="g-bg"/>
+<line x1="128.28125" y1="84.375" x2="170.9375" y2="66.25" class="g-edge"/><line x1="128.28125" y1="84.375" x2="115.15625" y2="149.375" class="g-edge"/><line x1="128.28125" y1="84.375" x2="131.5625" y2="105.625" class="g-edge"/><line x1="128.28125" y1="84.375" x2="184.0625" y2="160.0" class="g-edge"/><line x1="128.28125" y1="84.375" x2="62.65625" y2="48.75" class="g-edge"/><line x1="128.28125" y1="84.375" x2="85.625" y2="144.375" class="g-edge"/><line x1="128.28125" y1="84.375" x2="158.90625" y2="143.125" class="g-edge"/><line x1="128.28125" y1="84.375" x2="125.0" y2="153.125" class="g-edge"/><line x1="128.28125" y1="84.375" x2="41.875" y2="76.25" class="g-edge"/><line x1="128.28125" y1="84.375" x2="150.15625" y2="69.375" class="g-edge"/><line x1="170.9375" y1="66.25" x2="131.5625" y2="105.625" class="g-edge"/><line x1="170.9375" y1="66.25" x2="184.0625" y2="160.0" class="g-edge"/><line x1="170.9375" y1="66.25" x2="158.90625" y2="143.125" class="g-edge"/><line x1="170.9375" y1="66.25" x2="150.15625" y2="69.375" class="g-edge"/><line x1="115.15625" y1="149.375" x2="131.5625" y2="105.625" class="g-edge"/><line x1="115.15625" y1="149.375" x2="184.0625" y2="160.0" class="g-edge"/><line x1="115.15625" y1="149.375" x2="85.625" y2="144.375" class="g-edge"/><line x1="115.15625" y1="149.375" x2="158.90625" y2="143.125" class="g-edge"/><line x1="115.15625" y1="149.375" x2="125.0" y2="153.125" class="g-edge"/><line x1="115.15625" y1="149.375" x2="150.15625" y2="69.375" class="g-edge"/><line x1="131.5625" y1="105.625" x2="184.0625" y2="160.0" class="g-edge"/><line x1="131.5625" y1="105.625" x2="62.65625" y2="48.75" class="g-edge"/><line x1="131.5625" y1="105.625" x2="85.625" y2="144.375" class="g-edge"/><line x1="131.5625" y1="105.625" x2="158.90625" y2="143.125" class="g-edge"/><line x1="131.5625" y1="105.625" x2="125.0" y2="153.125" class="g-edge"/><line x1="131.5625" y1="105.625" x2="41.875" y2="76.25" class="g-edge"/><line x1="131.5625" y1="105.625" x2="150.15625" y2="69.375" class="g-edge"/><line x1="184.0625" y1="160.0" x2="158.90625" y2="143.125" class="g-edge"/><line x1="184.0625" y1="160.0" x2="125.0" y2="153.125" class="g-edge"/><line x1="62.65625" y1="48.75" x2="41.875" y2="76.25" class="g-edge"/><line x1="62.65625" y1="48.75" x2="150.15625" y2="69.375" class="g-edge"/><line x1="85.625" y1="144.375" x2="158.90625" y2="143.125" class="g-edge"/><line x1="85.625" y1="144.375" x2="125.0" y2="153.125" class="g-edge"/><line x1="85.625" y1="144.375" x2="41.875" y2="76.25" class="g-edge"/><line x1="158.90625" y1="143.125" x2="125.0" y2="153.125" class="g-edge"/><line x1="158.90625" y1="143.125" x2="150.15625" y2="69.375" class="g-edge"/><line x1="125.0" y1="153.125" x2="150.15625" y2="69.375" class="g-edge"/><circle cx="128.28125" cy="84.375" r="10.125" class="g-node hub"/><circle cx="170.9375" cy="66.25" r="8.12890625" class="g-node"/><circle cx="115.15625" cy="149.375" r="5.77734375" class="g-node"/><circle cx="131.5625" cy="105.625" r="10.453125" class="g-node"/><circle cx="184.0625" cy="160.0" r="9.4140625" class="g-node"/><circle cx="62.65625" cy="48.75" r="4.95703125" class="g-node"/><circle cx="85.625" cy="144.375" r="10.91796875" class="g-node"/><circle cx="158.90625" cy="143.125" r="5.50390625" class="g-node"/><circle cx="125.0" cy="153.125" r="5.99609375" class="g-node"/><circle cx="41.875" cy="76.25" r="5.0390625" class="g-node"/><circle cx="150.15625" cy="69.375" r="5.2578125" class="g-node"/></svg>
+</figure>
+
+  <section class="wrap numbers" aria-label="In numbers">
+<div><b>4</b><span>steps: perceive, extract, decide, act</span></div><div><b>0</b><span>API keys</span></div>  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">The idea</h2>
+    <p class="big">Agent demos usually start with an API key and a credit card. This one runs offline on a laptop, so everyone in the room can follow every step.
+</p>
+  </section>
+
+  <section class="wrap route-block">
+    <h2 class="sec">How it works</h2>
+    <ol class="route">
+<li><span class="stop" aria-hidden="true"></span><div><b>Perceive</b><p>Read blog and RSS sources for recent articles.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Extract</b><p>Pull the text and summarise it with a small local model.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Decide</b><p>Judge each summary against an interest written in plain English.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Act</b><p>Compile the keepers into an EPUB with tags and a comprehension quiz.</p></div></li>    </ol>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">What I learned</h2>
+    <ul class="learned"><li>Small local models are enough to teach the loop. The loop is the lesson.</li></ul>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">Built with</h2>
+    <p class="stack"><span>Python</span><span>local LLMs</span><span>RSS</span><span>EPUB</span></p>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">Nearby on the map</h2>
+    <div class="grid"><a class="card" href="../sqlsprint/" data-uc="teach">
+  <span class="media"><img src="../../../media/covers/sqlsprint.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · shipped</span>
+    <b>SQL Sprint</b>
+    <span class="q">Can you prepare for a live SQL interview in a week?</span>
+  </span>
+</a>
+<a class="card" href="../retro/" data-uc="tools teach">
+  <span class="media"><svg class="glyph" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Team retro, facilitated" style="--c: var(--uc-tools)">
+  <rect width="320" height="200" class="g-bg"/>
+<line x1="246.40625" y1="114.375" x2="269.375" y2="29.375" class="g-edge"/><line x1="246.40625" y1="114.375" x2="217.96875" y2="54.375" class="g-edge"/><line x1="246.40625" y1="114.375" x2="165.46875" y2="90.625" class="g-edge"/><line x1="246.40625" y1="114.375" x2="181.875" y2="158.75" class="g-edge"/><line x1="246.40625" y1="114.375" x2="260.625" y2="109.375" class="g-edge"/><line x1="289.0625" y1="28.75" x2="269.375" y2="29.375" class="g-edge"/><line x1="289.0625" y1="28.75" x2="217.96875" y2="54.375" class="g-edge"/><line x1="289.0625" y1="28.75" x2="260.625" y2="109.375" class="g-edge"/><line x1="41.875" y1="156.25" x2="77.96875" y2="110.0" class="g-edge"/><line x1="77.96875" y1="110.0" x2="165.46875" y2="90.625" class="g-edge"/><line x1="77.96875" y1="110.0" x2="152.34375" y2="129.375" class="g-edge"/><line x1="269.375" y1="29.375" x2="217.96875" y2="54.375" class="g-edge"/><line x1="269.375" y1="29.375" x2="260.625" y2="109.375" class="g-edge"/><line x1="217.96875" y1="54.375" x2="165.46875" y2="90.625" class="g-edge"/><line x1="217.96875" y1="54.375" x2="260.625" y2="109.375" class="g-edge"/><line x1="165.46875" y1="90.625" x2="181.875" y2="158.75" class="g-edge"/><line x1="165.46875" y1="90.625" x2="152.34375" y2="129.375" class="g-edge"/><line x1="181.875" y1="158.75" x2="152.34375" y2="129.375" class="g-edge"/><line x1="181.875" y1="158.75" x2="260.625" y2="109.375" class="g-edge"/><circle cx="246.40625" cy="114.375" r="9.7421875" class="g-node hub"/><circle cx="289.0625" cy="28.75" r="5.3671875" class="g-node"/><circle cx="41.875" cy="156.25" r="4.875" class="g-node"/><circle cx="77.96875" cy="110.0" r="8.8125" class="g-node"/><circle cx="269.375" cy="29.375" r="5.3671875" class="g-node"/><circle cx="217.96875" cy="54.375" r="7.91015625" class="g-node"/><circle cx="165.46875" cy="90.625" r="7.08984375" class="g-node"/><circle cx="181.875" cy="158.75" r="5.421875" class="g-node"/><circle cx="152.34375" cy="129.375" r="6.48828125" class="g-node"/><circle cx="260.625" cy="109.375" r="10.9453125" class="g-node"/></svg>
+</span>
+  <span class="body">
+    <span class="meta">Sep 2026 · prototype</span>
+    <b>Team retro, facilitated</b>
+    <span class="q">Can an AI facilitator keep a 60-minute retro on time?</span>
+  </span>
+</a>
+<a class="card" href="../pydata/" data-uc="data teach">
+  <span class="media"><img src="../../../media/covers/pydata.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Sep 2024 · talk</span>
+    <b>Hunting unicorns with networks</b>
+    <span class="q">Can the network of who-worked-where predict the next unicorn?</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <span>Valerio Ciotti · Imagine, try, solve.</span>
+  <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
+</footer>
+</body>
+</html>

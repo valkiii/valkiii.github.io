@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Writing · Valerio Ciotti</title>
+<meta name="description" content="I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../">Journal</a><a href="../projects/">By use</a><a href="./" aria-current="page">Writing</a><a href="../research/">Research</a><a href="../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<section class="wrap pagehead">
+  <p class="kicker">writing</p>
+  <h1>Essays, notes and talks</h1>
+</section>
+<section class="wrap">
+  <ul class="posts">
+    <li><a href="from-individual-contributor-to-leader/"><span class="hand">january 2025</span><b>From Individual Contributor to Leader</b></a></li>
+    <li><a href="connect-4-vs-ai-ensemble/"><span class="hand">january 2025</span><b>Connect 4 vs AI Ensemble</b><span>Challenge a tournament-winning AI ensemble in Connect 4. This AI combines 5 neural networks trained on 750k games and won first place against 35+ AI opponents.</span></a></li>
+    <li><a href="hunting-unicorns-with-network-analysis/"><span class="hand">september 2024</span><b>Hunting unicorns with Network analysis</b></a></li>
+    <li><a href="my-heart-beats-like-a-network/"><span class="hand">august 2024</span><b>My heart beats like a network</b><span>A heartbeat time series becomes a network. An introduction to visibility graphs, with my own run.</span></a></li>
+    <li><a href="automating-website-updates/"><span class="hand">july 2024</span><b>Automating Your Website Updates with Hugo and GitHub Pages</b><span>I was looking for a way to automate the process behind updating my site, and I found one.</span></a></li>
+    <li><a href="bookshelf/"><span class="hand">january 2022</span><b>📚 Bookshelf 📚</b><span>List of books that I am currently reading...</span></a></li>
+  </ul>
+</section>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

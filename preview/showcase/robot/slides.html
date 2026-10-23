@@ -1,0 +1,1081 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Someone to Play With</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a 1920x1080 film stage scaled into the viewport; letterbox bars, scene wipes, one orange accent. Deliberately single dark look. */
+:root{
+  color-scheme:dark;
+  --ink:#0C0907; --panel:#16100C; --panel-2:#1E1610; --line:#34281F; --deep:#070504;
+  --orange:#FF6B1A; --amber:#FFB26B; --bone:#F5EBDF; --muted:#A8937F; --dim:#5C4A3C;
+  --tok-me:#4CC47F; --tok-ai:#A866F0;
+  --display:"Unbounded","Arial Black",Impact,system-ui,sans-serif;
+  --body:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+html,body{height:100%}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);display:flex;flex-direction:column;overflow:hidden}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+
+/* ---------- screen ---------- */
+.viewport{flex:1;min-height:0;position:relative;padding-inline:16px}
+.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,.4));transform-origin:center;background:var(--ink);overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.letter{position:absolute;left:0;right:0;height:80px;background:var(--deep);display:flex;align-items:center;justify-content:space-between;padding:0 120px;font:500 22px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--muted);z-index:20}
+.letter.top{top:0}
+.letter.bottom{bottom:0}
+.letter .rec{display:flex;align-items:center;gap:16px}
+.letter .rec i{width:14px;height:14px;border-radius:50%;background:var(--orange)}
+.anim .letter .rec i{animation:blink 1.6s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.progress{position:absolute;left:0;top:80px;height:4px;background:var(--orange);width:0;z-index:21}
+#grain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.06;mix-blend-mode:screen;z-index:30}
+
+/* ---------- scenes ---------- */
+.scene{position:absolute;inset:80px 0;padding:56px 120px 52px;display:none;flex-direction:column;gap:32px}
+.scene.on{display:flex}
+.kicker{font:700 24px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--orange)}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font:700 72px/1.05 var(--display);letter-spacing:-.01em;max-width:1560px}
+h2 em,h1 em{font-style:normal;color:var(--orange)}
+p{margin:0}
+.lead{font:500 34px/1.42 var(--body);color:var(--bone);max-width:1100px}
+.body{font:400 29px/1.48 var(--body);color:var(--muted)}
+.body b,.lead b{color:var(--bone);font-weight:700}
+.label{font:500 22px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;gap:56px;flex:1;min-height:0}
+.col{display:flex;flex-direction:column;gap:26px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);padding:26px 32px;display:flex;flex-direction:column;gap:12px}
+.card h3{font:700 32px/1.2 var(--display);color:var(--bone)}
+.card .n{font:700 21px/1 var(--mono);color:var(--orange);letter-spacing:.2em;text-transform:uppercase}
+.card .body{font-size:27px}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:2px solid var(--orange);color:var(--orange);font:700 22px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;align-self:flex-start}
+.chip.solid{background:var(--orange);color:var(--ink)}
+.big{font:900 120px/1 var(--display);color:var(--orange);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+svg text{font-family:var(--mono)}
+
+/* under-the-hood box for the technical half of the audience */
+.hood{border:2px dashed var(--dim);padding:24px 32px;display:flex;flex-direction:column;gap:12px;background:var(--deep)}
+.hood .lab{font:700 19px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.hood .eq{font:500 27px/1.45 var(--mono);color:var(--bone)}
+.hood .eq i{font-style:normal;color:var(--orange)}
+.hood .note{font:400 23px/1.45 var(--body);color:var(--muted)}
+
+/* build-ins: everything is visible at rest; animation only once script adds .anim */
+.anim .scene.on .b{animation:rise .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d,0) * 1s)}
+.anim .scene.on .b.pop{animation-name:pop;animation-duration:.6s}
+.anim .scene.on .b.grow{animation:grow 1.3s cubic-bezier(.3,.9,.2,1) both;animation-delay:calc(var(--d,0) * 1s);transform-origin:left center}
+.anim .scene.on .b.growup{animation:growup 1s cubic-bezier(.3,.9,.2,1) both;animation-delay:calc(var(--d,0) * 1s)}
+.anim .scene.on .draw{animation:draw 1.6s ease-in-out both;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growup{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.draw{stroke-dasharray:1;stroke-dashoffset:0}
+svg .b{transform-box:fill-box;transform-origin:center}
+svg .b.growup{transform-origin:center bottom}
+.pulse{transform-origin:center;transform-box:fill-box}
+.anim .scene.on .pulse{animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.2);opacity:0}}
+
+/* scene wipe */
+.wipe{position:absolute;inset:0;background:var(--orange);z-index:40;transform:translateX(-101%);display:flex;flex-direction:column;justify-content:center;padding:0 120px;gap:22px;color:var(--ink);pointer-events:none}
+.wipe .wa{font:700 30px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase}
+.wipe .wn{font:900 180px/1 var(--display);letter-spacing:-.03em}
+.wipe .wt{font:700 56px/1.1 var(--display)}
+.wipe.go{animation:wipe 1.25s cubic-bezier(.7,0,.25,1) both}
+@keyframes wipe{0%{transform:translateX(-101%)}32%,64%{transform:translateX(0)}100%{transform:translateX(101%)}}
+
+/* ---------- scene specifics ---------- */
+.cover{justify-content:center}
+.cover h1{font:900 124px/1 var(--display);letter-spacing:-.03em}
+.cover .lead{max-width:960px}
+.armfig{position:absolute;right:50px;top:110px;width:680px;height:680px}
+
+.confess{display:flex;flex-direction:column;gap:14px}
+.confess p{font:700 64px/1.12 var(--display);letter-spacing:-.01em}
+.confess p.no{color:var(--muted)}
+.confess p.no em{font-style:normal;color:var(--orange)}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.three .card{padding:34px 36px}
+.three .q{font:700 30px/1.25 var(--display);color:var(--bone)}
+.three .tool{font:700 22px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.three svg{width:84px;height:84px}
+
+.chain{display:flex;align-items:stretch;gap:0}
+.node{background:var(--panel);border:2px solid var(--line);padding:18px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;width:220px;min-height:150px}
+.node .t{font:700 26px/1.2 var(--display)}
+.node .g{font:700 18px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase}
+.node.eyes{border-color:var(--amber)} .node.eyes .g{color:var(--amber)}
+.node.brain{border-color:var(--tok-ai)} .node.brain .g{color:var(--tok-ai)}
+.node.arm{border-color:var(--orange)} .node.arm .g{color:var(--orange)}
+.arrow{flex:1;height:4px;background:var(--orange);position:relative;align-self:center;min-width:24px}
+.arrow::after{content:"";position:absolute;right:-2px;top:-9px;border-left:18px solid var(--orange);border-top:11px solid transparent;border-bottom:11px solid transparent}
+
+.bars{display:flex;flex-direction:column;gap:26px}
+.bar{display:grid;grid-template-columns:500px 1fr;align-items:center;gap:32px}
+.bar .t{font:500 27px/1.3 var(--body);color:var(--muted)}
+.bar .t b{color:var(--bone)}
+.bar .track{display:flex;align-items:center;gap:22px}
+.bar .fill{height:58px;background:var(--orange)}
+.bar .fill.soft{background:var(--amber)}
+.bar .fill.mute{background:var(--dim)}
+.bar .v{font:900 44px/1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.facts{display:grid;grid-template-columns:230px 1fr;border-top:1px solid var(--line)}
+.facts span{padding:14px 0;border-bottom:1px solid var(--line);font:400 26px/1.35 var(--body);color:var(--muted)}
+.facts span.k{font:700 20px/1.6 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid6 .card{padding:26px 30px}
+.grid6 .card h3{font-size:28px}
+.grid6 .card .body{font-size:24px}
+
+.panels{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.panel{display:flex;flex-direction:column;gap:16px}
+.panel svg{width:100%;height:250px;background:var(--deep);border:1px solid var(--line)}
+.panel .n{font:700 21px/1 var(--mono);color:var(--orange);letter-spacing:.2em}
+.panel h3{font:700 30px/1.15 var(--display)}
+.panel .body{font-size:23px;line-height:1.4}
+
+.readouts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+.readouts div{padding:18px 24px;background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.readouts div:first-child{border-left:none}
+.readouts b{font:900 44px/1 var(--display);color:var(--orange);font-variant-numeric:tabular-nums}
+
+.ladder{display:flex;gap:10px;align-items:flex-end}
+.ladder span{font:700 22px/1 var(--mono);padding:12px 16px;border:2px solid var(--dim);color:var(--muted)}
+.ladder span.on{border-color:var(--orange);color:var(--orange)}
+
+.cmp{display:grid;grid-template-columns:230px 1fr 1fr;border:1px solid var(--line)}
+.cmp div{padding:18px 22px;border-top:1px solid var(--line);font:400 25px/1.35 var(--body);color:var(--muted)}
+.cmp .h{border-top:none;font:700 20px/1.2 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:var(--deep)}
+.cmp .h.ik{color:var(--orange)}
+.cmp .k{font:700 20px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.cmp .good{color:var(--bone);font-weight:700}
+
+.road{display:flex;flex-direction:column;border-left:4px solid var(--line);margin-left:14px}
+.step{display:grid;grid-template-columns:200px 1fr;align-items:center;gap:28px;padding:13px 0 13px 40px;position:relative}
+.step::before{content:"";position:absolute;left:-14px;top:50%;width:24px;height:24px;margin-top:-12px;border-radius:50%;background:var(--ink);border:4px solid var(--dim)}
+.step.done::before{background:var(--orange);border-color:var(--orange)}
+.step.now::before{border-color:var(--orange)}
+.step .s{font:700 22px/1 var(--mono);letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.step.done .s,.step.now .s{color:var(--orange)}
+.step .w{font:700 31px/1.25 var(--display);color:var(--bone)}
+.step.next .w{color:var(--muted)}
+
+.finale{justify-content:center;gap:44px}
+.finale .lines{display:flex;flex-direction:column;gap:18px}
+.finale .lines p{font:700 60px/1.1 var(--display);letter-spacing:-.01em}
+.finale .lines p span{color:var(--orange)}
+.finale h1{font:900 110px/1 var(--display);letter-spacing:-.03em;color:var(--orange)}
+
+/* ---------- controls ---------- */
+.bar-ui{display:flex;align-items:center;gap:14px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--deep)}
+.btn{background:var(--panel);border:1px solid var(--line);height:44px;min-width:44px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;font:700 14px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.btn:hover{border-color:var(--orange)}
+.btn.play{background:var(--orange);color:var(--ink);border-color:var(--orange)}
+.timeline{flex:1;display:flex;gap:4px;height:44px;align-items:center;min-width:0}
+.seg{flex:1;height:10px;background:var(--line);border:0;padding:0;cursor:pointer;position:relative;overflow:hidden}
+.seg.actstart{margin-left:8px}
+.seg:hover{background:var(--dim)}
+.seg i{position:absolute;inset:0;background:var(--orange);transform-origin:left;transform:scaleX(0)}
+.count{font:700 14px/1 var(--mono);color:var(--muted);letter-spacing:.1em;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:640px){.btn .lbl,.count{display:none}.btn{padding:0 12px}.seg.actstart{margin-left:4px}}
+
+@media (prefers-reduced-motion:reduce){
+  .anim .scene.on .b,.anim .scene.on .draw,.wipe.go,.anim .scene.on .pulse,.anim .letter .rec i{animation:none!important}
+}
+</style>
+
+<div class="viewport" id="viewport">
+<div class="stage" id="stage" role="region" aria-label="Presentation screen">
+  <div class="letter top"><span class="rec"><i></i><span id="actLabel">Prologue</span></span><span id="sceneLabel">Scene 01 / 21</span></div>
+  <div class="progress" id="progress"></div>
+
+  <!-- ===================== PROLOGUE ===================== -->
+
+  <!-- 01 COVER -->
+  <section class="scene cover on" data-title="Someone to Play With" data-act="Prologue" data-dur="9">
+    <div class="kicker b" style="--d:.2">A build story in three acts</div>
+    <h1 class="b" style="--d:.4">Someone<br>to <em>play with</em></h1>
+    <p class="lead b" style="--d:1">How a board-game lover taught an AI to play Connect 4, then gave it eyes and an arm so it could sit across the table.</p>
+    <p class="label b" style="--d:1.4">Sept 2025 → Sept 2026 · Reinforcement learning · Computer vision · Inverse kinematics</p>
+    <svg class="armfig" viewBox="0 0 760 760" aria-label="Line drawing of a robot arm dropping a token onto a flat game board">
+      <line x1="30" y1="640" x2="730" y2="640" stroke="#34281F" stroke-width="3"/>
+      <g id="coverBoard"></g>
+      <g fill="none" stroke="#F5EBDF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path class="draw" pathLength="1" style="--d:.6" d="M110 640 L210 640 L200 560 L120 560 Z"/>
+        <path class="draw" pathLength="1" style="--d:1" d="M160 540 L300 290 L520 330 L560 470"/>
+        <path class="draw" pathLength="1" style="--d:1.6" d="M545 470 L538 530 M575 470 L582 530"/>
+      </g>
+      <rect x="500" y="350" width="44" height="30" fill="#FF6B1A" transform="rotate(12 522 365)"/>
+      <g fill="#FF6B1A"><circle cx="160" cy="540" r="16"/><circle cx="300" cy="290" r="16"/><circle cx="520" cy="330" r="16"/></g>
+      <circle cx="560" cy="548" r="15" fill="#A866F0"/>
+      <line x1="560" y1="570" x2="560" y2="612" stroke="#FF6B1A" stroke-width="4" stroke-dasharray="8 8"/>
+      <circle class="pulse" cx="560" cy="628" r="12" fill="none" stroke="#FF6B1A" stroke-width="4"/>
+    </svg>
+  </section>
+
+  <!-- 02 WHY -->
+  <section class="scene" data-title="Why build this at all" data-act="Prologue" data-dur="12">
+    <div class="kicker b">Prologue · Why build this at all</div>
+    <div class="row" style="align-items:center">
+      <div class="col" style="width:1000px;gap:48px">
+        <div class="confess">
+          <p class="b" style="--d:.3">I love my wife.</p>
+          <p class="b" style="--d:1.1">I love board games.</p>
+          <p class="b no" style="--d:1.9">My wife does <em>not</em> love board games.</p>
+        </div>
+        <p class="lead b" style="--d:2.9">An app on a screen is not the same thing. I wanted a real opponent: someone, or something, sitting across the table and moving real pieces.</p>
+      </div>
+      <svg viewBox="0 0 620 640" style="width:620px;height:640px" aria-label="Top view of a table: me on one side, an empty seat for a robot opponent on the other">
+        <rect x="70" y="120" width="480" height="400" rx="18" fill="#16100C" stroke="#34281F" stroke-width="3"/>
+        <g id="whyBoard"></g>
+        <g class="b" style="--d:1.1">
+          <circle cx="310" cy="590" r="38" fill="#F5EBDF"/>
+          <text x="310" y="600" text-anchor="middle" font-size="24" font-weight="700" fill="#0C0907">ME</text>
+        </g>
+        <g class="b" style="--d:3.4">
+          <rect x="262" y="12" width="96" height="70" fill="none" stroke="#FF6B1A" stroke-width="4" stroke-dasharray="10 8"/>
+          <text x="310" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#FF6B1A">?</text>
+          <text x="380" y="56" font-size="20" fill="#A8937F">OPPONENT</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 03 PLAN -->
+  <section class="scene" data-title="Three problems, one opponent" data-act="Prologue" data-dur="13">
+    <div class="kicker b">Prologue · The plan</div>
+    <h2 class="b" style="--d:.2">Three problems, <em>one opponent</em></h2>
+    <p class="lead b" style="--d:.6;max-width:1500px">First learn how AI can play a game, in software. Then move that brain into the physical world and give it what it's missing.</p>
+    <div class="three">
+      <div class="card b" style="--d:1.2">
+        <svg viewBox="0 0 84 84" aria-hidden="true"><g stroke="#A866F0" stroke-width="3"><line x1="14" y1="20" x2="42" y2="42"/><line x1="14" y1="64" x2="42" y2="42"/><line x1="14" y1="20" x2="42" y2="16"/><line x1="14" y1="64" x2="42" y2="68"/><line x1="42" y1="16" x2="70" y2="42"/><line x1="42" y1="42" x2="70" y2="42"/><line x1="42" y1="68" x2="70" y2="42"/></g><g fill="#A866F0"><circle cx="14" cy="20" r="7"/><circle cx="14" cy="64" r="7"/><circle cx="42" cy="16" r="7"/><circle cx="42" cy="42" r="7"/><circle cx="42" cy="68" r="7"/><circle cx="70" cy="42" r="8"/></g></svg>
+        <span class="n">Act I · The brain</span>
+        <p class="q">Which move should I play?</p>
+        <p class="body">Trained in simulation, over a million games against itself and others.</p>
+        <span class="tool">Reinforcement learning</span>
+      </div>
+      <div class="card b" style="--d:1.7">
+        <svg viewBox="0 0 84 84" aria-hidden="true"><rect x="6" y="20" width="72" height="48" rx="6" fill="none" stroke="#FFB26B" stroke-width="4"/><circle cx="42" cy="44" r="15" fill="none" stroke="#FFB26B" stroke-width="4"/><circle cx="42" cy="44" r="6" fill="#FFB26B"/><rect x="28" y="12" width="20" height="8" fill="#FFB26B"/></svg>
+        <span class="n">Act II · The eyes</span>
+        <p class="q">What is on the board, and where is it?</p>
+        <p class="body">A camera on the wrist reads the board, the tokens and their position on the table.</p>
+        <span class="tool">Computer vision</span>
+      </div>
+      <div class="card b" style="--d:2.2">
+        <svg viewBox="0 0 84 84" aria-hidden="true"><g fill="none" stroke="#FF6B1A" stroke-width="5" stroke-linecap="round"><path d="M10 76 L30 76 M20 76 L22 50 L50 18 L70 40 L70 60"/></g><g fill="#FF6B1A"><circle cx="22" cy="50" r="6"/><circle cx="50" cy="18" r="6"/><circle cx="70" cy="40" r="6"/></g></svg>
+        <span class="n">Act III · The arm</span>
+        <p class="q">How do I put a piece exactly there?</p>
+        <p class="body">A robot arm turns "that square" into the joint angles that reach it.</p>
+        <span class="tool">Inverse kinematics</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACT I · THE BRAIN ===================== -->
+
+  <!-- 04 CONNECT 4 -->
+  <section class="scene" data-title="A game small enough to learn" data-act="Act I · The brain" data-dur="13">
+    <div class="kicker b">Act I · The brain · Choosing the game</div>
+    <h2 class="b" style="--d:.2">Start with a game <em>small enough to learn</em></h2>
+    <div class="row">
+      <div class="col" style="width:900px">
+        <p class="lead b" style="--d:.6">Connect 4: 7 columns, 6 rows, one decision per turn. <b>Which column?</b></p>
+        <p class="body b" style="--d:1.1">Simple rules, but about <b>4.5 trillion</b> legal positions. Far too many to memorise, so an AI has to learn to generalise.</p>
+        <div class="card b" style="--d:1.7"><span class="n">Sparring partner 1 · Random</span><p class="body">Drops a token in any legal column.</p></div>
+        <div class="card b" style="--d:2.2"><span class="n">Sparring partner 2 · Rules</span><p class="body">Win if you can. Otherwise block. Otherwise build a three. Otherwise play near the centre. Beats random in <b>~99%</b> of games.</p></div>
+      </div>
+      <svg id="c4svg" viewBox="0 0 640 620" style="flex:1;height:620px" aria-label="Connect 4 board with seven column choices"></svg>
+    </div>
+  </section>
+
+  <!-- 05 RL -->
+  <section class="scene" data-title="Learning by playing" data-act="Act I · The brain" data-dur="15">
+    <div class="kicker b">Act I · The brain · Reinforcement learning</div>
+    <h2 class="b" style="--d:.2">Learning <em>by playing</em></h2>
+    <div class="row" style="gap:60px">
+      <div class="col" style="width:820px">
+        <p class="lead b" style="--d:.5;font-size:29px">Nobody teaches it good moves. It plays, gets a reward when the game ends, and learns which moves lead to wins.</p>
+        <svg viewBox="0 0 820 330" style="width:820px;height:240px" aria-label="Loop: the agent picks a column, the game returns a new board and a reward">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#FF6B1A"/></marker></defs>
+          <g class="b" style="--d:1"><rect x="20" y="110" width="220" height="110" fill="#16100C" stroke="#A866F0" stroke-width="3"/><text x="130" y="160" text-anchor="middle" font-size="26" font-weight="700" fill="#F5EBDF">AGENT</text><text x="130" y="194" text-anchor="middle" font-size="19" fill="#A8937F">the AI player</text></g>
+          <g class="b" style="--d:1.3"><rect x="580" y="110" width="220" height="110" fill="#16100C" stroke="#34281F" stroke-width="3"/><text x="690" y="160" text-anchor="middle" font-size="26" font-weight="700" fill="#F5EBDF">GAME</text><text x="690" y="194" text-anchor="middle" font-size="19" fill="#A8937F">board + opponent</text></g>
+          <path class="draw" pathLength="1" style="--d:1.7" d="M130 105 C130 20 690 20 690 100" fill="none" stroke="#FF6B1A" stroke-width="4" marker-end="url(#ah)"/>
+          <text class="b" style="--d:2" x="410" y="36" text-anchor="middle" font-size="22" fill="#F5EBDF">action: drop in column D</text>
+          <path class="draw" pathLength="1" style="--d:2.4" d="M690 225 C690 315 130 315 130 230" fill="none" stroke="#FF6B1A" stroke-width="4" marker-end="url(#ah)"/>
+          <text class="b" style="--d:2.7" x="410" y="292" text-anchor="middle" font-size="22" fill="#F5EBDF">new board + reward</text>
+          <text class="b" style="--d:2.9" x="410" y="322" text-anchor="middle" font-size="19" fill="#A8937F">win +10 · loss −10 · otherwise ~0</text>
+        </svg>
+        <div class="hood b" style="--d:3.4">
+          <span class="lab">Under the hood · Q-learning</span>
+          <span class="eq">Q(s,a) ← Q(s,a) + α·[ <i>r + γ·max Q(s′,a′)</i> − Q(s,a) ]</span>
+          <span class="note">Nudge the old guess toward "reward now + best value next". α learning rate · γ = 0.95 future weight · ε random-move rate, 1.0 → 0.05.</span>
+        </div>
+      </div>
+      <div class="col" style="flex:1">
+        <p class="label b" style="--d:1.4">The AI (purple) must answer: how good is each column?</p>
+        <svg id="qsvg" viewBox="0 0 700 600" style="width:100%;height:440px" aria-label="Q-values for each column; column D, the block, scores highest"></svg>
+        <p class="body b" style="--d:3;font-size:26px">A <b>Q-value</b> is the reward the agent expects if it plays that column. Here green threatens four in a row, so blocking in <b>D</b> scores highest. <span style="color:var(--dim)">Illustrative values.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 TABLE -> NETWORK -->
+  <section class="scene" data-title="From a table to a network" data-act="Act I · The brain" data-dur="14">
+    <div class="kicker b">Act I · The brain · Deep Q-Network</div>
+    <h2 class="b" style="--d:.2">From a lookup table <em>to a neural network</em></h2>
+    <div class="row" style="gap:70px">
+      <div class="col" style="width:760px">
+        <div class="card b" style="--d:.6"><span class="n">Tabular Q-learning</span><p class="body">One score per board it has seen: <b>187,000 entries</b> after training, and still clueless on a board it has never met.</p></div>
+        <div class="card b" style="--d:1.2"><span class="n">Deep Q-Network (DQN)</span><p class="body">Replace the table with a neural network. The board goes in, <b>7 scores</b> come out. Similar boards get similar scores, so knowledge carries over.</p></div>
+        <p class="body b" style="--d:4.4"><b style="color:var(--orange)">Lesson:</b> an agent only gets as good as its sparring partners. Trained against random play, both learned to beat random play.</p>
+      </div>
+      <div class="col" style="flex:1;gap:22px">
+        <p class="label b" style="--d:1.6">Win rate · vs random / vs rules player</p>
+        <div class="bars" style="gap:18px">
+          <div class="bar b" style="--d:1.8;grid-template-columns:260px 1fr"><p class="t"><b>Tabular</b> vs random</p><div class="track"><div class="fill mute b grow" style="--d:2;width:329px"></div><span class="v">54.8%</span></div></div>
+          <div class="bar b" style="--d:2.1;grid-template-columns:260px 1fr"><p class="t"><b>Tabular</b> vs rules</p><div class="track"><div class="fill mute b grow" style="--d:2.3;width:11px"></div><span class="v">1.8%</span></div></div>
+          <div class="bar b" style="--d:2.7;grid-template-columns:260px 1fr"><p class="t"><b>DQN</b> vs random</p><div class="track"><div class="fill b grow" style="--d:2.9;width:352px"></div><span class="v">58.6%</span></div></div>
+          <div class="bar b" style="--d:3;grid-template-columns:260px 1fr"><p class="t"><b>DQN</b> vs rules</p><div class="track"><div class="fill b grow" style="--d:3.2;width:46px"></div><span class="v">7.6%</span></div></div>
+          <div class="bar b" style="--d:3.6;grid-template-columns:260px 1fr"><p class="t"><b>Rules</b> vs random</p><div class="track"><div class="fill soft b grow" style="--d:3.8;width:594px"></div><span class="v" style="color:var(--amber)">99%</span></div></div>
+        </div>
+        <p class="label b" style="--d:4">DQN: 3 layers × 128 neurons · ~70k weights</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 CNN -->
+  <section class="scene" data-title="A network that sees lines" data-act="Act I · The brain" data-hook="cnn" data-dur="15">
+    <div class="kicker b">Act I · The brain · Convolutional network</div>
+    <h2 class="b" style="--d:.2">A network that <em>sees lines</em></h2>
+    <div class="row">
+      <div class="col" style="width:640px;gap:18px">
+        <svg id="cnnsvg" viewBox="0 0 620 560" style="width:620px;height:540px" aria-label="A four-cell filter sliding over the board and finding a diagonal four in a row"></svg>
+        <p class="label" id="cnnLabel" style="text-align:center">Diagonal filter · 4 in a row found</p>
+      </div>
+      <div class="col" style="flex:1">
+        <p class="lead b" style="--d:.5">Four in a row is a visual pattern. A <b>convolutional network</b> slides small filters across the board, the way your eye scans for lines.</p>
+        <div class="facts b" style="--d:1.1">
+          <span class="k">Input</span><span>Two 6 × 7 layers: my tokens, your tokens</span>
+          <span class="k">Patterns</span><span>6 convolution layers learn threats, blocks and lines</span>
+          <span class="k">Two heads</span><span>How good is this board? How much better is each column?</span>
+          <span class="k">Size</span><span>~0.5 M parameters, trained on a MacBook's M1 GPU</span>
+        </div>
+        <div class="hood b" style="--d:2.6">
+          <span class="lab">Under the hood · dueling DQN</span>
+          <span class="eq">Q(s,a) = <i>V(s)</i> + A(s,a) − mean<sub>a′</sub> A(s,a′)</span>
+          <span class="note">V judges the whole board, A ranks the 7 columns. Learning gets steadier when most moves are equally fine.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 TRAINING FOUGHT BACK -->
+  <section class="scene" data-title="Training fought back" data-act="Act I · The brain" data-dur="15">
+    <div class="kicker b">Act I · The brain · What went wrong in training</div>
+    <h2 class="b" style="--d:.2">Training <em>fought back</em></h2>
+    <div class="grid4">
+      <div class="card b" style="--d:.8"><span class="n">01 · Exploding scores</span><h3>Q-values grew without limit</h3><p class="body">Each estimate fed the next one until the numbers blew up. <b>Fix:</b> discount 0.95, clamp to ±100, clip the gradients.</p></div>
+      <div class="card b" style="--d:1.5"><span class="n">02 · Forgetting</span><h3>New opponent, old skills gone</h3><p class="body">Switching sparring partners erased what it knew (catastrophic forgetting). <b>Fix:</b> a curriculum with 4,000-game overlaps and a memory that keeps old games.</p></div>
+      <div class="card b" style="--d:2.2"><span class="n">03 · Fake self-play</span><h3>Playing a stale copy of itself</h3><p class="body">Its "self" was a snapshot from 500 games ago. <b>Fix:</b> a league of 5 past versions. Win 60% to move up a tier.</p></div>
+      <div class="card b" style="--d:2.9"><span class="n">04 · Too little feedback</span><h3>Win or lose is a weak signal</h3><p class="body">One reward per game says little about which move mattered. <b>Fix:</b> +2 for a block, −3 for missing a block, −5 for missing a win.</p></div>
+    </div>
+  </section>
+
+  <!-- 09 TOURNAMENT -->
+  <section class="scene" data-title="A team beats a single player" data-act="Act I · The brain" data-dur="14">
+    <div class="kicker b">Act I · The brain · The tournament</div>
+    <h2 class="b" style="--d:.2">A team beats <em>any single player</em></h2>
+    <p class="lead b" style="--d:.6;max-width:1500px">After more than a million training games, the saved versions played each other in a round robin: <b>3,500 games each</b>.</p>
+    <div class="bars">
+      <div class="bar b" style="--d:1.2"><p class="t"><b>Ensemble</b>: the top 4 networks vote</p><div class="track"><div class="fill b grow" style="--d:1.4;width:770px"></div><span class="v" data-from="0" data-to="64.1" data-dec="1" data-d="1.4" data-suffix="%">64.1%</span></div></div>
+      <div class="bar b" style="--d:2.2"><p class="t"><b>Best single network</b> (950k games)</p><div class="track"><div class="fill mute b grow" style="--d:2.4;width:526px"></div><span class="v" data-from="0" data-to="43.8" data-dec="1" data-d="2.4" data-suffix="%">43.8%</span></div></div>
+      <div class="bar b" style="--d:3"><p class="t"><b>Network after 1M games</b></p><div class="track"><div class="fill mute b grow" style="--d:3.2;width:504px"></div><span class="v" data-from="0" data-to="42.0" data-dec="1" data-d="3.2" data-suffix="%">42.0%</span></div></div>
+    </div>
+    <div class="row" style="flex:0;align-items:center;justify-content:space-between;margin-top:auto">
+      <p class="body b" style="--d:4;max-width:1100px">Averaged opinions made play more varied and harder to exploit. On screen, the AI was now a real opponent. <b>But it only lived on a screen.</b></p>
+      <span class="chip solid b" style="--d:4.6">Next · leave the screen</span>
+    </div>
+  </section>
+
+  <!-- ===================== ACT II · THE EYES ===================== -->
+
+  <!-- 10 BODY -->
+  <section class="scene" data-title="Give the brain a body" data-act="Act II · The eyes" data-dur="13">
+    <div class="kicker b">Act II · The eyes · Software to hardware</div>
+    <h2 class="b" style="--d:.2">Give the brain <em>a body</em></h2>
+    <div class="row">
+      <div class="col" style="width:960px;gap:22px">
+        <p class="lead b" style="--d:.6">An <b>SO-101</b>: an open-source arm with 6 servo motors, driven from Python with Hugging Face's lerobot.</p>
+        <div class="card b" style="--d:1.2"><span class="n">It has no eyes</span><p class="body">So a USB camera goes on the wrist ("eye in hand"). It sees exactly where it is about to reach.</p></div>
+        <div class="card b" style="--d:1.8"><span class="n">The board lies flat</span><p class="body">Not the upright Connect 4 rack. A flat grid on the table is what checkers and chess look like too.</p></div>
+        <div class="card b" style="--d:2.4"><span class="n">A real move</span><p class="body">Go to the token supply, grab one, carry it, drop it in the chosen cell.</p></div>
+      </div>
+      <svg viewBox="0 0 720 640" style="flex:1;height:640px" aria-label="Side view of the arm with a wrist camera looking down at a flat board">
+        <line x1="20" y1="580" x2="700" y2="580" stroke="#34281F" stroke-width="4"/>
+        <polygon class="b" style="--d:2.2" points="512,300 400,570 690,570" fill="#FFB26B" opacity=".14"/>
+        <line class="b" style="--d:2.2" x1="512" y1="300" x2="400" y2="570" stroke="#FFB26B" stroke-width="2" stroke-dasharray="6 8"/>
+        <line class="b" style="--d:2.2" x1="512" y1="300" x2="690" y2="570" stroke="#FFB26B" stroke-width="2" stroke-dasharray="6 8"/>
+        <rect x="410" y="566" width="270" height="12" fill="#1E1610" stroke="#5C4A3C" stroke-width="2"/>
+        <g id="sideTokens"></g>
+        <g fill="none" stroke="#F5EBDF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+          <path class="draw" pathLength="1" style="--d:.6" d="M60 580 L160 580 L150 500 L70 500 Z"/>
+          <path class="draw" pathLength="1" style="--d:1" d="M110 480 L230 230 L440 250 L480 380"/>
+          <path class="draw" pathLength="1" style="--d:1.5" d="M466 380 L460 440 M494 380 L500 440"/>
+        </g>
+        <g fill="#FF6B1A"><circle cx="110" cy="480" r="15"/><circle cx="230" cy="230" r="15"/><circle cx="440" cy="250" r="15"/></g>
+        <rect class="b pop" style="--d:2" x="490" y="286" width="44" height="30" fill="#FFB26B" transform="rotate(20 512 300)"/>
+        <text class="b" style="--d:2.6" x="548" y="276" font-size="21" fill="#FFB26B">WRIST CAMERA</text>
+        <text x="70" y="620" font-size="20" fill="#A8937F">SO-101 · 6 SERVOS</text>
+        <text x="455" y="620" font-size="20" fill="#A8937F">FLAT BOARD</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 11 CV PIPELINE -->
+  <section class="scene" data-title="How the robot reads the board" data-act="Act II · The eyes" data-dur="16">
+    <div class="kicker b">Act II · The eyes · Computer vision</div>
+    <h2 class="b" style="--d:.2">How the robot <em>reads the board</em></h2>
+    <div class="panels">
+      <div class="panel b" style="--d:.7"><svg id="cv1" viewBox="0 0 360 300" aria-label="Camera frame with the board's four corners found"></svg><span class="n">1 · FIND IT</span><h3>Find the board</h3><p class="body">Keep bright pixels, take the biggest shape, reduce it to 4 corners.</p></div>
+      <div class="panel b" style="--d:1.4"><svg id="cv2" viewBox="0 0 360 300" aria-label="The board warped flat"></svg><span class="n">2 · FLATTEN IT</span><h3>Straighten it</h3><p class="body">A perspective warp makes a flat 700 × 600 image: 100 px per cell.</p></div>
+      <div class="panel b" style="--d:2.1"><svg id="cv3" viewBox="0 0 360 300" aria-label="Colour masks isolating green and purple tokens"></svg><span class="n">3 · FILTER COLOURS</span><h3>Find the tokens</h3><p class="body">HSV colour filters keep green (me) and purple (the AI). The rest goes black.</p></div>
+      <div class="panel b" style="--d:2.8"><svg id="cv4" viewBox="0 0 360 300" aria-label="The board as a 6 by 7 grid of numbers"></svg><span class="n">4 · READ IT</span><h3>Make it numbers</h3><p class="body">Each token's centre gives its cell: the 6 × 7 grid the AI reads.</p></div>
+    </div>
+    <div class="row" style="flex:0;gap:26px">
+      <div class="hood b" style="--d:3.6;flex:1">
+        <span class="lab">Under the hood · HSV</span>
+        <span class="note">Hue, saturation, value: colour is kept apart from brightness, so a shadow changes V, not H. Green = hue 35–90, purple = 125–165.</span>
+      </div>
+      <div class="hood b" style="--d:4.1;flex:1">
+        <span class="lab">Sanity check from physics</span>
+        <span class="note">Tokens can't float: one with an empty cell below it is glare, so it is removed. Colour filters still loved daylight and hated lamps.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 PIXELS TO MM -->
+  <section class="scene" data-title="From pixels to millimetres" data-act="Act II · The eyes" data-dur="15">
+    <div class="kicker b">Act II · The eyes · Where things are</div>
+    <h2 class="b" style="--d:.2">From pixels <em>to millimetres</em></h2>
+    <p class="lead b" style="--d:.5;max-width:1680px">The AI only needs "purple in D3". The arm needs to know where D3 is, <b>in millimetres</b>.</p>
+    <div class="row">
+      <div class="col" style="width:880px">
+        <div class="card b" style="--d:1.2"><span class="n">Homography</span><p class="body">A flat surface seen at an angle is a stretched rectangle. Four known points undo the stretch.</p></div>
+        <div class="card b" style="--d:1.8"><span class="n">ArUco markers</span><p class="body">Printed squares the camera finds and identifies by itself. Their corners are the known points.</p></div>
+        <div class="card b" style="--d:2.4"><span class="n">Lens fix</span><p class="body">The wide-angle lens bends straight lines (~7 mm). A one-time lens calibration fixes it.</p></div>
+      </div>
+      <div class="col" style="flex:1">
+        <svg id="homsvg" viewBox="0 0 820 440" style="width:100%;height:340px" aria-label="A slanted camera view mapped onto a flat table frame in millimetres"></svg>
+        <div class="hood b" style="--d:3">
+          <span class="lab">Under the hood</span>
+          <span class="eq">[u v 1]ᵀ ∝ <i>H</i> · [x y 1]ᵀ</span>
+          <span class="note">H is a 3 × 3 matrix with 8 unknowns. Each point pair gives 2 equations, so 4 points solve it; 16 marker corners make it robust.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACT III · THE ARM ===================== -->
+
+  <!-- 13 TEACH EVERY CELL -->
+  <section class="scene" data-title="First attempt: teach every cell" data-act="Act III · The arm" data-dur="14">
+    <div class="kicker b">Act III · The arm · The first approach</div>
+    <h2 class="b" style="--d:.2">First attempt: <em>teach every cell</em></h2>
+    <div class="row">
+      <div class="col" style="width:900px">
+        <p class="lead b" style="--d:.6">Move the arm by hand over each cell and save its joint angles. For a new spot, blend the nearest saved poses.</p>
+        <div class="card b" style="--d:1.2"><span class="n">What was built</span><p class="body"><b>40 hand-taught poses.</b> A new target borrowed a weighted blend of the <b>8 nearest</b>.</p></div>
+        <div class="card b" style="--d:2.6"><span class="n">Why it could never generalise</span><p class="body">Move the board 5 mm and every pose is wrong. Averaging joint angles is not averaging positions, so blends drifted. A new game means teaching every square again: <b>64 for chess</b>.</p></div>
+      </div>
+      <svg viewBox="0 0 700 600" style="width:700px;height:600px" aria-label="Grid of taught points with one new target blended from its eight nearest neighbours">
+        <g id="idwGrid"></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 14 FK / IK -->
+  <section class="scene" data-title="Forward and inverse kinematics" data-act="Act III · The arm" data-hook="fk" data-dur="16">
+    <div class="kicker b">Act III · The arm · The key idea</div>
+    <h2 class="b" style="--d:.2">Forward and <em>inverse</em> kinematics</h2>
+    <div class="row">
+      <div class="col" style="width:780px">
+        <div class="card b" style="--d:.6"><span class="n">Forward · angles → position</span><p class="body">Given every joint angle, where is the fingertip? Chain the links: turn, move along, turn, move along. <b>One answer, easy.</b></p></div>
+        <div class="card b" style="--d:1.2"><span class="n">Inverse · position → angles</span><p class="body">Given where the fingertip must go, which angles get it there? The reverse question: <b>maybe several answers, maybe none.</b></p></div>
+        <p class="body b" style="--d:2"><b style="color:var(--orange)">Think of a cup.</b> You don't plan "shoulder 30°, elbow 70°". You look at the cup and your arm works it out. IK gives the robot that skill.</p>
+      </div>
+      <div class="col" style="flex:1;gap:18px">
+        <svg id="fksvg" viewBox="0 0 900 600" style="width:100%;height:480px" aria-label="A two-link arm following a target that moves between board cells"></svg>
+        <div class="readouts b" style="--d:1.6">
+          <div><span class="label">Shoulder</span><b id="rS">0°</b></div>
+          <div><span class="label">Elbow</span><b id="rE">0°</b></div>
+          <div><span class="label">Wrist</span><b id="rW">0°</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 SOLVER -->
+  <section class="scene" data-title="Guess, check, adjust" data-act="Act III · The arm" data-hook="solve" data-dur="16">
+    <div class="kicker b">Act III · The arm · How the solver works</div>
+    <h2 class="b" style="--d:.2">Solving it: <em>guess, check, adjust</em></h2>
+    <div class="row">
+      <div class="col" style="width:800px;gap:22px">
+        <div class="card b" style="--d:.6"><span class="n">1 · Guess</span><p class="body">Start from 3 typical reaching shapes, pointed at the target.</p></div>
+        <div class="card b" style="--d:1"><span class="n">2 · Check</span><p class="body">Run forward kinematics: how far is the fingertip from the target?</p></div>
+        <div class="card b" style="--d:1.4"><span class="n">3 · Adjust</span><p class="body">Change the angles in the direction that shrinks that distance. Repeat until it's under <b>1 mm</b>.</p></div>
+        <div class="col b" style="--d:2;gap:14px">
+          <p class="label">Gripper preference · stay vertical, lean out only if needed</p>
+          <div class="ladder" id="ladder"><span class="on">0°</span><span>10°</span><span>20°</span><span>30°</span><span>40°</span><span>50°</span></div>
+        </div>
+      </div>
+      <div class="col" style="flex:1;gap:18px">
+        <svg id="solvesvg" viewBox="0 0 900 600" style="width:100%;height:400px" aria-label="Successive guesses of the arm converging on the target"></svg>
+        <div class="hood b" style="--d:2.4">
+          <span class="lab">Under the hood · kinematics.py</span>
+          <span class="eq">min ‖<i>FK(q)</i> − target‖² + (30 mm/rad · tilt error)²</span>
+          <span class="note">Least squares within the joint limits. Position wins; tilt only has to be roughly right. Sketch shows a simulated 2-joint arm.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 GENERALISE -->
+  <section class="scene" data-title="Why this generalises" data-act="Act III · The arm" data-hook="gen" data-dur="16">
+    <div class="kicker b">Act III · The arm · The payoff</div>
+    <h2 class="b" style="--d:.2">Why this <em>generalises</em></h2>
+    <div class="row">
+      <div class="col" style="width:980px">
+        <p class="lead b" style="--d:.5">A board game is a grid of points on a table. IK can reach <b>any point</b>, so every game becomes a list of coordinates.</p>
+        <div class="cmp b" style="--d:1.2">
+          <div class="h"></div><div class="h">Teach by hand</div><div class="h ik">Camera + IK</div>
+          <div class="k">Setup</div><div>Teach every cell</div><div class="good">Calibrate once with a printed mat</div>
+          <div class="k">Board moved</div><div>Teach everything again</div><div class="good">Camera finds it again</div>
+          <div class="k">New game</div><div>Teach every square again</div><div class="good">Describe the new grid</div>
+          <div class="k">Between cells</div><div>Blend of nearby poses</div><div class="good">Exact solution for any point</div>
+        </div>
+      </div>
+      <div class="col" style="flex:1;gap:14px">
+        <svg id="gensvg" viewBox="0 0 640 600" style="width:100%;height:560px" aria-label="Top view: boards of different games placed around the arm's reach"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 CALIBRATION -->
+  <section class="scene" data-title="Making the maths match the metal" data-act="Act III · The arm" data-dur="15">
+    <div class="kicker b">Act III · The arm · Calibration</div>
+    <h2 class="b" style="--d:.2">Making the maths <em>match the metal</em></h2>
+    <div class="row" style="gap:64px">
+      <div class="col" style="width:620px">
+        <p class="lead b" style="--d:.5;font-size:31px">IK is only as good as its model of the arm. A real arm has joints a few degrees off and a base that isn't quite where you think.</p>
+        <div class="card b" style="--d:1.1"><span class="n">10 numbers to fit</span><p class="body">Joint offsets, base position and rotation, fingertip offset.</p></div>
+        <div class="card b" style="--d:1.6"><span class="n">A printed mat</span><p class="body">15 crosshairs for the fingertip to touch, 4 ArUco markers for the camera.</p></div>
+      </div>
+      <div class="col" style="flex:1;gap:22px">
+        <p class="label b" style="--d:1.8">Error on points the fit never saw · mm</p>
+        <div class="bars" style="gap:22px">
+          <div class="bar b" style="--d:2;grid-template-columns:400px 1fr"><p class="t"><b>First fit</b>, raw touches</p><div class="track"><div class="fill b grow" style="--d:2.2;width:500px"></div><span class="v" data-from="0" data-to="16.9" data-dec="1" data-d="2.2">16.9</span></div></div>
+          <div class="bar b" style="--d:3;grid-template-columns:400px 1fr"><p class="t"><b>Bad touches fixed</b></p><div class="track"><div class="fill b grow" style="--d:3.2;width:160px"></div><span class="v" data-from="16.9" data-to="5.4" data-dec="1" data-d="3.2">5.4</span></div></div>
+          <div class="bar b" style="--d:4;grid-template-columns:400px 1fr"><p class="t"><b>Measured angles</b>, not commanded</p><div class="track"><div class="fill b grow" style="--d:4.2;width:92px"></div><span class="v" data-from="5.4" data-to="3.1" data-dec="1" data-d="4.2">3.1</span></div></div>
+          <div class="bar b" style="--d:5;grid-template-columns:400px 1fr"><p class="t"><b>Vertical touches only</b>, as it really moves</p><div class="track"><div class="fill soft b grow" style="--d:5.2;width:67px"></div><span class="v" style="color:var(--amber)" data-from="3.1" data-to="2.25" data-dec="2" data-d="5.2">2.25</span></div></div>
+        </div>
+        <p class="body b" style="--d:6">2.3 mm is well inside a cell: good enough to drop a token where it belongs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 STUMBLES -->
+  <section class="scene" data-title="What we tripped over" data-act="Act III · The arm" data-dur="16">
+    <div class="kicker b">Act III · The arm · The detours</div>
+    <h2 class="b" style="--d:.2">What we <em>tripped over</em></h2>
+    <div class="grid6">
+      <div class="card b" style="--d:.6"><span class="n">A LiDAR on the wrist?</span><h3>Not needed</h3><p class="body">±6 cm accuracy and a 20 cm blind zone. The table is flat, so height is already known.</p></div>
+      <div class="card b" style="--d:1"><span class="n">Two unit systems</span><h3>Degrees vs −100…100</h3><p class="body">Scripts spoke different units and loaded different calibration files: up to ~9° apart.</p></div>
+      <div class="card b" style="--d:1.4"><span class="n">The printer</span><h3>100 mm became 97.5</h3><p class="body">The mat printed slightly small. One scale factor fixed it.</p></div>
+      <div class="card b" style="--d:1.8"><span class="n">Lazy servos</span><h3>They stop ~1.5° short</h3><p class="body">Under load. Now it reads the encoders, nudges, and repeats until they match.</p></div>
+      <div class="card b" style="--d:2.2"><span class="n">The far row</span><h3>Taught at a tilt</h3><p class="body">The model never saw that pose, so it guessed 5 mm too low. Teach the pose you will use.</p></div>
+      <div class="card b" style="--d:2.6"><span class="n">The lens</span><h3>Fisheye bends lines</h3><p class="body">Predicted crosses drifted ~7 mm. A one-time lens calibration straightens the image.</p></div>
+    </div>
+    <p class="lead b" style="--d:3.4;max-width:1600px">Most of these looked like an arm problem. Most were <b>measurement</b> problems.</p>
+  </section>
+
+  <!-- ===================== EPILOGUE ===================== -->
+
+  <!-- 19 LOOP -->
+  <section class="scene" data-title="See, think, act" data-act="Epilogue" data-dur="14">
+    <div class="kicker b">Epilogue · Putting it together</div>
+    <h2 class="b" style="--d:.2">One move: <em>see, think, act</em></h2>
+    <div class="chain" style="margin-top:30px">
+      <div class="node eyes b" style="--d:.8"><span class="g">Eyes</span><span class="t">Camera frame</span></div><div class="arrow b grow" style="--d:1.1"></div>
+      <div class="node eyes b" style="--d:1.4"><span class="g">Eyes</span><span class="t">6 × 7 board</span></div><div class="arrow b grow" style="--d:1.7"></div>
+      <div class="node brain b" style="--d:2"><span class="g">Brain</span><span class="t">Best column</span></div><div class="arrow b grow" style="--d:2.3"></div>
+      <div class="node eyes b" style="--d:2.6"><span class="g">Eyes</span><span class="t">Cell in mm</span></div><div class="arrow b grow" style="--d:2.9"></div>
+      <div class="node arm b" style="--d:3.2"><span class="g">Arm · IK</span><span class="t">Joint angles</span></div><div class="arrow b grow" style="--d:3.5"></div>
+      <div class="node arm b" style="--d:3.8"><span class="g">Arm</span><span class="t">Token dropped</span></div>
+    </div>
+    <div class="grid4" style="margin-top:20px">
+      <div class="card b" style="--d:4.4"><span class="n" style="color:var(--amber)">Every game</span><p class="body">The camera finds the board, reads the tokens and works out where each cell sits on the table.</p></div>
+      <div class="card b" style="--d:4.8"><span class="n">Once</span><p class="body">Calibrate the arm and the camera against the table. After that, the board can sit anywhere the arm reaches.</p></div>
+    </div>
+  </section>
+
+  <!-- 20 ROADMAP -->
+  <section class="scene" data-title="Where the story stands" data-act="Epilogue" data-dur="14">
+    <div class="kicker b">Epilogue · Status</div>
+    <h2 class="b" style="--d:.2">Where the story <em>stands</em></h2>
+    <div class="road">
+      <div class="step done b" style="--d:.6"><span class="s">Done</span><span class="w">The brain: networks trained over 1M+ games</span></div>
+      <div class="step done b" style="--d:.9"><span class="s">Done</span><span class="w">The eyes: board and tokens read from the camera</span></div>
+      <div class="step done b" style="--d:1.2"><span class="s">Done</span><span class="w">The arm: calibrated model, 2.3 mm on unseen points</span></div>
+      <div class="step done b" style="--d:1.5"><span class="s">Done</span><span class="w">Click a pixel, the arm goes there</span></div>
+      <div class="step now b" style="--d:1.8"><span class="s">Now</span><span class="w">Lens calibration on the real camera</span></div>
+      <div class="step next b" style="--d:2.1"><span class="s">Next</span><span class="w">Find the board's corners → every cell in mm</span></div>
+      <div class="step next b" style="--d:2.4"><span class="s">Then</span><span class="w">A full game of Connect 4 across the table</span></div>
+      <div class="step next b" style="--d:2.7"><span class="s">Later</span><span class="w">Checkers and chess: same arm, new grid</span></div>
+    </div>
+  </section>
+
+  <!-- 21 FINALE -->
+  <section class="scene finale" data-title="Someone to play with" data-act="Epilogue" data-dur="10">
+    <div class="lines">
+      <p class="b" style="--d:.3">A brain from <span>software</span>.</p>
+      <p class="b" style="--d:1">Eyes from a <span>camera</span>.</p>
+      <p class="b" style="--d:1.7">Reach from <span>geometry</span>.</p>
+    </div>
+    <h1 class="b" style="--d:2.6">Someone to play with.</h1>
+    <p class="label b" style="--d:3.4">forza_quattro · my_robot · SO-101 · lerobot</p>
+  </section>
+
+  <div class="letter bottom"><span>Someone to Play With</span><span id="sceneTitle">Someone to Play With</span></div>
+  <div class="wipe" id="wipe" aria-hidden="true"><div class="wa" id="wipeAct"></div><div class="wn" id="wipeNum">02</div><div class="wt" id="wipeTitle"></div></div>
+  <canvas id="grain" width="480" height="270"></canvas>
+</div>
+</div>
+
+<div class="bar-ui">
+  <button class="btn" id="prev" aria-label="Previous scene">◀</button>
+  <button class="btn play" id="play" aria-label="Play the film"><span id="playIcon">▶</span><span class="lbl" id="playLbl">Play</span></button>
+  <button class="btn" id="next" aria-label="Next scene">▶</button>
+  <div class="timeline" id="timeline" role="group" aria-label="Scenes"></div>
+  <span class="count" id="count">01 / 21</span>
+  <button class="btn" id="fs" aria-label="Full screen"><span class="lbl">Full screen</span><span aria-hidden="true">⛶</span></button>
+</div>
+
+<script>
+(function(){
+  const stage=document.getElementById('stage'), vp=document.getElementById('viewport');
+  const scenes=[...stage.querySelectorAll('.scene')];
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pad=n=>String(n).padStart(2,'0');
+  const $=id=>document.getElementById(id);
+  const NS='http://www.w3.org/2000/svg';
+  const el=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+  const C={ink:'#0C0907',panel:'#16100C',panel2:'#1E1610',line:'#34281F',deep:'#070504',orange:'#FF6B1A',amber:'#FFB26B',bone:'#F5EBDF',muted:'#A8937F',dim:'#5C4A3C',me:'#4CC47F',ai:'#A866F0'};
+  const tokCol=ch=>ch==='G'?C.me:ch==='P'?C.ai:null;
+
+  function fit(){
+    const w=vp.clientWidth-32,h=vp.clientHeight-8;
+    stage.style.setProperty('--s',Math.max(.05,Math.min(w/1920,h/1080)));
+  }
+  addEventListener('resize',fit);fit();
+
+  /* draw a Connect 4 grid (rows top -> bottom, '.', 'G', 'P') */
+  function board(g,x0,y0,cell,rows,opt={}){
+    const R=rows.length,Cn=rows[0].length;
+    el('rect',{x:x0,y:y0,width:Cn*cell,height:R*cell,fill:opt.fill||C.panel2,stroke:opt.stroke||C.dim,'stroke-width':opt.sw||3,rx:opt.rx||0},g);
+    const cells=[];
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{
+      const cx=x0+c*cell+cell/2,cy=y0+r*cell+cell/2,col=tokCol(ch);
+      const e=col?el('circle',{cx,cy,r:cell*.36,fill:col},g):el('circle',{cx,cy,r:cell*.36,fill:opt.hole||C.ink,stroke:C.line,'stroke-width':2},g);
+      cells.push({r,c,cx,cy,ch,e});
+    }));
+    return cells;
+  }
+
+  /* ---------- 01 cover board ---------- */
+  (function(){
+    const g=$('coverBoard');
+    const pts=[[300,640],[360,640],[420,640],[480,640],[600,640],[660,640]];
+    pts.forEach(([x,y],i)=>el('circle',{cx:x,cy:y,r:9,fill:i%3===0?C.me:i%3===1?C.ai:C.line},g));
+  })();
+
+  /* ---------- 02 why board ---------- */
+  board($('whyBoard'),205,200,30,['.......','.......','...P...','..GG...','.PGPG..','GPPGPG.'],{sw:2});
+
+  /* ---------- 04 connect 4 ---------- */
+  (function(){
+    const s=$('c4svg');
+    board(s,75,120,70,['.......','.......','.......','...P...','..GG...','.PGPG..']);
+    'ABCDEFG'.split('').forEach((L,i)=>{
+      const x=75+i*70+35,g=el('g',{class:'b pop'},s);g.style.setProperty('--d',1+i*.12);
+      el('path',{d:`M${x} 58 L${x} 94 M${x-12} 82 L${x} 96 L${x+12} 82`,stroke:C.orange,'stroke-width':4,fill:'none'},g);
+      el('text',{x,y:44,'text-anchor':'middle','font-size':24,'font-weight':700,fill:C.bone},g).textContent=L;
+    });
+    el('text',{x:320,y:580,'text-anchor':'middle','font-size':22,fill:C.muted},s).textContent='7 CHOICES PER TURN · 6 ROWS';
+  })();
+
+  /* ---------- 05 Q-values ---------- */
+  (function(){
+    const s=$('qsvg');
+    board(s,195,10,44,['.......','.......','.......','.......','PP.....','GGG....'],{sw:2});
+    const q=[-.55,-.4,-.5,.9,-.6,-.75,-.7],base=470,sc=130,x0=195,w=44;
+    el('line',{x1:x0-20,y1:base,x2:x0+7*w+20,y2:base,stroke:C.dim,'stroke-width':2},s);
+    q.forEach((v,i)=>{
+      const h=Math.abs(v)*sc,x=x0+i*w+7,best=i===3;
+      const r=el('rect',{x,y:v>0?base-h:base,width:w-14,height:h,fill:best?C.orange:C.dim,class:'b growup'},s);
+      r.style.setProperty('--d',1.8+i*.12);
+      if(v<0)r.style.transformOrigin='center top';
+      el('text',{x:x0+i*w+w/2,y:v>0?base-h-12:base+h+28,'text-anchor':'middle','font-size':18,fill:best?C.orange:C.muted},s).textContent=(v>0?'+':'')+v.toFixed(2);
+      el('text',{x:x0+i*w+w/2,y:302,'text-anchor':'middle','font-size':20,'font-weight':700,fill:best?C.orange:C.muted},s).textContent='ABCDEFG'[i];
+    });
+  })();
+
+  /* ---------- 07 CNN sliding filter ---------- */
+  const cnn=(function(){
+    const s=$('cnnsvg'),cell=80,x0=30,y0=40;
+    const rows=['.......','.......','...G...','..GP...','.GPP...','GPPGP..'];
+    const cells=board(s,x0,y0,cell,rows);
+    const at=(r,c)=>cells[r*7+c];
+    const hl=el('g',{},s);
+    const wins=[];
+    for(let c=0;c<4;c++)wins.push({k:'Horizontal filter',p:[[5,c],[5,c+1],[5,c+2],[5,c+3]]});
+    for(let c=0;c<4;c++)wins.push({k:'Vertical filter',p:[[2,c],[3,c],[4,c],[5,c]]});
+    wins.push({k:'Diagonal filter',p:[[5,1],[4,2],[3,3],[2,4]]});
+    wins.push({k:'Diagonal filter',p:[[5,0],[4,1],[3,2],[2,3]]});
+    function show(w){
+      hl.textContent='';
+      const a=at(...w.p[0]),b=at(...w.p[3]);
+      const first=at(...w.p[0]).ch,hit=first!=='.'&&w.p.every(p=>at(...p).ch===first);
+      el('line',{x1:a.cx,y1:a.cy,x2:b.cx,y2:b.cy,stroke:hit?C.orange:C.amber,'stroke-width':cell*.9,'stroke-linecap':'round',opacity:hit?.35:.18},hl);
+      w.p.forEach(p=>{const q=at(...p);el('circle',{cx:q.cx,cy:q.cy,r:cell*.42,fill:'none',stroke:hit?C.orange:C.amber,'stroke-width':4},hl);});
+      $('cnnLabel').textContent=w.k+(hit?' · 4 in a row found':' · no match');
+      return hit;
+    }
+    show(wins[wins.length-1]);
+    return {wins,show};
+  })();
+
+  /* ---------- 10 side-view tokens ---------- */
+  (function(){const g=$('sideTokens');[440,480,560,600,640].forEach((x,i)=>el('ellipse',{cx:x,cy:562,rx:14,ry:5,fill:i%2?C.ai:C.me},g));})();
+
+  /* ---------- 11 CV panels ---------- */
+  (function(){
+    const rows=['.......','.......','...P...','..GG...','.PGPG..','GPPGPG.'];
+    // 1 camera frame: slanted board, bright
+    const s1=$('cv1');
+    el('rect',{x:0,y:0,width:360,height:300,fill:'#120D0A'},s1);
+    const quad=[[70,250],[300,262],[276,64],[92,52]];
+    el('polygon',{points:quad.map(p=>p.join(',')).join(' '),fill:'#3A2E24',stroke:C.bone,'stroke-width':2},s1);
+    const bil=(u,v)=>{const [a,b,c,d]=quad;const top=[d[0]+(c[0]-d[0])*u,d[1]+(c[1]-d[1])*u],bot=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];return[top[0]+(bot[0]-top[0])*v,top[1]+(bot[1]-top[1])*v];};
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{const [x,y]=bil((c+.5)/7,(r+.5)/6);el('circle',{cx:x,cy:y,r:10,fill:tokCol(ch)||'#1A140F'},s1);}));
+    quad.forEach(([x,y])=>{el('circle',{cx:x,cy:y,r:9,fill:C.orange},s1);});
+    // 2 flattened
+    const s2=$('cv2');
+    board(s2,40,20,40,rows,{sw:2,fill:'#3A2E24',hole:'#1A140F'});
+    for(let c=1;c<7;c++)el('line',{x1:40+c*40,y1:20,x2:40+c*40,y2:260,stroke:C.amber,'stroke-width':1,opacity:.5},s2);
+    for(let r=1;r<6;r++)el('line',{x1:40,y1:20+r*40,x2:320,y2:20+r*40,stroke:C.amber,'stroke-width':1,opacity:.5},s2);
+    // 3 masks
+    const s3=$('cv3');
+    el('rect',{x:0,y:0,width:360,height:300,fill:'#000'},s3);
+    el('line',{x1:180,y1:10,x2:180,y2:290,stroke:C.line,'stroke-width':2},s3);
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{
+      if(ch==='G')el('circle',{cx:14+c*23+11,cy:60+r*30+15,r:10,fill:C.me},s3);
+      if(ch==='P')el('circle',{cx:194+c*23+11,cy:60+r*30+15,r:10,fill:C.ai},s3);
+    }));
+    el('text',{x:90,y:36,'text-anchor':'middle','font-size':16,fill:C.me},s3).textContent='GREEN MASK';
+    el('text',{x:270,y:36,'text-anchor':'middle','font-size':16,fill:C.ai},s3).textContent='PURPLE MASK';
+    // 4 matrix
+    const s4=$('cv4');
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{
+      const v=ch==='G'?1:ch==='P'?2:0;
+      el('text',{x:48+c*44,y:52+r*42,'text-anchor':'middle','font-size':26,'font-weight':700,fill:v===1?C.me:v===2?C.ai:C.dim},s4).textContent=v;
+    }));
+  })();
+
+  /* ---------- 12 homography ---------- */
+  (function(){
+    const s=$('homsvg');
+    const quad=[[40,400],[360,400],[300,120],[100,120]];
+    el('polygon',{points:quad.map(p=>p.join(',')).join(' '),fill:C.panel,stroke:C.muted,'stroke-width':3},s);
+    const bil=(u,v)=>{const [a,b,c,d]=quad;const top=[d[0]+(c[0]-d[0])*u,d[1]+(c[1]-d[1])*u],bot=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];return[top[0]+(bot[0]-top[0])*v,top[1]+(bot[1]-top[1])*v];};
+    for(let i=1;i<6;i++){const [x1,y1]=bil(i/6,0),[x2,y2]=bil(i/6,1);el('line',{x1,y1,x2,y2,stroke:C.line,'stroke-width':2},s);}
+    for(let j=1;j<4;j++){const [x1,y1]=bil(0,j/4),[x2,y2]=bil(1,j/4);el('line',{x1,y1,x2,y2,stroke:C.line,'stroke-width':2},s);}
+    const R=[480,120,780,400];
+    el('rect',{x:R[0],y:R[1],width:R[2]-R[0],height:R[3]-R[1],fill:C.panel,stroke:C.bone,'stroke-width':3},s);
+    for(let i=1;i<6;i++)el('line',{x1:R[0]+i*50,y1:R[1],x2:R[0]+i*50,y2:R[3],stroke:C.line,'stroke-width':2},s);
+    for(let j=1;j<4;j++)el('line',{x1:R[0],y1:R[1]+j*70,x2:R[2],y2:R[1]+j*70,stroke:C.line,'stroke-width':2},s);
+    // markers at corners
+    const mk=(x,y,sz,d)=>{const g=el('g',{class:'b pop'},s);g.style.setProperty('--d',d);el('rect',{x:x-sz/2,y:y-sz/2,width:sz,height:sz,fill:C.bone},g);el('rect',{x:x-sz/4,y:y-sz/4,width:sz/2,height:sz/4,fill:C.ink},g);};
+    quad.forEach(([x,y],i)=>mk(x,y,i<2?30:22,.8+i*.15));
+    [[R[0],R[3]],[R[2],R[3]],[R[2],R[1]],[R[0],R[1]]].forEach(([x,y],i)=>mk(x,y,28,1.4+i*.15));
+    const [px,py]=bil(.62,.55);
+    const ux=R[0]+.62*300,uy=R[1]+.55*280;
+    el('circle',{cx:px,cy:py,r:10,fill:C.orange},s);
+    el('circle',{cx:ux,cy:uy,r:10,fill:C.orange},s);
+    el('path',{d:`M${px+14} ${py} C ${px+140} ${py-170}, ${ux-160} ${uy-170}, ${ux-14} ${uy}`,fill:'none',stroke:C.orange,'stroke-width':4,'stroke-dasharray':'10 8',class:'b',style:'--d:2'},s);
+    el('text',{x:200,y:60,'text-anchor':'middle','font-size':21,fill:C.muted},s).textContent='CAMERA · PIXELS (x, y)';
+    el('text',{x:630,y:60,'text-anchor':'middle','font-size':21,fill:C.muted},s).textContent='TABLE · MILLIMETRES (u, v)';
+    el('text',{x:630,y:436,'text-anchor':'middle','font-size':18,fill:C.dim},s).textContent='ARUCO MARKER AT EACH CORNER';
+  })();
+
+  /* ---------- 13 taught points + blend of 8 nearest ---------- */
+  (function(){
+    const g=$('idwGrid');
+    const taught=new Set(['00','01','02','03','04','05','06','11','13','14','16','21','23','25','26','30','33','34','36','40','41','44','45','50','52','53','54','56','31','24']);
+    const pts=[];
+    for(let r=0;r<6;r++)for(let c=0;c<7;c++){
+      const x=70+c*93,y=60+r*96;
+      if(taught.has(''+r+c)){pts.push([x,y]);el('circle',{cx:x,cy:y,r:11,fill:C.bone},g);}
+      else el('circle',{cx:x,cy:y,r:7,fill:'none',stroke:C.dim,'stroke-width':3},g);
+    }
+    const q=[70+2.5*93,60+2.45*96];
+    pts.map(p=>[Math.hypot(p[0]-q[0],p[1]-q[1]),p]).sort((a,b)=>a[0]-b[0]).slice(0,8).forEach(([,p],i)=>{
+      const l=el('path',{d:`M${q[0]} ${q[1]} L${p[0]} ${p[1]}`,stroke:C.orange,'stroke-width':3,fill:'none',pathLength:1,class:'draw'},g);
+      l.style.setProperty('--d',1.6+i*.15);
+    });
+    el('circle',{cx:q[0],cy:q[1],r:16,fill:C.orange},g);
+  })();
+
+  /* ---------- 14/15 planar arm ---------- */
+  const ARM={S:[150,420],L1:260,L2:240,L3:80,table:540};
+  const cellsX=[...Array(7)].map((_,i)=>390+i*40);
+  function fkW(t1,t2){ // y-up angles -> elbow, wrist in svg coords
+    const [sx,sy]=ARM.S;
+    const E=[sx+ARM.L1*Math.cos(t1),sy-ARM.L1*Math.sin(t1)];
+    const W=[E[0]+ARM.L2*Math.cos(t1+t2),E[1]-ARM.L2*Math.sin(t1+t2)];
+    return {E,W};
+  }
+  function ik2(wx,wy){
+    const X=wx-ARM.S[0],Y=ARM.S[1]-wy,d2=X*X+Y*Y;
+    const c=Math.max(-1,Math.min(1,(d2-ARM.L1**2-ARM.L2**2)/(2*ARM.L1*ARM.L2)));
+    const t2=-Math.acos(c);
+    const t1=Math.atan2(Y,X)-Math.atan2(ARM.L2*Math.sin(t2),ARM.L1+ARM.L2*Math.cos(t2));
+    return [t1,t2];
+  }
+  function armScene(svg,withTarget){
+    svg.textContent='';
+    el('line',{x1:20,y1:ARM.table,x2:880,y2:ARM.table,stroke:C.line,'stroke-width':4},svg);
+    el('rect',{x:ARM.S[0]-40,y:ARM.S[1],width:80,height:ARM.table-ARM.S[1],fill:C.panel2,stroke:C.dim,'stroke-width':3},svg);
+    cellsX.forEach(x=>el('rect',{x:x-16,y:ARM.table-6,width:32,height:6,fill:C.dim},svg));
+    const ghosts=el('g',{},svg);
+    const tgt=el('g',{},svg);
+    if(withTarget){
+      el('path',{d:'M-18 0 L18 0 M0 -18 L0 18',stroke:C.orange,'stroke-width':4},tgt);
+      el('circle',{cx:0,cy:0,r:12,fill:'none',stroke:C.orange,'stroke-width':4},tgt);
+    }
+    const arm=el('g',{fill:'none',stroke:C.bone,'stroke-width':12,'stroke-linecap':'round','stroke-linejoin':'round'},svg);
+    const l=el('polyline',{points:''},arm);
+    const joints=el('g',{},svg);
+    const js=[0,1,2].map(()=>el('circle',{r:15,fill:C.orange},joints));
+    return {ghosts,tgt,set(t1,t2,tipX){
+      const {E,W}=fkW(t1,t2),T=[W[0],W[1]+ARM.L3];
+      l.setAttribute('points',[ARM.S,E,W,T].map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' '));
+      [ARM.S,E,W].forEach((p,i)=>{js[i].setAttribute('cx',p[0]);js[i].setAttribute('cy',p[1]);});
+      return {E,W,T};
+    }};
+  }
+  const deg=r=>Math.round(r*180/Math.PI);
+  const fkArm=armScene($('fksvg'),true);
+  const tipY=ARM.table-8;
+  function poseAt(x){
+    const [t1,t2]=ik2(x,tipY-ARM.L3);
+    fkArm.set(t1,t2);
+    fkArm.tgt.setAttribute('transform',`translate(${x} ${tipY})`);
+    $('rS').textContent=deg(t1)+'°';$('rE').textContent=deg(t2)+'°';$('rW').textContent=deg(-Math.PI/2-(t1+t2))+'°';
+  }
+  poseAt(cellsX[3]);
+  el('text',{x:450,y:585,'text-anchor':'middle','font-size':20,fill:C.muted},$('fksvg')).textContent='TARGET CELL → IK → JOINT ANGLES · GRIPPER KEPT VERTICAL';
+
+  const solveArm=armScene($('solvesvg'),true);
+  const solve=(function(){
+    const tx=cellsX[5],W=[tx,tipY-ARM.L3];
+    solveArm.tgt.setAttribute('transform',`translate(${tx} ${tipY})`);
+    let t=[70*Math.PI/180,-20*Math.PI/180];const it=[];
+    for(let k=0;k<7;k++){
+      const {W:w}=fkW(t[0],t[1]);
+      const err=Math.hypot(w[0]-W[0],w[1]-W[1]);
+      it.push({t:[...t],err});
+      const s1=Math.sin(t[0]),c1=Math.cos(t[0]),s12=Math.sin(t[0]+t[1]),c12=Math.cos(t[0]+t[1]);
+      const J=[[-ARM.L1*s1-ARM.L2*s12,-ARM.L2*s12],[ARM.L1*c1+ARM.L2*c12,ARM.L2*c12]];
+      const ex=W[0]-w[0],ey=(ARM.S[1]-W[1])-(ARM.S[1]-w[1]);
+      const det=J[0][0]*J[1][1]-J[0][1]*J[1][0];
+      const d0=(J[1][1]*ex-J[0][1]*ey)/det,d1=(-J[1][0]*ex+J[0][0]*ey)/det;
+      t=[t[0]+.6*d0,t[1]+.6*d1];
+    }
+    const MM=.45; // drawing px -> mm at rough SO-101 scale
+    const list=el('g',{},$('solvesvg'));
+    function render(n){
+      solveArm.ghosts.textContent='';list.textContent='';
+      for(let k=0;k<n;k++){
+        const {E,W:w}=fkW(...it[k].t),last=k===n-1;
+        if(!last)el('polyline',{points:[ARM.S,E,w,[w[0],w[1]+ARM.L3]].map(p=>p.join(',')).join(' '),fill:'none',stroke:C.amber,'stroke-width':5,opacity:.18+.1*k,'stroke-linecap':'round'},solveArm.ghosts);
+        el('text',{x:880,y:40+k*34,'text-anchor':'end','font-size':22,fill:last?C.orange:C.muted},list).textContent=`try ${k+1} · ${(it[k].err*MM).toFixed(k>3?1:0)} mm`;
+      }
+      solveArm.set(...it[n-1].t);
+    }
+    render(it.length);
+    return {n:it.length,render};
+  })();
+
+  /* ---------- 16 boards around the reach ---------- */
+  const gen=(function(){
+    const s=$('gensvg'),B=[320,560];
+    el('path',{d:`M${B[0]-440} ${B[1]} A440 440 0 0 1 ${B[0]+440} ${B[1]} L${B[0]+140} ${B[1]} A140 140 0 0 0 ${B[0]-140} ${B[1]} Z`,fill:C.orange,opacity:.07,stroke:C.orange,'stroke-width':2,'stroke-dasharray':'8 10'},s);
+    el('text',{x:B[0],y:B[1]-450,'text-anchor':'middle','font-size':19,fill:C.orange},s).textContent='REACH';
+    const reachLine=el('line',{x1:B[0],y1:B[1],x2:B[0],y2:B[1],stroke:C.orange,'stroke-width':4,'stroke-dasharray':'8 8'},s);
+    const bg=el('g',{},s);
+    el('rect',{x:B[0]-40,y:B[1]-30,width:80,height:60,fill:C.panel2,stroke:C.bone,'stroke-width':3},s);
+    el('text',{x:B[0],y:B[1]+8,'text-anchor':'middle','font-size':16,fill:C.bone},s).textContent='ARM';
+    const name=el('text',{x:20,y:36,'font-size':24,'font-weight':700,fill:C.bone},s);
+    const sub=el('text',{x:20,y:66,'font-size':19,fill:C.muted},s);
+    const tipDot=el('circle',{r:10,fill:C.orange},s);
+    const games=[
+      {n:'CONNECT 4',s:'7 × 6 cells',cols:7,rows:6,cell:30,pos:[320,260],rot:-8,t:[3,2],draw:(g,cols,rows,cell)=>{
+        const W=cols*cell,H=rows*cell;el('rect',{x:-W/2,y:-H/2,width:W,height:H,fill:C.panel2,stroke:C.dim,'stroke-width':3},g);
+        const rowsS=['.......','.......','...P...','..GG...','.PGPG..','GPPGPG.'];
+        rowsS.forEach((row,r)=>[...row].forEach((ch,c)=>el('circle',{cx:-W/2+c*cell+cell/2,cy:-H/2+r*cell+cell/2,r:cell*.36,fill:tokCol(ch)||C.ink},g)));}},
+      {n:'CHECKERS',s:'8 × 8 squares',cols:8,rows:8,cell:26,pos:[190,300],rot:14,t:[5,4],draw:(g,cols,rows,cell)=>{
+        const W=cols*cell;for(let r=0;r<8;r++)for(let c=0;c<8;c++){el('rect',{x:-W/2+c*cell,y:-W/2+r*cell,width:cell,height:cell,fill:(r+c)%2?C.dim:C.bone},g);if((r+c)%2&&(r<3||r>4))el('circle',{cx:-W/2+c*cell+cell/2,cy:-W/2+r*cell+cell/2,r:cell*.36,fill:r<3?C.ai:C.me},g);}}},
+      {n:'CHESS',s:'8 × 8 squares · same arm',cols:8,rows:8,cell:26,pos:[450,290],rot:-18,t:[4,3],draw:(g,cols,rows,cell)=>{
+        const W=cols*cell;for(let r=0;r<8;r++)for(let c=0;c<8;c++){el('rect',{x:-W/2+c*cell,y:-W/2+r*cell,width:cell,height:cell,fill:(r+c)%2?C.dim:C.bone},g);if(r<2||r>5)el('rect',{x:-W/2+c*cell+6,y:-W/2+r*cell+6,width:cell-12,height:cell-12,rx:3,fill:r<2?C.ai:C.me},g);}}}
+    ];
+    function show(i){
+      const G=games[i];bg.textContent='';
+      const g=el('g',{transform:`translate(${G.pos[0]} ${G.pos[1]}) rotate(${G.rot})`},bg);
+      G.draw(g,G.cols,G.rows,G.cell);
+      const lx=-G.cols*G.cell/2+G.t[0]*G.cell+G.cell/2,ly=-G.rows*G.cell/2+G.t[1]*G.cell+G.cell/2,a=G.rot*Math.PI/180;
+      const wx=G.pos[0]+lx*Math.cos(a)-ly*Math.sin(a),wy=G.pos[1]+lx*Math.sin(a)+ly*Math.cos(a);
+      reachLine.setAttribute('x2',wx);reachLine.setAttribute('y2',wy);
+      tipDot.setAttribute('cx',wx);tipDot.setAttribute('cy',wy);
+      name.textContent=G.n;sub.textContent=G.s+' · target cell in mm → IK';
+      if(!reduced&&bg.animate)bg.animate([{opacity:0},{opacity:1}],{duration:500});
+    }
+    show(0);
+    return {count:games.length,show};
+  })();
+
+  /* ---------- counters ---------- */
+  const timers=[],intervals=[];
+  function runCounters(scene){
+    scene.querySelectorAll('[data-to]').forEach(n=>{
+      const from=+n.dataset.from,to=+n.dataset.to,dec=+(n.dataset.dec||0),suf=n.dataset.suffix||'',delay=(+n.dataset.d||0)*1000;
+      n.textContent=from.toFixed(dec)+suf;
+      const start=performance.now()+delay,dur=1400;
+      const tick=t=>{const p=Math.min(1,Math.max(0,(t-start)/dur)),e=1-Math.pow(1-p,3);n.textContent=(from+(to-from)*e).toFixed(dec)+suf;if(p<1)timers.push(requestAnimationFrame(tick));};
+      timers.push(requestAnimationFrame(tick));
+    });
+  }
+
+  /* ---------- per-scene hooks ---------- */
+  const hooks={
+    cnn(){
+      let i=0;cnn.show(cnn.wins[0]);
+      const step=()=>{const hit=cnn.show(cnn.wins[i]);i=(i+1)%cnn.wins.length;intervals.push(setTimeout(step,hit?2200:520));};
+      intervals.push(setTimeout(step,1200));
+    },
+    fk(){
+      const order=[3,6,1,5,0,4,2];let k=0,from=cellsX[3],to=cellsX[order[1]],t0=performance.now()+800;
+      const tick=t=>{
+        const p=Math.min(1,Math.max(0,(t-t0)/1500)),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+        poseAt(from+(to-from)*e);
+        if(t-t0>2300){k=(k+1)%order.length;from=to;to=cellsX[order[(k+1)%order.length]];t0=t;}
+        timers.length=0;timers.push(requestAnimationFrame(tick));
+      };
+      timers.push(requestAnimationFrame(tick));
+    },
+    solve(){
+      let n=1;solve.render(1);
+      const lad=[...$('ladder').children];lad.forEach((c,j)=>c.classList.toggle('on',j===0));
+      const step=()=>{n++;if(n<=solve.n){solve.render(n);intervals.push(setTimeout(step,900));}else{n=0;intervals.push(setTimeout(step,2400));}};
+      intervals.push(setTimeout(step,1600));
+    },
+    gen(){
+      let i=0;gen.show(0);
+      const step=()=>{i=(i+1)%gen.count;gen.show(i);intervals.push(setTimeout(step,3200));};
+      intervals.push(setTimeout(step,3200));
+    }
+  };
+
+  /* ---------- navigation ---------- */
+  const tl=$('timeline'),segs=[];
+  scenes.forEach((s,i)=>{
+    const b=document.createElement('button');b.className='seg'+(i>0&&s.dataset.act!==scenes[i-1].dataset.act?' actstart':'');
+    b.setAttribute('aria-label',`Scene ${i+1}: ${s.dataset.title}`);b.title=`${pad(i+1)} · ${s.dataset.act} · ${s.dataset.title}`;
+    b.innerHTML='<i></i>';b.onclick=()=>go(i,true);tl.appendChild(b);segs.push(b);
+  });
+  let cur=0,playing=false,sceneStart=performance.now(),pending=null;
+
+  function activate(i){
+    timers.splice(0).forEach(cancelAnimationFrame);
+    intervals.splice(0).forEach(clearTimeout);
+    cur=i;
+    scenes.forEach(s=>s.classList.remove('on'));
+    void stage.offsetWidth;
+    scenes[i].classList.add('on');
+    $('sceneLabel').textContent=`Scene ${pad(i+1)} / ${scenes.length}`;
+    $('actLabel').textContent=scenes[i].dataset.act;
+    $('sceneTitle').textContent=scenes[i].dataset.title;
+    $('count').textContent=`${pad(i+1)} / ${scenes.length}`;
+    if(!reduced){runCounters(scenes[i]);const h=scenes[i].dataset.hook;h&&hooks[h]&&hooks[h]();}
+    sceneStart=performance.now();
+    segs.forEach((b,j)=>b.firstChild.style.transform=`scaleX(${j<i?1:0})`);
+  }
+  function go(i,wipe){
+    i=Math.max(0,Math.min(scenes.length-1,i));
+    if(pending){clearTimeout(pending);pending=null;}
+    if(reduced||!wipe){activate(i);return;}
+    const w=$('wipe');$('wipeNum').textContent=pad(i+1);$('wipeTitle').textContent=scenes[i].dataset.title;$('wipeAct').textContent=scenes[i].dataset.act;
+    w.classList.remove('go');void w.offsetWidth;w.classList.add('go');
+    pending=setTimeout(()=>{pending=null;activate(i);},560);
+    sceneStart=performance.now()+560;
+  }
+  function setPlaying(p){
+    playing=p;$('playIcon').textContent=p?'❚❚':'▶';$('playLbl').textContent=p?'Pause':'Play';
+    $('play').setAttribute('aria-label',p?'Pause the film':'Play the film');
+    if(p&&cur===scenes.length-1)go(0,true);
+    sceneStart=performance.now();
+  }
+  $('prev').onclick=()=>go(cur-1,true);
+  $('next').onclick=()=>go(cur+1,true);
+  $('play').onclick=()=>setPlaying(!playing);
+  $('fs').onclick=()=>{try{const r=document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();r&&r.catch&&r.catch(()=>{});}catch(e){}};
+  addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'){go(cur+1,true);e.preventDefault();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1,true);e.preventDefault();}
+    else if(e.key===' '||e.key==='k'||e.key==='p'){setPlaying(!playing);e.preventDefault();}
+    else if(e.key==='Home')go(0,true);
+  });
+  let sx=null;
+  stage.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(cur+(dx<0?1:-1),true);sx=null;});
+
+  function loop(t){
+    const dur=(+scenes[cur].dataset.dur||10)*1000;
+    const p=Math.min(1,Math.max(0,(t-sceneStart)/dur));
+    if(playing){
+      $('progress').style.width=(p*100)+'%';
+      segs[cur].firstChild.style.transform=`scaleX(${p})`;
+      if(p>=1&&!pending){if(cur<scenes.length-1)go(cur+1,true);else setPlaying(false);}
+    }else $('progress').style.width='0';
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- film grain ---------- */
+  const cv=$('grain'),cx=cv.getContext('2d'),img=cx.createImageData(cv.width,cv.height);
+  function grain(){for(let i=0;i<img.data.length;i+=4){const v=Math.random()*255;img.data[i]=img.data[i+1]=img.data[i+2]=v;img.data[i+3]=255;}cx.putImageData(img,0,0);}
+  grain();
+  if(!reduced)setInterval(grain,90);
+
+  document.body.classList.add('anim');
+  activate(0);
+  requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>

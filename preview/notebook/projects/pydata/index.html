@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hunting unicorns with networks · Valerio Ciotti</title>
+<meta name="description" content="My PyData Amsterdam 2024 talk. Start-ups linked by the people who moved between them, and what centrality says about their future.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Journal</a><a href="../" aria-current="page">By use</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--w: var(--w-data)">
+  <header class="wrap story-head">
+    <p class="hand crumbs"><a href="../../">notebook</a> · september 2024 · talk</p>
+    <h1>Hunting unicorns with networks</h1>
+    <p class="question">Can the network of who-worked-where predict the next unicorn?</p>
+    <p class="lede">My PyData Amsterdam 2024 talk. Start-ups linked by the people who moved between them, and what centrality says about their future.</p>
+    <p class="actions">
+<a class="btn" href="../../writing/hunting-unicorns-with-network-analysis/">the essay →</a>    </p>
+    <span class="tags"><span class="tag" style="--w: var(--w-data)">data science</span><span class="tag" style="--w: var(--w-teach)">teaching</span></span>
+  </header>
+
+  <figure class="wrap taped">
+    <span class="tape l" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+<img src="../../../media/covers/pydata.jpg" alt="Hunting unicorns with networks">  </figure>
+
+  <section class="wrap ch">
+    <div class="txt">
+      <p class="kicker">the idea</p>
+      <p class="big">A start-up&#39;s position in its ecosystem, measured through the people who move between companies, carries information about its future.
+</p>
+    </div>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">how it works</p>
+    <ol class="steps">
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">1</text></svg>
+        <div><h3>Build</h3><p>A bipartite network of people and companies, projected onto companies.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">2</text></svg>
+        <div><h3>Measure</h3><p>Centrality over time as an early signal.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">3</text></svg>
+        <div><h3>Compare</h3><p>Against the track record of venture capital picks.</p></div>
+      </li>
+    </ol>
+  </section>
+
+
+  <section class="wrap ch stack">
+    <p class="kicker">made with</p>
+    <p class="made"><span>Python</span><span>networkx</span><span>bipartite projections</span></p>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">on nearby pages</p>
+    <div class="smalls"><a class="small" href="../../../showcase/clustering/">
+  <span class="pic"><img src="../../../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Cluster the reasons</b>
+  <span>How do you turn a gut-feeling rule into personas a team can use?</span>
+</a>
+<a class="small" href="../eulerian/">
+  <span class="pic"><img src="../../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Seeing the invisible</b>
+  <span>Can a webcam see your pulse?</span>
+</a>
+<a class="small" href="../market/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Market dashboard" style="--w: var(--w-home)">
+  <ellipse cx="192.96875" cy="121.640625" rx="123.59375" ry="92.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="275.3125" cy="175.078125" rx="95.8984375" ry="52.265625" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.78125" text-anchor="middle" class="init">M</text>
+  <path d="M67.8125 210 q 80 -22.6875 160 0 t 120 -2.34375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Market dashboard</b>
+  <span>What are my shares doing, in euros, from sources I can trust?</span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

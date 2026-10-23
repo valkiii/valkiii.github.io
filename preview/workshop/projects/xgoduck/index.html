@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>XGO-Duck on a Pi · Valerio Ciotti</title>
+<meta name="description" content="Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-robots); --on: var(--on-robots)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#robots">Robots &amp; devices</a></p>
+      <h1>XGO-Duck on a Pi</h1>
+      <p class="question">Can a 3D-printed duck learn to walk on a Pi Zero?</p>
+      <p class="lede">Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.</p>
+      <p class="actions">
+      </p>
+      <p class="facts"><span>October 2026</span><span class="status s-building">building</span><span>Robots &amp; devices</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><svg class="poster wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="XGO-Duck on a Pi" style="--c: var(--uc-robots); --on: var(--on-robots)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-21.484375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="42.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="106.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="170.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="234.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="298.515625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/>  <circle cx="229.296875" cy="106.328125" r="48.625" class="p-disc"/>
+  <text x="24" y="172" class="p-title">XGO-Duck on a Pi</text>
+</svg>
+</figure>
+
+<section class="wrap tiles"><div><b>15</b><span>servos</span></div><div><b>50 Hz</b><span>walking policy</span></div><div><b>34</b><span>tests in simulation</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">The duck walks with reinforcement-learned policies. Swapping its controller for a Pi means rewriting the loop that talks to the servos, not the brain.
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>Port</b><p>The microcontroller sketch rewritten in Python, behind the same interface, so the upstream code runs unchanged.</p></li><li><span class="n">02</span><b>Simulate</b><p>A simulated servo bus and robot, so everything is tested before the hardware arrives.</p></li><li><span class="n">03</span><b>Guide</b><p>A step-by-step setup wizard: parts, servo IDs, wiring scan, SSH, IMU axes, calibration.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>Check the bearings list twice.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>Raspberry Pi Zero 2W</span><span>Feetech bus servos</span><span>ONNX policies</span><span>Python</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../diary/" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The Diary" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-16.2109375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="47.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="111.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="175.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="239.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/><rect x="303.7890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(32.1875 160 100)"/>  <circle cx="213.359375" cy="90.625" r="57.8125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">The Diary</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Tools</span><span class="meta">Oct 2026</span></span>
+    <b>The Diary</b>
+    <span class="q">What if a paper notebook wrote back?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../../../showcase/robot/" style="--c: var(--uc-robots); --on: var(--on-robots)">
+  <span class="media"><img src="../../../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Robots &amp; devices</span><span class="meta">Sep 2026</span></span>
+    <b>Someone to play with</b>
+    <span class="q">Could a robot arm sit across the table from me?</span>
+    <span class="status s-in-progress">in progress</span>
+  </span>
+</a>
+<a class="card " href="../omi/" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A local Omi" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-33.5546875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.6796875 160 100)"/><rect x="30.4453125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.6796875 160 100)"/><rect x="94.4453125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.6796875 160 100)"/><rect x="158.4453125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.6796875 160 100)"/><rect x="222.4453125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.6796875 160 100)"/><rect x="286.4453125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.6796875 160 100)"/>  <circle cx="214.296875" cy="98.125" r="41.3125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">A local Omi</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Tools</span><span class="meta">Aug 2026</span></span>
+    <b>A local Omi</b>
+    <span class="q">Can a wearable assistant work with no cloud at all?</span>
+    <span class="status s-in-progress">in progress</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>

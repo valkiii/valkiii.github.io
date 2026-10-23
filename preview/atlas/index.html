@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valerio Ciotti</title>
+<meta name="description" content="I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+<header class="top">
+  <a class="brand" href="./" aria-label="Valerio Ciotti, home">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 22 L16 8 L25 20 L7 22 M16 8 L16 26"/></g><g fill="currentColor"><circle cx="7" cy="22" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="25" cy="20" r="3"/><circle cx="16" cy="26" r="2.2"/></g></svg>
+    <span>Valerio Ciotti</span>
+  </a>
+  <nav aria-label="Sections">
+<a href="./" aria-current="page">Map</a><a href="projects/">Index</a><a href="writing/">Writing</a><a href="research/">Research</a><a href="about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<section class="hero wrap">
+  <div class="hero-text">
+    <p class="kicker">A map of ideas and use cases</p>
+    <h1>Valerio Ciotti</h1>
+    <p class="role">Data scientist · network scientist · tinkerer</p>
+    <p class="lede">I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.
+</p>
+    <p class="hint">Every dot on the map is a project. They gather around what they are for, and connect when they share a technology. Hover to read, click to open.</p>
+  </div>
+  <figure class="map" aria-label="Map of projects by use case">
+    <svg id="map" role="img" aria-label="Network of projects linked to their use cases"></svg>
+    <div class="maptip" id="maptip" hidden></div>
+  </figure>
+</section>
+
+<section class="wrap filters" aria-label="Filter by use case">
+  <span class="label">Show</span>
+  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>27</span></button>
+  <button type="button" class="f" data-uc="play" aria-pressed="false" style="--c: var(--uc-play)"><i></i>Games <span>8</span></button>
+  <button type="button" class="f" data-uc="vision" aria-pressed="false" style="--c: var(--uc-vision)"><i></i>Seeing <span>4</span></button>
+  <button type="button" class="f" data-uc="robots" aria-pressed="false" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices <span>5</span></button>
+  <button type="button" class="f" data-uc="data" aria-pressed="false" style="--c: var(--uc-data)"><i></i>Data science <span>10</span></button>
+  <button type="button" class="f" data-uc="home" aria-pressed="false" style="--c: var(--uc-home)"><i></i>Home lab <span>4</span></button>
+  <button type="button" class="f" data-uc="tools" aria-pressed="false" style="--c: var(--uc-tools)"><i></i>Tools <span>9</span></button>
+  <button type="button" class="f" data-uc="teach" aria-pressed="false" style="--c: var(--uc-teach)"><i></i>Teaching <span>4</span></button>
+</section>
+
+<section class="wrap" aria-labelledby="start">
+  <h2 id="start" class="sec">Start here</h2>
+  <div class="grid feat">
+<a class="card big" href="../showcase/precog/" data-uc="vision tools">
+  <span class="media"><img src="../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · prototype</span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+  </span>
+</a>
+<a class="card big" href="projects/spellstorm/" data-uc="play">
+  <span class="media"><img src="../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · playable</span>
+    <b>Spellstorm</b>
+    <span class="q">Can a survivors-style game work for a five-year-old and a teenager?</span>
+  </span>
+</a>
+<a class="card" href="../showcase/clustering/" data-uc="data">
+  <span class="media"><img src="../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · essay</span>
+    <b>Cluster the reasons</b>
+    <span class="q">How do you turn a gut-feeling rule into personas a team can use?</span>
+  </span>
+</a>
+<a class="card" href="../showcase/robot/" data-uc="robots vision play">
+  <span class="media"><img src="../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Sep 2026 · in progress</span>
+    <b>Someone to play with</b>
+    <span class="q">Could a robot arm sit across the table from me?</span>
+  </span>
+</a>
+<a class="card" href="projects/connect4/" data-uc="play data">
+  <span class="media"><img src="../media/covers/connect4.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Sep 2025 · playable</span>
+    <b>Four in a row vs five networks</b>
+    <span class="q">Can I teach a computer to beat me at Connect 4?</span>
+  </span>
+</a>
+<a class="card" href="../showcase/heartbeat/" data-uc="data">
+  <span class="media"><img src="../media/covers/heartbeat.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Aug 2024 · essay</span>
+    <b>My heart beats like a network</b>
+    <span class="q">What does a heartbeat look like as a network?</span>
+  </span>
+</a>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="index">
+  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 27 projects, newest first.</p></div>
+  <div class="table-wrap">
+  <table class="index">
+    <thead><tr><th>When</th><th>Project</th><th>The question</th><th>Use cases</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <tr data-uc="vision tools">
+        <td class="mono">Oct 2026</td>
+        <td><a href="../showcase/precog/"><b>Precog</b></a></td>
+        <td class="q">What if my hands were the mouse?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-vision)"><i></i>Seeing</span><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"><a href="https://github.com/valkiii/precog_hand" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="play vision">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/pulp/"><b>PULP</b></a></td>
+        <td class="q">Can you play Fruit Ninja with your eyes?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span><span class="chip" style="--c: var(--uc-vision)"><i></i>Seeing</span></span></td>
+        <td class="mono">beta</td>
+        <td class="mono"><a href="https://github.com/valkiii/fruit_ninja" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="play">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/spellstorm/"><b>Spellstorm</b></a></td>
+        <td class="q">Can a survivors-style game work for a five-year-old and a teenager?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
+        <td class="mono">playable</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="play">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/drawbluff/"><b>Drawbluff</b></a></td>
+        <td class="q">Can I host a Drawful-style party game from a laptop?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
+        <td class="mono">playable</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="play">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/wisecrack/"><b>Wisecrack</b></a></td>
+        <td class="q">And a Quiplash one, while I&#39;m at it?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
+        <td class="mono">playable</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="data">
+        <td class="mono">Oct 2026</td>
+        <td><a href="../showcase/clustering/"><b>Cluster the reasons</b></a></td>
+        <td class="q">How do you turn a gut-feeling rule into personas a team can use?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">essay</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="vision data">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/eulerian/"><b>Seeing the invisible</b></a></td>
+        <td class="q">Can a webcam see your pulse?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-vision)"><i></i>Seeing</span><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="home">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/marquee/"><b>Marquee</b></a></td>
+        <td class="q">Can a Raspberry Pi be my Plex?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-home)"><i></i>Home lab</span></span></td>
+        <td class="mono">in use</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="home data">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/market/"><b>Market dashboard</b></a></td>
+        <td class="q">What are my shares doing, in euros, from sources I can trust?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-home)"><i></i>Home lab</span><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">in use</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="teach">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/sqlsprint/"><b>SQL Sprint</b></a></td>
+        <td class="q">Can you prepare for a live SQL interview in a week?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span></td>
+        <td class="mono">shipped</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="tools data">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/zepplocal/"><b>ZeppLocal</b></a></td>
+        <td class="q">Can I keep my watch data without trusting another app?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="tools robots">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/diary/"><b>The Diary</b></a></td>
+        <td class="q">What if a paper notebook wrote back?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span><span class="chip" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"><a href="https://github.com/valkiii/the_diary" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="robots">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/xgoduck/"><b>XGO-Duck on a Pi</b></a></td>
+        <td class="q">Can a 3D-printed duck learn to walk on a Pi Zero?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices</span></span></td>
+        <td class="mono">building</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="home tools">
+        <td class="mono">Oct 2026</td>
+        <td><a href="projects/kindlebot/"><b>Books to my Kindle</b></a></td>
+        <td class="q">Can a chat message put a classic on my Kindle?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-home)"><i></i>Home lab</span><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
+        <td class="mono">in use</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="robots vision play">
+        <td class="mono">Sep 2026</td>
+        <td><a href="../showcase/robot/"><b>Someone to play with</b></a></td>
+        <td class="q">Could a robot arm sit across the table from me?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices</span><span class="chip" style="--c: var(--uc-vision)"><i></i>Seeing</span><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
+        <td class="mono">in progress</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="data tools">
+        <td class="mono">Sep 2026</td>
+        <td><a href="projects/maieutica/"><b>Maieutica</b></a></td>
+        <td class="q">Who can do this, and what breaks if someone leaves?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="home data">
+        <td class="mono">Sep 2026</td>
+        <td><a href="projects/finance/"><b>Household finance dashboard</b></a></td>
+        <td class="q">Where does the money go, month by month?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-home)"><i></i>Home lab</span><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">in use</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="teach">
+        <td class="mono">Sep 2026</td>
+        <td><a href="projects/agentworkshop/"><b>Build your own agent</b></a></td>
+        <td class="q">What is an agent, once you take the cloud away?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span></td>
+        <td class="mono">shipped</td>
+        <td class="mono"><a href="https://github.com/valkiii/build_your_agent_workshop" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="tools teach">
+        <td class="mono">Sep 2026</td>
+        <td><a href="projects/retro/"><b>Team retro, facilitated</b></a></td>
+        <td class="q">Can an AI facilitator keep a 60-minute retro on time?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="tools">
+        <td class="mono">Sep 2026</td>
+        <td><a href="projects/spindle/"><b>Spindle</b></a></td>
+        <td class="q">Can I make the Mac widget I wanted, for less?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
+        <td class="mono">in progress</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="tools robots">
+        <td class="mono">Aug 2026</td>
+        <td><a href="projects/omi/"><b>A local Omi</b></a></td>
+        <td class="q">Can a wearable assistant work with no cloud at all?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span><span class="chip" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices</span></span></td>
+        <td class="mono">in progress</td>
+        <td class="mono"><a href="https://github.com/valkiii/my_omi" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="play data">
+        <td class="mono">Sep 2025</td>
+        <td><a href="projects/connect4/"><b>Four in a row vs five networks</b></a></td>
+        <td class="q">Can I teach a computer to beat me at Connect 4?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">playable</td>
+        <td class="mono"><a href="https://github.com/valkiii/forza_quatto" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="tools">
+        <td class="mono">Sep 2025</td>
+        <td><a href="projects/voicetranscriber/"><b>Local Voice Transcriber</b></a></td>
+        <td class="q">Can dictation be private and pretty?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
+        <td class="mono">shipped</td>
+        <td class="mono"><a href="https://github.com/valkiii/local-voice-transcriber" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="play">
+        <td class="mono">Aug 2025</td>
+        <td><a href="projects/risk/"><b>Risk engine</b></a></td>
+        <td class="q">Can agents learn to conquer the world?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
+        <td class="mono">archive</td>
+        <td class="mono"><a href="https://github.com/valkiii/risk-ai-project" target="_blank" rel="noopener">code ↗</a></td>
+      </tr>
+      <tr data-uc="data teach">
+        <td class="mono">Sep 2024</td>
+        <td><a href="projects/pydata/"><b>Hunting unicorns with networks</b></a></td>
+        <td class="q">Can the network of who-worked-where predict the next unicorn?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span></td>
+        <td class="mono">talk</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="data">
+        <td class="mono">Aug 2024</td>
+        <td><a href="../showcase/heartbeat/"><b>My heart beats like a network</b></a></td>
+        <td class="q">What does a heartbeat look like as a network?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">essay</td>
+        <td class="mono"></td>
+      </tr>
+      <tr data-uc="robots play data">
+        <td class="mono">May 2021</td>
+        <td><a href="projects/early/"><b>Early experiments</b></a></td>
+        <td class="q">Where did it start?</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices</span><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span></span></td>
+        <td class="mono">archive</td>
+        <td class="mono"></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="wrap two" aria-label="Writing and research">
+  <div>
+    <h2 class="sec">Writing</h2>
+    <ul class="list"><li><a href="writing/from-individual-contributor-to-leader/"><b>From Individual Contributor to Leader</b><span>Jan 2025</span></a></li><li><a href="writing/connect-4-vs-ai-ensemble/"><b>Connect 4 vs AI Ensemble</b><span>Jan 2025</span></a></li><li><a href="writing/hunting-unicorns-with-network-analysis/"><b>Hunting unicorns with Network analysis</b><span>Sep 2024</span></a></li><li><a href="writing/my-heart-beats-like-a-network/"><b>My heart beats like a network</b><span>Aug 2024</span></a></li></ul>
+    <a class="more" href="writing/">All writing →</a>
+  </div>
+  <div>
+    <h2 class="sec">Research</h2>
+    <ul class="list"><li><a href="https://www.nature.com/articles/s41598-019-57209-w" target="_blank" rel="noopener"><b>Predicting success in the worldwide start-up network</b><span>Scientific Reports, 2020</span></a></li><li><a href="https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/31787/CIOTTI_Valerio_PhD_final_170118.pdf?sequence=1" target="_blank" rel="noopener"><b>Positive and negative connections and homophily in complex networks</b><span>PhD thesis, Queen Mary University of London, 2018</span></a></li><li><a href="https://link.springer.com/content/pdf/10.1140/epjds/s13688-016-0068-2.pdf" target="_blank" rel="noopener"><b>Homophily and missing links in citation networks</b><span>EPJ Data Science, 2016</span></a></li><li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0378437114010334" target="_blank" rel="noopener"><b>Degree correlations in signed social networks</b><span>Physica A, 2015</span></a></li></ul>
+    <a class="more" href="research/">Papers and talks →</a>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <span>Valerio Ciotti · Imagine, try, solve.</span>
+  <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
+</footer>
+<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "home", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Home lab", "Tools", "Teaching"], "projects": ["precog", "pulp", "spellstorm", "drawbluff", "wisecrack", "clustering", "eulerian", "marquee", "market", "sqlsprint", "zepplocal", "diary", "xgoduck", "kindlebot", "robot", "maieutica", "finance", "agentworkshop", "retro", "spindle", "omi", "connect4", "voicetranscriber", "risk", "pydata", "heartbeat", "early"]}</script>
+<script>
+window.ATLAS = [
+  {slug: "precog", title: "Precog", q: "What if my hands were the mouse?", uc: ["vision", "tools"], stack: ["Python", "OpenCV", "MediaPipe", "PyObjC", "dynamic time warping"], href: "../showcase/precog/", featured: true, date: "Oct 2026"},
+  {slug: "pulp", title: "PULP", q: "Can you play Fruit Ninja with your eyes?", uc: ["play", "vision"], stack: ["JavaScript", "MediaPipe Tasks (wasm)", "Canvas", "WebAudio"], href: "projects/pulp/", featured: false, date: "Oct 2026"},
+  {slug: "spellstorm", title: "Spellstorm", q: "Can a survivors-style game work for a five-year-old and a teenager?", uc: ["play"], stack: ["JavaScript", "Canvas", "WebAudio", "Gamepad API"], href: "projects/spellstorm/", featured: true, date: "Oct 2026"},
+  {slug: "drawbluff", title: "Drawbluff", q: "Can I host a Drawful-style party game from a laptop?", uc: ["play"], stack: ["Node.js (no dependencies)", "Server-Sent Events", "Canvas", "Kokoro TTS", "WebAudio"], href: "projects/drawbluff/", featured: false, date: "Oct 2026"},
+  {slug: "wisecrack", title: "Wisecrack", q: "And a Quiplash one, while I'm at it?", uc: ["play"], stack: ["Node.js (no dependencies)", "Server-Sent Events", "Kokoro TTS", "WebAudio"], href: "projects/wisecrack/", featured: false, date: "Oct 2026"},
+  {slug: "clustering", title: "Cluster the reasons", q: "How do you turn a gut-feeling rule into personas a team can use?", uc: ["data"], stack: ["XGBoost", "SHAP", "UMAP", "HDBSCAN"], href: "../showcase/clustering/", featured: true, date: "Oct 2026"},
+  {slug: "eulerian", title: "Seeing the invisible", q: "Can a webcam see your pulse?", uc: ["vision", "data"], stack: ["Python", "NumPy", "SciPy", "OpenCV", "Riesz pyramids", "rPPG"], href: "projects/eulerian/", featured: false, date: "Oct 2026"},
+  {slug: "marquee", title: "Marquee", q: "Can a Raspberry Pi be my Plex?", uc: ["home"], stack: ["Python", "ffmpeg", "HLS (fMP4)", "hls.js", "Tailscale", "Chromecast"], href: "projects/marquee/", featured: false, date: "Oct 2026"},
+  {slug: "market", title: "Market dashboard", q: "What are my shares doing, in euros, from sources I can trust?", uc: ["home", "data"], stack: ["Python", "SQLite", "gettex post-trade data", "ECB rates", "Claude"], href: "projects/market/", featured: false, date: "Oct 2026"},
+  {slug: "sqlsprint", title: "SQL Sprint", q: "Can you prepare for a live SQL interview in a week?", uc: ["teach"], stack: ["sql.js (SQLite in WebAssembly)", "JavaScript"], href: "projects/sqlsprint/", featured: false, date: "Oct 2026"},
+  {slug: "zepplocal", title: "ZeppLocal", q: "Can I keep my watch data without trusting another app?", uc: ["tools", "data"], stack: ["Python", "SQLite", "pywebview", "keyring"], href: "projects/zepplocal/", featured: false, date: "Oct 2026"},
+  {slug: "diary", title: "The Diary", q: "What if a paper notebook wrote back?", uc: ["tools", "robots"], stack: ["TypeScript", "Kotlin", "Supernote plugin SDK", "Claude / Ollama"], href: "projects/diary/", featured: false, date: "Oct 2026"},
+  {slug: "xgoduck", title: "XGO-Duck on a Pi", q: "Can a 3D-printed duck learn to walk on a Pi Zero?", uc: ["robots"], stack: ["Raspberry Pi Zero 2W", "Feetech bus servos", "ONNX policies", "Python"], href: "projects/xgoduck/", featured: false, date: "Oct 2026"},
+  {slug: "kindlebot", title: "Books to my Kindle", q: "Can a chat message put a classic on my Kindle?", uc: ["home", "tools"], stack: ["Python", "Telegram Bot API", "Gutendex", "SMTP"], href: "projects/kindlebot/", featured: false, date: "Oct 2026"},
+  {slug: "robot", title: "Someone to play with", q: "Could a robot arm sit across the table from me?", uc: ["robots", "vision", "play"], stack: ["LeRobot", "SO-101 arm", "PyTorch", "OpenCV", "inverse kinematics"], href: "../showcase/robot/", featured: true, date: "Sep 2026"},
+  {slug: "maieutica", title: "Maieutica", q: "Who can do this, and what breaks if someone leaves?", uc: ["data", "tools"], stack: ["SQLite / Postgres", "D3", "Python", "Jira REST"], href: "projects/maieutica/", featured: false, date: "Sep 2026"},
+  {slug: "finance", title: "Household finance dashboard", q: "Where does the money go, month by month?", uc: ["home", "data"], stack: ["Python", "vanilla JavaScript", "Raspberry Pi", "Tailscale"], href: "projects/finance/", featured: false, date: "Sep 2026"},
+  {slug: "agentworkshop", title: "Build your own agent", q: "What is an agent, once you take the cloud away?", uc: ["teach"], stack: ["Python", "local LLMs", "RSS", "EPUB"], href: "projects/agentworkshop/", featured: false, date: "Sep 2026"},
+  {slug: "retro", title: "Team retro, facilitated", q: "Can an AI facilitator keep a 60-minute retro on time?", uc: ["tools", "teach"], stack: ["Node.js", "Claude", "Kokoro TTS"], href: "projects/retro/", featured: false, date: "Sep 2026"},
+  {slug: "spindle", title: "Spindle", q: "Can I make the Mac widget I wanted, for less?", uc: ["tools"], stack: ["Swift", "SwiftUI", "AppKit", "AppleScript"], href: "projects/spindle/", featured: false, date: "Sep 2026"},
+  {slug: "omi", title: "A local Omi", q: "Can a wearable assistant work with no cloud at all?", uc: ["tools", "robots"], stack: ["Flutter", "Bluetooth LE", "on-device speech", "Gemma"], href: "projects/omi/", featured: false, date: "Aug 2026"},
+  {slug: "connect4", title: "Four in a row vs five networks", q: "Can I teach a computer to beat me at Connect 4?", uc: ["play", "data"], stack: ["PyTorch", "Dueling Double DQN", "CNNs", "curriculum learning", "JavaScript"], href: "projects/connect4/", featured: true, date: "Sep 2025"},
+  {slug: "voicetranscriber", title: "Local Voice Transcriber", q: "Can dictation be private and pretty?", uc: ["tools"], stack: ["Python", "OpenAI Whisper (local)"], href: "projects/voicetranscriber/", featured: false, date: "Sep 2025"},
+  {slug: "risk", title: "Risk engine", q: "Can agents learn to conquer the world?", uc: ["play"], stack: ["Python", "Matplotlib"], href: "projects/risk/", featured: false, date: "Aug 2025"},
+  {slug: "pydata", title: "Hunting unicorns with networks", q: "Can the network of who-worked-where predict the next unicorn?", uc: ["data", "teach"], stack: ["Python", "networkx", "bipartite projections"], href: "projects/pydata/", featured: false, date: "Sep 2024"},
+  {slug: "heartbeat", title: "My heart beats like a network", q: "What does a heartbeat look like as a network?", uc: ["data"], stack: ["Python", "networkx", "Louvain communities", "Canvas"], href: "../showcase/heartbeat/", featured: true, date: "Aug 2024"},
+  {slug: "early", title: "Early experiments", q: "Where did it start?", uc: ["robots", "play", "data"], stack: ["Python", "Raspberry Pi", "TensorFlow"], href: "projects/early/", featured: false, date: "May 2021"},
+];
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="map.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Household finance dashboard · Valerio Ciotti</title>
+<meta name="description" content="A private dashboard for bank transactions, investments, pension, mortgage and Dutch tax rules, served from a Raspberry Pi and reachable only over Tailscale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Journal</a><a href="../" aria-current="page">By use</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--w: var(--w-home)">
+  <header class="wrap story-head">
+    <p class="hand crumbs"><a href="../../">notebook</a> · september 2026 · in use</p>
+    <h1>Household finance dashboard</h1>
+    <p class="question">Where does the money go, month by month?</p>
+    <p class="lede">A private dashboard for bank transactions, investments, pension, mortgage and Dutch tax rules, served from a Raspberry Pi and reachable only over Tailscale.</p>
+    <p class="actions">
+    </p>
+    <span class="tags"><span class="tag" style="--w: var(--w-home)">home lab</span><span class="tag" style="--w: var(--w-data)">data science</span></span>
+  </header>
+
+  <figure class="wrap taped">
+    <span class="tape l" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+<svg class="wash-cover wide" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Household finance dashboard" style="--w: var(--w-home)">
+  <ellipse cx="155.859375" cy="148.359375" rx="147.96875" ry="97.109375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="294.0625" cy="158.5546875" rx="89.6875" ry="67.5" class="w2" filter="url(#wc)"/>
+  <text x="200" y="173.078125" text-anchor="middle" class="init">H</text>
+  <path d="M86.25 210 q 80 -18.0390625 160 0 t 120 -0.59375" class="line" filter="url(#rough)"/>
+</svg>
+  </figure>
+
+  <section class="wrap ch">
+    <div class="txt">
+      <p class="kicker">the idea</p>
+      <p class="big">Banking apps show balances. I wanted trends: every category month by month, what changed, and why a number is what it is.
+</p>
+    </div>
+    <ul class="nums"><li><b>0</b><span class="hand">personal data in the code repository</span></li><li><b>1</b><span class="hand">HTML page, phone first</span></li></ul>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">how it works</p>
+    <ol class="steps">
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">1</text></svg>
+        <div><h3>Ingest</h3><p>Bank and broker exports are parsed and categorised with rules I can edit from the page.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">2</text></svg>
+        <div><h3>Explain</h3><p>Every number opens a panel that shows how it is worked out.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">3</text></svg>
+        <div><h3>Stay private</h3><p>The server refuses to listen on public interfaces; the code repository holds no data.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">notes to self</p>
+    <ul class="notes"><li class="hand">Re-categorising in the page beats editing rules in a file. You fix things when you see them.</li></ul>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">made with</p>
+    <p class="made"><span>Python</span><span>vanilla JavaScript</span><span>Raspberry Pi</span><span>Tailscale</span></p>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">on nearby pages</p>
+    <div class="smalls"><a class="small" href="../../../showcase/clustering/">
+  <span class="pic"><img src="../../../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Cluster the reasons</b>
+  <span>How do you turn a gut-feeling rule into personas a team can use?</span>
+</a>
+<a class="small" href="../eulerian/">
+  <span class="pic"><img src="../../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Seeing the invisible</b>
+  <span>Can a webcam see your pulse?</span>
+</a>
+<a class="small" href="../marquee/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Marquee" style="--w: var(--w-home)">
+  <ellipse cx="173.4375" cy="124.3359375" rx="145.46875" ry="83.671875" class="w1" filter="url(#wc)"/>
+  <ellipse cx="249.375" cy="161.71875" rx="70.234375" ry="50.3125" class="w2" filter="url(#wc)"/>
+  <text x="200" y="176.9453125" text-anchor="middle" class="init">M</text>
+  <path d="M72.96875 210 q 80 -18.8046875 160 0 t 120 0.4375" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>Marquee</b>
+  <span>Can a Raspberry Pi be my Plex?</span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

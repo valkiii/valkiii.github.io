@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Precog · Valerio Ciotti</title>
+<meta name="description" content="Minority Report style gesture control for macOS. Swipe between desktops in mid-air, pinch to click, throw windows to the other screen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Journal</a><a href="../" aria-current="page">By use</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--w: var(--w-vision)">
+  <header class="wrap story-head">
+    <p class="hand crumbs"><a href="../../">notebook</a> · october 2026 · prototype</p>
+    <h1>Precog</h1>
+    <p class="question">What if my hands were the mouse?</p>
+    <p class="lede">Minority Report style gesture control for macOS. Swipe between desktops in mid-air, pinch to click, throw windows to the other screen.</p>
+    <p class="actions">
+<a class="btn primary" href="../../../showcase/precog/">read the full story →</a><a class="btn" href="https://github.com/valkiii/precog_hand" target="_blank" rel="noopener">code on github ↗</a>    </p>
+    <span class="tags"><span class="tag" style="--w: var(--w-vision)">seeing</span><span class="tag" style="--w: var(--w-tools)">tools</span></span>
+  </header>
+
+  <figure class="wrap taped">
+    <span class="tape l" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+<img src="../../../media/covers/precog.jpg" alt="Precog">  </figure>
+
+  <section class="wrap ch">
+    <div class="txt">
+      <p class="kicker">the idea</p>
+      <p class="big">In the film, detectives sort evidence by sweeping their hands through the air. They needed gloves and a wall of glass. A laptop camera and an open hand-tracking model should be enough to try the same thing on an ordinary desk.
+</p>
+    </div>
+    <ul class="nums"><li><b>21</b><span class="hand">landmarks per hand</span></li><li><b>~30</b><span class="hand">frames per second</span></li><li><b>6</b><span class="hand">takes per gesture</span></li></ul>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">how it works</p>
+    <ol class="steps">
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">1</text></svg>
+        <div><h3>See</h3><p>MediaPipe turns every frame into 21 points per hand. Nothing after that step looks at pixels.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">2</text></svg>
+        <div><h3>Normalise</h3><p>Each hand is redrawn around its wrist and divided by its own size, so near and far hands compare.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">3</text></svg>
+        <div><h3>Recognise</h3><p>Poses are matched by shape; movements by dynamic time warping against about six recorded takes, with a threshold set from their spread.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">4</text></svg>
+        <div><h3>Act</h3><p>macOS ignores synthetic Ctrl+arrow for desktops, so Precog posts the private dock-swipe events a real trackpad sends.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">notes to self</p>
+    <ul class="notes"><li class="hand">Most of the work is not the model. It is making an operating system accept input it was never designed for.</li><li class="hand">Recording gestures by example beats hand-tuned rules, as long as the threshold comes from the examples too.</li><li class="hand">A gesture interface needs an off switch. Ten spread fingers put it on standby.</li></ul>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">made with</p>
+    <p class="made"><span>Python</span><span>OpenCV</span><span>MediaPipe</span><span>PyObjC</span><span>dynamic time warping</span></p>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">on nearby pages</p>
+    <div class="smalls"><a class="small" href="../pulp/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--w: var(--w-play)">
+  <ellipse cx="183.203125" cy="120.46875" rx="156.09375" ry="87.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="278.75" cy="168.3984375" rx="80.78125" ry="59.921875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="175.578125" text-anchor="middle" class="init">P</text>
+  <path d="M83.125 210 q 80 -11.0390625 160 0 t 120 2.96875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>PULP</b>
+  <span>Can you play Fruit Ninja with your eyes?</span>
+</a>
+<a class="small" href="../eulerian/">
+  <span class="pic"><img src="../../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Seeing the invisible</b>
+  <span>Can a webcam see your pulse?</span>
+</a>
+<a class="small" href="../zepplocal/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--w: var(--w-tools)">
+  <ellipse cx="162.109375" cy="141.2109375" rx="141.40625" ry="98.59375" class="w1" filter="url(#wc)"/>
+  <ellipse cx="294.375" cy="168.046875" rx="82.5390625" ry="58.359375" class="w2" filter="url(#wc)"/>
+  <text x="200" y="174.40625" text-anchor="middle" class="init">Z</text>
+  <path d="M77.65625 210 q 80 -17.0546875 160 0 t 120 -3.90625" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>ZeppLocal</b>
+  <span>Can I keep my watch data without trusting another app?</span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

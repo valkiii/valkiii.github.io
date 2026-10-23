@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Someone to play with · Valerio Ciotti</title>
+<meta name="description" content="The Connect 4 brain, given eyes and an arm. A camera on the wrist reads the board, and an SO-101 arm drops the token.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../" aria-label="Valerio Ciotti, home">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 22 L16 8 L25 20 L7 22 M16 8 L16 26"/></g><g fill="currentColor"><circle cx="7" cy="22" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="25" cy="20" r="3"/><circle cx="16" cy="26" r="2.2"/></g></svg>
+    <span>Valerio Ciotti</span>
+  </a>
+  <nav aria-label="Sections">
+<a href="../../">Map</a><a href="../" aria-current="page">Index</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-robots)">
+  <header class="wrap story-head">
+    <p class="crumbs"><a href="../../">Map</a> / <a href="../#robots">Robots &amp; devices</a> / Someone to play with</p>
+    <div class="meta-row"><span class="chips"><span class="chip" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices</span><span class="chip" style="--c: var(--uc-vision)"><i></i>Seeing</span><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span><span class="mono">September 2026 · in progress</span></div>
+    <h1>Someone to play with</h1>
+    <p class="question">Could a robot arm sit across the table from me?</p>
+    <p class="lede">The Connect 4 brain, given eyes and an arm. A camera on the wrist reads the board, and an SO-101 arm drops the token.</p>
+    <p class="actions">
+<a class="btn primary" href="../../../showcase/robot/">Read the full story →</a>    </p>
+  </header>
+
+  <figure class="wrap hero-media"><img src="../../../media/covers/robot.jpg" alt="Someone to play with"></figure>
+
+  <section class="wrap numbers" aria-label="In numbers">
+<div><b>3</b><span>problems: brain, eyes, arm</span></div><div><b>6</b><span>joints</span></div><div><b>1M+</b><span>games in simulation</span></div>  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">The idea</h2>
+    <p class="big">I love board games. My wife doesn&#39;t. An app on a screen is not the same as an opponent that looks at the board and moves the pieces itself.
+</p>
+  </section>
+
+  <section class="wrap route-block">
+    <h2 class="sec">How it works</h2>
+    <ol class="route">
+<li><span class="stop" aria-hidden="true"></span><div><b>Brain</b><p>The reinforcement learning agents from Connect 4 decide the move.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Eyes</b><p>A wrist camera finds the board and the tokens and where they sit on the table.</p></div></li><li><span class="stop" aria-hidden="true"></span><div><b>Arm</b><p>Calibration and inverse kinematics turn &#39;that column&#39; into joint angles.</p></div></li>    </ol>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">What I learned</h2>
+    <ul class="learned"><li>Every step from software to the physical world multiplies the ways things fail. Calibration is the real project.</li></ul>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">Built with</h2>
+    <p class="stack"><span>LeRobot</span><span>SO-101 arm</span><span>PyTorch</span><span>OpenCV</span><span>inverse kinematics</span></p>
+  </section>
+
+  <section class="wrap prose-block">
+    <h2 class="sec">Nearby on the map</h2>
+    <div class="grid"><a class="card" href="../../../showcase/precog/" data-uc="vision tools">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · prototype</span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+  </span>
+</a>
+<a class="card" href="../pulp/" data-uc="play vision">
+  <span class="media"><svg class="glyph" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--c: var(--uc-play)">
+  <rect width="320" height="200" class="g-bg"/>
+<line x1="272.65625" y1="81.25" x2="225.625" y2="118.125" class="g-edge"/><line x1="272.65625" y1="81.25" x2="232.1875" y2="112.5" class="g-edge"/><line x1="272.65625" y1="81.25" x2="242.03125" y2="40.625" class="g-edge"/><line x1="272.65625" y1="81.25" x2="292.34375" y2="38.125" class="g-edge"/><line x1="272.65625" y1="81.25" x2="233.28125" y2="70.625" class="g-edge"/><line x1="225.625" y1="118.125" x2="232.1875" y2="112.5" class="g-edge"/><line x1="225.625" y1="118.125" x2="242.03125" y2="40.625" class="g-edge"/><line x1="225.625" y1="118.125" x2="173.125" y2="140.0" class="g-edge"/><line x1="225.625" y1="118.125" x2="233.28125" y2="70.625" class="g-edge"/><line x1="120.625" y1="99.375" x2="122.8125" y2="146.25" class="g-edge"/><line x1="120.625" y1="99.375" x2="173.125" y2="140.0" class="g-edge"/><line x1="232.1875" y1="112.5" x2="242.03125" y2="40.625" class="g-edge"/><line x1="232.1875" y1="112.5" x2="173.125" y2="140.0" class="g-edge"/><line x1="232.1875" y1="112.5" x2="233.28125" y2="70.625" class="g-edge"/><line x1="40.78125" y1="159.375" x2="122.8125" y2="146.25" class="g-edge"/><line x1="122.8125" y1="146.25" x2="173.125" y2="140.0" class="g-edge"/><line x1="242.03125" y1="40.625" x2="292.34375" y2="38.125" class="g-edge"/><line x1="242.03125" y1="40.625" x2="233.28125" y2="70.625" class="g-edge"/><line x1="292.34375" y1="38.125" x2="233.28125" y2="70.625" class="g-edge"/><line x1="173.125" y1="140.0" x2="233.28125" y2="70.625" class="g-edge"/><circle cx="272.65625" cy="81.25" r="7.96484375" class="g-node hub"/><circle cx="225.625" cy="118.125" r="9.578125" class="g-node"/><circle cx="120.625" cy="99.375" r="5.39453125" class="g-node"/><circle cx="232.1875" cy="112.5" r="6.0234375" class="g-node"/><circle cx="40.78125" cy="159.375" r="8.8671875" class="g-node"/><circle cx="122.8125" cy="146.25" r="6.6796875" class="g-node"/><circle cx="242.03125" cy="40.625" r="9.44140625" class="g-node"/><circle cx="292.34375" cy="38.125" r="5.859375" class="g-node"/><circle cx="173.125" cy="140.0" r="7.6640625" class="g-node"/><circle cx="233.28125" cy="70.625" r="4.41015625" class="g-node"/></svg>
+</span>
+  <span class="body">
+    <span class="meta">Oct 2026 · beta</span>
+    <b>PULP</b>
+    <span class="q">Can you play Fruit Ninja with your eyes?</span>
+  </span>
+</a>
+<a class="card" href="../spellstorm/" data-uc="play">
+  <span class="media"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="meta">Oct 2026 · playable</span>
+    <b>Spellstorm</b>
+    <span class="q">Can a survivors-style game work for a five-year-old and a teenager?</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <span>Valerio Ciotti · Imagine, try, solve.</span>
+  <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
+</footer>
+</body>
+</html>

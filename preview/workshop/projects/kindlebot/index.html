@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Books to my Kindle · Valerio Ciotti</title>
+<meta name="description" content="A Telegram command that finds a public-domain book on Project Gutenberg and emails the EPUB straight to my Kindle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-home); --on: var(--on-home)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#home">Home lab</a></p>
+      <h1>Books to my Kindle</h1>
+      <p class="question">Can a chat message put a classic on my Kindle?</p>
+      <p class="lede">A Telegram command that finds a public-domain book on Project Gutenberg and emails the EPUB straight to my Kindle.</p>
+      <p class="actions">
+      </p>
+      <p class="facts"><span>October 2026</span><span class="status s-in-use">in use</span><span>Home lab</span><span>Tools</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><svg class="poster wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Books to my Kindle" style="--c: var(--uc-home); --on: var(--on-home)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-35.1953125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="28.8046875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="92.8046875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="156.8046875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="220.8046875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/><rect x="284.8046875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(27.6171875 160 100)"/>  <circle cx="215.9375" cy="98.125" r="57.8125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">Books to my Kindle</text>
+</svg>
+</figure>
+
+<section class="wrap tiles"><div><b>1</b><span>message: /book_download Title - Author</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">Getting a free classic onto a Kindle takes a browser, a download and an email. A chat message is shorter.
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>Find</b><p>Search Project Gutenberg through Gutendex.</p></li><li><span class="n">02</span><b>Fit</b><p>Fall back to the image-free EPUB when a book is too large to email.</p></li><li><span class="n">03</span><b>Send</b><p>Email it to the Kindle address from the Raspberry Pi.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>The best home automations are one sentence long.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>Python</span><span>Telegram Bot API</span><span>Gutendex</span><span>SMTP</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../../../showcase/precog/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../marquee/" style="--c: var(--uc-home); --on: var(--on-home)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Marquee" style="--c: var(--uc-home); --on: var(--on-home)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-32.96875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="31.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="95.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="159.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="223.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="287.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/>  <circle cx="238.203125" cy="81.015625" r="48.8125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">Marquee</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Home lab</span><span class="meta">Oct 2026</span></span>
+    <b>Marquee</b>
+    <span class="q">Can a Raspberry Pi be my Plex?</span>
+    <span class="status s-in-use">in use</span>
+  </span>
+</a>
+<a class="card " href="../market/" style="--c: var(--uc-home); --on: var(--on-home)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Market dashboard" style="--c: var(--uc-home); --on: var(--on-home)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-27.109375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(21.640625 160 100)"/><rect x="36.890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(21.640625 160 100)"/><rect x="100.890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(21.640625 160 100)"/><rect x="164.890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(21.640625 160 100)"/><rect x="228.890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(21.640625 160 100)"/><rect x="292.890625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(21.640625 160 100)"/>  <circle cx="205.390625" cy="107.96875" r="56.59375" class="p-disc"/>
+  <text x="24" y="172" class="p-title">Market dashboard</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Home lab</span><span class="meta">Oct 2026</span></span>
+    <b>Market dashboard</b>
+    <span class="q">What are my shares doing, in euros, from sources I can trust?</span>
+    <span class="status s-in-use">in use</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>

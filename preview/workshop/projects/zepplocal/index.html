@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZeppLocal · Valerio Ciotti</title>
+<meta name="description" content="A private, local copy of my own Zepp/Amazfit health data (heart rate, sleep, workouts, HRV), in one SQLite file with a dashboard on localhost.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#tools">Tools</a></p>
+      <h1>ZeppLocal</h1>
+      <p class="question">Can I keep my watch data without trusting another app?</p>
+      <p class="lede">A private, local copy of my own Zepp/Amazfit health data (heart rate, sleep, workouts, HRV), in one SQLite file with a dashboard on localhost.</p>
+      <p class="actions">
+      </p>
+      <p class="facts"><span>October 2026</span><span class="status s-prototype">prototype</span><span>Tools</span><span>Data science</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><svg class="poster wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-36.3671875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="27.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="91.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="155.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="219.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="283.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/>  <circle cx="232.109375" cy="125.78125" r="62.3125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">ZeppLocal</text>
+</svg>
+</figure>
+
+<section class="wrap tiles"><div><b>1</b><span>server it talks to: Zepp&#39;s own</span></div><div><b>0</b><span>CDNs, map tiles or telemetry</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">Third-party sync apps want your watch account. I wanted the same features with code small enough to read in an evening.
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>Sync</b><p>Sign in once; raw responses are stored, so parsing can be redone later.</p></li><li><span class="n">02</span><b>Store</b><p>Everything lands in one SQLite file on the Mac.</p></li><li><span class="n">03</span><b>Guard</b><p>A test fails the build if any code tries to reach a host other than Zepp&#39;s.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>Privacy you can test is worth more than privacy you promise.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>Python</span><span>SQLite</span><span>pywebview</span><span>keyring</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../../../showcase/precog/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Precog</b>
+    <span class="q">What if my hands were the mouse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../../../showcase/clustering/" style="--c: var(--uc-data); --on: var(--on-data)">
+  <span class="media"><img src="../../../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Data science</span><span class="meta">Oct 2026</span></span>
+    <b>Cluster the reasons</b>
+    <span class="q">How do you turn a gut-feeling rule into personas a team can use?</span>
+    <span class="status s-essay">essay</span>
+  </span>
+</a>
+<a class="card " href="../eulerian/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Seeing the invisible</b>
+    <span class="q">Can a webcam see your pulse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>

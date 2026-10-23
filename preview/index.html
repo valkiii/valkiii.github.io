@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Three Portfolio Themes</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: a short note, then the three themes side by side (stacked on phones), each with what makes it different. */
+:root { --bg: #f4f4f1; --card: #fff; --ink: #17181b; --ink-2: #555a63; --ink-3: #8b9099; --rule: #e1e2dd; --accent: #2a78d6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121315; --card: #1b1d20; --ink: #eef0f2; --ink-2: #b5bac2; --ink-3: #7f858e; --rule: #2a2d31; --accent: #5b9ef0; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #121315; --card: #1b1d20; --ink: #eef0f2; --ink-2: #b5bac2; --ink-3: #7f858e; --rule: #2a2d31; --accent: #5b9ef0; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  padding: 40px max(16px, env(safe-area-inset-right, 0px)) 60px max(16px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 28px; }
+h1 { font: 800 clamp(34px, 5vw, 56px)/1 inherit; letter-spacing: -.03em; margin: 0; font-family: inherit; }
+p { margin: 0; color: var(--ink-2); max-width: 44em; }
+.mono { font: 400 13px/1.4 "IBM Plex Mono", ui-monospace, monospace; color: var(--ink-3); }
+.themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.theme { background: var(--card); border: 1px solid var(--rule); border-radius: 18px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: inherit; }
+.theme iframe { width: 200%; height: 1000px; transform: scale(.5); transform-origin: 0 0; border: 0; pointer-events: none; margin-bottom: -500px; display: block; }
+.frame { height: 500px; overflow: hidden; border-bottom: 1px solid var(--rule); }
+.info { padding: 18px 20px 22px; display: grid; gap: 10px; align-content: start; }
+.info b { font-size: 22px; letter-spacing: -.01em; }
+.info ul { margin: 0; padding-left: 1.1em; color: var(--ink-2); font-size: 15px; display: grid; gap: 4px; }
+.open { font-weight: 600; color: var(--accent); }
+.also { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.also a { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 14px 16px; text-decoration: none; color: inherit; display: grid; gap: 2px; }
+.also a span { color: var(--ink-2); font-size: 15px; }
+@media (max-width: 900px) { .themes { grid-template-columns: minmax(0, 1fr); } .frame { height: 420px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="display:grid;gap:12px">
+    <p class="mono">Preview · not linked from the live site yet</p>
+    <h1>Three ways to show the same work</h1>
+    <p>Same projects, same writing and research, three different structures and looks. Open each one, try a project page and a post, then pick a favourite (or mix: the structure of one with the look of another).</p>
+  </div>
+  <div class="themes">
+    <a class="theme" href="atlas/">
+      <div class="frame"><iframe src="atlas/" title="Atlas preview" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="info"><span class="mono">1 · Atlas</span><b>A map of ideas</b>
+        <ul><li>Home is a live network: use cases as hubs, projects linked by shared technology.</li><li>A filterable index table of every project.</li><li>Project pages read as a route of stops.</li><li>Clean, technical, light and dark.</li></ul>
+        <span class="open">Open Atlas →</span></div>
+    </a>
+    <a class="theme" href="notebook/">
+      <div class="frame"><iframe src="notebook/" title="Notebook preview" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="info"><span class="mono">2 · Notebook</span><b>A lab journal</b>
+        <ul><li>Entries in date order, each one opening with its question.</li><li>The watercolour and ink of the robot story, covers taped in.</li><li>Project pages are hand-numbered scroll stories.</li><li>Warm and personal, one paper look.</li></ul>
+        <span class="open">Open Notebook →</span></div>
+    </a>
+    <a class="theme" href="workshop/">
+      <div class="frame"><iframe src="workshop/" title="Workshop preview" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="info"><span class="mono">3 · Workshop</span><b>Shelves of use cases</b>
+        <ul><li>A big statement and a bento of favourites.</li><li>One bold coloured shelf per use case.</li><li>Project pages read like product launches.</li><li>Loud and confident, light and dark.</li></ul>
+        <span class="open">Open Workshop →</span></div>
+    </a>
+  </div>
+  <div style="display:grid;gap:12px">
+    <p class="mono">The hand-made pages, shared by all three</p>
+    <div class="also">
+      <a href="showcase/precog/"><b>Precog</b><span>Gesture control, as a scroll story you can steer with your hands</span></a>
+      <a href="showcase/heartbeat/"><b>My heart beats like a network</b><span>The redone visibility graph</span></a>
+      <a href="showcase/robot/"><b>Someone to play with</b><span>The robot arm story</span></a>
+      <a href="showcase/clustering/"><b>Cluster the reasons</b><span>Supervised clustering, on made-up customers</span></a>
+      <a href="play/connect4/"><b>Four in a row</b><span>The Connect 4 ensemble, now in the browser</span></a>
+      <a href="play/spellstorm/"><b>Spellstorm</b><span>Play in the browser</span></a>
+      <a href="play/pulp/"><b>PULP</b><span>Fruit Ninja with your hands (webcam)</span></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

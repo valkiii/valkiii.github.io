@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Heart Beats Like a Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="53 minutes of a run, one heart-rate reading at a time, turned into a visibility graph.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a night-time cardiac monitor. Readout band on top, the graph as the big screen, the run as a scrubbable strip below. One dark world by design. */
+:root {
+  color-scheme: dark;
+  --bg: #12080b;          /* oxblood night */
+  --panel: #1c0d12;
+  --line: #3a1d25;
+  --ink: #f6e9ea;
+  --ink-2: #c7a9ae;
+  --ink-3: #8c6a71;
+  --trace: #ffd0d5;       /* ECG phosphor, warm */
+  --heart: #e5354f;
+  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 17px/1.6 var(--serif);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+.wrap > * { min-width: 0; }
+.embed body, body.embed { padding-block: 10px; }
+body.embed .story { display: none; }
+
+header.intro { display: grid; gap: 10px; max-width: 760px; }
+.eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+h1 { font: 800 clamp(44px, 7vw, 86px)/.92 var(--display); letter-spacing: .005em; margin: 0; text-wrap: balance; text-transform: uppercase; }
+h1 em { font-style: normal; color: var(--heart); }
+.lede { color: var(--ink-2); margin: 0; max-width: 62ch; }
+
+/* ---------- the monitor ---------- */
+.monitor {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  display: grid; grid-template-columns: 150px minmax(0, 1fr) 230px; align-items: stretch;
+  overflow: hidden;
+}
+.heartbox { position: relative; border-right: 1px solid var(--line); min-height: 150px; }
+.heartbox canvas, .ecg canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ecg { position: relative; min-height: 150px; }
+.ecg .grid { position: absolute; inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 25px 25px; opacity: .45; }
+.ecg .tag { position: absolute; left: 12px; top: 10px; font: 600 11px/1 var(--mono); letter-spacing: .12em; color: var(--ink-3); text-transform: uppercase; }
+.readout { border-left: 1px solid var(--line); padding: 14px 18px; display: grid; align-content: center; gap: 2px; }
+.readout .lbl { font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.bpm { font: 800 92px/.9 var(--display); font-variant-numeric: tabular-nums; color: var(--ink); display: flex; align-items: baseline; gap: 8px; }
+.bpm small { font: 600 14px/1 var(--mono); color: var(--heart); letter-spacing: .08em; }
+.clock { font: 400 13px/1.5 var(--mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+/* ---------- screen ---------- */
+.screen { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
+.seg button, .btn {
+  font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-2); background: transparent; border: 0; border-radius: 999px; padding: 8px 12px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.btn { border: 1px solid var(--line); }
+.btn.primary { background: var(--heart); border-color: var(--heart); color: #fff; }
+.seg button:focus-visible, .btn:focus-visible { outline: 2px solid var(--trace); outline-offset: 2px; }
+.spacer { flex: 1; }
+.legend { display: flex; align-items: center; gap: 8px; font: 400 11px/1 var(--mono); color: var(--ink-3); }
+.legend .bar { width: 110px; height: 8px; border-radius: 4px; }
+.stage { position: relative; height: min(68vh, 620px); min-height: 360px; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+.stage .hint { position: absolute; right: 14px; bottom: 12px; text-align: right; font: 400 12px/1.4 var(--mono); color: var(--ink-3); pointer-events: none; max-width: 60ch; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font: 400 12px/1.45 var(--mono);
+  padding: 8px 10px; border-radius: 8px; white-space: nowrap; transform: translate(12px, -50%); z-index: 3; }
+.tip b { font-weight: 600; }
+.strip { position: relative; height: 112px; border-top: 1px solid var(--line); cursor: ew-resize; }
+.strip canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+
+/* ---------- story ---------- */
+.story { display: grid; gap: 26px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.fact { background: var(--panel); padding: 16px 18px; display: grid; gap: 4px; }
+.fact .v { font: 700 40px/1 var(--display); font-variant-numeric: tabular-nums; }
+.fact .k { font: 400 12px/1.4 var(--mono); color: var(--ink-3); }
+.cols { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 34px; align-items: start; }
+.cols h2 { font: 700 30px/1.05 var(--display); text-transform: uppercase; margin: 0 0 8px; letter-spacing: .01em; }
+.cols p { margin: 0 0 12px; color: var(--ink-2); max-width: 64ch; }
+.cols p strong { color: var(--ink); font-weight: 600; }
+figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 16px 10px; position: relative; }
+figcaption { font: 400 12px/1.5 var(--mono); color: var(--ink-3); margin-top: 6px; }
+#deg { width: 100%; height: auto; display: block; }
+#deg text { font: 400 11px var(--mono); fill: var(--ink-3); }
+#deg .axis { stroke: var(--line); }
+#deg .fit { stroke: var(--trace); stroke-width: 2; stroke-dasharray: 5 4; fill: none; }
+#deg .pt { fill: var(--heart); stroke: var(--panel); stroke-width: 2; }
+#deg .pt:hover { fill: var(--trace); }
+.degtip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font: 400 12px/1.4 var(--mono); padding: 6px 8px; border-radius: 6px; }
+.foot { font: 400 12px/1.6 var(--mono); color: var(--ink-3); }
+.foot a { color: var(--ink-2); }
+
+@media (max-width: 820px) {
+  .monitor { grid-template-columns: 110px minmax(0, 1fr); }
+  .ecg { grid-column: 1 / -1; grid-row: 2; border-top: 1px solid var(--line); min-height: 110px; }
+  .readout { border-left: 0; }
+  .heartbox { min-height: 120px; }
+  .bpm { font-size: 72px; }
+  .cols { grid-template-columns: 1fr; }
+  .stage { height: min(70vh, 480px); }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro story">
+    <div class="eyebrow">Visibility graphs · a run on <span id="rundate"></span></div>
+    <h1>My heart beats <em>like a network</em></h1>
+    <p class="lede">Every reading my watch took during a 53-minute run becomes a node. Two readings are linked when they can see each other over the readings in between, like rooftops on a street of skyscrapers. Press play and watch the run build its own graph, beat by beat.</p>
+  </header>
+
+  <section class="monitor" aria-label="Heart-rate monitor">
+    <div class="heartbox"><canvas id="heart" aria-hidden="true"></canvas></div>
+    <div class="ecg"><div class="grid"></div><span class="tag">ECG · paced from the real reading</span><canvas id="ecg" aria-hidden="true"></canvas></div>
+    <div class="readout">
+      <span class="lbl">Heart rate</span>
+      <div class="bpm"><span id="bpm">—</span><small>BPM</small></div>
+      <div class="clock" id="clock">minute 0:00 of 53:24</div>
+      <div class="clock" id="links">0 sightlines</div>
+    </div>
+  </section>
+
+  <section class="screen" aria-label="Visibility graph">
+    <div class="toolbar">
+      <button class="btn primary" id="play" type="button">Pause</button>
+      <div class="seg" role="group" aria-label="Playback speed">
+        <button type="button" data-speed="0.5" aria-pressed="false">½×</button>
+        <button type="button" data-speed="1" aria-pressed="true">1×</button>
+        <button type="button" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </div>
+      <div class="seg" role="group" aria-label="Layout">
+        <button type="button" data-layout="series" aria-pressed="false">Skyline</button>
+        <button type="button" data-layout="net" aria-pressed="true">Network</button>
+        <button type="button" data-layout="heart" aria-pressed="false">Heart</button>
+      </div>
+      <div class="seg" role="group" aria-label="Colour">
+        <button type="button" data-color="hr" aria-pressed="true">Colour: BPM</button>
+        <button type="button" data-color="comm" aria-pressed="false">Communities</button>
+      </div>
+      <button class="btn" id="sound" type="button" aria-pressed="false">Sound off</button>
+      <span class="spacer"></span>
+      <div class="legend"><span id="lg0">83</span><span class="bar" id="lgbar"></span><span id="lg1">168 bpm</span></div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="net"></canvas>
+      <div class="tip" id="tip" hidden></div>
+      <div class="hint" id="hint">Hover a node to see its moment in the run. Drag the strip below to scrub.</div>
+    </div>
+    <div class="strip" id="strip" aria-label="Heart rate over the run; drag to scrub"><canvas id="series"></canvas></div>
+  </section>
+
+  <section class="story">
+    <div class="facts" id="facts"></div>
+    <div class="cols">
+      <div>
+        <h2>Peaks become hubs</h2>
+        <p>A reading sees far when it stands taller than its neighbours. So the hardest moments of the run turn into the graph's hubs: <strong id="hubline"></strong> The flat, steady stretches only see the readings next to them, and they knit into tight local clusters.</p>
+        <p>That is why the network breaks so cleanly into communities: each one is a stretch of the run with its own rhythm. Switch the colour to <em>Communities</em> and they line up along the strip almost in order of time.</p>
+        <p>The degree distribution has a heavy tail. Most readings see a handful of others, a few see more than fifty. On log-log axes the tail falls roughly on a line with slope <strong id="gammaline"></strong>, the kind of scale-free signature visibility graphs pick up from fractal-like series.</p>
+      </div>
+      <figure>
+        <svg id="deg" viewBox="0 0 520 330" role="img" aria-label="Degree distribution on log-log axes"></svg>
+        <div class="degtip" id="degtip" hidden></div>
+        <figcaption>How many readings each reading can see (degree k), log-binned. Dashed: least-squares power-law fit on the binned tail.</figcaption>
+      </figure>
+    </div>
+    <p class="foot">Data: one Garmin TCX export, heart rate only (GPS removed). Visibility follows Lacasa et al., PNAS 2008, using real elapsed seconds as the x axis (the watch samples every ~4.6 s, unevenly). Communities: Louvain, seed 7. Layouts: seeded force layout with a pull towards each community, and a parametric heart where time runs clockwise from the tip.</p>
+  </section>
+</div>
+
+<script src="data.js"></script>
+<script>
+(() => {
+const D = window.HEART, N = D.hr.length;
+const params = new URLSearchParams(location.search);
+if (params.has("embed")) document.body.classList.add("embed");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+const TOTAL = D.secs[N - 1];
+const HRMIN = D.stats.hr_min, HRMAX = D.stats.hr_max, NCOMM = D.stats.communities;
+
+// one hue (rose), dim -> hot. On a dark surface, high values glow.
+const STOPS = [[96, 30, 44], [150, 40, 62], [205, 58, 84], [238, 104, 120], [255, 168, 176], [255, 228, 230]];
+function ramp(u) {
+  u = Math.max(0, Math.min(1, u)) * (STOPS.length - 1);
+  const i = Math.min(STOPS.length - 2, Math.floor(u)), f = u - i, a = STOPS[i], b = STOPS[i + 1];
+  return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
+}
+const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+$("lgbar").style.background = `linear-gradient(90deg, ${[0, .2, .4, .6, .8, 1].map(u => rgb(ramp(u))).join(",")})`;
+$("rundate").textContent = new Date(D.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+// ---------- graph structure ----------
+const E = D.edges.slice().sort((a, b) => a[1] - b[1] || a[0] - b[0]); // j = later node; visible prefix grows with time
+const edgeUpTo = new Int32Array(N + 1); { let e = 0; for (let k = 0; k <= N; k++) { while (e < E.length && E[e][1] < k) e++; edgeUpTo[k] = e; } }
+const adj = Array.from({ length: N }, () => []);
+for (const [a, b] of E) { adj[a].push(b); adj[b].push(a); }
+const deg = adj.map(x => x.length);
+
+// ---------- layouts ----------
+const L = { series: new Float32Array(N * 2), net: new Float32Array(N * 2), heart: new Float32Array(N * 2) };
+for (let i = 0; i < N; i++) {
+  L.series[2 * i] = D.secs[i] / TOTAL * 2 - 1;
+  L.series[2 * i + 1] = -((D.hr[i] - HRMIN) / (HRMAX - HRMIN) * 2 - 1);
+  L.net[2 * i] = D.net[i][0]; L.net[2 * i + 1] = D.net[i][1];
+  L.heart[2 * i] = D.heart[i][0]; L.heart[2 * i + 1] = D.heart[i][1];
+}
+let layout = "net", from = L.net, to = L.net, morphT0 = -1e9;
+const MORPH = 1.4;
+const cur = new Float32Array(N * 2);
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+// ---------- state ----------
+let colorMode = "hr", playing = !reduce, speed = 1, cursor = reduce ? N : 0, lastShown = reduce ? N : 0;
+const DURATION = 48;                 // seconds for the whole run at 1x
+const appear = new Float64Array(N).fill(-1e9);
+let hover = -1, soundOn = false, actx = null;
+const nodeColor = i => colorMode === "hr" ? ramp((D.hr[i] - HRMIN) / (HRMAX - HRMIN)) : ramp(0.12 + 0.88 * D.comm[i] / (NCOMM - 1));
+
+// ---------- canvases ----------
+function fit(c) {
+  const r = c.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+  const w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  return { w, h, dpr };
+}
+const cNet = $("net"), gNet = cNet.getContext("2d");
+const cSer = $("series"), gSer = cSer.getContext("2d");
+const cHeart = $("heart"), gHeart = cHeart.getContext("2d");
+const cEcg = $("ecg"), gEcg = cEcg.getContext("2d");
+
+// ---------- heartbeat timing ----------
+let lastBeat = -10, nextBeat = 0, beatInterval = 0.6, rTime = -10, ripples = [];
+function currentIndex() { return Math.max(0, Math.min(N - 1, Math.floor(cursor) - 1 < 0 ? 0 : Math.floor(cursor) - 1)); }
+function currentBpm() { return D.hr[currentIndex()]; }
+const g = (x, m, w) => Math.exp(-((x - m) * (x - m)) / (2 * w * w));
+function ecgAt(tau, s) { // PQRST, tau = seconds since the beat started, s = time squeeze for fast rates
+  const x = tau / s;
+  return 0.12 * g(x, .08, .025) - 0.12 * g(x, .17, .009) + 1.0 * g(x, .2, .012) - 0.26 * g(x, .226, .011) + 0.28 * g(x, .42, .05);
+}
+function thump(t0, f, gain) {
+  const o = actx.createOscillator(), v = actx.createGain();
+  o.type = "sine"; o.frequency.setValueAtTime(f, t0); o.frequency.exponentialRampToValueAtTime(f * 0.45, t0 + .12);
+  v.gain.setValueAtTime(0.0001, t0); v.gain.exponentialRampToValueAtTime(gain, t0 + .012); v.gain.exponentialRampToValueAtTime(0.0001, t0 + .16);
+  o.connect(v).connect(actx.destination); o.start(t0); o.stop(t0 + .2);
+}
+function beat(now) {
+  const bpm = currentBpm();
+  beatInterval = 60 / bpm;
+  lastBeat = now; nextBeat = now + beatInterval;
+  const s = Math.max(.55, Math.min(1, beatInterval / .75));
+  rTime = now + .2 * s;
+  ripples.push(rTime);
+  if (soundOn && actx) { const t = actx.currentTime + .2 * s; thump(t, 78, .55); thump(t + .2 * s + .02, 64, .3); }
+}
+
+// ---------- ECG sweep ----------
+let ecgCol = null, sweepX = 0, ecgW = 0;
+function drawEcg(now, dt) {
+  const { w, h, dpr } = fit(cEcg);
+  if (w !== ecgW) { ecgW = w; ecgCol = new Float32Array(w).fill(NaN); sweepX = 0; }
+  const pxps = 150 * dpr, s = Math.max(.55, Math.min(1, beatInterval / .75));
+  let adv = Math.min(w, pxps * dt);
+  for (let k = 0; k < adv; k++) {
+    const tAt = now - (adv - k) / pxps;
+    const tau = tAt - lastBeat;
+    const v = tau >= 0 && tau < beatInterval + .3 ? ecgAt(tau, s) : 0;
+    ecgCol[(Math.floor(sweepX) + k) % w] = v;
+  }
+  sweepX = (sweepX + adv) % w;
+  const gap = 26 * dpr;
+  for (let k = 0; k < gap; k++) ecgCol[(Math.floor(sweepX) + k) % w] = NaN;
+  gEcg.clearRect(0, 0, w, h);
+  const mid = h * .62, amp = h * .44;
+  gEcg.lineWidth = 2 * dpr; gEcg.lineJoin = "round"; gEcg.lineCap = "round";
+  gEcg.shadowColor = "rgba(255,120,140,.75)"; gEcg.shadowBlur = 10 * dpr;
+  const CH = Math.max(6, Math.round(12 * dpr));
+  for (let x0 = 0; x0 < w; x0 += CH) {
+    const behind = ((Math.floor(sweepX) - x0 - CH) % w + w) % w;
+    const a = Math.max(.12, 1 - behind / w);
+    gEcg.strokeStyle = `rgba(255,208,213,${a})`;
+    gEcg.beginPath(); let pen = false;
+    for (let x = x0; x <= Math.min(w - 1, x0 + CH); x++) {
+      const v = ecgCol[x];
+      if (Number.isNaN(v)) { pen = false; continue; }
+      const y = mid - v * amp;
+      if (!pen) { gEcg.moveTo(x, y); pen = true; } else gEcg.lineTo(x, y);
+    }
+    gEcg.stroke();
+  }
+  gEcg.shadowBlur = 0;
+  const hx = Math.floor(sweepX) % w, hv = ecgCol[(hx - 1 + w) % w];
+  if (!Number.isNaN(hv)) { gEcg.fillStyle = "#fff"; gEcg.beginPath(); gEcg.arc(hx, mid - hv * amp, 3.2 * dpr, 0, 7); gEcg.fill(); }
+}
+
+// ---------- beating heart ----------
+function heartPath(ctx, cx, cy, r) {
+  ctx.beginPath();
+  for (let k = 0; k <= 80; k++) {
+    const t = k / 80 * Math.PI * 2;
+    const x = 16 * Math.pow(Math.sin(t), 3), y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    const px = cx + x / 17 * r, py = cy - y / 17 * r - r * .08;
+    k ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+  }
+  ctx.closePath();
+}
+const kick = x => x < 0 ? 0 : (1 - Math.exp(-x / .018)) * Math.exp(-x / .07);
+function drawHeart(now) {
+  const { w, h, dpr } = fit(cHeart);
+  gHeart.clearRect(0, 0, w, h);
+  const cx = w / 2, cy = h / 2, r0 = Math.min(w, h) * .3;
+  const s = Math.max(.55, Math.min(1, beatInterval / .75));
+  const pulse = 0.17 * kick(now - rTime) / 0.62 + 0.08 * kick(now - rTime - .2 * s) / 0.62;
+  ripples = ripples.filter(t => now - t < 1.1);
+  for (const t of ripples) {
+    const k = (now - t) / 1.1; if (k < 0) continue;
+    gHeart.strokeStyle = `rgba(229,53,79,${(1 - k) * .55})`; gHeart.lineWidth = 2 * dpr;
+    heartPath(gHeart, cx, cy, r0 * (1 + k * .9)); gHeart.stroke();
+  }
+  const r = r0 * (1 + pulse);
+  const grad = gHeart.createRadialGradient(cx - r * .3, cy - r * .4, r * .1, cx, cy, r * 1.2);
+  grad.addColorStop(0, "#ff8a98"); grad.addColorStop(.55, "#e5354f"); grad.addColorStop(1, "#8e1730");
+  gHeart.shadowColor = `rgba(229,53,79,${.35 + pulse * 3})`; gHeart.shadowBlur = (14 + pulse * 90) * dpr;
+  gHeart.fillStyle = grad; heartPath(gHeart, cx, cy, r); gHeart.fill(); gHeart.shadowBlur = 0;
+  gHeart.fillStyle = "rgba(255,255,255,.28)";
+  gHeart.beginPath(); gHeart.ellipse(cx - r * .42, cy - r * .42, r * .16, r * .09, -.6, 0, 7); gHeart.fill();
+}
+
+// ---------- network ----------
+let view = { w: 1, h: 1, dpr: 1, sx: 1, sy: 1, ox: 0, oy: 0 };
+function scaleFor(lay, w, h, pad) {
+  return lay === L.series ? [(w - 2 * pad) / 2, (h - 2 * pad) / 2] : [Math.min(w, h) / 2 - pad, Math.min(w, h) / 2 - pad];
+}
+function computeView(now) {
+  const { w, h, dpr } = fit(cNet);
+  const pad = 34 * dpr, e = ease(Math.min(1, (now - morphT0) / MORPH));
+  const a = scaleFor(from, w, h, pad), b = scaleFor(to, w, h, pad);
+  view = { w, h, dpr, sx: a[0] + (b[0] - a[0]) * e, sy: a[1] + (b[1] - a[1]) * e, ox: w / 2, oy: h / 2 };
+}
+function positions(now) {
+  const k = Math.min(1, (now - morphT0) / MORPH), e = ease(k);
+  for (let i = 0; i < 2 * N; i++) cur[i] = from[i] + (to[i] - from[i]) * e;
+}
+const BUCKETS = 10;
+function drawNet(now, shown) {
+  computeView(now);
+  const { w, h, dpr, sx, sy, ox, oy } = view;
+  positions(now);
+  gNet.clearRect(0, 0, w, h);
+  const X = i => ox + cur[2 * i] * sx, Y = i => oy + cur[2 * i + 1] * sy;
+  const nE = edgeUpTo[shown];
+  const series = to === L.series;
+  // settled edges, batched by colour
+  gNet.globalCompositeOperation = "lighter";
+  gNet.lineWidth = (series ? .7 : .8) * dpr;
+  const paths = Array.from({ length: BUCKETS }, () => new Path2D());
+  const fresh = [];
+  for (let e = 0; e < nE; e++) {
+    const a = E[e][0], b = E[e][1];
+    if (now - appear[b] < .9) { fresh.push(e); continue; }
+    const u = colorMode === "hr" ? (Math.min(D.hr[a], D.hr[b]) - HRMIN) / (HRMAX - HRMIN) : D.comm[b] / (NCOMM - 1);
+    const p = paths[Math.min(BUCKETS - 1, Math.floor(u * BUCKETS))];
+    p.moveTo(X(a), Y(a)); p.lineTo(X(b), Y(b));
+  }
+  const ea = hover >= 0 ? .05 : (series ? .16 : .2);
+  for (let k = 0; k < BUCKETS; k++) { gNet.strokeStyle = rgb(colorMode === "hr" ? ramp((k + .5) / BUCKETS) : ramp(.12 + .88 * (k + .5) / BUCKETS), ea); gNet.stroke(paths[k]); }
+  // new sightlines flash in
+  for (const e of fresh) {
+    const a = E[e][0], b = E[e][1], k = (now - appear[b]) / .9;
+    gNet.strokeStyle = `rgba(255,236,238,${(1 - k) * .9})`; gNet.lineWidth = (1.6 - k) * dpr;
+    gNet.beginPath(); gNet.moveTo(X(a), Y(a)); gNet.lineTo(X(b), Y(b)); gNet.stroke();
+  }
+  // hovered node: its sightlines
+  if (hover >= 0 && hover < shown) {
+    gNet.strokeStyle = "rgba(255,236,238,.85)"; gNet.lineWidth = 1.2 * dpr;
+    gNet.beginPath();
+    for (const j of adj[hover]) if (j < shown) { gNet.moveTo(X(hover), Y(hover)); gNet.lineTo(X(j), Y(j)); }
+    gNet.stroke();
+  }
+  gNet.globalCompositeOperation = "source-over";
+  // nodes
+  const beatGlow = Math.max(0, 1 - (now - rTime) / .45);
+  const newest = shown - 1;
+  const ego = newest >= 0 ? new Set(adj[newest].filter(j => j < shown)) : new Set();
+  for (let i = 0; i < shown; i++) {
+    const c = nodeColor(i);
+    let r = (1.4 + Math.sqrt(deg[i]) * .42) * dpr;
+    let a = hover >= 0 ? (i === hover || adj[hover].includes(i) ? 1 : .35) : .95;
+    const age = now - appear[i];
+    if (age < .5) r *= 1 + 1.6 * (1 - age / .5);
+    if ((i === newest || ego.has(i)) && playing && shown < N) r *= 1 + beatGlow * (i === newest ? 1.2 : .45);
+    gNet.fillStyle = rgb(c, a);
+    gNet.beginPath(); gNet.arc(X(i), Y(i), r, 0, 7); gNet.fill();
+  }
+  if (newest >= 0 && shown < N) {
+    gNet.strokeStyle = `rgba(255,255,255,${.4 + beatGlow * .6})`; gNet.lineWidth = 1.5 * dpr;
+    gNet.beginPath(); gNet.arc(X(newest), Y(newest), (7 + beatGlow * 8) * dpr, 0, 7); gNet.stroke();
+  }
+  if (hover >= 0 && hover < shown) {
+    gNet.strokeStyle = "#fff"; gNet.lineWidth = 2 * dpr;
+    gNet.beginPath(); gNet.arc(X(hover), Y(hover), 7 * dpr, 0, 7); gNet.stroke();
+  }
+  if (series) { // axis hints for the skyline view
+    gNet.fillStyle = "rgba(199,169,174,.8)"; gNet.font = `${11 * dpr}px "JetBrains Mono", monospace`;
+    gNet.fillText(`${HRMAX} bpm`, 8 * dpr, oy - sy - 8 * dpr); gNet.fillText(`${HRMIN} bpm`, 8 * dpr, oy + sy + 18 * dpr);
+  }
+}
+
+// ---------- series strip ----------
+function drawStrip(now, shown) {
+  const { w, h, dpr } = fit(cSer);
+  gSer.clearRect(0, 0, w, h);
+  const pl = 12 * dpr, pr = 12 * dpr, pt = 14 * dpr, pb = 20 * dpr;
+  const X = i => pl + D.secs[i] / TOTAL * (w - pl - pr);
+  const Y = i => pt + (1 - (D.hr[i] - HRMIN) / (HRMAX - HRMIN)) * (h - pt - pb);
+  // skyline bars, played part lit
+  const bw = Math.max(1, (w - pl - pr) / N * .9);
+  for (let i = 0; i < N; i++) {
+    gSer.fillStyle = i < shown ? rgb(nodeColor(i), .9) : "rgba(140,106,113,.28)";
+    gSer.fillRect(X(i) - bw / 2, Y(i), bw, h - pb - Y(i));
+  }
+  // sightlines from the current reading to the earlier readings it can see
+  const c = (hover >= 0 && hover < shown) ? hover : shown - 1;
+  if (c >= 0) {
+    gSer.strokeStyle = "rgba(255,236,238,.7)"; gSer.lineWidth = 1 * dpr; gSer.beginPath();
+    for (const j of adj[c]) if (j < shown) { gSer.moveTo(X(c), Y(c)); gSer.lineTo(X(j), Y(j)); }
+    gSer.stroke();
+    gSer.fillStyle = "#fff"; gSer.beginPath(); gSer.arc(X(c), Y(c), 3.5 * dpr, 0, 7); gSer.fill();
+    gSer.fillStyle = "rgba(255,255,255,.5)"; gSer.fillRect(X(c) - .5 * dpr, pt - 6 * dpr, 1 * dpr, h - pb - pt + 6 * dpr);
+  }
+  gSer.fillStyle = "rgba(140,106,113,1)"; gSer.font = `${10 * dpr}px "JetBrains Mono", monospace`;
+  for (let m = 0; m <= 50; m += 10) { const x = pl + m * 60 / TOTAL * (w - pl - pr); gSer.fillText(`${m}′`, x - 6 * dpr, h - 5 * dpr); }
+}
+
+// ---------- readouts ----------
+let lastReadout = -1;
+function readouts(shown) {
+  const i = Math.max(0, shown - 1);
+  if (i === lastReadout) return; lastReadout = i;
+  $("bpm").textContent = D.hr[i];
+  $("clock").textContent = `minute ${fmt(D.secs[i])} of ${fmt(TOTAL)}`;
+  $("links").textContent = `${edgeUpTo[shown].toLocaleString("en")} sightlines · ${shown} readings`;
+}
+
+// ---------- loop ----------
+let prev = performance.now() / 1000;
+function frame() {
+  const now = performance.now() / 1000, dt = Math.min(.1, now - prev); prev = now;
+  if (playing) {
+    cursor += dt * speed * N / DURATION;
+    if (cursor >= N) { cursor = N; playing = false; setPlay(); }
+  }
+  const shown = Math.max(1, Math.min(N, Math.floor(cursor)));
+  for (let i = lastShown; i < shown; i++) appear[i] = now;
+  if (shown < lastShown) for (let i = shown; i < lastShown; i++) appear[i] = -1e9;
+  lastShown = shown;
+  if (now >= nextBeat) beat(now);
+  drawEcg(now, dt); drawHeart(now); drawNet(now, shown); drawStrip(now, shown); readouts(shown);
+  requestAnimationFrame(frame);
+}
+
+// ---------- controls ----------
+function setPlay() { $("play").textContent = playing ? "Pause" : (cursor >= N ? "Replay the run" : "Play"); }
+$("play").onclick = () => {
+  if (cursor >= N) { cursor = 0; }
+  playing = !playing; setPlay();
+};
+document.querySelectorAll("[data-speed]").forEach(b => b.onclick = () => {
+  speed = +b.dataset.speed; document.querySelectorAll("[data-speed]").forEach(x => x.setAttribute("aria-pressed", x === b));
+});
+function setLayout(name) {
+  if (name === layout) return;
+  const now = performance.now() / 1000;
+  positions(now); from = cur.slice(); to = L[name]; morphT0 = reduce ? -1e9 : now; layout = name;
+  document.querySelectorAll("[data-layout]").forEach(x => x.setAttribute("aria-pressed", x.dataset.layout === name));
+}
+document.querySelectorAll("[data-layout]").forEach(b => b.onclick = () => setLayout(b.dataset.layout));
+document.querySelectorAll("[data-color]").forEach(b => b.onclick = () => {
+  colorMode = b.dataset.color;
+  document.querySelectorAll("[data-color]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("lg0").textContent = colorMode === "hr" ? HRMIN : "start";
+  $("lg1").textContent = colorMode === "hr" ? `${HRMAX} bpm` : "end of run";
+});
+$("sound").onclick = () => {
+  soundOn = !soundOn;
+  if (soundOn && !actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { soundOn = false; } }
+  if (actx && actx.state === "suspended") actx.resume();
+  $("sound").textContent = soundOn ? "Sound on" : "Sound off"; $("sound").setAttribute("aria-pressed", soundOn);
+};
+
+// hover on the network
+const tip = $("tip");
+function pick(ev) {
+  const r = cNet.getBoundingClientRect(), dpr = view.dpr;
+  const mx = (ev.clientX - r.left) * dpr, my = (ev.clientY - r.top) * dpr;
+  const shown = Math.max(1, Math.floor(cursor));
+  let best = -1, bd = (16 * dpr) ** 2;
+  for (let i = 0; i < shown; i++) {
+    const dx = view.ox + cur[2 * i] * view.sx - mx, dy = view.oy + cur[2 * i + 1] * view.sy - my, d = dx * dx + dy * dy;
+    if (d < bd) { bd = d; best = i; }
+  }
+  hover = best;
+  if (best < 0) { tip.hidden = true; return; }
+  tip.hidden = false;
+  tip.innerHTML = `<b>${D.hr[best]} bpm</b> · minute ${fmt(D.secs[best])}<br>sees ${deg[best]} other readings · community ${D.comm[best] + 1}`;
+  const x = ev.clientX - r.left, y = ev.clientY - r.top;
+  tip.style.left = Math.min(x, r.width - 250) + "px"; tip.style.top = y + "px";
+}
+cNet.addEventListener("pointermove", pick);
+cNet.addEventListener("pointerleave", () => { hover = -1; tip.hidden = true; });
+
+// scrub on the strip
+const strip = $("strip");
+function scrub(ev) {
+  const r = strip.getBoundingClientRect();
+  const u = Math.max(0, Math.min(1, (ev.clientX - r.left - 12) / (r.width - 24)));
+  const t = u * TOTAL; let k = 0; while (k < N && D.secs[k] <= t) k++;
+  cursor = Math.max(1, k); playing = false; setPlay();
+}
+strip.addEventListener("pointerdown", ev => { strip.setPointerCapture(ev.pointerId); scrub(ev); });
+strip.addEventListener("pointermove", ev => { if (ev.buttons) scrub(ev); });
+
+// ---------- story: facts + degree chart ----------
+const S = D.stats;
+const facts = [
+  [S.nodes, "heart-rate readings (nodes)"], [S.edges.toLocaleString("en"), "sightlines (edges)"],
+  [S.mean_degree, "average readings each one sees"], [S.communities, `communities · modularity ${S.modularity}`],
+  [S.clustering, "clustering coefficient"], [S.path_length, "steps between any two readings, on average"],
+];
+$("facts").innerHTML = facts.map(([v, k]) => `<div class="fact"><span class="v">${v}</span><span class="k">${k}</span></div>`).join("");
+const h0 = S.hubs[0];
+$("hubline").textContent = `the busiest node is minute ${fmt(h0.s)}, the run's peak at ${h0.hr} bpm, and it sees ${h0.k} other readings.`;
+$("gammaline").textContent = `−${S.gamma}`;
+
+(function degreeChart() {
+  const svg = $("deg"), W = 520, H = 330, ml = 52, mr = 16, mt = 14, mb = 40;
+  const ks = D.degdist.bin_k, ps = D.degdist.bin_p;
+  const lx0 = 0, lx1 = Math.ceil(Math.log10(Math.max(...ks)) * 2) / 2 + .05;
+  const ly0 = Math.floor(Math.log10(Math.min(...ps))), ly1 = 0;
+  const X = k => ml + (Math.log10(k) - lx0) / (lx1 - lx0) * (W - ml - mr);
+  const Y = p => mt + (ly1 - Math.log10(p)) / (ly1 - ly0) * (H - mt - mb);
+  let s = "";
+  for (let e = ly0; e <= ly1; e++) s += `<line class="axis" x1="${ml}" x2="${W - mr}" y1="${Y(10 ** e)}" y2="${Y(10 ** e)}"/><text x="${ml - 8}" y="${Y(10 ** e) + 4}" text-anchor="end">10${e === 0 ? "⁰" : "⁻" + "⁰¹²³⁴⁵⁶"[-e]}</text>`;
+  for (const k of [1, 10, 100]) if (Math.log10(k) <= lx1) s += `<text x="${X(k)}" y="${H - mb + 18}" text-anchor="middle">${k}</text>`;
+  s += `<text x="${(ml + W - mr) / 2}" y="${H - 6}" text-anchor="middle">degree k (readings seen)</text>`;
+  s += `<text x="14" y="${(mt + H - mb) / 2}" text-anchor="middle" transform="rotate(-90 14 ${(mt + H - mb) / 2})">P(k)</text>`;
+  const [m, b] = D.degdist.fit, kA = Math.min(...ks), kB = Math.max(...ks);
+  s += `<path class="fit" d="M${X(kA)},${Y(10 ** (b + m * Math.log10(kA)))} L${X(kB)},${Y(10 ** (b + m * Math.log10(kB)))}"/>`;
+  s += `<text x="${X(kA) + 18}" y="${Y(10 ** (b + m * Math.log10(kA))) - 4}" style="fill:var(--ink-2)">slope −${S.gamma}</text>`;
+  ks.forEach((k, i) => { s += `<circle class="pt" cx="${X(k)}" cy="${Y(ps[i])}" r="6" data-i="${i}"/><circle cx="${X(k)}" cy="${Y(ps[i])}" r="14" fill="transparent" data-i="${i}"/>`; });
+  svg.innerHTML = s;
+  const tt = $("degtip");
+  svg.addEventListener("pointermove", ev => {
+    const i = ev.target.dataset && ev.target.dataset.i;
+    if (i === undefined) { tt.hidden = true; return; }
+    const r = svg.getBoundingClientRect(), fr = svg.parentElement.getBoundingClientRect();
+    tt.hidden = false; tt.textContent = `k ≈ ${ks[i]} · P(k) = ${(+ps[i]).toPrecision(2)}`;
+    tt.style.left = (ev.clientX - fr.left + 12) + "px"; tt.style.top = (ev.clientY - fr.top - 30) + "px";
+  });
+  svg.addEventListener("pointerleave", () => tt.hidden = true);
+})();
+
+// URL options, for embeds and links: ?layout=series|net|heart&color=hr|comm&at=0..1&autoplay=0
+const qLayout = params.get("layout"), qColor = params.get("color"), qAt = params.get("at");
+if (qLayout && L[qLayout]) { from = to = L[qLayout]; layout = qLayout; document.querySelectorAll("[data-layout]").forEach(x => x.setAttribute("aria-pressed", x.dataset.layout === qLayout)); }
+if (qColor === "comm") document.querySelector('[data-color="comm"]').click();
+const autoplay = !reduce && params.get("autoplay") !== "0" && qAt === null;
+if (qAt !== null) { cursor = Math.max(1, Math.round(N * Math.min(1, +qAt || 0))); lastShown = cursor; playing = false; }
+setPlay();
+// start the replay when the monitor is in view; the graph is complete until then
+if (autoplay && "IntersectionObserver" in window) {
+  cursor = N; lastShown = N; playing = false; setPlay();
+  let started = false;
+  new IntersectionObserver((es, ob) => {
+    if (!started && es[0].isIntersecting) { started = true; ob.disconnect(); setTimeout(() => { cursor = 0; playing = true; setPlay(); }, 900); }
+  }, { threshold: .35 }).observe($("stage"));
+} else if (!autoplay && qAt === null) { cursor = N; lastShown = N; playing = false; setPlay(); }
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

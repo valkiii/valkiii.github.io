@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Household finance dashboard · Valerio Ciotti</title>
+<meta name="description" content="A private dashboard for bank transactions, investments, pension, mortgage and Dutch tax rules, served from a Raspberry Pi and reachable only over Tailscale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-home); --on: var(--on-home)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#home">Home lab</a></p>
+      <h1>Household finance dashboard</h1>
+      <p class="question">Where does the money go, month by month?</p>
+      <p class="lede">A private dashboard for bank transactions, investments, pension, mortgage and Dutch tax rules, served from a Raspberry Pi and reachable only over Tailscale.</p>
+      <p class="actions">
+      </p>
+      <p class="facts"><span>September 2026</span><span class="status s-in-use">in use</span><span>Home lab</span><span>Data science</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><svg class="poster wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Household finance dashboard" style="--c: var(--uc-home); --on: var(--on-home)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-38.2421875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(48.359375 160 100)"/><rect x="25.7578125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(48.359375 160 100)"/><rect x="89.7578125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(48.359375 160 100)"/><rect x="153.7578125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(48.359375 160 100)"/><rect x="217.7578125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(48.359375 160 100)"/><rect x="281.7578125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(48.359375 160 100)"/>  <circle cx="241.953125" cy="121.328125" r="62.21875" class="p-disc"/>
+  <text x="24" y="172" class="p-title">Household finance dashboard</text>
+</svg>
+</figure>
+
+<section class="wrap tiles"><div><b>0</b><span>personal data in the code repository</span></div><div><b>1</b><span>HTML page, phone first</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">Banking apps show balances. I wanted trends: every category month by month, what changed, and why a number is what it is.
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>Ingest</b><p>Bank and broker exports are parsed and categorised with rules I can edit from the page.</p></li><li><span class="n">02</span><b>Explain</b><p>Every number opens a panel that shows how it is worked out.</p></li><li><span class="n">03</span><b>Stay private</b><p>The server refuses to listen on public interfaces; the code repository holds no data.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>Re-categorising in the page beats editing rules in a file. You fix things when you see them.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>Python</span><span>vanilla JavaScript</span><span>Raspberry Pi</span><span>Tailscale</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../../../showcase/clustering/" style="--c: var(--uc-data); --on: var(--on-data)">
+  <span class="media"><img src="../../../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Data science</span><span class="meta">Oct 2026</span></span>
+    <b>Cluster the reasons</b>
+    <span class="q">How do you turn a gut-feeling rule into personas a team can use?</span>
+    <span class="status s-essay">essay</span>
+  </span>
+</a>
+<a class="card " href="../eulerian/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Seeing the invisible</b>
+    <span class="q">Can a webcam see your pulse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../marquee/" style="--c: var(--uc-home); --on: var(--on-home)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Marquee" style="--c: var(--uc-home); --on: var(--on-home)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-32.96875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="31.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="95.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="159.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="223.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/><rect x="287.03125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(24.3359375 160 100)"/>  <circle cx="238.203125" cy="81.015625" r="48.8125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">Marquee</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Home lab</span><span class="meta">Oct 2026</span></span>
+    <b>Marquee</b>
+    <span class="q">Can a Raspberry Pi be my Plex?</span>
+    <span class="status s-in-use">in use</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>

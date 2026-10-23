@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Four in a Row vs the Ensemble</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Play Connect 4 against five neural networks that learned the game by playing hundreds of thousands of games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<style>
+/* Layout: the same warm paper and watercolour as "Someone to play with". The board is a painted sketch on the left,
+   the ensemble's opinion is a row of washes under it, notes in the margin on the right. A single light paper look, by design. */
+:root {
+  color-scheme: light;
+  --paper: #FAF6EE; --paper-2: #F2EBDD; --rule: #E6DCCB;
+  --ink: #2E2925; --ink-soft: #6B6158; --ink-faint: #BDB2A2;
+  --w-blue: #8FB0DA; --w-sage: #9CC39A; --w-lav: #B9A3DD; --w-ochre: #EBC27E; --w-rose: #E8A596;
+  --sage-ink: #4E7D55; --lav-ink: #6C54A2; --blue-ink: #4A6E9E;
+  --display: "Young Serif", Georgia, "Times New Roman", serif;
+  --body: "Newsreader", Georgia, "Times New Roman", serif;
+  --hand: "Kalam", "Segoe Print", "Comic Sans MS", cursive;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--ink); font: 400 19px/1.6 var(--body); background-color: var(--paper);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .30  0 0 0 0 .24  0 0 0 .075 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 64px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 48px; align-items: start; }
+header { grid-column: 1 / -1; display: grid; gap: 14px; }
+.kicker { font: 400 21px/1.2 var(--hand); color: var(--ink-soft); }
+h1 { margin: 0; font: 400 clamp(44px, 7vw, 86px)/1 var(--display); letter-spacing: -.015em; text-wrap: balance; }
+h1 .hl { background: linear-gradient(transparent 58%, rgba(185,163,221,.5) 58%, rgba(185,163,221,.5) 92%, transparent 92%); }
+.lede { margin: 0; max-width: 36em; font-size: clamp(19px, 2vw, 22px); }
+.game { display: grid; gap: 14px; min-width: 0; }
+.stage { position: relative; width: 100%; aspect-ratio: 736 / 900; max-width: 640px; justify-self: center; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: manipulation; cursor: pointer; }
+.stage canvas:focus-visible { outline: 2px dashed var(--blue-ink); outline-offset: 6px; border-radius: 12px; }
+.status { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; max-width: 640px; justify-self: center; width: 100%; }
+.turn { font: 400 26px/1.2 var(--hand); }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; }
+button { font: 400 19px/1 var(--hand); color: var(--ink); background: transparent; border: 0; padding: 8px 14px; cursor: pointer; position: relative; }
+button::before { content: ""; position: absolute; inset: 2px -2px; border: 1.6px solid var(--ink); border-radius: 18px 14px 20px 12px / 14px 20px 12px 18px; }
+button.primary::after { content: ""; position: absolute; inset: 4px 0; z-index: -1; background: var(--w-ochre); opacity: .55; border-radius: 40% 30% 45% 35% / 50% 40% 55% 45%; filter: blur(1px); }
+button:disabled { opacity: .4; cursor: default; }
+button:focus-visible { outline: 2px dashed var(--blue-ink); outline-offset: 4px; }
+aside { display: grid; gap: 30px; padding-top: 10px; }
+aside h2 { margin: 0 0 6px; font: 400 26px/1.15 var(--display); }
+aside p { margin: 0; color: var(--ink-soft); font-size: 17px; }
+.tally { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; gap: 6px; }
+.tally b { display: block; font: 400 46px/1 var(--display); font-variant-numeric: tabular-nums; }
+.tally span { font: 400 18px/1.3 var(--hand); color: var(--ink-soft); }
+.tally .you b { color: var(--sage-ink); } .tally .ai b { color: var(--lav-ink); }
+.models { display: grid; gap: 4px; font: 400 17px/1.35 var(--hand); color: var(--ink-soft); margin-top: 8px; }
+.models div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--rule); }
+.log { font: 400 17px/1.5 var(--hand); color: var(--ink-soft); max-height: 170px; overflow: auto; columns: 2; }
+.note { font: 400 17px/1.4 var(--hand); color: var(--ink-faint); }
+body.embed { padding-block: 8px 16px; } body.embed header { display: none; }
+@media (max-width: 880px) { .wrap { grid-template-columns: minmax(0, 1fr); } aside { padding-top: 0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">reinforcement learning · play it right here</div>
+    <h1>Four in a row against <span class="hl">five networks</span></h1>
+    <p class="lede">Five convolutional networks learned Connect 4 by playing hundreds of thousands of games, then won a tournament against 35 other AIs as a team. They run in your browser. The washes under the board show how much the team likes each column before it moves.</p>
+  </header>
+
+  <section class="game" aria-label="Game">
+    <div class="stage"><canvas id="c" tabindex="0" aria-label="Connect 4 board. Click a column, or press 1 to 7."></canvas></div>
+    <div class="status">
+      <div class="turn" id="turn" aria-live="polite">warming up the networks…</div>
+      <div class="btns">
+        <button type="button" id="hint" disabled>hint</button>
+        <button type="button" id="aifirst">let the AI start</button>
+        <button type="button" class="primary" id="new">new game</button>
+      </div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="tally"><div class="you"><b id="w1">0</b><span>you</span></div><div><b id="dr">0</b><span>draws</span></div><div class="ai"><b id="w2">0</b><span>the networks</span></div></div>
+    <div>
+      <h2>How it decides</h2>
+      <p>Each network sees the board as two 6 × 7 layers, its discs and yours, and scores all seven columns. The team averages the scores with fixed weights and plays the best legal column. Under the board you can see how many of the five would have chosen the same column on their own.</p>
+      <div class="models" id="models"></div>
+    </div>
+    <div>
+      <h2>Moves</h2>
+      <div class="log" id="log">—</div>
+    </div>
+    <p class="note">keys: 1–7 to drop · H for a hint · N for a new game</p>
+  </aside>
+</div>
+
+<script src="c4net.js"></script>
+<script>
+(async () => {
+"use strict";
+if (new URLSearchParams(location.search).has("embed")) document.body.classList.add("embed");
+const ROWS = 6, COLS = 7, YOU = 1, AI = 2;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+
+// ---------- geometry (viewBox units) ----------
+const VW = 736, VH = 900, CELL = 96, BX = 32, BY = 128, R = 38;
+const cx = c => BX + CELL / 2 + c * CELL, cy = r => BY + CELL / 2 + r * CELL;
+const BAR_Y = BY + ROWS * CELL + 62, BAR_H = 92;
+
+// ---------- watercolour sprites: SVG with the story's filters, rasterised once ----------
+const FILTERS = (seed) => `<filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="${seed}" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+  <feGaussianBlur in="d" stdDeviation="1.6" result="b"/><feMorphology in="d" operator="erode" radius="2" result="e"/>
+  <feComposite in="b" in2="e" operator="out" result="edge"/><feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+  <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge></filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="${seed + 3}" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>`;
+function sprite(w, h, body, seed, scale) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w * scale}" height="${h * scale}" viewBox="0 0 ${w} ${h}"><defs>${FILTERS(seed)}</defs>${body}</svg>`;
+  return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg); });
+}
+const INK = "#2E2925", PAPER = "#FAF6EE";
+const COL = { 1: { wash: "#9CC39A", ink: "#4E7D55" }, 2: { wash: "#B9A3DD", ink: "#6C54A2" } };
+let S = {};
+async function buildSprites(scale) {
+  let holes = "", cuts = "";
+  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+    holes += `<circle cx="${cx(c)}" cy="${cy(r)}" r="${R + 2}" fill="none" stroke="${INK}" stroke-width="2" filter="url(#rough)"/>`;
+    cuts += `<circle cx="${cx(c)}" cy="${cy(r)}" r="${R + 2}" fill="black"/>`;
+  }
+  // the painted board has real holes: tokens are drawn first and show through them
+  const board = `<mask id="holes"><rect width="${VW}" height="${VH}" fill="white"/>${cuts}</mask>
+    <g mask="url(#holes)"><rect x="${BX - 14}" y="${BY - 14}" width="${COLS * CELL + 28}" height="${ROWS * CELL + 28}" rx="26" fill="#8FB0DA" opacity=".6" filter="url(#wc)"/>
+    <rect x="${BX - 6}" y="${BY - 6}" width="${COLS * CELL + 12}" height="${ROWS * CELL + 12}" rx="22" fill="${PAPER}" opacity=".35"/></g>
+    <rect x="${BX - 6}" y="${BY - 6}" width="${COLS * CELL + 12}" height="${ROWS * CELL + 12}" rx="22" fill="none" stroke="${INK}" stroke-width="2.6" filter="url(#rough)"/>
+    ${holes}
+    <path d="M${BX - 30} ${BY + ROWS * CELL + 22} L${BX + COLS * CELL + 30} ${BY + ROWS * CELL + 22}" stroke="${INK}" stroke-width="2.4" filter="url(#rough)"/>
+    <path d="M${BX + 8} ${BY + ROWS * CELL + 8} l-14 28 M${BX + COLS * CELL - 8} ${BY + ROWS * CELL + 8} l14 28" stroke="${INK}" stroke-width="2.4" stroke-linecap="round" filter="url(#rough)"/>
+    <ellipse cx="${VW / 2}" cy="${BY + ROWS * CELL + 30}" rx="${COLS * CELL * .55}" ry="12" fill="#9CC39A" opacity=".35" filter="url(#wc)"/>`;
+  S.board = await sprite(VW, VH, board, 9, scale);
+  const tok = (p, seed) => sprite(120, 120, `<circle cx="60" cy="60" r="${R + 2}" fill="${COL[p].wash}" opacity=".95" filter="url(#wc)"/>
+    <circle cx="60" cy="60" r="${R - 4}" fill="none" stroke="${INK}" stroke-width="2.2" filter="url(#rough)"/>
+    <circle cx="60" cy="60" r="${R - 16}" fill="none" stroke="${COL[p].ink}" stroke-width="1.6" opacity=".7" filter="url(#rough)"/>
+    <path d="M44 48 q8 -10 20 -8" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".55" fill="none"/>`, seed, scale);
+  S.tok = { 1: await Promise.all([3, 11, 17].map(s => tok(1, s))), 2: await Promise.all([5, 13, 21].map(s => tok(2, s))) };
+  S.bar = await Promise.all([0, 1, 2, 3, 4, 5, 6].map(k => sprite(80, BAR_H + 30, `<rect x="10" y="12" width="60" height="${BAR_H}" rx="10" fill="#B9A3DD" opacity=".85" filter="url(#wc)"/>`, 30 + k, scale)));
+  S.barBest = await sprite(80, BAR_H + 30, `<rect x="10" y="12" width="60" height="${BAR_H}" rx="10" fill="#EBC27E" opacity=".95" filter="url(#wc)"/>`, 41, scale);
+}
+
+// ---------- canvas ----------
+const cv = $("c"), ctx = cv.getContext("2d");
+let scale = 1, dpr = 1;
+function resize() {
+  const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+  cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+  scale = cv.width / VW;
+}
+
+// ---------- game state ----------
+let board, tokens = [], over = false, busy = true, net = null, aiFirst = false, moves = [], winLine = null, winT0 = 0;
+let scores = null, scoreT0 = 0, hoverC = 3, ghostX = cx(3), ghostOn = false, msgHand = "";
+const tally = { 1: 0, 2: 0, d: 0 };
+try { Object.assign(tally, JSON.parse(localStorage.getItem("c4-tally") || "{}")); } catch (e) {}
+const legal = b => [...Array(COLS).keys()].filter(c => b[0][c] === 0);
+const dropRow = (b, c) => { for (let r = ROWS - 1; r >= 0; r--) if (b[r][c] === 0) return r; return -1; };
+function winner(b) {
+  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+    const p = b[r][c]; if (!p) continue;
+    for (const [dr, dc] of [[0, 1], [1, 0], [1, 1], [1, -1]]) {
+      const line = [[r, c]];
+      for (let k = 1; k < 4; k++) { const rr = r + dr * k, cc = c + dc * k; if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS || b[rr][cc] !== p) break; line.push([rr, cc]); }
+      if (line.length === 4) return { p, line };
+    }
+  }
+  return null;
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function setTurn(t) { $("turn").textContent = t; }
+
+// a token falls with gravity and settles with two small bounces
+function place(c, p) {
+  const r = dropRow(board, c); if (r < 0) return null;
+  board[r][c] = p;
+  const t = { r, c, p, y: BY - CELL * .9, vy: 0, target: cy(r), done: reduce, v: Math.floor(Math.random() * 3), bounces: 0 };
+  if (reduce) t.y = t.target;
+  tokens.push(t);
+  moves.push(`${p === YOU ? "you" : "AI"} · ${"ABCDEFG"[c]}`);
+  $("log").innerHTML = moves.map((m, i) => `${i + 1}. ${m}`).join("<br>");
+  $("log").scrollTop = 1e9;
+  return new Promise(res => { t.onDone = res; if (reduce) res(); });
+}
+function stepTokens(dt) {
+  for (const t of tokens) {
+    if (t.done) continue;
+    t.vy += 5200 * dt; t.y += t.vy * dt;
+    if (t.y >= t.target) {
+      t.y = t.target;
+      if (t.bounces < 2 && t.vy > 260) { t.vy = -t.vy * .28; t.bounces++; }
+      else { t.vy = 0; t.done = true; t.onDone && t.onDone(); }
+    }
+  }
+}
+
+// ---------- drawing ----------
+function draw(now) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  // ghost token above the hovered column
+  ghostX += (cx(hoverC) - ghostX) * Math.min(1, (reduce ? 1 : .22));
+  if (ghostOn && !busy && !over && net) {
+    ctx.globalAlpha = .5 + .08 * Math.sin(now * 3);
+    ctx.drawImage(S.tok[YOU][0], ghostX - 60, BY - CELL * .95 - 60 + 48, 120, 120);
+    ctx.globalAlpha = 1;
+  }
+  // tokens first: the board is painted over them, so they fall behind it and show through the holes
+  for (const t of tokens) ctx.drawImage(S.tok[t.p][t.v], cx(t.c) - 60, t.y - 60, 120, 120);
+  ctx.drawImage(S.board, 0, 0, VW, VH);
+  // winning line, drawn like a pen stroke
+  if (winLine) {
+    const k = reduce ? 1 : Math.min(1, (now - winT0) / .7);
+    const pts = winLine.line.map(([r, c]) => [cx(c), cy(r)]);
+    const [a, b] = [pts[0], pts[3]];
+    ctx.lineCap = "round"; ctx.strokeStyle = "rgba(235,194,126,.55)"; ctx.lineWidth = 34;
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k); ctx.stroke();
+    ctx.strokeStyle = INK; ctx.lineWidth = 3.2;
+    ctx.beginPath(); ctx.moveTo(a[0] - 6, a[1] + 3);
+    const steps = 24;
+    for (let i = 1; i <= Math.round(steps * k); i++) { const f = i / steps; ctx.lineTo(a[0] + (b[0] - a[0]) * f + Math.sin(i * 1.7) * 1.6, a[1] + (b[1] - a[1]) * f + Math.cos(i * 1.3) * 1.6); }
+    ctx.stroke();
+  }
+  // the ensemble's opinion: one wash per column, grown smoothly
+  ctx.font = "400 22px Kalam, cursive"; ctx.textAlign = "center"; ctx.fillStyle = "#6B6158";
+  for (let c = 0; c < COLS; c++) ctx.fillText("ABCDEFG"[c], cx(c), BAR_Y + BAR_H + 30);
+  if (scores) {
+    const k = reduce ? 1 : Math.min(1, (now - scoreT0) / .6), e = 1 - Math.pow(1 - k, 3);
+    const { q, lo, hi, best, legalCols } = scores;
+    const norm = v => .18 + .82 * (v - lo) / Math.max(1e-6, hi - lo);
+    for (let c = 0; c < COLS; c++) {
+      if (!legalCols.includes(c)) continue;
+      const h = BAR_H * norm(q[c]) * e, img = c === best ? S.barBest : S.bar[c];
+      const sy = 12 + BAR_H - h;
+      ctx.drawImage(img, 0, sy * img.width / 80, img.width, (h + 6) * img.width / 80, cx(c) - 40, BAR_Y + BAR_H - h, 80, h + 6);
+      if (k === 1) { ctx.fillStyle = "#6B6158"; ctx.font = "400 18px Kalam, cursive"; ctx.fillText(q[c].toFixed(1), cx(c), BAR_Y + BAR_H - h - 6); }
+    }
+  } else {
+    ctx.fillStyle = "#BDB2A2"; ctx.font = "400 21px Kalam, cursive";
+    ctx.fillText(msgHand || "the networks' opinion appears here when they think", VW / 2, BAR_Y + BAR_H / 2);
+  }
+}
+let prev = performance.now() / 1000;
+function frame() {
+  const now = performance.now() / 1000, dt = Math.min(.033, now - prev); prev = now;
+  stepTokens(dt); draw(now);
+  requestAnimationFrame(frame);
+}
+
+// ---------- turns ----------
+function showScores(th) {
+  const L = legal(board), live = L.map(c => th.q[c]);
+  let best = L[0]; for (const c of L) if (th.q[c] > th.q[best]) best = c;
+  // how many networks, on their own, would choose the team's column
+  const agree = th.each.filter(e => L.reduce((b, c) => e[c] > e[b] ? c : b, L[0]) === best).length;
+  scores = { q: th.q, lo: Math.min(...live), hi: Math.max(...live), best, legalCols: L, agree }; scoreT0 = performance.now() / 1000;
+  return best;
+}
+function finish() {
+  const w = winner(board);
+  if (w) { over = true; winLine = w; winT0 = performance.now() / 1000; tally[w.p]++; setTurn(w.p === YOU ? "you win! the networks will remember nothing." : "the networks win this one."); }
+  else if (!legal(board).length) { over = true; tally.d++; setTurn("a draw."); }
+  if (over) { save(); $("hint").disabled = true; }
+  return over;
+}
+function save() { $("w1").textContent = tally[1]; $("w2").textContent = tally[2]; $("dr").textContent = tally.d; try { localStorage.setItem("c4-tally", JSON.stringify(tally)); } catch (e) {} }
+async function aiMove() {
+  busy = true; setTurn("the networks are thinking…");
+  await sleep(250);
+  const best = showScores(net.think(board, AI));
+  await sleep(reduce ? 200 : 750);
+  await place(best, AI);
+  if (!finish()) { busy = false; setTurn(`they played ${"ABCDEFG"[best]} (${scores.agree} of 5 agreed). Your turn`); $("hint").disabled = false; }
+}
+async function play(c) {
+  if (busy || over || !net || !legal(board).includes(c)) return;
+  busy = true; $("hint").disabled = true; scores = null; msgHand = "";
+  await place(c, YOU);
+  if (!finish()) aiMove();
+}
+function newGame() {
+  board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+  tokens = []; over = false; moves = []; winLine = null; scores = null; msgHand = ""; $("log").textContent = "—";
+  if (aiFirst) aiMove(); else { busy = false; setTurn("your turn: pick a column"); $("hint").disabled = false; }
+}
+function hint() {
+  if (busy || over || !net) return;
+  const best = showScores(net.think(board, YOU));
+  setTurn(`the networks would play ${"ABCDEFG"[best]} · ${scores.agree} of 5 agree`);
+}
+
+// ---------- input ----------
+function colAt(ev) {
+  const r = cv.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * VW;
+  return Math.max(0, Math.min(COLS - 1, Math.floor((x - BX) / CELL)));
+}
+cv.addEventListener("pointermove", ev => { hoverC = colAt(ev); ghostOn = true; });
+cv.addEventListener("pointerleave", () => { ghostOn = false; });
+cv.addEventListener("click", ev => play(colAt(ev)));
+document.addEventListener("keydown", e => {
+  if (e.key >= "1" && e.key <= "7") { hoverC = +e.key - 1; play(hoverC); }
+  else if (e.key === "ArrowLeft") { hoverC = Math.max(0, hoverC - 1); ghostOn = true; }
+  else if (e.key === "ArrowRight") { hoverC = Math.min(6, hoverC + 1); ghostOn = true; }
+  else if ((e.key === "Enter" || e.key === " ") && document.activeElement === cv) { e.preventDefault(); play(hoverC); }
+  else if (e.key === "h" || e.key === "H") hint();
+  else if (e.key === "n" || e.key === "N") newGame();
+});
+$("new").onclick = newGame; $("hint").onclick = hint;
+$("aifirst").onclick = () => { aiFirst = !aiFirst; $("aifirst").textContent = aiFirst ? "let me start" : "let the AI start"; newGame(); };
+
+// ---------- start ----------
+resize();
+addEventListener("resize", async () => { const old = scale; resize(); if (Math.abs(scale - old) > .3) await buildSprites(Math.max(1, scale)); });
+save();
+try { await document.fonts.load("22px Kalam"); } catch (e) {}
+await buildSprites(Math.max(1, scale));
+board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+requestAnimationFrame(frame);
+try {
+  net = await C4Net.load("./");
+  $("models").innerHTML = net.models.map(m => `<div><span>${m.name}</span><span>weight ${m.weight.toFixed(2)}</span></div>`).join("");
+  newGame();
+} catch (e) {
+  console.error(e); setTurn("the networks could not load. Reload the page to try again.");
+}
+})();
+</script>
+</body>
+</html>

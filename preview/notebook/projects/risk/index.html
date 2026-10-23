@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Risk engine · Valerio Ciotti</title>
+<meta name="description" content="The board game Risk as a Python engine, with the full map, turn logic and AI agents that play each other.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+    <feMorphology in="d" operator="erode" radius="2" result="e"/>
+    <feComposite in="b" in2="e" operator="out" result="edge"/>
+    <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+  </filter>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti<span>'s notebook</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Journal</a><a href="../" aria-current="page">By use</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--w: var(--w-play)">
+  <header class="wrap story-head">
+    <p class="hand crumbs"><a href="../../">notebook</a> · august 2025 · archive</p>
+    <h1>Risk engine</h1>
+    <p class="question">Can agents learn to conquer the world?</p>
+    <p class="lede">The board game Risk as a Python engine, with the full map, turn logic and AI agents that play each other.</p>
+    <p class="actions">
+<a class="btn" href="https://github.com/valkiii/risk-ai-project" target="_blank" rel="noopener">code on github ↗</a>    </p>
+    <span class="tags"><span class="tag" style="--w: var(--w-play)">games</span></span>
+  </header>
+
+  <figure class="wrap taped">
+    <span class="tape l" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+<svg class="wash-cover wide" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Risk engine" style="--w: var(--w-play)">
+  <ellipse cx="167.96875" cy="126.5625" rx="149.21875" ry="82.03125" class="w1" filter="url(#wc)"/>
+  <ellipse cx="296.875" cy="151.0546875" rx="82.65625" ry="63.046875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="174.5625" text-anchor="middle" class="init">R</text>
+  <path d="M63.125 210 q 80 -21.265625 160 0 t 120 -3.4375" class="line" filter="url(#rough)"/>
+</svg>
+  </figure>
+
+  <section class="wrap ch">
+    <div class="txt">
+      <p class="kicker">the idea</p>
+      <p class="big">Before Connect 4, I wanted an environment with more going on: territories, dice and alliances.
+</p>
+    </div>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">how it works</p>
+    <ol class="steps">
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">1</text></svg>
+        <div><h3>Map</h3><p>Every territory and continent as an adjacency graph.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">2</text></svg>
+        <div><h3>Rules</h3><p>Reinforcement, attack and fortification, turn by turn.</p></div>
+      </li>
+      <li>
+        <svg class="num" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="blob" filter="url(#wc)"/><circle cx="30" cy="30" r="20" class="ring" filter="url(#rough)"/><text x="30" y="38" text-anchor="middle">3</text></svg>
+        <div><h3>Agents</h3><p>Simple AI players and a map that draws the state of the game.</p></div>
+      </li>
+    </ol>
+  </section>
+
+
+  <section class="wrap ch stack">
+    <p class="kicker">made with</p>
+    <p class="made"><span>Python</span><span>Matplotlib</span></p>
+  </section>
+
+  <section class="wrap ch stack">
+    <p class="kicker">on nearby pages</p>
+    <div class="smalls"><a class="small" href="../pulp/">
+  <span class="pic"><svg class="wash-cover" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--w: var(--w-play)">
+  <ellipse cx="183.203125" cy="120.46875" rx="156.09375" ry="87.65625" class="w1" filter="url(#wc)"/>
+  <ellipse cx="278.75" cy="168.3984375" rx="80.78125" ry="59.921875" class="w2" filter="url(#wc)"/>
+  <text x="200" y="175.578125" text-anchor="middle" class="init">P</text>
+  <path d="M83.125 210 q 80 -11.0390625 160 0 t 120 2.96875" class="line" filter="url(#rough)"/>
+</svg>
+</span>
+  <span class="hand when">oct 2026</span>
+  <b>PULP</b>
+  <span>Can you play Fruit Ninja with your eyes?</span>
+</a>
+<a class="small" href="../spellstorm/">
+  <span class="pic"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Spellstorm</b>
+  <span>Can a survivors-style game work for a five-year-old and a teenager?</span>
+</a>
+<a class="small" href="../drawbluff/">
+  <span class="pic"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="hand when">oct 2026</span>
+  <b>Drawbluff</b>
+  <span>Can I host a Drawful-style party game from a laptop?</span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <p class="hand">imagine, try, solve.</p>
+  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></p>
+</footer>
+</body>
+</html>

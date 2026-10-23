@@ -1,0 +1,1174 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Someone to Play With</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Kalam:wght@400;700&display=swap">
+<style>
+/* Layout: one calm reading column on warm paper; ink sketches draw themselves as you scroll, watercolor washes bloom behind them,
+   and a dashed thread in the margin carries a token from chapter to chapter. Deliberately a single light, paper look. */
+:root{
+  color-scheme:light;
+  --paper:#FAF6EE; --paper-2:#F2EBDD; --rule:#E6DCCB;
+  --ink:#2E2925; --ink-soft:#6B6158; --ink-faint:#BDB2A2;
+  --w-blue:#8FB0DA; --w-sage:#9CC39A; --w-lav:#B9A3DD; --w-ochre:#EBC27E; --w-rose:#E8A596;
+  --sage-ink:#4E7D55; --lav-ink:#6C54A2; --blue-ink:#4A6E9E;
+  --hl:rgba(235,194,126,.45);
+  --display:"Young Serif",Georgia,"Times New Roman",serif;
+  --body:"Newsreader",Georgia,"Times New Roman",serif;
+  --hand:"Kalam","Segoe Print","Comic Sans MS",cursive;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;padding-inline:20px;color:var(--ink);font:400 20px/1.65 var(--body);
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .30  0 0 0 0 .24  0 0 0 .075 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  overflow-x:hidden;
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:focus-visible{outline:2px dashed var(--blue-ink);outline-offset:4px}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0}
+em.hl,.hl{font-style:normal;background:linear-gradient(transparent 56%,var(--hl) 56%,var(--hl) 92%,transparent 92%)}
+b{font-weight:500;color:var(--ink)}
+
+/* ---------- structure ---------- */
+main#story{position:relative}
+.wrap{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.kicker{font:400 21px/1.2 var(--hand);color:var(--ink-soft)}
+h2{font:400 clamp(32px,4.2vw,48px)/1.12 var(--display);letter-spacing:-.005em}
+.txt{display:flex;flex-direction:column;gap:18px;min-width:0}
+.txt p{max-width:34em;color:var(--ink)}
+.txt p.soft{color:var(--ink-soft)}
+.ch{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:56px;align-items:center;padding-block:72px}
+.ch.flip .txt{order:2}
+.ch.stack{grid-template-columns:minmax(0,1fr);gap:36px}
+.ch.stack .txt{max-width:720px}
+figure{margin:0;min-width:0}
+figure svg{display:block;width:100%;height:auto;overflow:visible}
+figcaption{font:400 18px/1.4 var(--hand);color:var(--ink-soft);text-align:center;margin-top:6px}
+@media (max-width:820px){
+  body{font-size:18.5px}
+  .ch{grid-template-columns:minmax(0,1fr);gap:26px;padding-block:44px}
+  .ch.flip .txt{order:0}
+}
+
+/* ---------- hero ---------- */
+.hero{padding-block:64px 8px;display:grid;gap:18px}
+.hero h1{font:400 clamp(52px,9vw,112px)/.98 var(--display);letter-spacing:-.015em}
+.hero .sub{font:400 clamp(21px,2.3vw,27px)/1.45 var(--body);max-width:30em;color:var(--ink)}
+.hero .meta{font:400 19px/1.4 var(--hand);color:var(--ink-soft)}
+.cue{display:flex;align-items:center;gap:10px;justify-content:center;font:400 20px/1 var(--hand);color:var(--ink-soft);padding-block:6px 28px}
+.cue svg{width:22px;height:38px;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.cue svg{animation:none}}
+
+/* ---------- acts ---------- */
+.act{position:relative;display:grid;justify-items:center;text-align:center;gap:6px;padding-block:110px 36px}
+.act .aw{position:absolute;left:50%;top:50%;width:min(680px,100%);transform:translate(-50%,-46%);z-index:-1;pointer-events:none}
+.act .kicker{font-size:24px}
+.act h2{font-size:clamp(52px,7.5vw,92px);line-height:1}
+.act .as{font:400 22px/1.4 var(--hand);color:var(--ink-soft)}
+
+/* ---------- svg drawing vocabulary ---------- */
+svg text{font-family:var(--hand)}
+.ink,.live{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke-width:1.6}
+.faint{stroke:var(--ink-faint)}
+.soft{stroke:var(--ink-soft)}
+.tube{stroke-width:15}
+.tube-in{stroke:var(--paper);stroke-width:9}
+.joint{fill:var(--paper)}
+.dot{fill:var(--ink)}
+.inkfill{fill:var(--ink);stroke:none}
+.paperfill{fill:var(--paper)}
+.dsh{fill:none;stroke:var(--ink-soft);stroke-width:2;stroke-dasharray:4 7;stroke-linecap:round}
+.hand{fill:var(--ink-soft);font-size:22px}
+.hand.ink-c{fill:var(--ink)}
+.wash{opacity:.55;mix-blend-mode:multiply}
+.wash.tok{opacity:.85}
+.w-blue{fill:var(--w-blue)} .w-sage{fill:var(--w-sage)} .w-lav{fill:var(--w-lav)} .w-ochre{fill:var(--w-ochre)} .w-rose{fill:var(--w-rose)}
+.t-sage{fill:var(--sage-ink)} .t-lav{fill:var(--lav-ink)} .t-blue{fill:var(--blue-ink)}
+.hlc{fill:none;stroke-linecap:round}
+
+/* draw-in: everything is drawn at rest; the script only rewinds figures that are still below the fold */
+.ink{transition:stroke-dashoffset 1.5s cubic-bezier(.45,.05,.2,1);transition-delay:calc(var(--i,0) * 38ms)}
+.wash{transition:opacity 1.8s ease .15s,transform 2.2s cubic-bezier(.2,.7,.2,1) .15s;transform-box:fill-box;transform-origin:center}
+.wash.bar{transform-origin:left center}
+.wash.qb{transform-origin:center bottom}
+.fade{transition:opacity 1s ease;transition-delay:calc(.5s + var(--i,0) * 38ms)}
+.pre .ink{stroke-dashoffset:var(--len)}
+.pre .wash{opacity:0;transform:scale(.6)}
+.pre .wash.bar{transform:scaleX(0)}
+.pre .wash.qb{transform:scaleY(0)}
+.pre .fade{opacity:0}
+.setup,.setup *{transition:none!important}
+.drawn .ink{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+
+/* ---------- components ---------- */
+.hood{max-width:34em;display:grid;gap:6px;padding:18px 22px 20px;border:1.5px dashed var(--ink-faint);border-radius:4px;
+  background-color:var(--paper-2);background-image:repeating-linear-gradient(transparent 0 31px,var(--rule) 31px 32px);transform:rotate(-.35deg)}
+.hood .lab{font:400 19px/1.3 var(--hand);color:var(--ink-soft)}
+.hood .eq{font:italic 400 22px/1.5 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.hood .hnote{font-size:17.5px;line-height:1.6;color:var(--ink-soft)}
+
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.trio div{display:grid;gap:4px;align-content:start}
+.trio h3{font:400 26px/1.2 var(--display)}
+.trio .q{font:400 20px/1.35 var(--hand);color:var(--ink-soft)}
+.trio p{font-size:18px;line-height:1.55}
+.trio .tool{font:700 17px/1.3 var(--hand);letter-spacing:.02em}
+@media (max-width:820px){.trio{grid-template-columns:minmax(0,1fr)}}
+
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 30px}
+.notes.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.note{position:relative;background:var(--paper);border:1.5px solid var(--ink-faint);border-radius:3px;padding:26px 24px 22px;display:grid;gap:8px;align-content:start;transform:rotate(var(--r,0deg));box-shadow:0 2px 0 var(--rule)}
+.note::before{content:"";position:absolute;top:-13px;left:50%;width:92px;height:24px;margin-left:-46px;background:var(--hl);transform:rotate(-3deg)}
+.note svg{width:64px;height:64px;overflow:visible}
+.note .k{font:400 18px/1.2 var(--hand);color:var(--ink-soft)}
+.note h3{font:400 23px/1.2 var(--display)}
+.note p{font-size:17.5px;line-height:1.55}
+@media (max-width:980px){.notes.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.notes,.notes.three{grid-template-columns:minmax(0,1fr)}}
+
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 20px;max-width:34em}
+.facts dt{font:400 19px/1.5 var(--hand);color:var(--lav-ink);padding-block:9px;border-bottom:1.5px dashed var(--rule)}
+.facts dd{margin:0;padding-block:9px;border-bottom:1.5px dashed var(--rule);font-size:18.5px;line-height:1.5}
+
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;max-width:34em;counter-reset:s}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;align-items:baseline}
+.steps li::before{counter-increment:s;content:counter(s);font:700 24px/1 var(--hand);color:var(--blue-ink)}
+
+.readouts{display:flex;flex-wrap:wrap;gap:12px 34px;justify-content:center;font:400 19px/1.2 var(--hand);color:var(--ink-soft)}
+.readouts b{font:700 30px/1 var(--hand);color:var(--ink);font-variant-numeric:tabular-nums;margin-left:6px}
+
+.ladder{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font:400 19px/1 var(--hand);color:var(--ink-soft)}
+.ladder span{padding:7px 11px;border:1.5px dashed var(--ink-faint);border-radius:999px}
+.ladder span.on{border-style:solid;border-color:var(--ink);color:var(--ink);background:var(--hl)}
+
+.tablewrap{overflow-x:auto;max-width:100%}
+table.cmp{border-collapse:collapse;width:100%;min-width:520px;font-size:18px;line-height:1.45}
+.cmp th{font:400 20px/1.3 var(--hand);color:var(--ink-soft);text-align:left;padding:8px 12px;border-bottom:2px solid var(--ink)}
+.cmp td{padding:12px;border-bottom:1.5px dashed var(--rule);vertical-align:top}
+.cmp td:first-child{font:400 19px/1.4 var(--hand);color:var(--ink-soft);white-space:nowrap}
+.cmp .ik{background:rgba(156,195,154,.18)}
+.cmp th.ik{color:var(--sage-ink)}
+
+ol.road{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-width:38em;position:relative}
+ol.road::before{content:"";position:absolute;left:13px;top:18px;bottom:18px;border-left:2px dashed var(--ink-faint)}
+.road li{display:grid;grid-template-columns:28px 86px minmax(0,1fr);gap:14px;align-items:center;padding-block:9px;position:relative}
+.road .d{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);background:var(--paper)}
+.road .done .d{background:radial-gradient(circle at 40% 38%,var(--w-sage),rgba(156,195,154,.65) 70%)}
+.road .now .d{background:linear-gradient(90deg,rgba(235,194,126,.9) 50%,var(--paper) 50%)}
+.road .next .d{border-style:dashed;border-color:var(--ink-soft)}
+.road .s{font:400 19px/1 var(--hand);color:var(--ink-soft)}
+.road .w{font-size:19px;line-height:1.4}
+.road .next .w{color:var(--ink-soft)}
+
+.finale{text-align:center;display:grid;justify-items:center;gap:22px;padding-block:90px 40px}
+.finale .lines p{font:400 clamp(26px,3.4vw,38px)/1.35 var(--display)}
+.finale .lines span{background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%)}
+.finale h2{font-size:clamp(46px,7vw,84px)}
+footer{font:400 17px/1.5 var(--hand);color:var(--ink-soft);text-align:center;padding-block:30px 60px}
+
+/* margin thread (wide screens only) */
+#thread{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:0;overflow:visible}
+@media (max-width:1239px){#thread{display:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wc" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+      <feMorphology in="d" operator="erode" radius="2" result="e"/>
+      <feComposite in="b" in2="e" operator="out" result="edge"/>
+      <feComponentTransfer in="edge" result="edge2"><feFuncA type="linear" slope="0.6"/></feComponentTransfer>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="edge2"/></feMerge>
+    </filter>
+    <filter id="wcS" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation=".7"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M2 2 L10 6 L2 10" fill="none" stroke="#6B6158" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+</svg>
+
+<main id="story">
+<svg id="thread" aria-hidden="true">
+  <defs><mask id="threadMask" maskUnits="userSpaceOnUse"><path id="threadReveal" fill="none" stroke="#fff" stroke-width="10" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1"/></mask></defs>
+  <path id="threadGhost" fill="none" stroke="#E6DCCB" stroke-width="2" stroke-dasharray="4 8" stroke-linecap="round"/>
+  <path id="threadPath" fill="none" stroke="#6B6158" stroke-width="2.2" stroke-dasharray="5 8" stroke-linecap="round" mask="url(#threadMask)"/>
+  <g id="threadTok"><circle r="11" fill="#B9A3DD" opacity=".85" filter="url(#wcS)"/><circle r="11" fill="none" stroke="#2E2925" stroke-width="1.8"/></g>
+</svg>
+
+<div class="wrap">
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <p class="kicker">a build story · September 2025 to today</p>
+  <h1>Someone to <span class="hl">play with</span></h1>
+  <p class="sub">How I taught an AI to play Connect 4, and then gave it eyes and an arm so it could sit across the table from me.</p>
+  <p class="meta">reinforcement learning · computer vision · inverse kinematics · an SO-101 robot arm</p>
+</header>
+<figure class="draw-me" id="heroFig">
+  <svg viewBox="0 0 1000 500" role="img" aria-label="Sketch: a flat game board on a table, a mug and a plant, and a robot arm dropping a purple token, with dashed paths from dice, a meeple and a little network">
+    <g filter="url(#wc)">
+      <path class="wash w-ochre" data-blob="175 205 150 125 31"/>
+      <path class="wash w-blue" data-blob="755 240 190 150 11"/>
+      <path class="wash w-blue" data-blob="790 210 120 100 12"/>
+      <path class="wash w-sage" data-blob="515 430 200 42 21"/>
+      <path class="wash w-rose" data-blob="300 418 44 34 51"/>
+      <path class="wash w-sage" data-blob="702 382 34 30 61"/>
+      <path class="wash w-lav" data-blob="250 252 46 40 71"/>
+    </g>
+    <g filter="url(#rough)">
+      <path class="ink" d="M40 452 C300 447 700 455 965 449"/>
+      <!-- board -->
+      <path class="ink" d="M396 451 L640 451 L612 408 L426 408 Z"/>
+      <path class="ink thin faint" d="M402 437 L630 437 M410 423 L622 423"/>
+      <!-- mug -->
+      <path class="ink" d="M278 451 C276 432 278 414 281 401 L321 401 C324 414 326 432 324 451 Z"/>
+      <path class="ink" d="M322 410 C344 410 344 437 324 437"/>
+      <path class="ink thin soft" d="M292 390 C284 378 300 370 292 356"/>
+      <path class="ink thin soft" d="M309 390 C301 378 317 370 309 356"/>
+      <!-- plant -->
+      <path class="ink" d="M681 451 L676 419 L726 419 L721 451 Z"/>
+      <path class="ink" d="M701 419 C691 392 671 386 663 372 C685 372 701 390 701 419"/>
+      <path class="ink" d="M701 419 C709 390 727 382 739 366 C737 390 717 402 701 419"/>
+      <path class="ink" d="M701 419 C701 398 703 380 700 360"/>
+      <!-- arm -->
+      <path class="ink" d="M792 451 L872 451 L862 420 L802 420 Z"/>
+      <polyline class="ink tube" points="832,410 762,222 592,274"/>
+      <polyline class="ink tube-in" points="832,410 762,222 592,274"/>
+      <path class="ink" d="M592 274 L592 318 M581 318 L576 344 M603 318 L608 344"/>
+      <circle class="ink joint" cx="832" cy="410" r="13"/>
+      <circle class="ink joint" cx="762" cy="222" r="13"/>
+      <circle class="ink joint" cx="592" cy="274" r="13"/>
+      <rect class="ink joint" x="604" y="282" width="34" height="22" rx="4" transform="rotate(16 621 293)"/>
+      <circle class="ink thin" cx="622" cy="294" r="6"/>
+      <circle class="ink" cx="592" cy="364" r="11"/>
+      <!-- dice -->
+      <rect class="ink" x="86" y="122" width="58" height="58" rx="10" transform="rotate(-12 115 151)"/>
+      <circle class="dot fade" cx="104" cy="139" r="4.5"/><circle class="dot fade" cx="115" cy="151" r="4.5"/><circle class="dot fade" cx="126" cy="163" r="4.5"/>
+      <!-- meeple -->
+      <g transform="translate(222 108)"><circle class="ink" cx="0" cy="-22" r="9"/><path class="ink" d="M-6 -12 C-14 -12 -26 -8 -28 -2 C-29 3 -22 4 -14 3 L-18 26 L-4 26 L0 14 L4 26 L18 26 L14 3 C22 4 29 3 28 -2 C26 -8 14 -12 6 -12 Z"/></g>
+      <!-- cards -->
+      <rect class="ink" x="70" y="290" width="46" height="64" rx="5" transform="rotate(-14 93 322)"/>
+      <rect class="ink joint" x="96" y="286" width="46" height="64" rx="5" transform="rotate(8 119 318)"/>
+      <path class="ink thin" d="M112 306 L126 318 L112 330 L98 318 Z" transform="rotate(8 119 318)"/>
+      <!-- tiny network -->
+      <path class="ink thin" d="M226 236 L250 252 L226 268 M226 236 L250 230 M226 268 L250 274 M250 230 L274 252 M250 252 L274 252 M250 274 L274 252"/>
+      <circle class="ink joint thin" cx="226" cy="236" r="5"/><circle class="ink joint thin" cx="226" cy="268" r="5"/><circle class="ink joint thin" cx="250" cy="230" r="5"/><circle class="ink joint thin" cx="250" cy="252" r="5"/><circle class="ink joint thin" cx="250" cy="274" r="5"/><circle class="ink joint thin" cx="274" cy="252" r="6"/>
+    </g>
+    <g filter="url(#wcS)"><circle class="wash tok w-lav" cx="592" cy="364" r="11"/></g>
+    <g class="fade">
+      <path class="dsh" d="M150 170 C250 200 300 320 420 398" marker-end="url(#arr)"/>
+      <path class="dsh" d="M250 120 C340 150 400 290 470 398" marker-end="url(#arr)"/>
+      <path class="dsh" d="M150 330 C230 370 320 380 402 420" marker-end="url(#arr)"/>
+      <path class="dsh" d="M284 258 C360 258 380 330 448 398" marker-end="url(#arr)"/>
+      <path class="dsh" d="M592 382 L592 420" marker-end="url(#arr)"/>
+    </g>
+    <text class="hand fade" x="56" y="222">board games</text>
+    <text class="hand fade" x="200" y="304">a brain</text>
+    <text class="hand fade" x="650" y="270">eyes</text>
+    <text class="hand fade" x="860" y="236">an arm</text>
+  </svg>
+</figure>
+<div class="cue"><span>scroll</span><svg viewBox="0 0 22 38" aria-hidden="true"><path d="M11 2 L11 32 M4 25 L11 33 L18 25" fill="none" stroke="#6B6158" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 5"/></svg></div>
+
+<!-- ===================== PROLOGUE ===================== -->
+<section class="ch" id="why">
+  <div class="txt">
+    <p class="kicker">prologue</p>
+    <h2>Why build this at all</h2>
+    <p>I love my wife, and she loves me. I also love board games. My wife does <span class="hl">not</span> love board games.</p>
+    <p>I could play against an app, but that is not the same thing. I wanted to sit at a table and play against something real: an opponent that looks at the board and moves the pieces itself.</p>
+  </div>
+  <figure class="draw-me">
+    <svg viewBox="0 0 600 360" role="img" aria-label="Sketch of two evenings: a book and a mug on one side, dice, a meeple and a game box on the other, a small heart between them">
+      <g filter="url(#wc)">
+        <path class="wash w-rose" data-blob="160 225 125 95 81"/>
+        <path class="wash w-ochre" data-blob="450 215 130 100 82"/>
+        <path class="wash w-rose" d="M300 150 C280 130 262 112 276 98 C288 86 300 96 300 106 C300 96 312 86 324 98 C338 112 320 130 300 150 Z"/>
+      </g>
+      <g filter="url(#rough)">
+        <path class="ink" d="M40 292 C200 287 400 296 565 289"/>
+        <path class="ink" d="M300 150 C280 130 262 112 276 98 C288 86 300 96 300 106 C300 96 312 86 324 98 C338 112 320 130 300 150 Z"/>
+        <!-- her side: open book + mug -->
+        <path class="ink" d="M70 288 C102 272 124 272 136 282 C148 272 170 272 202 288 L202 248 C170 234 148 236 136 246 C124 236 102 234 70 248 Z"/>
+        <path class="ink thin" d="M136 246 L136 282 M84 256 C100 250 114 250 126 256 M84 266 C100 260 114 260 126 266 M146 256 C158 250 172 250 188 256 M146 266 C158 260 172 260 188 266"/>
+        <path class="ink" d="M222 290 C221 276 222 262 224 252 L254 252 C256 262 257 276 256 290 Z"/>
+        <path class="ink" d="M255 259 C270 259 270 278 256 278"/>
+        <path class="ink thin soft" d="M234 242 C228 232 240 226 234 214"/>
+        <!-- his side: box, dice, meeple, mug -->
+        <rect class="ink" x="350" y="168" width="140" height="60" rx="4" transform="rotate(-4 420 198)"/>
+        <path class="ink thin" d="M352 184 L490 175" />
+        <rect class="ink" x="364" y="248" width="40" height="40" rx="7" transform="rotate(-10 384 268)"/>
+        <circle class="dot fade" cx="377" cy="260" r="3.5"/><circle class="dot fade" cx="391" cy="276" r="3.5"/>
+        <g transform="translate(450 262) scale(.9)"><circle class="ink" cx="0" cy="-22" r="9"/><path class="ink" d="M-6 -12 C-14 -12 -26 -8 -28 -2 C-29 3 -22 4 -14 3 L-18 26 L-4 26 L0 14 L4 26 L18 26 L14 3 C22 4 29 3 28 -2 C26 -8 14 -12 6 -12 Z"/></g>
+        <path class="ink" d="M506 290 C505 276 506 262 508 252 L538 252 C540 262 541 276 540 290 Z"/>
+        <path class="ink" d="M539 259 C554 259 554 278 540 278"/>
+        <path class="ink thin soft" d="M520 242 C514 232 526 226 520 214"/>
+      </g>
+      <text class="hand fade" x="420" y="207" text-anchor="middle" transform="rotate(-4 420 198)">GAMES</text>
+      <text class="hand fade" x="150" y="334" text-anchor="middle">her evening</text>
+      <text class="hand fade" x="452" y="334" text-anchor="middle">my evening</text>
+    </svg>
+  </figure>
+</section>
+
+<section class="ch stack" id="plan">
+  <div class="txt">
+    <p class="kicker">the plan</p>
+    <h2>Three problems, one opponent</h2>
+    <p>I started in software, where failing is cheap: learn how reinforcement learning can master a simple game. Then move that brain into the physical world and give it what it is missing.</p>
+  </div>
+  <figure class="draw-me">
+    <svg viewBox="0 0 900 330" role="img" aria-label="Three sketches, a network, a camera and an arm, with dashed arrows meeting at a game board">
+      <g filter="url(#wc)">
+        <path class="wash w-lav" data-blob="150 92 92 72 91"/>
+        <path class="wash w-blue" data-blob="450 92 92 72 92"/>
+        <path class="wash w-rose" data-blob="750 92 92 72 93"/>
+        <path class="wash w-sage" data-blob="450 292 90 26 94"/>
+      </g>
+      <g filter="url(#rough)">
+        <path class="ink thin" d="M112 62 L150 92 L112 122 M112 62 L150 44 M112 122 L150 140 M150 44 L190 92 M150 92 L190 92 M150 140 L190 92"/>
+        <circle class="ink joint" cx="112" cy="62" r="8"/><circle class="ink joint" cx="112" cy="122" r="8"/><circle class="ink joint" cx="150" cy="44" r="8"/><circle class="ink joint" cx="150" cy="92" r="8"/><circle class="ink joint" cx="150" cy="140" r="8"/><circle class="ink joint" cx="190" cy="92" r="9"/>
+        <rect class="ink" x="402" y="62" width="96" height="62" rx="9"/>
+        <rect class="ink" x="430" y="50" width="26" height="12" rx="3"/>
+        <circle class="ink" cx="450" cy="93" r="21"/><circle class="ink thin" cx="450" cy="93" r="8"/>
+        <path class="ink" d="M716 142 L786 142"/>
+        <polyline class="ink tube" points="742,138 754,96 796,62 812,92"/>
+        <polyline class="ink tube-in" points="742,138 754,96 796,62 812,92"/>
+        <circle class="ink joint" cx="754" cy="96" r="8"/><circle class="ink joint" cx="796" cy="62" r="8"/>
+        <path class="ink" d="M397 304 L503 304 L488 280 L412 280 Z"/>
+      </g>
+      <text class="hand ink-c fade" x="150" y="186" text-anchor="middle">the brain</text>
+      <text class="hand ink-c fade" x="450" y="186" text-anchor="middle">the eyes</text>
+      <text class="hand ink-c fade" x="750" y="186" text-anchor="middle">the arm</text>
+      <g class="fade">
+        <path class="dsh" d="M150 200 C170 262 320 292 392 292" marker-end="url(#arr)"/>
+        <path class="dsh" d="M450 200 L450 268" marker-end="url(#arr)"/>
+        <path class="dsh" d="M750 200 C730 262 580 292 508 292" marker-end="url(#arr)"/>
+      </g>
+    </svg>
+  </figure>
+  <div class="trio">
+    <div><h3>The brain</h3><p class="q">Which move should I play?</p><p>Trained in simulation, over a million games against itself and others.</p><p class="tool t-lav" style="color:var(--lav-ink)">reinforcement learning</p></div>
+    <div><h3>The eyes</h3><p class="q">What is on the board, and where?</p><p>A camera on the wrist reads the board, the tokens and where they sit on the table.</p><p class="tool" style="color:var(--blue-ink)">computer vision</p></div>
+    <div><h3>The arm</h3><p class="q">How do I put a piece exactly there?</p><p>The arm turns "that square" into the joint angles that reach it.</p><p class="tool" style="color:#A9614F">inverse kinematics</p></div>
+  </div>
+</section>
+
+<!-- ===================== ACT I ===================== -->
+<header class="act draw-me" id="brain">
+  <svg class="aw" viewBox="0 0 680 280" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-lav" data-blob="340 140 290 96 101"/><path class="wash w-lav" data-blob="370 150 200 70 102"/></g></svg>
+  <p class="kicker">act I</p>
+  <h2>The brain</h2>
+  <p class="as">teaching software to play Connect 4</p>
+</header>
+
+<section class="ch" id="c4">
+  <div class="txt">
+    <p class="kicker">choosing the game</p>
+    <h2>A game small enough to learn</h2>
+    <p>Connect 4 has 7 columns, 6 rows and one decision per turn: which column. The rules fit on a napkin, but there are about <span class="hl">4.5 trillion</span> legal positions. Nothing can memorise them all, so an AI has to learn to generalise.</p>
+    <p class="soft">Two simple opponents set the bar. <b>Random</b> drops a token in any legal column. <b>Rules</b> wins if it can, blocks if it must, builds threes and prefers the centre. Rules beats Random in about 99% of games.</p>
+  </div>
+  <figure class="draw-me"><svg id="c4svg" viewBox="0 0 560 490" role="img" aria-label="Connect 4 board with an arrow over each of the seven columns"></svg></figure>
+</section>
+
+<section class="ch flip" id="rl">
+  <div class="txt">
+    <p class="kicker">reinforcement learning</p>
+    <h2>Learning by playing</h2>
+    <p>Nobody tells the agent what a good move is. It plays a game, gets a reward at the end (<b>+10</b> for a win, <b>−10</b> for a loss), and slowly works out which moves led there.</p>
+    <p>What it learns is a <span class="hl">Q-value</span> for every move: how much reward it expects if it plays that column now. Most of the time it plays the highest one. Sometimes it tries a random column, just to explore.</p>
+    <div class="hood">
+      <span class="lab">under the hood · Q-learning</span>
+      <span class="eq">Q(s,a) ← Q(s,a) + α · [ r + γ · max Q(s′,a′) − Q(s,a) ]</span>
+      <span class="hnote">Nudge the old estimate toward "reward now plus the best value next". α is the learning rate, γ = 0.95 sets how much the future counts, and ε, the chance of a random move, decays from 1.0 to 0.05.</span>
+    </div>
+  </div>
+  <figure class="draw-me"><svg id="rlsvg" viewBox="0 0 600 680" role="img" aria-label="Loop between the agent and the game, and bars showing how good each column looks; blocking in column D scores highest"></svg>
+    <figcaption>green threatens four, so blocking in D scores highest · example values</figcaption></figure>
+</section>
+
+<section class="ch" id="dqn">
+  <div class="txt">
+    <p class="kicker">deep Q-network</p>
+    <h2>From a lookup table to a neural network</h2>
+    <p>My first agent kept a table: one score for every board it had seen. After training it held <b>187,000 entries</b> and still knew nothing about a board it had never met.</p>
+    <p>A Deep Q-Network swaps the table for a neural network. The board goes in, seven scores come out, and similar boards get similar scores, so what it learns carries over.</p>
+    <p class="soft">Both agents learned to beat random play, because that is what they trained against. An agent only gets as good as its sparring partners.</p>
+  </div>
+  <div style="display:grid;gap:18px;min-width:0">
+    <figure class="draw-me"><svg id="tblsvg" viewBox="0 0 600 250" role="img" aria-label="A long lookup table turning into a small neural network with seven outputs"></svg></figure>
+    <figure class="draw-me"><svg id="dqnbars" viewBox="0 0 600 290" role="img" aria-label="Win rates: table agent 54.8% vs random and 1.8% vs rules; DQN 58.6% vs random and 7.6% vs rules; rules player 99% vs random"></svg>
+      <figcaption>win rate · DQN used 3 layers of 128 neurons, about 70k weights</figcaption></figure>
+  </div>
+</section>
+
+<section class="ch flip" id="cnn">
+  <div class="txt">
+    <p class="kicker">convolutional network</p>
+    <h2>A network that sees lines</h2>
+    <p>Four in a row is a visual pattern, so the next network looks at the board the way you do. A <span class="hl">convolutional network</span> slides small filters across the grid and lights up when it finds lines, threats and blocks.</p>
+    <dl class="facts">
+      <dt>input</dt><dd>two 6 × 7 layers: my tokens, your tokens</dd>
+      <dt>patterns</dt><dd>6 convolution layers that learn lines in every direction</dd>
+      <dt>two heads</dt><dd>how good is this board, and how much better is each column</dd>
+      <dt>size</dt><dd>about 0.5 million parameters, trained on a MacBook's M1 GPU</dd>
+    </dl>
+    <div class="hood">
+      <span class="lab">under the hood · dueling DQN</span>
+      <span class="eq">Q(s,a) = V(s) + A(s,a) − mean A(s,·)</span>
+      <span class="hnote">V judges the whole board, A ranks the seven columns. Learning gets steadier when most moves are equally fine.</span>
+    </div>
+  </div>
+  <figure class="draw-me" data-hook="cnn"><svg id="cnnsvg" viewBox="0 0 560 500" role="img" aria-label="A four-cell filter sliding over the board until it finds a diagonal four in a row"></svg></figure>
+</section>
+
+<section class="ch stack" id="fought">
+  <div class="txt">
+    <p class="kicker">what went wrong in training</p>
+    <h2>Training fought back</h2>
+    <p>Getting from "plays" to "plays well" took most of the time. Four problems kept coming back.</p>
+  </div>
+  <div class="notes draw-me">
+    <div class="note" style="--r:-1deg">
+      <svg viewBox="0 0 90 90" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-rose" data-blob="58 30 26 22 111"/></g><g filter="url(#rough)"><path class="ink" d="M10 82 L84 82 M10 82 L10 8"/><path class="ink" d="M14 72 L30 66 L44 54 L56 34 L64 10"/><path class="ink thin" d="M64 10 L58 2 M64 10 L74 4 M64 10 L76 14"/></g></svg>
+      <span class="k">exploding scores</span><h3>The numbers ran away</h3>
+      <p>Each estimate fed the next until Q-values blew up. Fixed with a 0.95 discount, clamping to ±100 and clipping the gradients.</p></div>
+    <div class="note" style="--r:.8deg">
+      <svg viewBox="0 0 90 90" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-blue" data-blob="40 48 30 30 112"/></g><g filter="url(#rough)"><rect class="ink" x="12" y="16" width="48" height="60" rx="3"/><path class="ink thin" d="M20 30 L52 30 M20 42 L52 42"/><path class="ink thin faint" d="M20 54 L44 54 M20 64 L38 64"/><rect class="ink joint" x="50" y="50" width="32" height="16" rx="3" transform="rotate(-30 66 58)"/></g></svg>
+      <span class="k">forgetting</span><h3>New opponent, old skills gone</h3>
+      <p>Switching sparring partners erased what it knew. Fixed with a curriculum that overlaps phases by 4,000 games and a memory that keeps old games.</p></div>
+    <div class="note" style="--r:.6deg">
+      <svg viewBox="0 0 90 90" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-lav" data-blob="45 38 26 30 113"/></g><g filter="url(#rough)"><ellipse class="ink" cx="45" cy="38" rx="24" ry="30"/><path class="ink" d="M45 68 L45 82 M32 84 L58 84"/><g transform="translate(45 44) scale(.42)"><circle class="ink" cx="0" cy="-22" r="9"/><path class="ink" d="M-6 -12 C-14 -12 -26 -8 -28 -2 C-29 3 -22 4 -14 3 L-18 26 L-4 26 L0 14 L4 26 L18 26 L14 3 C22 4 29 3 28 -2 C26 -8 14 -12 6 -12 Z"/></g></g></svg>
+      <span class="k">fake self-play</span><h3>Playing a stale copy of itself</h3>
+      <p>Its "self" was a snapshot from 500 games ago. Fixed with a league of 5 past versions: win 60% of games to move up a tier.</p></div>
+    <div class="note" style="--r:-.7deg">
+      <svg viewBox="0 0 90 90" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-ochre" data-blob="45 46 30 28 114"/></g><g filter="url(#rough)"><path class="ink" d="M45 10 L54 34 L80 35 L60 51 L67 77 L45 62 L23 77 L30 51 L10 35 L36 34 Z"/></g></svg>
+      <span class="k">too little feedback</span><h3>Win or lose says too little</h3>
+      <p>One reward per game hides which move mattered. Fixed with small signals: +2 for a block, −3 for a missed block, −5 for a missed win.</p></div>
+  </div>
+</section>
+
+<section class="ch" id="tourney">
+  <div class="txt">
+    <p class="kicker">the tournament</p>
+    <h2>A team beats any single player</h2>
+    <p>After more than a million training games, I put the saved versions in a round robin: <b>3,500 games each</b>. The winner was a team: the top four networks voting on every move.</p>
+    <p class="soft">On screen, the AI was now a real opponent. But it lived on a screen, and I wanted it across the table.</p>
+  </div>
+  <figure class="draw-me"><svg id="tourbars" viewBox="0 0 600 260" role="img" aria-label="Tournament win rates: team of four networks 64.1%, best single network 43.8%, network after one million games 42.0%"></svg>
+    <figcaption>overall win rate in the round robin</figcaption></figure>
+</section>
+
+<!-- ===================== ACT II ===================== -->
+<header class="act draw-me" id="eyes">
+  <svg class="aw" viewBox="0 0 680 280" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-blue" data-blob="340 140 290 96 201"/><path class="wash w-blue" data-blob="310 150 200 70 202"/></g></svg>
+  <p class="kicker">act II</p>
+  <h2>The eyes</h2>
+  <p class="as">giving the brain a body, and a way to see</p>
+</header>
+
+<section class="ch" id="body">
+  <div class="txt">
+    <p class="kicker">from software to hardware</p>
+    <h2>Give the brain a body</h2>
+    <p>The body is an <b>SO-101</b>, an open-source robot arm with six servo motors that I drive from Python with Hugging Face's lerobot library.</p>
+    <p>It has no eyes, so a small USB camera sits on the wrist. Because the camera moves with the hand, it always sees where the hand is about to go.</p>
+    <p class="soft">The board lies flat on the table instead of standing upright. A flat grid is also what checkers and chess look like, so the same setup can grow beyond Connect 4. A move means: go to the token supply, grab a token, carry it, drop it in the chosen cell.</p>
+  </div>
+  <figure class="draw-me">
+    <svg viewBox="0 0 600 450" role="img" aria-label="Side view of the arm with a wrist camera whose view cone covers a flat board, and a stack of tokens">
+      <g filter="url(#wc)">
+        <path class="wash w-blue" d="M402 214 L300 392 L566 392 Z"/>
+        <path class="wash w-sage" data-blob="440 400 150 22 211"/>
+      </g>
+      <g filter="url(#rough)">
+        <path class="ink" d="M20 402 C200 398 420 406 590 400"/>
+        <path class="ink" d="M302 402 L566 402 L546 388 L320 388 Z"/>
+        <path class="ink" d="M40 402 L120 402 L112 374 L48 374 Z"/>
+        <polyline class="ink tube" points="80,364 160,162 380,192"/>
+        <polyline class="ink tube-in" points="80,364 160,162 380,192"/>
+        <path class="ink" d="M380 192 L380 250 M369 250 L364 276 M391 250 L396 276"/>
+        <circle class="ink joint" cx="80" cy="364" r="13"/><circle class="ink joint" cx="160" cy="162" r="13"/><circle class="ink joint" cx="380" cy="192" r="13"/>
+        <rect class="ink joint" x="392" y="196" width="34" height="22" rx="4" transform="rotate(22 409 207)"/>
+        <circle class="ink thin" cx="410" cy="208" r="6"/>
+        <path class="ink thin" d="M402 214 L300 392 M402 214 L566 392"/>
+        <ellipse class="ink thin" cx="214" cy="396" rx="18" ry="6"/><ellipse class="ink thin" cx="214" cy="388" rx="18" ry="6"/><ellipse class="ink thin" cx="214" cy="380" rx="18" ry="6"/>
+      </g>
+      <g filter="url(#wcS)">
+        <ellipse class="wash tok w-lav" cx="214" cy="396" rx="18" ry="6"/><ellipse class="wash tok w-lav" cx="214" cy="388" rx="18" ry="6"/><ellipse class="wash tok w-lav" cx="214" cy="380" rx="18" ry="6"/>
+        <ellipse class="wash tok w-sage" cx="372" cy="395" rx="13" ry="4.5"/><ellipse class="wash tok w-lav" cx="410" cy="395" rx="13" ry="4.5"/><ellipse class="wash tok w-sage" cx="470" cy="395" rx="13" ry="4.5"/><ellipse class="wash tok w-lav" cx="510" cy="395" rx="13" ry="4.5"/>
+      </g>
+      <text class="hand fade" x="436" y="176">wrist camera</text>
+      <text class="hand fade" x="420" y="436">flat board</text>
+      <text class="hand fade" x="170" y="436">token supply</text>
+      <text class="hand fade" x="30" y="436">SO-101</text>
+    </svg>
+  </figure>
+</section>
+
+<section class="ch stack" id="read">
+  <div class="txt">
+    <p class="kicker">computer vision</p>
+    <h2>How the robot reads the board</h2>
+    <p>Before the AI can think, the camera has to turn a photo into a grid of numbers. It does that in four steps.</p>
+  </div>
+  <figure class="draw-me"><svg id="cvsvg" viewBox="0 0 1000 300" role="img" aria-label="Four steps: find the board's corners, flatten it, keep only green and purple, and read the grid as numbers"></svg></figure>
+  <div class="ch" style="padding-block:0;gap:30px;align-items:start">
+    <div class="hood"><span class="lab">under the hood · HSV colour</span><span class="hnote">Hue, saturation, value: colour is kept apart from brightness, so a shadow changes V but barely changes H. Green is hue 35–90 and purple 125–165 on OpenCV's scale. The colour filters still loved daylight and hated lamps.</span></div>
+    <div class="hood"><span class="lab">a sanity check from physics</span><span class="hnote">Tokens can't float. A "token" with an empty cell below it must be glare on the board, so it gets removed before the AI ever sees it.</span></div>
+  </div>
+</section>
+
+<section class="ch flip" id="mm">
+  <div class="txt">
+    <p class="kicker">where things are</p>
+    <h2>From pixels to millimetres</h2>
+    <p>"Purple in D3" is enough for the AI. The arm needs to know where D3 is on the table, <span class="hl">in millimetres</span>.</p>
+    <p>A flat table seen at an angle is a stretched rectangle, and a <b>homography</b> undoes the stretch. Four known points are enough to compute it. They come from <b>ArUco markers</b>: printed squares the camera finds and identifies on its own.</p>
+    <p class="soft">One more fix: the wide-angle lens bends straight lines, up to about 7 mm off. A one-time lens calibration straightens the image first.</p>
+    <div class="hood"><span class="lab">under the hood</span><span class="eq">[u v 1]ᵀ ∝ H · [x y 1]ᵀ</span><span class="hnote">H is a 3 × 3 matrix with 8 unknowns. Each point pair gives two equations, so four points solve it; the 16 marker corners make it robust.</span></div>
+  </div>
+  <figure class="draw-me"><svg id="homsvg" viewBox="0 0 600 340" role="img" aria-label="A slanted camera view of the table mapped onto a flat rectangle measured in millimetres"></svg></figure>
+</section>
+
+<!-- ===================== ACT III ===================== -->
+<header class="act draw-me" id="arm">
+  <svg class="aw" viewBox="0 0 680 280" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-rose" data-blob="340 140 290 96 301"/><path class="wash w-ochre" data-blob="380 150 180 62 302"/></g></svg>
+  <p class="kicker">act III</p>
+  <h2>The arm</h2>
+  <p class="as">from "that square" to joint angles</p>
+</header>
+
+<section class="ch" id="teach">
+  <div class="txt">
+    <p class="kicker">the first approach</p>
+    <h2>First attempt: teach every cell</h2>
+    <p>My first approach was hands-on. I moved the arm over each cell and saved its joint angles: <b>40 poses</b> in total. For a spot in between, the software blended the 8 nearest saved poses.</p>
+    <p class="soft">It worked near the taught points and broke everywhere else. Moving the board 5 mm made every pose wrong. Averaging joint angles is not the same as averaging positions, so the blends drifted. And a new game would mean teaching every square again: 64 for chess.</p>
+  </div>
+  <figure class="draw-me"><svg id="idwsvg" viewBox="0 0 700 600" role="img" aria-label="Grid of hand-taught points; a new target borrows from its eight nearest neighbours"></svg>
+    <figcaption>filled dots: taught by hand · the new spot borrows from its 8 nearest</figcaption></figure>
+</section>
+
+<section class="ch flip" id="fkik">
+  <div class="txt">
+    <p class="kicker">the key idea</p>
+    <h2>Forward and inverse kinematics</h2>
+    <p><b>Forward kinematics</b> answers an easy question: given every joint angle, where is the fingertip? Chain the links together: turn, move along the link, turn again. There is exactly one answer.</p>
+    <p><b>Inverse kinematics</b> asks the reverse: given where the fingertip must go, which angles get it there? There may be several answers, or none.</p>
+    <p class="soft">Think of reaching for a cup. You don't plan "shoulder 30°, elbow 70°". You look at the cup and your arm works it out. IK gives the robot that skill.</p>
+  </div>
+  <figure class="draw-me" data-hook="fk"><svg id="fksvg" viewBox="0 0 900 600" role="img" aria-label="A two-link arm following a target as it moves between board cells, keeping the gripper vertical"></svg>
+    <div class="readouts" aria-live="off"><span>shoulder<b id="rS">0°</b></span><span>elbow<b id="rE">0°</b></span><span>wrist<b id="rW">0°</b></span></div></figure>
+</section>
+
+<section class="ch" id="solve">
+  <div class="txt">
+    <p class="kicker">how the solver works</p>
+    <h2>Solving it: guess, check, adjust</h2>
+    <ol class="steps">
+      <li><span><b>Guess</b> a set of angles. The solver starts from three typical reaching shapes.</span></li>
+      <li><span><b>Check</b> with forward kinematics how far the fingertip lands from the target.</span></li>
+      <li><span><b>Adjust</b> the angles in whichever direction shrinks that distance, and repeat until the error is under 1 mm.</span></li>
+    </ol>
+    <p class="soft">It also has a preference: keep the gripper pointing straight down, and lean outward in 10° steps, up to 50°, only when a cell is too far to reach vertically.</p>
+    <div class="ladder" id="ladder" aria-label="Gripper tilt steps"><span class="on">0°</span><span>10°</span><span>20°</span><span>30°</span><span>40°</span><span>50°</span></div>
+    <div class="hood"><span class="lab">under the hood · kinematics.py</span><span class="eq">minimise ‖FK(q) − target‖² + (30 mm/rad · tilt error)²</span><span class="hnote">Least squares within the joint limits. Position wins; the tilt only has to be roughly right.</span></div>
+  </div>
+  <figure class="draw-me" data-hook="solve"><svg id="solvesvg" viewBox="0 0 900 600" role="img" aria-label="Successive guesses of the arm getting closer to the target"></svg>
+    <figcaption>a simulated 2-joint arm, drawn at rough SO-101 scale</figcaption></figure>
+</section>
+
+<section class="ch flip" id="gen">
+  <div class="txt">
+    <p class="kicker">the payoff</p>
+    <h2>Why this generalises</h2>
+    <p>Seen from above, a board game is just a grid of points on a table. IK can reach any point within the arm's range, so <span class="hl">every game turns into a list of coordinates</span>.</p>
+    <div class="tablewrap">
+      <table class="cmp">
+        <thead><tr><th></th><th>teach by hand</th><th class="ik">camera + IK</th></tr></thead>
+        <tbody>
+          <tr><td>setup</td><td>teach every cell</td><td class="ik">calibrate once with a printed mat</td></tr>
+          <tr><td>board moved</td><td>teach everything again</td><td class="ik">the camera finds it again</td></tr>
+          <tr><td>new game</td><td>teach every square again</td><td class="ik">describe the new grid</td></tr>
+          <tr><td>between cells</td><td>a blend of nearby poses</td><td class="ik">an exact solution for any point</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <figure class="draw-me" data-hook="gen"><svg id="gensvg" viewBox="0 0 640 600" role="img" aria-label="Top view: Connect 4, checkers and chess boards placed in different spots inside the arm's reach"></svg></figure>
+</section>
+
+<section class="ch" id="calib">
+  <div class="txt">
+    <p class="kicker">calibration</p>
+    <h2>Making the maths match the metal</h2>
+    <p>IK is only as good as its model of the arm, and a real arm never matches the drawing exactly. Joints sit a few degrees off, and the base is not quite where you think.</p>
+    <p>So I printed a calibration mat with <b>15 crosshairs</b> to touch and 4 ArUco markers for the camera. Then I fitted <b>10 numbers</b> to the touches: joint offsets, the base's position and rotation, and the fingertip offset.</p>
+    <p class="soft">2.3 mm is well inside a cell: good enough to drop a token where it belongs.</p>
+  </div>
+  <div style="display:grid;gap:22px;min-width:0">
+    <figure class="draw-me" data-hook="mat"><svg id="matsvg" viewBox="0 0 600 330" role="img" aria-label="The A4 calibration mat with 15 crosshairs, 4 markers and a scale bar; a fingertip hops between crosshairs"></svg></figure>
+    <figure class="draw-me"><svg id="calbars" viewBox="0 0 600 250" role="img" aria-label="Error on unseen points: 16.9 mm at first, 5.4 after fixing bad touches, 3.1 using measured angles, 2.25 using vertical touches only"></svg>
+      <figcaption>error on points the fit never saw, in mm</figcaption></figure>
+  </div>
+</section>
+
+<section class="ch stack" id="trip">
+  <div class="txt">
+    <p class="kicker">the detours</p>
+    <h2>What I tripped over</h2>
+    <p>Most of these looked like an arm problem. Most were measurement problems.</p>
+  </div>
+  <div class="notes three">
+    <div class="note" style="--r:-1deg"><span class="k">a LiDAR on the wrist?</span><h3>Not needed</h3><p>±6 cm accuracy and a 20 cm blind zone. The table is flat, so the height is already known.</p></div>
+    <div class="note" style="--r:.7deg"><span class="k">two unit systems</span><h3>Degrees vs −100…100</h3><p>Scripts spoke different units and loaded different calibration files, up to ~9° apart.</p></div>
+    <div class="note" style="--r:-.5deg"><span class="k">the printer</span><h3>100 mm became 97.5</h3><p>The mat printed slightly small. One scale factor fixed it.</p></div>
+    <div class="note" style="--r:.9deg"><span class="k">lazy servos</span><h3>They stop ~1.5° short</h3><p>Under load. Now the arm reads its encoders, nudges, and repeats until they match.</p></div>
+    <div class="note" style="--r:-.8deg"><span class="k">the far row</span><h3>Taught at a tilt</h3><p>Taught leaning, used vertical: the model guessed 5 mm too low. Teach the pose you will use.</p></div>
+    <div class="note" style="--r:.5deg"><span class="k">the lens</span><h3>Fisheye bends lines</h3><p>Predicted crosses drifted ~7 mm. A one-time lens calibration straightens the image.</p></div>
+  </div>
+</section>
+
+<!-- ===================== EPILOGUE ===================== -->
+<header class="act draw-me" id="epilogue">
+  <svg class="aw" viewBox="0 0 680 280" aria-hidden="true"><g filter="url(#wc)"><path class="wash w-sage" data-blob="340 140 290 96 401"/><path class="wash w-ochre" data-blob="300 150 170 60 402"/></g></svg>
+  <p class="kicker">epilogue</p>
+  <h2>Putting it together</h2>
+  <p class="as">one move, from photo to token</p>
+</header>
+
+<section class="ch stack" id="loop">
+  <div class="txt">
+    <h2>One move: see, think, act</h2>
+    <p>Every game, the camera finds the board, reads the tokens and works out where each cell sits on the table. The arm and the camera are calibrated against the table once. After that, the board can sit anywhere the arm reaches.</p>
+  </div>
+  <figure class="draw-me"><svg id="loopsvg" viewBox="0 0 1000 250" role="img" aria-label="Six stations on a dashed path: camera frame, 6 by 7 grid, best column, cell in millimetres, joint angles, token dropped"></svg></figure>
+</section>
+
+<section class="ch" id="status">
+  <div class="txt">
+    <p class="kicker">status</p>
+    <h2>Where the story stands</h2>
+    <p class="soft">The three parts work on their own. What's left is joining them into one full game across the table.</p>
+  </div>
+  <ol class="road">
+    <li class="done"><span class="d"></span><span class="s">done</span><span class="w">The brain: networks trained over 1M+ games</span></li>
+    <li class="done"><span class="d"></span><span class="s">done</span><span class="w">The eyes: board and tokens read from the camera</span></li>
+    <li class="done"><span class="d"></span><span class="s">done</span><span class="w">The arm: calibrated model, 2.3 mm on unseen points</span></li>
+    <li class="done"><span class="d"></span><span class="s">done</span><span class="w">Click a pixel, and the arm goes there</span></li>
+    <li class="now"><span class="d"></span><span class="s">now</span><span class="w">Lens calibration on the real camera</span></li>
+    <li class="next"><span class="d"></span><span class="s">next</span><span class="w">Find the board's corners, then every cell in mm</span></li>
+    <li class="next"><span class="d"></span><span class="s">then</span><span class="w">A full game of Connect 4 across the table</span></li>
+    <li class="next"><span class="d"></span><span class="s">later</span><span class="w">Checkers and chess: same arm, new grid</span></li>
+  </ol>
+</section>
+
+<section class="finale" id="end">
+  <div class="lines">
+    <p>A brain from <span>software</span>.</p>
+    <p>Eyes from a <span>camera</span>.</p>
+    <p>Reach from <span>geometry</span>.</p>
+  </div>
+  <figure class="draw-me" style="width:100%;max-width:900px">
+    <svg viewBox="0 0 1000 380" role="img" aria-label="Closing sketch: the board on the table with two mugs, the arm about to play, and a small heart">
+      <g filter="url(#wc)">
+        <path class="wash w-blue" data-blob="760 170 170 120 501"/>
+        <path class="wash w-sage" data-blob="510 335 190 34 502"/>
+        <path class="wash w-rose" data-blob="250 330 50 36 503"/>
+        <path class="wash w-rose" d="M500 150 C484 134 470 120 481 109 C491 99 500 107 500 115 C500 107 509 99 519 109 C530 120 516 134 500 150 Z"/>
+      </g>
+      <g filter="url(#rough)">
+        <path class="ink" d="M40 352 C300 347 700 355 965 349"/>
+        <path class="ink" d="M400 351 L630 351 L604 312 L428 312 Z"/>
+        <path class="ink" d="M228 351 C226 334 228 318 231 306 L269 306 C272 318 274 334 272 351 Z"/>
+        <path class="ink" d="M270 314 C290 314 290 338 272 338"/>
+        <path class="ink thin soft" d="M244 296 C236 284 252 276 244 262"/>
+        <path class="ink" d="M500 150 C484 134 470 120 481 109 C491 99 500 107 500 115 C500 107 509 99 519 109 C530 120 516 134 500 150 Z"/>
+        <path class="ink" d="M792 351 L872 351 L862 320 L802 320 Z"/>
+        <polyline class="ink tube" points="832,310 770,140 610,190"/>
+        <polyline class="ink tube-in" points="832,310 770,140 610,190"/>
+        <path class="ink" d="M610 190 L610 232 M599 232 L594 258 M621 232 L626 258"/>
+        <circle class="ink joint" cx="832" cy="310" r="13"/><circle class="ink joint" cx="770" cy="140" r="13"/><circle class="ink joint" cx="610" cy="190" r="13"/>
+        <circle class="ink" cx="610" cy="250" r="10"/>
+      </g>
+      <g filter="url(#wcS)"><circle class="wash tok w-lav" cx="610" cy="250" r="10"/>
+        <ellipse class="wash tok w-sage" cx="470" cy="340" rx="11" ry="4"/><ellipse class="wash tok w-lav" cx="510" cy="340" rx="11" ry="4"/><ellipse class="wash tok w-sage" cx="550" cy="330" rx="10" ry="3.6"/></g>
+      <text class="hand fade" x="420" y="90">your move</text>
+    </svg>
+  </figure>
+  <h2>Someone to play with.</h2>
+</section>
+<footer>forza_quattro · my_robot · SO-101 · lerobot</footer>
+
+</div>
+</main>
+
+<script>
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const $=id=>document.getElementById(id);
+  const el=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+  const txt=(x,y,s,cls,parent,extra={})=>{const t=el('text',Object.assign({x,y,class:cls},extra),parent);t.textContent=s;return t;};
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motion=!reduced&&'IntersectionObserver' in window;
+
+  /* ---------- watercolor blobs ---------- */
+  function rnd(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function curve(p,closed){
+    const n=p.length,f=v=>v.toFixed(1);let d=`M${f(p[0][0])} ${f(p[0][1])}`;
+    const last=closed?n:n-1;
+    for(let i=0;i<last;i++){
+      const g=k=>closed?p[(k+n)%n]:p[Math.max(0,Math.min(n-1,k))];
+      const p0=g(i-1),p1=g(i),p2=g(i+1),p3=g(i+2);
+      d+=` C${f(p1[0]+(p2[0]-p0[0])/6)} ${f(p1[1]+(p2[1]-p0[1])/6)} ${f(p2[0]-(p3[0]-p1[0])/6)} ${f(p2[1]-(p3[1]-p1[1])/6)} ${f(p2[0])} ${f(p2[1])}`;
+    }
+    return closed?d+'Z':d;
+  }
+  function blob(cx,cy,rx,ry,seed){const r=rnd(seed*7919+13),n=11,pts=[];for(let i=0;i<n;i++){const a=i/n*Math.PI*2+(r()-.5)*.3,k=1+(r()-.5)*.38;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k]);}return curve(pts,true);}
+  document.querySelectorAll('[data-blob]').forEach(p=>{const v=p.dataset.blob.split(' ').map(Number);p.setAttribute('d',blob(...v));});
+
+  /* ---------- shared drawing helpers ---------- */
+  const layers=svg=>({w:el('g',{filter:'url(#wc)'},svg),s:el('g',{filter:'url(#wcS)'},svg),i:el('g',{filter:'url(#rough)'},svg)});
+  function c4(L,x0,y0,cell,rows){
+    el('rect',{x:x0,y:y0,width:7*cell,height:rows.length*cell,rx:cell*.18,class:'ink'},L.i);
+    const cells=[];
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{
+      const cx=x0+c*cell+cell/2,cy=y0+r*cell+cell/2;
+      if(ch==='.')el('circle',{cx,cy,r:cell*.3,class:'ink thin faint'},L.i);
+      else{el('circle',{cx,cy,r:cell*.33,class:'wash tok '+(ch==='G'?'w-sage':'w-lav')},L.s);el('circle',{cx,cy,r:cell*.33,class:'ink thin'},L.i);}
+      cells.push({r,c,cx,cy,ch});
+    }));
+    return cells;
+  }
+  function bars(svg,rows,o){
+    const L=layers(svg);
+    rows.forEach(([label,v,col,dec],i)=>{
+      const y=o.top+i*o.step,w=Math.max(3,v/o.max*o.maxw);
+      txt(o.x0-16,y+o.h*.7,label,'hand ink-c fade',svg,{'text-anchor':'end'});
+      el('rect',{x:o.x0,y,width:w,height:o.h,rx:5,class:'wash bar '+col},L.w);
+      txt(o.x0+w+14,y+o.h*.72,v.toFixed(dec??o.dec)+(o.unit||''),'hand ink-c fade',svg,{'font-size':24,'font-weight':700});
+    });
+    el('path',{d:`M${o.x0} ${o.top-10} L${o.x0} ${o.top+rows.length*o.step-o.step+o.h+10}`,class:'ink'},L.i);
+  }
+  const meeple='M-6 -12 C-14 -12 -26 -8 -28 -2 C-29 3 -22 4 -14 3 L-18 26 L-4 26 L0 14 L4 26 L18 26 L14 3 C22 4 29 3 28 -2 C26 -8 14 -12 6 -12 Z';
+  const LET='ABCDEFG';
+
+  /* ---------- connect 4 ---------- */
+  (function(){
+    const s=$('c4svg'),L=layers(s);
+    el('path',{class:'wash w-sage',d:blob(280,290,240,190,121)},L.w);
+    c4(L,84,110,56,['.......','.......','.......','...P...','..GG...','.PGPG..']);
+    LET.split('').forEach((l,i)=>{const x=84+i*56+28;el('path',{d:`M${x} 62 L${x} 96 M${x-9} 86 L${x} 97 L${x+9} 86`,class:'ink thin soft'},L.i);txt(x,50,l,'hand ink-c fade',s,{'text-anchor':'middle'});});
+    txt(280,482,'7 choices per turn · 6 rows','hand fade',s,{'text-anchor':'middle'});
+  })();
+
+  /* ---------- RL loop + Q bars ---------- */
+  (function(){
+    const s=$('rlsvg'),L=layers(s);
+    el('path',{class:'wash w-lav',d:blob(125,130,105,78,131)},L.w);
+    el('path',{class:'wash w-blue',d:blob(475,130,105,78,132)},L.w);
+    el('rect',{x:40,y:76,width:170,height:108,rx:14,class:'ink'},L.i);
+    el('rect',{x:390,y:76,width:170,height:108,rx:14,class:'ink'},L.i);
+    // network doodle in agent box
+    el('path',{d:'M90 108 L125 130 L90 152 M125 130 L160 130 M90 108 L125 104 M90 152 L125 156 M125 104 L160 130 M125 156 L160 130',class:'ink thin'},L.i);
+    [[90,108],[90,152],[125,104],[125,130],[125,156],[160,130]].forEach(([x,y])=>el('circle',{cx:x,cy:y,r:6,class:'ink thin joint'},L.i));
+    // mini board in game box
+    el('rect',{x:425,y:96,width:100,height:70,rx:6,class:'ink thin'},L.i);
+    for(let r=0;r<3;r++)for(let c=0;c<5;c++){const cx=440+c*17.5,cy=111+r*20;el('circle',{cx,cy,r:6,class:'ink thin faint'},L.i);}
+    el('circle',{cx:475,cy:151,r:6,class:'wash tok w-lav'},L.s);el('circle',{cx:457.5,cy:151,r:6,class:'wash tok w-sage'},L.s);
+    txt(125,212,'the agent','hand ink-c fade',s,{'text-anchor':'middle'});
+    txt(475,212,'the game','hand ink-c fade',s,{'text-anchor':'middle'});
+    el('path',{d:'M125 68 C150 6 450 6 475 66',class:'dsh fade','marker-end':'url(#arr)'},s);
+    txt(300,24,'drops a token in a column','hand fade',s,{'text-anchor':'middle'});
+    el('path',{d:'M475 230 C450 286 150 286 125 232',class:'dsh fade','marker-end':'url(#arr)'},s);
+    txt(300,300,'new board + reward','hand fade',s,{'text-anchor':'middle'});
+    // Q bars above a board (illustrative values)
+    const x0=174,cell=36,base=420,q=[.22,.3,.26,.92,.2,.12,.16];
+    q.forEach((v,i)=>{const h=v*90,x=x0+i*cell+6;el('rect',{x,y:base-h,width:cell-12,height:h,rx:3,class:'wash qb '+(i===3?'w-rose':'w-blue')},L.w);});
+    el('path',{d:`M${x0-8} ${base} L${x0+7*cell+8} ${base}`,class:'ink thin'},L.i);
+    txt(x0+3*cell+cell/2,base-q[3]*90-12,'block!','hand ink-c fade',s,{'text-anchor':'middle','font-weight':700});
+    txt(x0-16,base-30,'how good?','hand fade',s,{'text-anchor':'end','font-size':19});
+    c4(L,x0,430,cell,['.......','.......','.......','.......','PP.....','GGG....']);
+    LET.split('').forEach((l,i)=>txt(x0+i*cell+cell/2,672,l,'hand fade',s,{'text-anchor':'middle','font-size':20}));
+  })();
+
+  /* ---------- lookup table -> network ---------- */
+  (function(){
+    const s=$('tblsvg'),L=layers(s);
+    el('path',{class:'wash w-ochre',d:blob(120,120,90,92,141)},L.w);
+    el('path',{class:'wash w-lav',d:blob(460,120,120,96,142)},L.w);
+    el('path',{d:'M40 30 L200 30 L200 190 L185 202 L170 190 L155 202 L140 190 L125 202 L110 190 L95 202 L80 190 L65 202 L50 190 L40 198 Z',class:'ink'},L.i);
+    for(let y=52;y<=178;y+=18)el('path',{d:`M52 ${y} L188 ${y}`,class:'ink thin faint'},L.i);
+    el('path',{d:'M90 40 L90 186',class:'ink thin faint'},L.i);
+    txt(120,232,'187,000 rows','hand ink-c fade',s,{'text-anchor':'middle'});
+    el('path',{d:'M222 112 C258 92 300 92 336 112',class:'dsh fade','marker-end':'url(#arr)'},s);
+    const A=[0,1,2,3,4].map(i=>[372,40+i*40]),B=[0,1,2,3].map(i=>[452,60+i*40]),Cc=[0,1,2,3,4,5,6].map(i=>[532,24+i*28]);
+    A.forEach(a=>B.forEach(b=>el('path',{d:`M${a[0]} ${a[1]} L${b[0]} ${b[1]}`,class:'ink thin faint'},L.i)));
+    B.forEach(b=>Cc.forEach(c=>el('path',{d:`M${b[0]} ${b[1]} L${c[0]} ${c[1]}`,class:'ink thin faint'},L.i)));
+    [...A,...B].forEach(([x,y])=>el('circle',{cx:x,cy:y,r:8,class:'ink joint'},L.i));
+    Cc.forEach(([x,y],i)=>{el('circle',{cx:x,cy:y,r:7,class:'ink joint'},L.i);txt(x+16,y+6,LET[i],'hand fade',s,{'font-size':17});});
+    txt(452,240,'7 scores out','hand ink-c fade',s,{'text-anchor':'middle'});
+  })();
+  bars($('dqnbars'),[['table vs random',54.8,'w-blue'],['table vs rules',1.8,'w-blue'],['DQN vs random',58.6,'w-lav'],['DQN vs rules',7.6,'w-lav'],['rules vs random',99,'w-ochre']],{x0:190,top:18,step:54,h:32,max:100,maxw:330,dec:1,unit:'%'});
+
+  /* ---------- CNN sliding filter ---------- */
+  const cnn=(function(){
+    const s=$('cnnsvg'),L=layers(s),cell=64,x0=56,y0=36;
+    el('path',{class:'wash w-lav',d:blob(280,230,250,200,151)},L.w);
+    const rows=['.......','.......','...G...','..GP...','.GPP...','GPPGP..'];
+    const cells=c4(L,x0,y0,cell,rows),at=(r,c)=>cells[r*7+c];
+    const hl=el('g',{},s);
+    const label=txt(280,488,'','hand ink-c',s,{'text-anchor':'middle'});
+    const wins=[];
+    for(let c=0;c<4;c++)wins.push({k:'horizontal filter',p:[[5,c],[5,c+1],[5,c+2],[5,c+3]]});
+    for(let c=0;c<4;c++)wins.push({k:'vertical filter',p:[[2,c],[3,c],[4,c],[5,c]]});
+    wins.push({k:'diagonal filter',p:[[5,1],[4,2],[3,3],[2,4]]});
+    wins.push({k:'diagonal filter',p:[[5,0],[4,1],[3,2],[2,3]]});
+    function show(w){
+      hl.textContent='';
+      const a=at(...w.p[0]),b=at(...w.p[3]),f=a.ch,hit=f!=='.'&&w.p.every(p=>at(...p).ch===f);
+      el('line',{x1:a.cx,y1:a.cy,x2:b.cx,y2:b.cy,class:'hlc','stroke-width':cell*.92,stroke:hit?'#E8A596':'#8FB0DA',opacity:hit?.55:.32},hl);
+      w.p.forEach(p=>{const q=at(...p);el('circle',{cx:q.cx,cy:q.cy,r:cell*.42,fill:'none',stroke:'#2E2925','stroke-width':hit?2.4:1.4,'stroke-dasharray':hit?'':'3 5'},hl);});
+      label.textContent=w.k+(hit?' · four in a row!':' · nothing yet');
+      return hit;
+    }
+    show(wins[wins.length-1]);
+    return {wins,show};
+  })();
+
+  /* ---------- tournament ---------- */
+  (function(){
+    const s=$('tourbars');
+    bars(s,[['team of 4 networks',64.1,'w-lav'],['best single network',43.8,'w-blue'],['after 1M games',42.0,'w-blue']],{x0:210,top:84,step:60,h:36,max:100,maxw:420,dec:1,unit:'%'});
+    const L=layers(s);
+    el('path',{transform:'translate(-60 6)',d:'M520 8 L560 8 L556 30 C554 40 546 46 540 46 C534 46 526 40 524 30 Z M540 46 L540 58 M528 62 L552 62 M520 14 C508 14 508 28 522 30 M560 14 C572 14 572 28 558 30',class:'ink'},L.i);
+    el('path',{class:'wash w-ochre',d:blob(480,36,26,24,161)},L.w);
+  })();
+
+  /* ---------- CV strip ---------- */
+  (function(){
+    const s=$('cvsvg'),L=layers(s);
+    const rows=['.......','.......','...P...','..GG...','.PGPG..','GPPGPG.'];
+    const tok=(cx,cy,r,ch)=>{if(ch==='.'){el('circle',{cx,cy,r,class:'ink thin faint'},L.i);return;}el('circle',{cx,cy,r,class:'wash tok '+(ch==='G'?'w-sage':'w-lav')},L.s);el('circle',{cx,cy,r,class:'ink thin'},L.i);};
+    // 1 find: slanted board
+    const quad=[[34,196],[206,206],[188,50],[54,40]];
+    el('path',{class:'wash w-ochre',d:blob(120,124,100,86,171)},L.w);
+    el('path',{d:'M'+quad.map(p=>p.join(' ')).join(' L')+' Z',class:'ink'},L.i);
+    const bil=(u,v)=>{const [a,b,c,d]=quad,t=[d[0]+(c[0]-d[0])*u,d[1]+(c[1]-d[1])*u],bt=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];return[t[0]+(bt[0]-t[0])*v,t[1]+(bt[1]-t[1])*v];};
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{const [x,y]=bil((c+.5)/7,(r+.5)/6);tok(x,y,8,ch);}));
+    quad.forEach(([x,y])=>{el('circle',{cx:x,cy:y,r:9,class:'wash tok w-rose'},L.s);el('circle',{cx:x,cy:y,r:9,class:'ink thin'},L.i);});
+    // 2 flatten
+    el('path',{class:'wash w-sage',d:blob(372,124,100,86,172)},L.w);
+    el('rect',{x:286,y:40,width:175,height:150,rx:6,class:'ink'},L.i);
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>tok(286+c*25+12.5,40+r*25+12.5,8.5,ch)));
+    for(let c=1;c<7;c++)el('path',{d:`M${286+c*25} 44 L${286+c*25} 186`,class:'ink thin faint'},L.i);
+    // 3 colours
+    el('path',{class:'wash w-blue',d:blob(626,124,104,86,173)},L.w);
+    el('rect',{x:530,y:40,width:192,height:150,rx:6,class:'ink'},L.i);
+    el('path',{d:'M626 46 L626 184',class:'ink thin soft'},L.i);
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{
+      if(ch==='G'){el('circle',{cx:538+c*12.5+6,cy:62+r*21,r:5.5,class:'wash tok w-sage'},L.s);}
+      if(ch==='P'){el('circle',{cx:634+c*12.5+6,cy:62+r*21,r:5.5,class:'wash tok w-lav'},L.s);}
+    }));
+    txt(578,206,'green','hand t-sage fade',s,{'text-anchor':'middle','font-size':18});
+    txt(674,206,'purple','hand t-lav fade',s,{'text-anchor':'middle','font-size':18});
+    // 4 numbers
+    el('path',{class:'wash w-lav',d:blob(872,124,100,86,174)},L.w);
+    rows.forEach((row,r)=>[...row].forEach((ch,c)=>{const v=ch==='G'?1:ch==='P'?2:0;txt(790+c*26,62+r*25,String(v),'hand '+(v===1?'t-sage':v===2?'t-lav':'')+' fade',s,{'text-anchor':'middle','font-size':21,'font-weight':700,opacity:v?1:.55});}));
+    // arrows + captions
+    [[218,272],[470,522],[730,778]].forEach(([a,b])=>el('path',{d:`M${a} 120 C${a+18} 104 ${b-18} 104 ${b} 120`,class:'dsh fade','marker-end':'url(#arr)'},s));
+    [['1 · find the board','keep bright pixels, find 4 corners',120],['2 · flatten it','warp to 700 × 600, 100 px a cell',374],['3 · filter colours','keep only green and purple',626],['4 · read it','the 6 × 7 grid the AI reads',872]].forEach(([h,sub,x])=>{
+      txt(x,248,h,'hand ink-c fade',s,{'text-anchor':'middle','font-weight':700});
+      txt(x,276,sub,'hand fade',s,{'text-anchor':'middle','font-size':17});
+    });
+  })();
+
+  /* ---------- homography ---------- */
+  (function(){
+    const s=$('homsvg'),L=layers(s);
+    el('path',{class:'wash w-blue',d:blob(150,190,140,110,181)},L.w);
+    el('path',{class:'wash w-sage',d:blob(455,190,130,110,182)},L.w);
+    const quad=[[30,290],[270,290],[225,90],[75,90]];
+    el('path',{d:'M'+quad.map(p=>p.join(' ')).join(' L')+' Z',class:'ink'},L.i);
+    const bil=(u,v)=>{const [a,b,c,d]=quad,t=[d[0]+(c[0]-d[0])*u,d[1]+(c[1]-d[1])*u],bt=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];return[t[0]+(bt[0]-t[0])*v,t[1]+(bt[1]-t[1])*v];};
+    for(let i=1;i<6;i++){const [x1,y1]=bil(i/6,0),[x2,y2]=bil(i/6,1);el('path',{d:`M${x1} ${y1} L${x2} ${y2}`,class:'ink thin faint'},L.i);}
+    for(let j=1;j<4;j++){const [x1,y1]=bil(0,j/4),[x2,y2]=bil(1,j/4);el('path',{d:`M${x1} ${y1} L${x2} ${y2}`,class:'ink thin faint'},L.i);}
+    const R=[340,90,570,290];
+    el('rect',{x:R[0],y:R[1],width:R[2]-R[0],height:R[3]-R[1],class:'ink'},L.i);
+    for(let i=1;i<6;i++)el('path',{d:`M${R[0]+i*230/6} ${R[1]} L${R[0]+i*230/6} ${R[3]}`,class:'ink thin faint'},L.i);
+    for(let j=1;j<4;j++)el('path',{d:`M${R[0]} ${R[1]+j*50} L${R[2]} ${R[1]+j*50}`,class:'ink thin faint'},L.i);
+    for(let k=0;k<=10;k++)el('path',{d:`M${R[0]+k*23} ${R[3]} L${R[0]+k*23} ${R[3]+(k%5?6:12)}`,class:'ink thin'},L.i);
+    const mk=(x,y,sz)=>{el('rect',{x:x-sz/2,y:y-sz/2,width:sz,height:sz,class:'inkfill fade'},s);el('rect',{x:x-sz/4,y:y-sz/4,width:sz/2,height:sz/4,class:'paperfill fade'},s);};
+    quad.forEach(([x,y],i)=>mk(x,y,i<2?20:15));
+    [[R[0],R[3]],[R[2],R[3]],[R[2],R[1]],[R[0],R[1]]].forEach(([x,y])=>mk(x,y,20));
+    const [px,py]=bil(.62,.55),ux=R[0]+.62*230,uy=R[1]+.55*200;
+    el('circle',{cx:px,cy:py,r:9,class:'wash tok w-rose'},L.s);el('circle',{cx:px,cy:py,r:9,class:'ink thin'},L.i);
+    el('circle',{cx:ux,cy:uy,r:9,class:'wash tok w-rose'},L.s);el('circle',{cx:ux,cy:uy,r:9,class:'ink thin'},L.i);
+    el('path',{d:`M${px+12} ${py-6} C${px+100} ${py-150} ${ux-110} ${uy-150} ${ux-12} ${uy-6}`,class:'dsh fade','marker-end':'url(#arr)'},s);
+    txt(150,330,'what the camera sees','hand ink-c fade',s,{'text-anchor':'middle'});
+    txt(455,330,'the table, in mm','hand ink-c fade',s,{'text-anchor':'middle'});
+    txt(300,40,'homography','hand fade',s,{'text-anchor':'middle'});
+  })();
+
+  /* ---------- teach every cell ---------- */
+  (function(){
+    const s=$('idwsvg'),L=layers(s);
+    el('path',{class:'wash w-ochre',d:blob(350,300,330,290,191)},L.w);
+    const taught=new Set(['00','01','02','03','04','05','06','11','13','14','16','21','23','25','26','30','33','34','36','40','41','44','45','50','52','53','54','56','31','24']);
+    const pts=[];
+    for(let r=0;r<6;r++)for(let c=0;c<7;c++){
+      const x=70+c*93,y=60+r*96;
+      if(taught.has(''+r+c)){pts.push([x,y]);el('circle',{cx:x,cy:y,r:9,class:'dot fade'},s);}
+      else el('circle',{cx:x,cy:y,r:7,class:'ink thin faint'},L.i);
+    }
+    const q=[70+2.5*93,60+2.45*96];
+    pts.map(p=>[Math.hypot(p[0]-q[0],p[1]-q[1]),p]).sort((a,b)=>a[0]-b[0]).slice(0,8).forEach(([,p])=>el('path',{d:`M${q[0]} ${q[1]} L${p[0]} ${p[1]}`,class:'ink thin soft'},L.i));
+    el('circle',{cx:q[0],cy:q[1],r:16,class:'wash tok w-rose'},L.s);el('circle',{cx:q[0],cy:q[1],r:16,class:'ink'},L.i);
+  })();
+
+  /* ---------- planar arm (FK/IK and solver) ---------- */
+  const ARM={S:[150,420],L1:260,L2:240,L3:80,table:540};
+  const cellsX=[...Array(7)].map((_,i)=>390+i*40);
+  const tipY=ARM.table-8;
+  function fkW(t1,t2){const [sx,sy]=ARM.S;const E=[sx+ARM.L1*Math.cos(t1),sy-ARM.L1*Math.sin(t1)];return{E,W:[E[0]+ARM.L2*Math.cos(t1+t2),E[1]-ARM.L2*Math.sin(t1+t2)]};}
+  function ik2(wx,wy){const X=wx-ARM.S[0],Y=ARM.S[1]-wy,c=Math.max(-1,Math.min(1,(X*X+Y*Y-ARM.L1**2-ARM.L2**2)/(2*ARM.L1*ARM.L2)));const t2=-Math.acos(c);return[Math.atan2(Y,X)-Math.atan2(ARM.L2*Math.sin(t2),ARM.L1+ARM.L2*Math.cos(t2)),t2];}
+  function armScene(svg,seed){
+    const L=layers(svg);
+    el('path',{class:'wash w-blue',d:blob(420,330,380,230,seed)},L.w);
+    el('path',{class:'wash w-sage',d:blob(510,544,170,22,seed+1)},L.w);
+    el('path',{d:`M20 ${ARM.table} C300 ${ARM.table-4} 600 ${ARM.table+4} 880 ${ARM.table-2}`,class:'ink'},L.i);
+    el('path',{d:`M${ARM.S[0]-42} ${ARM.table} L${ARM.S[0]+42} ${ARM.table} L${ARM.S[0]+32} ${ARM.S[1]+8} L${ARM.S[0]-32} ${ARM.S[1]+8} Z`,class:'ink'},L.i);
+    cellsX.forEach(x=>el('path',{d:`M${x-14} ${ARM.table-3} L${x+14} ${ARM.table-3}`,class:'ink thin soft'},L.i));
+    const ghosts=el('g',{filter:'url(#rough)'},svg);
+    const tgt=el('g',{},svg);
+    el('path',{d:'M-16 0 L16 0 M0 -16 L0 16',class:'live thin',style:'stroke:#A9614F'},tgt);
+    el('circle',{r:11,class:'live thin',style:'stroke:#A9614F'},tgt);
+    const g=el('g',{filter:'url(#rough)'},svg);
+    const o=el('polyline',{class:'live tube'},g),inn=el('polyline',{class:'live tube-in'},g),grip=el('path',{class:'live'},g);
+    const js=[0,1,2].map(()=>el('circle',{r:13,class:'live joint'},g));
+    return{ghosts,tgt,set(t1,t2){
+      const {E,W}=fkW(t1,t2),pts=[ARM.S,E,W].map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ');
+      o.setAttribute('points',pts);inn.setAttribute('points',pts);
+      grip.setAttribute('d',`M${W[0]} ${W[1]} L${W[0]} ${W[1]+ARM.L3-22} M${W[0]-11} ${W[1]+ARM.L3-22} L${W[0]-15} ${W[1]+ARM.L3} M${W[0]+11} ${W[1]+ARM.L3-22} L${W[0]+15} ${W[1]+ARM.L3}`);
+      [ARM.S,E,W].forEach((p,i)=>{js[i].setAttribute('cx',p[0]);js[i].setAttribute('cy',p[1]);});
+    }};
+  }
+  const deg=r=>Math.round(r*180/Math.PI);
+  const fkArm=armScene($('fksvg'),201);
+  // a small mug on the table, for the cup analogy
+  (function(){const s=$('fksvg'),L=layers(s);el('path',{d:'M776 538 C775 522 776 508 778 498 L806 498 C808 508 809 522 808 538 Z M807 505 C822 505 822 524 808 524',class:'ink'},L.i);el('path',{d:'M788 488 C782 478 794 472 788 460',class:'ink thin soft'},L.i);txt(450,588,'target cell → IK → joint angles · gripper kept vertical','hand fade',s,{'text-anchor':'middle','font-size':20});})();
+  function poseAt(x){const [t1,t2]=ik2(x,tipY-ARM.L3);fkArm.set(t1,t2);fkArm.tgt.setAttribute('transform',`translate(${x} ${tipY})`);$('rS').textContent=deg(t1)+'°';$('rE').textContent=deg(t2)+'°';$('rW').textContent=deg(-Math.PI/2-(t1+t2))+'°';}
+  poseAt(cellsX[3]);
+
+  const solveArm=armScene($('solvesvg'),211);
+  const solve=(function(){
+    const s=$('solvesvg'),tx=cellsX[5],W=[tx,tipY-ARM.L3];
+    solveArm.tgt.setAttribute('transform',`translate(${tx} ${tipY})`);
+    let t=[70*Math.PI/180,-20*Math.PI/180];const it=[];
+    for(let k=0;k<7;k++){
+      const {W:w}=fkW(t[0],t[1]);it.push({t:[...t],err:Math.hypot(w[0]-W[0],w[1]-W[1])});
+      const s1=Math.sin(t[0]),c1=Math.cos(t[0]),s12=Math.sin(t[0]+t[1]),c12=Math.cos(t[0]+t[1]);
+      const J=[[-ARM.L1*s1-ARM.L2*s12,-ARM.L2*s12],[ARM.L1*c1+ARM.L2*c12,ARM.L2*c12]];
+      const ex=W[0]-w[0],ey=w[1]-W[1],det=J[0][0]*J[1][1]-J[0][1]*J[1][0];
+      t=[t[0]+.6*(J[1][1]*ex-J[0][1]*ey)/det,t[1]+.6*(-J[1][0]*ex+J[0][0]*ey)/det];
+    }
+    const MM=.45,list=el('g',{},s);
+    function render(n){
+      solveArm.ghosts.textContent='';list.textContent='';
+      for(let k=0;k<n;k++){
+        const {E,W:w}=fkW(...it[k].t),last=k===n-1;
+        if(!last)el('polyline',{points:[ARM.S,E,w,[w[0],w[1]+ARM.L3]].map(p=>p.join(',')).join(' '),fill:'none',stroke:'#4A6E9E','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.12+.08*k},solveArm.ghosts);
+        txt(880,42+k*34,`try ${k+1} · ${(it[k].err*MM).toFixed(k>3?1:0)} mm`,last?'hand ink-c':'hand',list,{'text-anchor':'end','font-size':22,'font-weight':last?700:400});
+      }
+      solveArm.set(...it[n-1].t);
+    }
+    render(it.length);
+    return{n:it.length,render};
+  })();
+
+  /* ---------- boards around the reach ---------- */
+  const gen=(function(){
+    const s=$('gensvg'),L=layers(s),B=[320,560];
+    el('path',{class:'wash w-blue',d:`M${B[0]-430} ${B[1]} A430 430 0 0 1 ${B[0]+430} ${B[1]} L${B[0]+140} ${B[1]} A140 140 0 0 0 ${B[0]-140} ${B[1]} Z`},L.w);
+    el('path',{d:`M${B[0]-430} ${B[1]} A430 430 0 0 1 ${B[0]+430} ${B[1]}`,class:'dsh fade'},s);
+    txt(B[0],B[1]-442,"the arm's reach",'hand fade',s,{'text-anchor':'middle'});
+    const reach=el('path',{class:'dsh'},s);
+    const bg=el('g',{},s);
+    el('rect',{x:B[0]-40,y:B[1]-34,width:80,height:62,rx:8,class:'ink joint'},L.i);
+    txt(B[0],B[1]+4,'arm','hand ink-c fade',s,{'text-anchor':'middle'});
+    const name=txt(16,36,'','hand ink-c',s,{'font-size':26,'font-weight':700});
+    const sub=txt(16,64,'','hand',s,{'font-size':19});
+    const tip=el('g',{},s);el('circle',{r:10,class:'wash tok w-rose'},tip);el('circle',{r:10,class:'live thin'},tip);
+    const sq=(g,W,r,c,cell,dark)=>el('rect',{x:-W/2+c*cell,y:-W/2+r*cell,width:cell,height:cell,fill:dark?'#C7B69E':'#FAF6EE',stroke:'#6B6158','stroke-width':.6},g);
+    const games=[
+      {n:'Connect 4',s:'7 × 6 cells',cols:7,rows:6,cell:30,pos:[330,262],rot:-8,t:[3,2],draw(g){
+        const W=210,H=180;el('rect',{x:-W/2,y:-H/2,width:W,height:H,rx:6,fill:'#F2EBDD',stroke:'#2E2925','stroke-width':2.2},g);
+        ['.......','.......','...P...','..GG...','.PGPG..','GPPGPG.'].forEach((row,r)=>[...row].forEach((ch,c)=>el('circle',{cx:-W/2+c*30+15,cy:-H/2+r*30+15,r:10.5,fill:ch==='G'?'#9CC39A':ch==='P'?'#B9A3DD':'none',stroke:ch==='.'?'#BDB2A2':'#2E2925','stroke-width':1.3},g)));}},
+      {n:'Checkers',s:'8 × 8 squares',cols:8,rows:8,cell:26,pos:[205,300],rot:14,t:[5,4],draw(g){
+        const W=208;for(let r=0;r<8;r++)for(let c=0;c<8;c++){sq(g,W,r,c,26,(r+c)%2);if((r+c)%2&&(r<3||r>4))el('circle',{cx:-W/2+c*26+13,cy:-W/2+r*26+13,r:9,fill:r<3?'#B9A3DD':'#9CC39A',stroke:'#2E2925','stroke-width':1.2},g);}
+        el('rect',{x:-W/2,y:-W/2,width:W,height:W,fill:'none',stroke:'#2E2925','stroke-width':2.2},g);}},
+      {n:'Chess',s:'8 × 8 squares · same arm',cols:8,rows:8,cell:26,pos:[440,290],rot:-16,t:[4,3],draw(g){
+        const W=208,P='♜♞♝♛♚♝♞♜';for(let r=0;r<8;r++)for(let c=0;c<8;c++){sq(g,W,r,c,26,(r+c)%2);
+          const ch=r===0||r===7?P[c]:(r===1||r===6?'♟':'');if(ch){const t=el('text',{x:-W/2+c*26+13,y:-W/2+r*26+20,'text-anchor':'middle','font-size':19,fill:r<2?'#6C54A2':'#4E7D55','font-family':'serif'},g);t.textContent=ch+'︎';}}
+        el('rect',{x:-W/2,y:-W/2,width:W,height:W,fill:'none',stroke:'#2E2925','stroke-width':2.2},g);}}
+    ];
+    function show(i,anim){
+      const G=games[i];bg.textContent='';
+      const g=el('g',{transform:`translate(${G.pos[0]} ${G.pos[1]}) rotate(${G.rot})`,filter:'url(#wcS)'},bg);
+      G.draw(g);
+      const lx=-G.cols*G.cell/2+G.t[0]*G.cell+G.cell/2,ly=-G.rows*G.cell/2+G.t[1]*G.cell+G.cell/2,a=G.rot*Math.PI/180;
+      const wx=G.pos[0]+lx*Math.cos(a)-ly*Math.sin(a),wy=G.pos[1]+lx*Math.sin(a)+ly*Math.cos(a);
+      reach.setAttribute('d',`M${B[0]} ${B[1]-34} L${wx} ${wy}`);
+      tip.setAttribute('transform',`translate(${wx} ${wy})`);
+      name.textContent=G.n;sub.textContent=G.s+' · target cell in mm → IK';
+      if(anim&&bg.animate)bg.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:700,easing:'ease-out'});
+    }
+    show(0);
+    return{count:games.length,show};
+  })();
+
+  /* ---------- calibration mat + bars ---------- */
+  const mat=(function(){
+    const s=$('matsvg'),L=layers(s),ox=60,oy=20,k=1.62; // A4 297 x 210 mm drawn at 1.62 px/mm
+    el('path',{class:'wash w-ochre',d:blob(300,190,280,160,221)},L.w);
+    el('rect',{x:ox,y:oy,width:297*k,height:210*k,rx:3,fill:'#FAF6EE',stroke:'#2E2925','stroke-width':2.2,filter:'url(#rough)'},s);
+    const gi=el('g',{opacity:.5},s);
+    for(let u=10;u<297;u+=10)el('path',{d:`M${ox+u*k} ${oy} L${ox+u*k} ${oy+210*k}`,stroke:'#E6DCCB','stroke-width':u%50?.6:1.2},gi);
+    for(let v=10;v<210;v+=10)el('path',{d:`M${ox} ${oy+v*k} L${ox+297*k} ${oy+v*k}`,stroke:'#E6DCCB','stroke-width':v%50?.6:1.2},gi);
+    [[8,8],[259,8],[259,172],[8,172]].forEach(([x,y])=>{el('rect',{x:ox+x*k,y:oy+y*k,width:30*k,height:30*k,class:'inkfill fade'},s);el('rect',{x:ox+(x+8)*k,y:oy+(y+8)*k,width:8*k,height:14*k,class:'paperfill fade'},s);el('rect',{x:ox+(x+18)*k,y:oy+(y+16)*k,width:6*k,height:6*k,class:'paperfill fade'},s);});
+    const T=[];
+    [50,105,160].forEach(v=>[45,95,145,195,245].forEach(u=>{const x=ox+u*k,y=oy+(210-v)*k;el('path',{d:`M${x-9} ${y} L${x+9} ${y} M${x} ${y-9} L${x} ${y+9}`,class:'ink thin'},L.i);el('circle',{cx:x,cy:y,r:4,class:'ink thin'},L.i);T.push([x,y]);}));
+    el('path',{d:`M${ox+100*k} ${oy+16*k} L${ox+200*k} ${oy+16*k}`,class:'ink thin'},L.i);
+    txt(ox+150*k,oy+12*k,'100 mm · printed 97.5','hand fade',s,{'text-anchor':'middle','font-size':16});
+    txt(ox+148.5*k,oy+206*k,'robot side','hand fade',s,{'text-anchor':'middle','font-size':16});
+    const tip=el('g',{},s);el('circle',{r:9,class:'wash tok w-rose'},tip);el('circle',{r:9,class:'live thin'},tip);
+    tip.setAttribute('transform',`translate(${T[7][0]} ${T[7][1]})`);
+    return{T,tip};
+  })();
+  bars($('calbars'),[['first fit, raw touches',16.9,'w-rose'],['bad touches fixed',5.4,'w-rose'],['measured angles',3.1,'w-rose'],['vertical touches only',2.25,'w-sage',2]],{x0:236,top:16,step:56,h:32,max:18,maxw:290,dec:1,unit:' mm'});
+
+  /* ---------- see, think, act ---------- */
+  (function(){
+    const s=$('loopsvg'),L=layers(s),X=[90,260,430,600,770,920];
+    const parts=[['eyes','w-blue','t-blue'],['eyes','w-blue','t-blue'],['brain','w-lav','t-lav'],['eyes','w-blue','t-blue'],['arm','w-rose',''],['arm','w-rose','']];
+    X.forEach((x,i)=>{el('path',{class:'wash '+parts[i][1],d:blob(x,112,58,50,231+i)},L.w);txt(x,30,parts[i][0],'hand fade '+parts[i][2],s,{'text-anchor':'middle','font-weight':700,'font-size':19});});
+    let d=`M${X[0]+40} 112`;for(let i=0;i<X.length-1;i++){const a=X[i]+40,b=X[i+1]-40,m=(a+b)/2;d+=` C${m} ${i%2?150:74} ${m} ${i%2?150:74} ${b} 112`;if(i<X.length-2)d+=` M${X[i+1]+40} 112`;}
+    el('path',{d,class:'dsh fade','marker-end':'url(#arr)'},s);
+    // 1 camera
+    el('rect',{x:66,y:94,width:48,height:34,rx:6,class:'ink'},L.i);el('circle',{cx:90,cy:111,r:10,class:'ink thin'},L.i);
+    // 2 grid
+    el('rect',{x:232,y:90,width:56,height:46,rx:4,class:'ink'},L.i);for(let c=1;c<4;c++)el('path',{d:`M${232+c*14} 92 L${232+c*14} 134`,class:'ink thin faint'},L.i);for(let r=1;r<3;r++)el('path',{d:`M234 ${90+r*15.3} L286 ${90+r*15.3}`,class:'ink thin faint'},L.i);
+    // 3 network
+    el('path',{d:'M408 96 L430 112 L408 128 M430 112 L452 112 M408 96 L430 96 M408 128 L430 128 M430 96 L452 112 M430 128 L452 112',class:'ink thin'},L.i);
+    [[408,96],[408,128],[430,96],[430,112],[430,128],[452,112]].forEach(([x,y])=>el('circle',{cx:x,cy:y,r:5,class:'ink thin joint'},L.i));
+    // 4 ruler
+    el('rect',{x:568,y:100,width:64,height:22,rx:3,class:'ink'},L.i);for(let k=0;k<=8;k++)el('path',{d:`M${572+k*7} 100 L${572+k*7} ${k%4?106:112}`,class:'ink thin'},L.i);
+    // 5 arm
+    el('path',{d:'M748 134 L792 134 M760 132 L766 106 L792 88 L800 108',class:'ink'},L.i);[[766,106],[792,88]].forEach(([x,y])=>el('circle',{cx:x,cy:y,r:5,class:'ink thin joint'},L.i));
+    // 6 token into board
+    el('path',{d:'M892 132 L948 132 L938 116 L902 116 Z',class:'ink'},L.i);el('circle',{cx:920,cy:96,r:8,class:'wash tok w-lav'},L.s);el('circle',{cx:920,cy:96,r:8,class:'ink thin'},L.i);
+    ['camera frame','6 × 7 grid','best column','cell in mm','joint angles','token dropped'].forEach((l,i)=>txt(X[i],196,l,'hand ink-c fade',s,{'text-anchor':'middle'}));
+    txt(345,236,'every game','hand fade t-blue',s,{'text-anchor':'middle','font-size':18});
+    txt(770,236,'calibrated once','hand fade',s,{'text-anchor':'middle','font-size':18});
+  })();
+
+  /* ---------- draw-in on scroll ---------- */
+  const figs=[...document.querySelectorAll('.draw-me')];
+  if(motion){
+    document.documentElement.classList.add('setup');
+    figs.forEach(f=>{
+      let i=0;
+      f.querySelectorAll('.ink,.fade').forEach(e=>{
+        if(e.classList.contains('ink')&&typeof e.getTotalLength==='function'){
+          let len=0;try{len=e.getTotalLength();}catch(_){}
+          if(len>0){e.style.strokeDasharray=len+' '+(len+2);e.style.setProperty('--len',len);}
+        }
+        e.style.setProperty('--i',Math.min(i++,46));
+      });
+      f.classList.add('pre');
+    });
+    void document.body.offsetHeight;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('setup')));
+    const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target);const t=en.target;setTimeout(()=>t.classList.add('drawn'),3200);}}),{threshold:.18,rootMargin:'0px 0px -6% 0px'});
+    figs.forEach(f=>io.observe(f));
+  }
+
+  /* ---------- looping scenes run only while visible ---------- */
+  const loops={
+    cnn(){let i=0,h;const step=()=>{const hit=cnn.show(cnn.wins[i]);i=(i+1)%cnn.wins.length;h=setTimeout(step,hit?2400:620);};h=setTimeout(step,1400);return()=>clearTimeout(h);},
+    fk(){const order=[3,6,1,5,0,4,2];let k=0,from=cellsX[3],to=cellsX[order[1]],t0=performance.now()+900,raf;
+      const tick=t=>{const p=Math.min(1,Math.max(0,(t-t0)/1700)),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;poseAt(from+(to-from)*e);
+        if(t-t0>2700){k=(k+1)%order.length;from=to;to=cellsX[order[(k+1)%order.length]];t0=t;}raf=requestAnimationFrame(tick);};
+      raf=requestAnimationFrame(tick);return()=>cancelAnimationFrame(raf);},
+    solve(){let n=1,h;solve.render(1);const lad=[...$('ladder').children];
+      const step=()=>{n++;if(n<=solve.n){solve.render(n);h=setTimeout(step,950);}else{n=0;h=setTimeout(step,2600);}};
+      h=setTimeout(step,1600);lad.forEach((c,j)=>c.classList.toggle('on',j===0));return()=>{clearTimeout(h);solve.render(solve.n);};},
+    gen(){let i=0,h;const step=()=>{i=(i+1)%gen.count;gen.show(i,true);h=setTimeout(step,3600);};h=setTimeout(step,3200);return()=>clearTimeout(h);},
+    mat(){const T=mat.T,order=[7,0,4,10,14,2,12,5,9,1,13,6,11,3,8];let k=0,raf,t0=performance.now()+1500,from=T[7],to=T[order[1]];
+      const tick=t=>{const p=Math.min(1,Math.max(0,(t-t0)/900)),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,lift=Math.sin(p*Math.PI)*-14;
+        mat.tip.setAttribute('transform',`translate(${from[0]+(to[0]-from[0])*e} ${from[1]+(to[1]-from[1])*e+lift}) scale(${1+Math.sin(p*Math.PI)*.25})`);
+        if(t-t0>1500){k=(k+1)%order.length;from=to;to=T[order[(k+1)%order.length]];t0=t;}raf=requestAnimationFrame(tick);};
+      raf=requestAnimationFrame(tick);return()=>cancelAnimationFrame(raf);}
+  };
+  if(motion){
+    const stops=new Map();
+    const lo=new IntersectionObserver(es=>es.forEach(en=>{
+      const f=en.target,name=f.dataset.hook;
+      if(en.isIntersecting&&!stops.has(f))stops.set(f,loops[name]());
+      else if(!en.isIntersecting&&stops.has(f)){stops.get(f)();stops.delete(f);}
+    }),{threshold:.05});
+    document.querySelectorAll('[data-hook]').forEach(f=>lo.observe(f));
+  }
+
+  /* ---------- the margin thread ---------- */
+  const story=$('story'),th=$('thread'),tp=$('threadPath'),tg=$('threadGhost'),tr=$('threadReveal'),tok=$('threadTok'),mask=$('threadMask');
+  let thLen=0,thOn=false;
+  function layoutThread(){
+    thOn=innerWidth>=1240;if(!thOn)return;
+    const W=story.clientWidth,H=story.scrollHeight,col=Math.min(1080,W);
+    const xm=Math.max(30,(W-col)/2/2),amp=Math.min(46,xm*.45);
+    const startY=$('why').offsetTop-20,pts=[];
+    for(let y=startY,i=0;y<H-140;y+=260,i++)pts.push([xm+Math.sin(i*1.3)*amp+(i%3===0?amp*.3:0),y]);
+    pts.push([xm,H-120]);
+    const d=curve(pts,false);
+    th.setAttribute('viewBox',`0 0 ${W} ${H}`);th.style.height=H+'px';
+    [tp,tg,tr].forEach(p=>p.setAttribute('d',d));
+    mask.setAttribute('x',0);mask.setAttribute('y',0);mask.setAttribute('width',W);mask.setAttribute('height',H);
+    thLen=tp.getTotalLength();onScroll();
+  }
+  let ticking=false;
+  function onScroll(){
+    if(!thOn||!thLen)return;
+    const r=story.getBoundingClientRect(),H=story.scrollHeight;
+    const startY=$('why').offsetTop-20;
+    const y=-r.top+innerHeight*.55;
+    const p=Math.max(0,Math.min(1,(y-startY)/(H-140-startY)));
+    tr.style.strokeDashoffset=String(1-p);
+    const pt=tp.getPointAtLength(p*thLen);
+    tok.setAttribute('transform',`translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
+  }
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{ticking=false;onScroll();});}},{passive:true});
+  let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(layoutThread,150);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layoutThread);
+  addEventListener('load',layoutThread);
+  layoutThread();
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Precog · Valerio Ciotti</title>
+<meta name="description" content="Minority Report style gesture control for macOS. Swipe between desktops in mid-air, pinch to click, throw windows to the other screen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true">VC</span><span>Valerio Ciotti</span></a>
+  <nav aria-label="Sections">
+<a href="../../">Workshop</a><a href="../" aria-current="page">All projects</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>    <a class="gh" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <header class="band">
+    <div class="wrap">
+      <p class="crumbs"><a href="../../">Workshop</a> / <a href="../../#vision">Seeing</a></p>
+      <h1>Precog</h1>
+      <p class="question">What if my hands were the mouse?</p>
+      <p class="lede">Minority Report style gesture control for macOS. Swipe between desktops in mid-air, pinch to click, throw windows to the other screen.</p>
+      <p class="actions">
+<a class="btn primary" href="../../../showcase/precog/">Read the full story</a><a class="btn" href="https://github.com/valkiii/precog_hand" target="_blank" rel="noopener">GitHub ↗</a>      </p>
+      <p class="facts"><span>October 2026</span><span class="status s-prototype">prototype</span><span>Seeing</span><span>Tools</span></p>
+    </div>
+  </header>
+  <figure class="wrap screen"><img src="../../../media/covers/precog.jpg" alt="Precog"></figure>
+
+<section class="wrap tiles"><div><b>21</b><span>landmarks per hand</span></div><div><b>~30</b><span>frames per second</span></div><div><b>6</b><span>takes per gesture</span></div></section>
+  <section class="wrap split">
+    <h2>The idea</h2>
+    <p class="big">In the film, detectives sort evidence by sweeping their hands through the air. They needed gloves and a wall of glass. A laptop camera and an open hand-tracking model should be enough to try the same thing on an ordinary desk.
+</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">How it works</h2>
+    <ol class="steps"><li><span class="n">01</span><b>See</b><p>MediaPipe turns every frame into 21 points per hand. Nothing after that step looks at pixels.</p></li><li><span class="n">02</span><b>Normalise</b><p>Each hand is redrawn around its wrist and divided by its own size, so near and far hands compare.</p></li><li><span class="n">03</span><b>Recognise</b><p>Poses are matched by shape; movements by dynamic time warping against about six recorded takes, with a threshold set from their spread.</p></li><li><span class="n">04</span><b>Act</b><p>macOS ignores synthetic Ctrl+arrow for desktops, so Precog posts the private dock-swipe events a real trackpad sends.</p></li></ol>
+  </section>
+
+  <section class="wrap split">
+    <h2>What I learned</h2>
+    <ul class="learned"><li>Most of the work is not the model. It is making an operating system accept input it was never designed for.</li><li>Recording gestures by example beats hand-tuned rules, as long as the threshold comes from the examples too.</li><li>A gesture interface needs an off switch. Ten spread fingers put it on standby.</li></ul>
+  </section>
+
+  <section class="wrap split">
+    <h2>Built with</h2>
+    <p class="stack"><span>Python</span><span>OpenCV</span><span>MediaPipe</span><span>PyObjC</span><span>dynamic time warping</span></p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="h2">On the same shelf</h2>
+    <div class="grid"><a class="card " href="../pulp/" style="--c: var(--uc-play); --on: var(--on-play)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PULP" style="--c: var(--uc-play); --on: var(--on-play)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-30.0390625" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="33.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="97.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="161.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="225.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/><rect x="289.9609375" y="-60" width="22" height="320" class="p-stripe" transform="rotate(20.46875 160 100)"/>  <circle cx="254.140625" cy="92.96875" r="57.625" class="p-disc"/>
+  <text x="24" y="172" class="p-title">PULP</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Games</span><span class="meta">Oct 2026</span></span>
+    <b>PULP</b>
+    <span class="q">Can you play Fruit Ninja with your eyes?</span>
+    <span class="status s-beta">beta</span>
+  </span>
+</a>
+<a class="card " href="../eulerian/" style="--c: var(--uc-vision); --on: var(--on-vision)">
+  <span class="media"><img src="../../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="row"><span class="pill">Seeing</span><span class="meta">Oct 2026</span></span>
+    <b>Seeing the invisible</b>
+    <span class="q">Can a webcam see your pulse?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+<a class="card " href="../zepplocal/" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <span class="media"><svg class="poster" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ZeppLocal" style="--c: var(--uc-tools); --on: var(--on-tools)">
+  <rect width="320" height="200" class="p-bg"/>
+<rect x="-36.3671875" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="27.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="91.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="155.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="219.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/><rect x="283.6328125" y="-60" width="22" height="320" class="p-stripe" transform="rotate(41.2109375 160 100)"/>  <circle cx="232.109375" cy="125.78125" r="62.3125" class="p-disc"/>
+  <text x="24" y="172" class="p-title">ZeppLocal</text>
+</svg>
+</span>
+  <span class="body">
+    <span class="row"><span class="pill">Tools</span><span class="meta">Oct 2026</span></span>
+    <b>ZeppLocal</b>
+    <span class="q">Can I keep my watch data without trusting another app?</span>
+    <span class="status s-prototype">prototype</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div><b>Valerio Ciotti</b><span>Data scientist · network scientist · tinkerer</span></div>
+  <div><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></div>
+</footer>
+</body>
+</html>
