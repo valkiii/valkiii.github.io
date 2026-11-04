@@ -1,0 +1,1848 @@
+<meta charset="utf-8">
+<title>Build your agent</title>
+<meta name="description" content="Opening deck for a hands-on workshop on local, offline AI agents: the loop, why local, and what breaks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Bangers&display=swap">
+
+<style>
+  :root {
+    color-scheme: light dark;
+
+    --ground:        #ECEBE4;
+    --surface:       #F7F6F1;
+    --raise:         #FFFFFF;
+    --grid:          #DEDCD2;
+    --ink:           #23252B;
+    --ink-soft:      #585B62;
+    --ink-faint:     #8B8D93;
+    --line:          #D5D3C9;
+
+    --local:         #2C6E4B;   /* on-device · agent · "does things" */
+    --local-tint:    #E4EDE6;
+    --elsewhere:     #3A5788;   /* cloud · chatbot · "just answers" */
+    --elsewhere-tint:#E3E7F1;
+    --flag:          #BB4C25;   /* the hard way · don'ts · warnings  */
+    --flag-tint:     #F3E3DA;
+
+    --font-display: "Space Grotesk", "Trebuchet MS", system-ui, sans-serif;
+    --font-body:    "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --edge: min(6vw, 5.5rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:        #121317;
+      --surface:       #1A1C21;
+      --raise:         #24272D;
+      --grid:          #22242A;
+      --ink:           #E8E6DE;
+      --ink-soft:      #A6A39A;
+      --ink-faint:     #75767C;
+      --line:          #31333A;
+      --local:         #5EBA8B;
+      --local-tint:    #182920;
+      --elsewhere:     #88A8DC;
+      --elsewhere-tint:#1A2230;
+      --flag:          #E28C5E;
+      --flag-tint:     #2C1E16;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:        #121317;
+    --surface:       #1A1C21;
+    --raise:         #24272D;
+    --grid:          #22242A;
+    --ink:           #E8E6DE;
+    --ink-soft:      #A6A39A;
+    --ink-faint:     #75767C;
+    --line:          #31333A;
+    --local:         #5EBA8B;
+    --local-tint:    #182920;
+    --elsewhere:     #88A8DC;
+    --elsewhere-tint:#1A2230;
+    --flag:          #E28C5E;
+    --flag-tint:     #2C1E16;
+  }
+
+  * { box-sizing: border-box; }
+
+  /* the whole stylesheet is rem-based, so scaling the root font-size is a
+     single lever that scales every size in the deck (type, padding, gaps,
+     radii) together as the window resizes — 14px on a narrow/half window
+     up to 20px on a wide one or a projector, ~16.6px at a typical 1440px
+     laptop width so nothing jumps at the common case. The headline
+     elements (h1/h2/.statement/.lead/.kicker-line) already had their own
+     vw-based clamp()s on top of this — those stay independently fluid. */
+  html { font-size: clamp(14px, 0.6vw + 8px, 20px); scroll-behavior: smooth; scroll-snap-type: y proximity; }
+
+  body {
+    margin: 0;
+    font: 400 1.0625rem/1.62 var(--font-body);
+    color: var(--ink);
+    background:
+      radial-gradient(var(--grid) 1px, transparent 1.5px) -13px -13px / 26px 26px,
+      var(--ground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--local); color: var(--raise); }
+
+  /* ---------- fixed chrome ---------- */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--local); z-index: 40;
+    transition: width .15s linear;
+  }
+  .counter {
+    position: fixed; top: 1.15rem; left: var(--edge); z-index: 30;
+    font: 500 .78rem/1 var(--font-mono); letter-spacing: .06em;
+    color: var(--ink-faint);
+  }
+  .counter b { color: var(--ink); font-weight: 700; }
+  .wordmark {
+    position: fixed; bottom: 1.15rem; left: var(--edge); z-index: 30;
+    font: 500 .68rem/1 var(--font-mono); letter-spacing: .22em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .chrome {
+    position: fixed; bottom: 1rem; right: var(--edge); z-index: 30;
+    display: flex; gap: .6rem; align-items: center;
+  }
+  .chrome button {
+    font: 500 .72rem/1 var(--font-mono); letter-spacing: .08em;
+    color: var(--ink-soft); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 4px;
+    padding: .5rem .7rem; cursor: pointer;
+  }
+  .chrome button:hover { color: var(--ink); border-color: var(--ink-faint); }
+  kbd {
+    font: 700 .68rem/1 var(--font-mono);
+    border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 3px; padding: .15em .4em; color: var(--ink-soft);
+    background: var(--raise);
+  }
+  :focus-visible { outline: 2px solid var(--local); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- slide frame ---------- */
+  .slide {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem var(--edge) 6rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--line) 55%, transparent);
+  }
+  .inner { width: 100%; max-width: 66rem; margin: 0 auto; }
+  .wide .inner { max-width: 76rem; }
+  #s2b .inner { margin: 0; }  /* left-justified, not centered — so the timeline's 40% is 40% of the real left edge */
+
+  .eyebrow {
+    font: 500 .74rem/1.5 var(--font-mono);
+    letter-spacing: .17em; text-transform: uppercase;
+    color: var(--ink-faint);
+    display: flex; align-items: center; gap: .7rem;
+    margin: 0 0 1.6rem;
+  }
+  .eyebrow::before {
+    content: ""; flex: none; width: 1.6rem; height: 1px; background: var(--ink-faint);
+  }
+  .eyebrow.is-flag { color: var(--flag); }
+  .eyebrow.is-flag::before { background: var(--flag); }
+
+  h1 {
+    font: 700 clamp(2.9rem, 7.2vw, 5.6rem)/1.02 var(--font-display);
+    letter-spacing: -.02em; margin: 0; text-wrap: balance;
+  }
+  h2 {
+    font: 700 clamp(2rem, 4.6vw, 3.4rem)/1.06 var(--font-display);
+    letter-spacing: -.015em; margin: 0 0 1.5rem; text-wrap: balance;
+  }
+  .statement {
+    font: 700 clamp(1.8rem, 3.7vw, 2.9rem)/1.18 var(--font-display);
+    letter-spacing: -.01em; margin: 0; text-wrap: balance;
+    max-width: 22ch;
+  }
+  .statement.long { max-width: 30ch; }
+  .lead {
+    font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+    color: var(--ink-soft); max-width: 34em; margin: 1.4rem 0 0;
+  }
+  p { max-width: 36em; }
+  .c-local { color: var(--local); }
+  .c-else  { color: var(--elsewhere); }
+  .c-flag  { color: var(--flag); }
+
+  /* ---------- title slide ---------- */
+  /* text pinned to solid black here, in both themes — the background video
+     behind this slide makes the normal light/dark ink tokens hard to read,
+     especially --ink-soft/--ink-faint in dark mode against moving footage */
+  #s1 { justify-content: center; overflow: hidden; color: #000; }
+  /* comic-book title treatment — title slide's headline only, everything
+     else on the slide stays the plain solid-black styling above */
+  #s1 h1 {
+    font-family: "Bangers", var(--font-display);
+    font-weight: 400; /* Bangers only ships one weight; the display fallback's 700 would fake-bold it */
+    font-size: clamp(3.8rem, 9.5vw, 7.8rem);
+    letter-spacing: .03em;
+    color: #FFD400;
+    -webkit-text-stroke: 6px #1E3FE0;
+    paint-order: stroke fill;
+    text-shadow: 7px 7px 0 #1E3FE0;
+  }
+  #s1 .sub {
+    font: 500 clamp(1.05rem, 2vw, 1.5rem)/1.4 var(--font-body);
+    color: #000; margin: 1.6rem 0 0; max-width: 24ch;
+  }
+  .byline {
+    margin-top: 3.2rem; font: 500 .9rem/1.7 var(--font-mono);
+    letter-spacing: .04em; color: #000;
+  }
+  .byline .fill {
+    border-bottom: 1px dashed #000; padding-bottom: 1px;
+    color: #000;
+  }
+  .scrollcue {
+    position: absolute; bottom: 2.6rem; left: var(--edge);
+    font: 500 .74rem/1 var(--font-mono); letter-spacing: .14em;
+    text-transform: uppercase; color: #000;
+  }
+
+  /* ---------- presenters ---------- */
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6rem; margin-top: 1.8rem; }
+  .intro-name {
+    font: 700 1.35rem/1.25 var(--font-display); letter-spacing: -.01em;
+    color: var(--ink); margin: 0;
+  }
+  .intro-photo {
+    width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden;
+    background: var(--raise); border: 1px solid var(--line); margin: 1.2rem 0;
+  }
+  .intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .intro-bio {
+    font: 400 .95rem/1.55 var(--font-body);
+    color: var(--ink-soft);
+  }
+
+  /* ambient network, fixed behind every slide — nodes drift and link up
+     when close, a handful tinted --local to read as "agents talking,
+     on-device". Sits under the whole deck, not just the title. */
+  .bg-net { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; display: block; }
+  main#deck { position: relative; z-index: 1; }
+
+  /* ---------- agenda ---------- */
+  .track { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .track .row { background: var(--surface); padding: 1.4rem 1.5rem; display: grid; grid-template-columns: 9.5rem 1fr; gap: 1.4rem; align-items: baseline; }
+  .track .k { font: 700 .78rem/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--local); }
+  .track .v { color: var(--ink); }
+  .track .v small { display: block; color: var(--ink-soft); margin-top: .3rem; font-size: .95rem; }
+  .halves { display: grid; grid-template-columns: 2fr 1fr; gap: 2.6rem; align-items: center; }
+  .kicker-line {
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--local);
+    font: 700 clamp(1.25rem, 2.3vw, 1.8rem)/1.35 var(--font-display);
+    letter-spacing: -.01em; text-wrap: balance; max-width: 22ch;
+  }
+
+  /* ---------- task / workflow / agent ---------- */
+  #s4b { overflow: hidden; }
+  #sdemo { overflow: hidden; }
+
+  /* shared background-video treatment — slide 1 and slide 10 each drop a
+     <video class="bgvideo"> in as their first child; same alpha .4, cover,
+     sits behind the slide's own in-flow content via negative z-index */
+  .bgvideo {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: -1; opacity: .4; pointer-events: none;
+  }
+  #sdemo .bgvideo { opacity: .5; }
+  /* table at 1/3, the "what we built" case at 2/3 */
+  .twagrid { display: grid; grid-template-columns: 1fr 2fr; gap: 2.6rem; align-items: start; margin-top: 1.8rem; }
+  .twaside p { margin: 1.2rem 0 0; }
+  .twaside .kicker-line { margin-top: 0; }
+  .callout {
+    margin-top: 1.3rem; padding: 1.1rem 1.4rem;
+    border-radius: 8px; background: var(--local-tint); border-left: 3px solid var(--local);
+    font-size: 1rem; line-height: 1.58; color: var(--ink);
+  }
+  .callout b { color: var(--local); }
+
+  /* ---------- vertical timetable: time under the title's left edge, the
+     line + dot sitting right after the time column, activity to their
+     right ---------- */
+  .timetable { --tt-col: 14ch; position: relative; margin-top: 1.7rem; }
+  .timetable::before {
+    content: ""; position: absolute; left: var(--tt-col); top: .3rem; bottom: .3rem; width: 2px;
+    background: var(--line); transform: translateX(-1px);
+  }
+  .tt-row { position: relative; display: grid; grid-template-columns: var(--tt-col) 1fr; align-items: start; margin-bottom: 1.05rem; }
+  .tt-row:last-child { margin-bottom: 0; }
+  .tt-dot {
+    position: absolute; left: var(--tt-col); top: .28rem; width: .6rem; height: .6rem; border-radius: 50%;
+    background: var(--local); border: 2px solid var(--ground); transform: translate(-50%, 0); z-index: 1;
+  }
+  .tt-time { text-align: left; font: 700 .82rem/1.4 var(--font-mono); color: var(--ink-soft); white-space: nowrap; }
+  .tt-activity { padding-left: 1.5rem; font-size: .92rem; line-height: 1.42; color: var(--ink); }
+
+  /* ---------- two-column compare ---------- */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .col { padding-top: 1.1rem; border-top: 3px solid var(--line); }
+  .col.is-else  { border-top-color: var(--elsewhere); }
+  .col.is-local { border-top-color: var(--local); }
+  .col .tagword {
+    font: 700 .8rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase;
+    margin: 0 0 .9rem;
+  }
+  .col.is-else  .tagword { color: var(--elsewhere); }
+  .col.is-local .tagword { color: var(--local); }
+  .col p { font-size: 1.1rem; margin: 0; color: var(--ink); }
+
+  /* ---------- #s4 "Chatbot vs Agent" demos: play ONCE, the first time you land on the slide
+     (JS adds .play to #s4 on first IntersectionObserver hit), then hold still.
+     Each element has its own delay + duration below — no shared timeline needed
+     since nothing loops. Chat runs ~0–4.9s, a quiet beat, then the agent side
+     runs ~5.8–8.9s. Retime by editing the delays; order is what matters. ------- */
+  .chatdemo, .agentdemo { margin-top: 1.7rem; min-height: 120px; }
+  .chatdemo { display: flex; flex-direction: column; gap: .5rem; }
+
+  @keyframes s4fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes s4pop    { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+  @keyframes s4blink  { 0% { opacity: 0; } 20% { opacity: 1; } 78% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes s4reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0% 0 0); } }
+  @keyframes s4arrow  { from { opacity: 0; } to { opacity: 1; } }
+
+  .bubble {
+    width: fit-content; max-width: 100%; white-space: nowrap; opacity: 0;
+    padding: .55rem .85rem; border-radius: 13px; font: 500 .86rem/1.3 var(--font-body);
+  }
+  .bubble--user { align-self: flex-end; background: var(--elsewhere); color: var(--raise); border-bottom-right-radius: 3px; }
+  .bubble--bot  { align-self: flex-start; background: var(--raise); color: var(--ink); border: 1px solid var(--line); border-bottom-left-radius: 3px; }
+  .bubble--dots {
+    align-self: flex-start; background: var(--raise); border: 1px solid var(--line); border-bottom-left-radius: 3px;
+    display: flex; gap: .28rem; padding: .68rem .9rem; opacity: 0;
+  }
+  .bubble--dots .dot { width: .36rem; height: .36rem; border-radius: 50%; background: var(--ink-faint); animation: s4dotBounce 1.1s ease-in-out infinite; }
+  .bubble--dots .dot:nth-child(2) { animation-delay: .15s; }
+  .bubble--dots .dot:nth-child(3) { animation-delay: .3s; }
+  @keyframes s4dotBounce { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(-3px); opacity: 1; } }
+  .typed { display: inline-block; clip-path: inset(0 100% 0 0); }
+
+  #s4.play .bubble--user  { animation: s4fadeUp .3s ease 0s      forwards; }
+  #s4.play .typed--q      { animation: s4reveal 1.4s linear .3s  forwards; }
+  #s4.play .bubble--dots  { animation: s4blink  1.0s ease 2.0s   forwards; }
+  #s4.play .bubble--bot   { animation: s4fadeUp .3s ease 2.8s    forwards; }
+  #s4.play .typed--a      { animation: s4reveal 1.8s linear 3.1s forwards; }
+
+  /* the agent side: robot -> (arrow) -> cloud -> (arrow) -> document, left to right */
+  .apipe { display: flex; align-items: center; justify-content: space-between; gap: .5rem; width: 100%; flex-wrap: wrap; }
+  .astep { display: flex; flex-direction: column; align-items: center; gap: .35rem; min-width: 3.4rem; opacity: 0; }
+  .aicon { font-size: 2.1rem; line-height: 1; }
+  .alabel { font: 500 .68rem/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); text-align: center; white-space: nowrap; }
+  .aarrow { width: 2rem; height: 1rem; flex: none; opacity: 0; }
+  .aarrow path { fill: none; stroke: var(--ink-soft); stroke-width: 1.6; }
+  .adocsvg { width: 3rem; height: auto; overflow: visible; }
+  .adocsvg rect:first-child { fill: var(--local-tint); stroke: var(--local); stroke-width: 1.5; }
+  .a-line { fill: var(--local); }
+
+  #s4.play .astep--node  { animation: s4pop   .35s ease 5.80s forwards; }
+  #s4.play .aarrow--1    { animation: s4arrow .3s  ease 6.20s forwards; }
+  #s4.play .astep--cloud { animation: s4fadeUp .6s ease 6.55s forwards; }
+  #s4.play .aarrow--2    { animation: s4arrow .3s  ease 7.25s forwards; }
+  #s4.play .astep--doc   { animation: s4pop   .4s  ease 7.60s forwards; }
+  #s4.play .a-line.l1    { animation: s4reveal .25s linear 8.05s forwards; }
+  #s4.play .a-line.l2    { animation: s4reveal .25s linear 8.35s forwards; }
+  #s4.play .a-line.l3    { animation: s4reveal .25s linear 8.65s forwards; }
+
+  /* ---------- reasons (not a sequence — no numbers) ---------- */
+  .reasons { display: grid; gap: 0; }
+  .reason {
+    display: grid; grid-template-columns: 12rem 1fr; gap: 1.6rem; align-items: baseline;
+    padding: 1.35rem 1.1rem; margin: 0 -1.1rem; border-top: 1px solid var(--line);
+    border-radius: 7px;
+    transition: background-color .18s ease, border-top-color .18s ease;
+  }
+  .reason:last-child { border-bottom: 1px solid var(--line); }
+  .reason:hover { background: color-mix(in oklab, var(--local) 16%, var(--ground)); border-top-color: var(--local); }
+  .reason:hover h3::before { transform: scale(1.4); }
+  .reason h3 { margin: 0; font: 700 1.15rem/1.2 var(--font-display); color: var(--local); display: flex; align-items: center; gap: .6rem; }
+  .reason h3::before { content: ""; flex: none; width: .55rem; height: .55rem; background: var(--local); transition: transform .18s ease; }
+  .reason p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; transition: color .18s ease; }
+  .reason:hover p { color: var(--ink); }
+
+  /* ---------- do / don't ---------- */
+  .tag {
+    display: inline-block; font: 700 .72rem/1 var(--font-mono);
+    letter-spacing: .16em; text-transform: uppercase;
+    padding: .4rem .6rem; border-radius: 3px; margin-bottom: 1.3rem;
+  }
+  .tag.dont { color: var(--flag); background: var(--flag-tint); }
+  .tag.do   { color: var(--local); background: var(--local-tint); }
+
+  .ba { display: grid; gap: 1rem; margin: 1.6rem 0 0; }
+  .ba .step { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.2rem; align-items: baseline; }
+  .ba .lbl { font: 700 .74rem/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+  .ba .before .lbl { color: var(--flag); }
+  .ba .after  .lbl { color: var(--local); }
+  .ba .txt { color: var(--ink); font-size: 1.08rem; }
+  .ba code { font: 500 .92em/1 var(--font-mono); background: var(--raise); border: 1px solid var(--line); border-radius: 3px; padding: .1em .35em; }
+
+  .lesson {
+    margin-top: 2rem; padding: 1.2rem 1.4rem;
+    background: var(--surface); border-left: 3px solid var(--local);
+    border-radius: 0 5px 5px 0;
+  }
+  .lesson.warn { border-left-color: var(--flag); }
+  .lesson .k { font: 700 .72rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+  .lesson p { margin: .5rem 0 0; font-size: 1.08rem; color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.4rem; }
+  .chips span { font: 500 .85rem/1 var(--font-mono); color: var(--local); background: var(--local-tint); padding: .5rem .7rem; border-radius: 4px; }
+
+  /* ---------- code ---------- */
+  pre {
+    margin: 1.4rem 0 0; padding: 1.1rem 1.2rem; overflow-x: auto;
+    background: var(--raise); border: 1px solid var(--line); border-radius: 6px;
+    font: 400 .92rem/1.65 var(--font-mono); color: var(--ink);
+  }
+  pre .cmt { color: var(--ink-faint); }
+  pre .fence { color: var(--flag); }
+  pre .str { color: var(--local); }
+
+  /* ---------- demo card ---------- */
+  .demo {
+    border: 1px solid var(--ink-soft); border-radius: 8px;
+    background: var(--surface); padding: 1.6rem 1.7rem;
+  }
+  .demo .bar { display: flex; align-items: center; gap: .5rem; margin-bottom: 1.2rem; font: 500 .74rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+  .demo .bar::before { content: ""; width: .6rem; height: .6rem; border-radius: 50%; background: var(--flag); }
+  .demo ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .95rem; }
+  .demo li { display: grid; grid-template-columns: 1.75rem 1fr; gap: .85rem; align-items: baseline; font-size: 1.06rem; }
+  .demo li > b { font: 700 .82rem/1.7 var(--font-mono); color: var(--local); }
+  .demo li code { font: 500 .9em/1 var(--font-mono); white-space: nowrap; background: var(--raise); border: 1px solid var(--line); border-radius: 3px; padding: .12em .4em; }
+  .demo li em { color: var(--ink); }
+  .timebox { margin-top: 1.3rem; font: 500 .8rem/1 var(--font-mono); letter-spacing: .06em; color: var(--flag); background: var(--flag-tint); display: inline-block; padding: .5rem .7rem; border-radius: 4px; }
+
+  /* ---------- live Ollama widget ---------- */
+  .ollamabox { border: 1px solid var(--ink-soft); border-radius: 8px; background: var(--surface); padding: 1.5rem 1.6rem; margin-top: 1.6rem; }
+  .obar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+  .ostatus { display: inline-flex; align-items: center; gap: .55rem; font: 500 .82rem/1 var(--font-mono); color: var(--ink-soft); }
+  .odot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--ink-faint); flex: none; }
+  .ostatus--ok .odot { background: var(--local); }
+  .ostatus--err .odot, .ostatus--warn .odot { background: var(--flag); }
+  .ostatus--checking .odot { background: var(--ink-faint); animation: oPulse 1s ease-in-out infinite; }
+  @keyframes oPulse { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+  .ollamabox button {
+    font: 700 .78rem/1 var(--font-mono); letter-spacing: .05em; color: var(--local);
+    background: var(--local-tint); border: 1px solid transparent; border-radius: 5px;
+    padding: .55rem .85rem; cursor: pointer;
+  }
+  .ollamabox button:hover:not(:disabled) { border-color: var(--local); }
+  .ollamabox button:disabled { opacity: .5; cursor: default; }
+  .ofields { display: grid; grid-template-columns: 1fr 12rem; gap: .7rem; margin-bottom: 1rem; }
+  .obase, .omodel, .oprompt {
+    font: 500 .86rem/1.4 var(--font-mono); color: var(--ink);
+    background: var(--raise); border: 1px solid var(--line); border-radius: 5px; padding: .6rem .75rem;
+  }
+  .oprompt { width: 100%; resize: vertical; font-family: var(--font-body); font-size: .98rem; line-height: 1.5; margin-bottom: 1rem; }
+  .orow { display: flex; align-items: center; gap: 1.1rem; margin-bottom: 1rem; }
+  .otimebox { font: 500 .78rem/1 var(--font-mono); color: var(--ink-faint); }
+  .ooutput {
+    margin: 0; min-height: 6rem; max-height: 13rem; overflow-y: auto;
+    white-space: pre-wrap; word-break: break-word; color: var(--ink);
+    background: var(--raise); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.1rem;
+    font: 400 .92rem/1.55 var(--font-mono);
+  }
+
+  /* ---------- model explainer ---------- */
+  .modelsplit { display: grid; grid-template-columns: 1fr 1.15fr; gap: 2.4rem; margin-top: 1.8rem; align-items: start; }
+  .specsheet { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .spec { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; background: var(--surface); padding: .85rem 1.1rem; }
+  .spec .k { font: 700 .72rem/1.35 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+  .spec .v { font-size: .92rem; color: var(--ink); line-height: 1.4; }
+  .spec .v code { font: 500 .92em/1 var(--font-mono); background: var(--raise); border: 1px solid var(--line); border-radius: 3px; padding: .1em .35em; }
+  .modelnote p { margin: 0 0 1rem; font-size: .98rem; color: var(--ink); line-height: 1.55; }
+  .modelnote pre { margin: 0 0 1.4rem; }
+
+  /* ---------- mapped loop ---------- */
+  .map { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .map .hd, .map .r { display: grid; grid-template-columns: 15rem 1fr; }
+  .map .hd > *, .map .r > * { background: var(--surface); padding: 1.05rem 1.4rem; transition: background-color .18s ease; }
+  .map .hd > * { font: 700 .74rem/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+  .map .r .s { font: 700 1.05rem/1.3 var(--font-display); color: var(--local); border-left: 3px solid var(--local); }
+  .map .r .a { color: var(--ink); font-size: 1.05rem; }
+  .map .r:hover > * { background: color-mix(in oklab, var(--local) 14%, var(--surface)); }
+
+  /* ---------- use cases (builds — see .reveal below) ---------- */
+  .usecases { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: 1.8rem; align-items: start; }
+  .usecase { border-radius: 8px; padding: 1.3rem 1.5rem; border-top: 3px solid var(--line); }
+  .usecase--good { border-top-color: var(--local); background: var(--local-tint); }
+  .usecase--bad  { border-top-color: var(--flag);  background: var(--flag-tint); }
+  .usetag  { margin: 0 0 .4rem; font: 700 .82rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .usecase--good .usetag { color: var(--local); }
+  .usecase--bad  .usetag { color: var(--flag); }
+  .usewhy  { margin: 0 0 .9rem; color: var(--ink); font-size: 1.02rem; }
+  .uselist { margin: 0; padding: 0; list-style: none; display: grid; gap: .55rem; }
+  .uselist li { position: relative; padding-left: 1.15rem; color: var(--ink); font-size: .98rem; line-height: 1.45; }
+  .uselist li::before { content: "–"; position: absolute; left: 0; color: var(--ink-faint); }
+
+  /* ---------- build reveal (progressive, ↓ / click — see the nav script): ----
+     slides up from below into place, nothing shown before that (not a ghost
+     placeholder) — so it reads as an entrance, not a redacted box. ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .45s ease, transform .45s ease; cursor: pointer; }
+  .reveal.shown { opacity: 1; transform: translateY(0); cursor: default; }
+
+  /* ---------- loop diagram ---------- */
+  .loopwrap { margin: 0 0 1.8rem; }
+  .loop { width: 100%; height: auto; overflow: visible; }
+  .loop .box { fill: var(--local-tint); stroke: var(--local); stroke-width: 1.5; }
+  .loop .word { fill: var(--local); font: 700 19px/1 var(--font-display); letter-spacing: .04em; text-anchor: middle; }
+  .loop .flow { stroke: var(--ink-soft); stroke-width: 2; fill: none; }
+  .loop .rl { fill: var(--ink-faint); font: 500 12px/1 var(--font-mono); letter-spacing: .12em; text-anchor: middle; text-transform: uppercase; }
+  .loop .glow { fill: var(--local); opacity: 0; }
+  .loop .dot  { fill: var(--local); opacity: 0; }
+  .loop-legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; }
+  .loop-legend div { border-top: 2px solid var(--local); padding-top: .7rem; }
+  .loop-legend b { display: block; font: 700 .8rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--local); margin-bottom: .3rem; }
+  .loop-legend p { margin: 0; font-size: .98rem; color: var(--ink-soft); }
+
+  /* ---------- what is an agent: metaphors ---------- */
+  .agent-egs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 2rem; }
+  .agent-egs > div { border-top: 2px solid var(--local); padding-top: .9rem; }
+  .agent-egs .aicon { font-size: 1.8rem; line-height: 1; display: block; margin-bottom: .5rem; }
+  .agent-egs b { display: block; font: 700 .95rem/1.3 var(--font-display); color: var(--ink); margin-bottom: .4rem; }
+  .agent-egs p { margin: 0; font-size: .92rem; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ---------- roles ---------- */
+  .roles { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }
+  .roles span { font: 700 .82rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--local); border: 1px solid var(--local); border-radius: 4px; padding: .55rem .8rem; }
+
+  /* ---------- hands-on exercise: prompt + QR articles ---------- */
+  .promptbox {
+    margin-top: 1.8rem; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface); padding: 1.4rem 1.6rem;
+  }
+  .promptbox-k {
+    display: block; font: 700 .72rem/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--local); margin-bottom: .8rem;
+  }
+  .promptbox p { margin: 0 0 .9rem; font-size: 1rem; color: var(--ink); max-width: none; }
+  .promptbox p:last-child { margin-bottom: 0; }
+
+  .qrgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.1rem; margin-top: 1.8rem; }
+  .qrcard { border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem; background: var(--surface); text-align: center; }
+  /* fixed white tile regardless of theme — scan reliability beats palette-matching here */
+  .qrslot {
+    display: block; width: 100%; aspect-ratio: 1 / 1; background: #fff; border-radius: 4px;
+    margin-bottom: .9rem; padding: 6%;
+  }
+  .qrslot svg { width: 100%; height: 100%; display: block; }
+  .qrtitle { margin: 0 0 .4rem; font: 700 .86rem/1.3 var(--font-display); color: var(--ink); }
+  .qrpitch { margin: 0; font-size: .8rem; color: var(--ink-soft); line-height: 1.4; }
+
+  /* collapsed by default (native <details>) so the answer key isn't visible
+     on the projector until the facilitator deliberately opens it */
+  .factkey { margin-top: 2rem; border-top: 1px dashed var(--line); padding-top: 1rem; }
+  .factkey summary {
+    cursor: pointer; font: 700 .78rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--flag); list-style: none;
+  }
+  .factkey summary::-webkit-details-marker { display: none; }
+  .factkey summary::before { content: "▸ "; }
+  .factkey[open] summary::before { content: "▾ "; }
+  .factkey-body { margin-top: 1rem; display: grid; gap: .7rem; }
+  .factkey-body p { margin: 0; font-size: .92rem; color: var(--ink-soft); line-height: 1.5; max-width: none; }
+  .factkey-body b { color: var(--ink); }
+
+  /* ---------- what to click, and when ---------- */
+  .clicktable { display: grid; grid-template-columns: 11rem 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-top: 1.8rem; }
+  .clicktable > div { background: var(--surface); padding: 1.05rem 1.4rem; }
+  .clicktable .hd { font: 700 .74rem/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+  .clicktable code { font: 500 .92em/1 var(--font-mono); background: var(--raise); border: 1px solid var(--line); border-radius: 3px; padding: .15em .45em; }
+
+  /* ---------- speaker notes ---------- */
+  .note { display: none; }
+  body.notes .note {
+    display: block; margin-top: 2.4rem; padding: 1.1rem 1.3rem;
+    background: var(--flag-tint); border-left: 3px solid var(--flag);
+    border-radius: 0 5px 5px 0;
+    font: 400 .96rem/1.6 var(--font-body); color: var(--ink);
+    max-width: 44em;
+  }
+  .note b { font: 700 .7rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--flag); display: block; margin-bottom: .5rem; }
+  .note code { font: 500 .9em/1 var(--font-mono); color: var(--ink); }
+  .note kbd { vertical-align: baseline; }
+
+  @media (max-width: 760px) {
+    :root { --edge: 1.5rem; }
+    .slide { padding: 5.5rem var(--edge) 5rem; }
+    .compare, .loop-legend, .halves, .ofields, .usecases, .modelsplit, .twagrid, .intro-grid, .agent-egs, .qrgrid, .clicktable { grid-template-columns: 1fr; }
+    .kicker-line { margin-top: .6rem; }
+    .track .row, .reason, .map .hd, .map .r, .ba .step, .map .r .s { grid-template-columns: 1fr; }
+    .ba .step { gap: .3rem; }
+    .map .r .s { border-left: none; border-top: 3px solid var(--local); }
+    .wordmark { display: none; }
+    .timetable::before, .tt-dot { display: none; }
+    .tt-row { grid-template-columns: 1fr; margin-bottom: 1.1rem; }
+    .tt-time { text-align: left; padding-right: 0; padding-bottom: .2rem; }
+    .tt-activity { border-left: 2px solid var(--local); padding-left: .8rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .progress { transition: none; }
+    .loop .dot, .loop .glow { display: none; }
+    .chatdemo, .agentdemo,
+    .bubble--user, .bubble--bot, .bubble--dots, .bubble--dots .dot, .typed,
+    .astep--node, .astep--cloud, .astep--doc, .aarrow, .a-line { animation: none !important; }
+    .bubble--user, .bubble--bot, .astep--node, .astep--cloud, .astep--doc, .aarrow { opacity: 1 !important; transform: none !important; }
+    .bubble--dots { display: none !important; }
+    .typed, .a-line { clip-path: none !important; }
+    .reveal { transition: none; }
+    .bg-net { opacity: .4; }
+    .bgvideo { display: none; }
+  }
+</style>
+
+<canvas class="bg-net" aria-hidden="true"></canvas>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="counter" aria-hidden="true"><b id="cur">01</b> / 22</div>
+<div class="wordmark" aria-hidden="true">Build your agent</div>
+<div class="chrome">
+  <button id="notesBtn" type="button" aria-pressed="false">Speaker notes <kbd>S</kbd></button>
+</div>
+
+<main id="deck">
+
+  <!-- 1 ============================================================= -->
+  <section class="slide" id="s1" aria-label="Slide 1: Build your Agent">
+    <!-- relative path resolves when the deck runs from docs/ (local double-click / a
+         local server); the /_blob/ path resolves on the hosted Artifact link, which
+         only ships this one HTML file. onerror only fires once both have failed. -->
+    <video class="bgvideo" autoplay muted loop playsinline preload="auto" aria-hidden="true" onerror="this.remove()">
+      <source src="build-an-agent.mp4" type="video/mp4">
+      <source src="/_blob/ba5e5b53c10af4a7cc79d4c37182df43" type="video/mp4">
+    </video>
+    <div class="inner">
+      <h1>Build your&nbsp;Agent</h1>
+      <p class="sub">Building local, offline AI assistants for real tasks</p>
+      <p class="byline"><span class="fill">Valerio Ciotti</span> &nbsp;·&nbsp; <span class="fill">22 September 2026</span></p>
+    </div>
+    <div class="scrollcue" aria-hidden="true">Scroll to begin ↓</div>
+    <aside class="note">
+      <b>Run of show</b>
+      Open (title, presenters, agenda, goals, timetable), slides 1–5 — ~3 min · Block A (what is
+      an agent, incl. chatbot-vs-agent on slide 7, the metaphors on slide 8, the use-cases check
+      on slide 9, the task/workflow/agent distinction on slide 10, the live Ollama slide 12,
+      and the model explainer 13), 6–14 — ~17 min ·
+      Block B (why local), 15–16 — ~5 min · demo time, 17 · hands-on setup (transition, the
+      you-vs-Gemma exercise, what to click, then the break-it-on-purpose instructions for the
+      own build), 18–22 — ~3 min to introduce, then straight into the 3:20 hands-on block
+      (full breakdown on slide 5).
+      Total talk ~28–30 min before hands-on begins.
+      Press <kbd>S</kbd> anytime to hide these notes.
+    </aside>
+  </section>
+
+  <!-- 1b (presenters) ================================================== -->
+  <section class="slide" id="s1b" aria-label="Slide 2: Meet your presenters">
+    <div class="inner">
+      <p class="eyebrow">Today</p>
+      <h2>Today&rsquo;s Helpers</h2>
+      <div class="intro-grid">
+        <div>
+          <p class="intro-name">Valerio Ciotti</p>
+          <div class="intro-photo"><img src="Valerio.png" alt="Valerio Ciotti" style="object-position: 40% 20%;" onerror="this.onerror=null;this.src='/_blob/a5e498f18c3095ebaeae650ac1a446ca';"></div>
+          <p class="intro-bio">Team lead for the Consumer and Affluent Data Science Team.</p>
+        </div>
+        <div>
+          <p class="intro-name">Veeraraghavan Veerasubramanian</p>
+          <div class="intro-photo"><img src="Veera.png" alt="Veeraraghavan Veerasubramanian" style="object-position: 45% 25%;" onerror="this.onerror=null;this.src='/_blob/967fc6f12a3192a696830e9e77e331b6';"></div>
+          <p class="intro-bio">Senior Data Scientist for the Consumer and Affluent Data Science Team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 ============================================================= -->
+  <section class="slide" id="s2" aria-label="Slide 3: Today">
+    <div class="inner">
+      <p class="eyebrow">Today</p>
+      <h2>Today's Menu</h2>
+      <div class="halves">
+        <div class="track">
+          <div class="row">
+            <span class="k">Talk</span>
+            <span class="v">What an agent actually is and what we will build.
+              <small>~45 minutes. Slides, one live demo, no keyboards yet.</small></span>
+          </div>
+          <div class="row">
+            <span class="k">Hands-on</span>
+            <span class="v">Run the Agent: a Content Curator that reads, judges, and compiles articles into an e-book.
+              <small>~1.5 hours. Change agent's behaviour, test, iterate, have fun.</small></span>
+          </div>
+        </div>
+        <p class="kicker-line">Everything today runs on your own laptop. No cloud, no API keys, nothing leaves your machine.</p>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Say the "nothing leaves your machine" line out loud, slowly. It's a genuine hook for a technical
+      room, and it sets up the "why local" block later — you'll call back to it on slide 15.
+    </aside>
+  </section>
+
+  <!-- 2c (goals of the day) ============================================ -->
+  <section class="slide" id="s2c" aria-label="Slide 4: What is today about">
+    <div class="inner">
+      <p class="eyebrow">Today</p>
+      <h2>What is today about?</h2>
+      <div class="reasons">
+        <div class="reason">
+          <h3>Explore</h3>
+          <p>Get inspired to use things locally — test it, break it, repair it, poke around.</p>
+        </div>
+        <div class="reason">
+          <h3>Enjoy</h3>
+          <p>Give yourself permission to just enjoy spending the time discovering what's possible.</p>
+        </div>
+        <div class="reason">
+          <h3>Automate</h3>
+          <p>Leave with one part of your own life a little more improved, or automated.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Not a technical slide — a permission slide. Say it plainly: today isn't graded, there's
+      no "correct" outcome. If someone leaves having just enjoyed poking at something local, or
+      with one small automation idea for their own life, that's the whole win.
+    </aside>
+  </section>
+
+  <!-- 2b (timetable) ================================================== -->
+  <section class="slide wide" id="s2b" aria-label="Slide 5: Workshop timetable">
+    <div class="inner">
+      <p class="eyebrow">Today</p>
+      <h2>The full 3 hours</h2>
+      <div class="timetable">
+        <div class="tt-row">
+          <div class="tt-time">9:00 – 9:45</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">Presentation — what an agent is, what can and cannot do, how to run one on your machine.</div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">9:45 – 10:00</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">What are we going to build today? An agent's demo.</div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">10:00 – 10:30</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">Activity: &ldquo;Be the agent&rdquo;. Understand what the agent does and how it makes decisions.</div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">10:30 – 10:45</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">Break.</div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">10:45 – 11:30</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">Run end-to-end + &ldquo;break it and see what happens&rdquo; (mistune the prompt, watch decisions flip).</div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">11:30 – 11:45</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">Read the result on Calibre/e-reader/phone, regroup, compare what each track built.</div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">11:45 – 12:00</div>
+          <div class="tt-dot"></div>
+          <div class="tt-activity">Discussion + wrap-up + showcase your work.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 ============================================================= -->
+  <section class="slide" id="s3" aria-label="Slide 6: The hook">
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <p class="statement long">You've all used a chatbot. Today we build something that <span class="c-local">does&nbsp;things</span>, not just answers.</p>
+    </div>
+  </section>
+
+  <!-- 4 ============================================================= -->
+  <section class="slide" id="s4" aria-label="Slide 7: Chatbot vs Agent">
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <h2>Chatbot vs. agent</h2>
+      <div class="compare">
+        <div class="col is-else">
+          <p class="tagword">Chatbot</p>
+          <p>You ask, it answers, the conversation ends. Nothing happens unless you type again.</p>
+          <div class="chatdemo" aria-hidden="true">
+            <div class="bubble bubble--user"><span class="typed typed--q">Summarize this article?</span></div>
+            <div class="bubble bubble--dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="bubble bubble--bot"><span class="typed typed--a">Sure — three sentences, coming up.</span></div>
+          </div>
+        </div>
+        <div class="col is-local">
+          <p class="tagword">Agent</p>
+          <p>It perceives something, decides what matters, and takes an action — often in a loop, often without you in every step.</p>
+          <div class="agentdemo" aria-hidden="true">
+            <div class="apipe">
+              <div class="astep astep--node">
+                <span class="aicon">🤖</span>
+                <span class="alabel">Agent</span>
+              </div>
+              <svg class="aarrow aarrow--1" viewBox="0 0 32 16">
+                <defs>
+                  <marker id="ah4a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0 0 L10 5 L0 10 Z" fill="var(--ink-soft)"></path>
+                  </marker>
+                </defs>
+                <path d="M2,8 H24" marker-end="url(#ah4a)"></path>
+              </svg>
+              <div class="astep astep--cloud">
+                <span class="aicon">☁️</span>
+                <span class="alabel">Working</span>
+              </div>
+              <svg class="aarrow aarrow--2" viewBox="0 0 32 16">
+                <defs>
+                  <marker id="ah4b" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0 0 L10 5 L0 10 Z" fill="var(--ink-soft)"></path>
+                  </marker>
+                </defs>
+                <path d="M2,8 H24" marker-end="url(#ah4b)"></path>
+              </svg>
+              <div class="astep astep--doc">
+                <svg class="adocsvg" viewBox="0 0 60 74">
+                  <rect x="4" y="4" width="52" height="66" rx="7"></rect>
+                  <rect class="a-line l1" x="14" y="22" width="32" height="4" rx="2"></rect>
+                  <rect class="a-line l2" x="14" y="35" width="32" height="4" rx="2"></rect>
+                  <rect class="a-line l3" x="14" y="48" width="22" height="4" rx="2"></rect>
+                </svg>
+                <span class="alabel">Written text</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3b (what is an agent?) ============================================ -->
+  <section class="slide" id="s3b" aria-label="Slide 8: What is an agent?">
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <h2>What is an agent?</h2>
+      <p class="lead">Strip away the hype: an agent is software that <b>perceives</b> something, <b>decides</b>
+        what it means, and <b>acts</b> — on its own, in a loop — instead of waiting for you to do each step
+        by hand.</p>
+      <div class="agent-egs">
+        <div>
+          <span class="aicon">🌡️</span>
+          <b>A thermostat</b>
+          <p>Perceives the room's temperature, decides it's too cold, acts by turning on the heat. No AI
+            involved — the simplest possible agent.</p>
+        </div>
+        <div>
+          <span class="aicon">🧹</span>
+          <b>A robot vacuum</b>
+          <p>Perceives a wall through a bump sensor, decides to turn, acts by changing direction. Still
+            just a loop.</p>
+        </div>
+        <div>
+          <span class="aicon">📚</span>
+          <b>Today's build</b>
+          <p>Perceives a new article, decides — using a language model's judgment — whether it matches your
+            interest, acts by adding it to your book.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      The point of this slide: "agent" isn't a new idea invented for AI — thermostats and Roombas have been
+      agents for decades. What's new is using a language model for the "decide" step, so it can handle
+      judgment calls a fixed rule can't. Set that up here; the next few slides build on it.
+    </aside>
+  </section>
+
+  <!-- 7b (use cases, builds) =========================================== -->
+  <section class="slide" id="s7b" aria-label="Slide 9: Is this actually an agent problem?">
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <h2>When is the use of an agent appropriate?</h2>
+      <p class="lead">The perceive → decide → act loop is worth the extra complexity only when
+        "decide" needs real judgment. A quick gut check <span class="c-local">↓</span></p>
+      <div class="usecases">
+        <div class="usecase usecase--bad reveal">
+          <p class="usetag">✗ Not an agent problem</p>
+          <p class="usewhy">The rule already exists — writing it down is the whole job.</p>
+          <ul class="uselist">
+            <li>Track a price on a page and alert if it drops below a number — a scheduled script + if/else</li>
+            <li>Rename ten thousand files to a fixed pattern</li>
+            <li>Pull an API every five minutes and log the response</li>
+            <li>Check that a CSV's columns match a fixed schema</li>
+          </ul>
+        </div>
+        <div class="usecase usecase--good reveal">
+          <p class="usetag">✓ Good fit for an agent</p>
+          <p class="usewhy">The output depends on judgment a script can't cheaply encode.</p>
+          <ul class="uselist">
+            <li>Read a stack of PDFs and pull out the ones that actually match a research question</li>
+            <li>Triage support tickets by what the person actually means, not a keyword match</li>
+            <li>Draft a first-pass reply that references the right internal doc</li>
+            <li>Turn a messy meeting transcript into real action items</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Both blocks start off-screen — press ↓ (or click one) to slide up the green one, ↓ again for
+      the red one; ↑ un-reveals them in reverse before it starts moving you back through the deck.
+      The price-tracker line is a real, deliberately boring example — resisting the temptation to
+      reach for an LLM when a five-line script would do is one of the running themes of the day.
+    </aside>
+  </section>
+
+  <!-- 4b ============================================================ -->
+  <section class="slide wide" id="s4b" aria-label="Slide 10: Task, workflow, or agent?">
+    <!-- relative path resolves when the deck runs from docs/ (local double-click / a
+         local server); the /_blob/ path resolves on the hosted Artifact link, which
+         only ships this one HTML file. onerror only fires once both have failed. -->
+    <video class="bgvideo" autoplay muted loop playsinline preload="auto" aria-hidden="true" onerror="this.remove()">
+      <source src="moving_1.mp4" type="video/mp4">
+      <source src="/_blob/ef4cb7c8a76e4a3f2b6dd5bf9171612e" type="video/mp4">
+    </video>
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <h2>Task, workflow, or agent?</h2>
+      <div class="twagrid">
+        <div class="track">
+          <div class="row">
+            <span class="k">Task</span>
+            <span class="v">One model call. Summarize this. Classify that.</span>
+          </div>
+          <div class="row">
+            <span class="k">Workflow</span>
+            <span class="v">Several model calls, chained through control flow you wrote — judgment at fixed points you decided.</span>
+          </div>
+          <div class="row">
+            <span class="k">Agent</span>
+            <span class="v">The model decides its own next steps at runtime — which tool to call, whether to retry, when to stop.</span>
+          </div>
+        </div>
+        <div class="twaside">
+          <p class="kicker-line">The system we built today is a <span class="c-local">workflow</span>, not an agent.</p>
+          <p>Our code hardcodes the order — <span class="c-local">discover → scrape → summarize → decide → publish</span>, every run. The model only fills in judgment; everything else is plain code. Same model, different code, and this could be a real agent instead.</p>
+          <div class="callout">
+            <b>Not a flaw — the right call.</b> Anthropic recommends workflows for well-defined tasks like this one: predictable, cheap, errors don't compound. Full agentic autonomy is for genuinely open-ended problems.
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      "Not building/training the LLM" is NOT why this is a workflow, not an agent — using a
+      pre-trained model is normal either way. The real line: who decides what happens next.
+      Here, our code picks the order, always the same. A real agent would have the model
+      itself decide — e.g. which source to check next, or whether to retry a failed scrape —
+      at runtime, not something we wrote in advance. Good moment for a provocation: "What
+      would make this a real agent?"
+    </aside>
+  </section>
+
+  <!-- 5 ============================================================= -->
+  <section class="slide wide" id="s5" aria-label="Slide 11: The loop">
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <h2>The loop</h2>
+      <div class="loopwrap">
+        <svg class="loop" viewBox="0 0 900 300" role="img" aria-label="A four-step cycle: Perceive, Extract, Decide, Act, then repeat. A point of light travels the loop, illuminating each step as it arrives.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z" fill="var(--ink-soft)"></path>
+            </marker>
+            <path id="dotpath" fill="none" d="M111,140 L204,91 L248,91 L434,91 L478,91 L664,91 L708,91 L801,138 L801,232 A14,14 0 0 1 787,246 L125,246 A14,14 0 0 1 111,232 L111,140"></path>
+          </defs>
+          <g>
+            <rect class="glow" x="12"  y="40" width="198" height="102" rx="16">
+              <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite"
+                       keyTimes="0;0.08;0.92;1" values="0.6;0;0;0.6"></animate>
+            </rect>
+            <rect class="glow" x="242" y="40" width="198" height="102" rx="16">
+              <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite"
+                       keyTimes="0;0.0729;0.0929;0.1729;1" values="0;0;0.6;0;0"></animate>
+            </rect>
+            <rect class="glow" x="472" y="40" width="198" height="102" rx="16">
+              <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite"
+                       keyTimes="0;0.2161;0.2361;0.3161;1" values="0;0;0.6;0;0"></animate>
+            </rect>
+            <rect class="glow" x="702" y="40" width="198" height="102" rx="16">
+              <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite"
+                       keyTimes="0;0.3594;0.3794;0.4594;1" values="0;0;0.6;0;0"></animate>
+            </rect>
+
+            <rect class="box" x="18"  y="46" width="186" height="90" rx="10"></rect>
+            <rect class="box" x="248" y="46" width="186" height="90" rx="10"></rect>
+            <rect class="box" x="478" y="46" width="186" height="90" rx="10"></rect>
+            <rect class="box" x="708" y="46" width="186" height="90" rx="10"></rect>
+            <text class="word" x="111" y="97">PERCEIVE</text>
+            <text class="word" x="341" y="97">EXTRACT</text>
+            <text class="word" x="571" y="97">DECIDE</text>
+            <text class="word" x="801" y="97">ACT</text>
+            <path class="flow" d="M210 91 H240"  marker-end="url(#ah)"></path>
+            <path class="flow" d="M440 91 H470"  marker-end="url(#ah)"></path>
+            <path class="flow" d="M670 91 H700"  marker-end="url(#ah)"></path>
+            <path class="flow" d="M801 138 V232 a14 14 0 0 1 -14 14 H125 a14 14 0 0 1 -14 -14 V140" marker-end="url(#ah)"></path>
+            <text class="rl" x="456" y="270">repeat</text>
+
+            <circle class="dot" r="6">
+              <animateMotion dur="9s" begin="0s" repeatCount="indefinite" calcMode="paced">
+                <mpath href="#dotpath"></mpath>
+              </animateMotion>
+              <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite" calcMode="discrete"
+                       keyTimes="0;0.0655;0.0929;0.2087;0.2361;0.3520;0.3794;0.4443"
+                       values="0;1;0;1;0;1;0;1"></animate>
+            </circle>
+          </g>
+        </svg>
+      </div>
+      <div class="loop-legend">
+        <div class="reveal"><b>Perceive</b><p>Notice something — a new article, a price, an email.</p></div>
+        <div class="reveal"><b>Extract</b><p>Pull out what matters from the noise.</p></div>
+        <div class="reveal"><b>Decide</b><p>Judge it against a goal.</p></div>
+        <div class="reveal"><b>Act</b><p>Do something real — send, write, save, notify.</p></div>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Press ↓ to bring in Perceive, Extract, Decide, Act one at a time as you name each one —
+      don't dump all four at once. You'll point back at these four words repeatedly for the
+      rest of the session — it's the spine of the whole workshop.
+    </aside>
+  </section>
+
+  <!-- 6b (live widget) ================================================ -->
+  <section class="slide" id="s6live" aria-label="Slide 12: Try it live">
+    <div class="inner">
+      <p class="eyebrow">Block A · Live</p>
+      <h2>Talk to your model, right here <span class="c-local">↓</span></h2>
+      <p class="lead">If Ollama is running on this laptop, this talks to it directly — nothing leaves the room.</p>
+      <div class="ollamabox">
+        <div class="obar">
+          <span class="ostatus" id="oStatus"><i class="odot"></i>not connected</span>
+          <button type="button" id="oCheck">Check connection</button>
+        </div>
+        <div class="ofields">
+          <input id="oBase" class="obase" value="http://localhost:11434" spellcheck="false" aria-label="Ollama server URL">
+          <select id="oModel" class="omodel" aria-label="Model"><option value="gemma4:e2b">gemma4:e2b</option></select>
+        </div>
+        <textarea id="oPrompt" class="oprompt" rows="4" spellcheck="false" placeholder="Paste an article, or ask it anything…">Summarize this in three sentences: [paste an article here]</textarea>
+        <div class="orow">
+          <button type="button" id="oSend">▶️ Send</button>
+          <span class="otimebox" id="oTiming"></span>
+        </div>
+        <pre class="ooutput" id="oOutput">Output streams here once you hit Send.</pre>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Needs Ollama running on THIS machine — and best served from a local
+      server, e.g. <code>python3 -m http.server 8000</code> in this docs/
+      folder, then open <code>http://localhost:8000/agents-at-home.html</code>.
+      Verified: Ollama allows localhost origins by default, no extra config.
+      Double-clicking the file instead (file://) gets a 403 — fix with
+      <code>OLLAMA_ORIGINS=* ollama serve</code>. The hosted claude.ai link
+      can never reach it (blocked twice over — Ollama's CORS and the
+      artifact sandbox itself) — that's expected, not a bug. Click
+      "Check connection" once before the room is watching; if it's red,
+      narrate what you expect the model to say and keep going.
+    </aside>
+  </section>
+
+  <!-- 6c (model explainer) ============================================= -->
+  <section class="slide wide" id="s6b" aria-label="Slide 13: Meet gemma4:e2b">
+    <div class="inner">
+      <p class="eyebrow">Block A · The model</p>
+      <h2>What you actually just talked to</h2>
+      <div class="modelsplit">
+        <div class="specsheet">
+          <div class="spec"><span class="k">Model</span><span class="v">Gemma 4, Google DeepMind — April 2026</span></div>
+          <div class="spec"><span class="k">This build</span><span class="v"><code>gemma4:e2b</code> — the smaller of two on-device sizes (e2b / e4b)</span></div>
+          <div class="spec"><span class="k">"e2b" means</span><span class="v">2.3B <em>effective</em> parameters — not the whole story, see right</span></div>
+          <div class="spec"><span class="k">On disk</span><span class="v">~7 GB — more than 2.3B params' worth, because of how it's built</span></div>
+          <div class="spec"><span class="k">Context window</span><span class="v">128K tokens available; this project caps it at 8K — plenty for one article</span></div>
+          <div class="spec"><span class="k">Modality</span><span class="v">text, image, audio, video — we only ever send it text</span></div>
+        </div>
+        <div class="modelnote">
+          <div class="lesson">
+            <span class="k">Made concrete</span>
+            <p style="margin:.5rem 0 0">2.3 billion parameters is enough that just writing them out as plain
+              numbers, one per line, would fill roughly 40,000 novels. The 7&nbsp;GB on disk is about the size
+              of 2,000 photos on your phone. And the unused 128K context window is roughly a whole novel's
+              worth of text in one go — this project only ever fills about 6% of it, one article at a time.</p>
+          </div>
+          <p>&ldquo;Effective&rdquo; parameters aren&rsquo;t the whole file. Gemma 4&rsquo;s small models use
+            <b>Per-Layer Embeddings</b> — a lookup table bolted onto every layer, cheap to store, cheap to
+            query, not part of the &ldquo;active&rdquo; compute spent per token. It&rsquo;s what lets a file
+            this size run this well on a laptop CPU.</p>
+          <p>And &ldquo;thinking&rdquo;? Gemma 4 also has an optional extended-reasoning mode — put a
+            <code>&lt;|think|&gt;</code> token in the prompt and it writes out a chain of thought before
+            answering.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Point back at the terminal from the last two slides — that's this model. If someone asks why it
+      doesn't "show its work" like a reasoning model would: that's the &lt;|think|&gt; token being
+      deliberately left out, not a limitation of the model itself.
+    </aside>
+  </section>
+
+  <!-- 7 ============================================================= -->
+  <section class="slide" id="s7" aria-label="Slide 14: Today's build mapped onto the loop">
+    <div class="inner">
+      <p class="eyebrow">Block A · What is an agent?</p>
+      <h2>Today's build, on the same loop</h2>
+      <div class="map">
+        <div class="hd"><span>The loop</span><span>The Content Curator</span></div>
+        <div class="r"><span class="s">Perceive</span><span class="a">Checks each source's RSS feed for new articles — falls back to scraping the homepage only if there's no feed.</span></div>
+        <div class="r"><span class="s">Extract</span><span class="a">Summarizes each article with the local model.</span></div>
+        <div class="r"><span class="s">Decide</span><span class="a">Judges the summary against an interest you wrote in plain English.</span></div>
+        <div class="r"><span class="s">Act</span><span class="a">Compiles the approved ones into an e-book — tags, a quiz, a link back to the source.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 ============================================================= -->
+  <section class="slide" id="s8" aria-label="Slide 15: Why local — three reasons">
+    <div class="inner">
+      <p class="eyebrow">Block B · Why local?</p>
+      <h2>Three reasons</h2>
+      <div class="reasons">
+        <div class="reason">
+          <h3>Privacy</h3>
+          <p>Nothing you read or write leaves your laptop. No third party sees your interests, your sources, or your drafts.</p>
+        </div>
+        <div class="reason">
+          <h3>Cost</h3>
+          <p>Free after setup. No per-token bill, no quota, no surprise invoice for a batch job that ran long.</p>
+        </div>
+        <div class="reason">
+          <h3>Offline</h3>
+          <p>Works on a plane. Works when the venue wifi doesn't. The model is a file on disk, not a service you call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 ============================================================= -->
+  <section class="slide" id="s9" aria-label="Slide 16: The honest trade-off">
+    <div class="inner">
+      <p class="eyebrow">Block B · Why local?</p>
+      <p class="statement long">Small local models are weaker than the <span class="c-else">giant cloud ones</span>.</p>
+      <p class="lead">That's not a footnote — it's useful. The constraint forces habits that sloppy prompting against a huge model lets you skip:</p>
+      <div class="chips">
+        <span>clear prompts</span>
+        <span>structured output</span>
+        <span>knowing when <em>not</em> to use the model</span>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      This slide is the bridge into the hands-on exercise. Say the trade-off out loud as the transition:
+      "Because the model is small, we had to be disciplined about how we prompted it — let's see how well
+      you can do the same."
+    </aside>
+  </section>
+
+  <!-- Block C (do's & don'ts, slides s10-s15) commented out per facilitator
+       request — not deleted, just not rendered. Re-enable by removing this
+       comment wrapper if the block comes back into the run of show.
+  <section class="slide" id="s10" aria-label="What we learned building this">
+    <div class="inner">
+      <p class="eyebrow is-flag">Block C · Do's &amp; don'ts</p>
+      <p class="statement">What we learned building this <span class="c-flag">— the hard way</span>.</p>
+      <p class="lead">Five lessons, all from things that actually broke while making the Content Curator.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s11" aria-label="Don't reach for the LLM first">
+    <div class="inner">
+      <span class="tag dont">Don't</span>
+      <h2>Reach for the model first</h2>
+      <div class="ba">
+        <div class="step before">
+          <span class="lbl">Before</span>
+          <span class="txt">Scrape the blog's homepage, hand the model every link, ask it which ones are real articles.</span>
+        </div>
+        <div class="step after">
+          <span class="lbl">After</span>
+          <span class="txt">Check for an <code>RSS feed</code> first — structured, dated, reliable, free. No model call at all.</span>
+        </div>
+      </div>
+      <div class="lesson">
+        <span class="k">Lesson</span>
+        <p>Check for structured data before reaching for judgment. Use the model for what actually needs judgment — not for what a parser already does.</p>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Keep this concrete — it lands because it's a real before/after, not a hypothetical.
+      The homepage scrape genuinely returned nav links and category pages mixed in with articles.
+    </aside>
+  </section>
+
+  <section class="slide" id="s12" aria-label="Don't trust an agent blindly on consequential actions">
+    <div class="inner">
+      <span class="tag dont">Don't</span>
+      <h2>Trust an agent blindly on consequential actions</h2>
+      <p class="lead">A general principle, even outside today's build:</p>
+      <p class="statement long" style="font-size:clamp(1.5rem,2.8vw,2.2rem);max-width:28ch;margin-top:1.2rem">If an action costs money, deletes something, or can't be undone — a human confirms first.</p>
+      <div class="lesson warn">
+        <span class="k">Lesson</span>
+        <p>Cheap to add. Easy to skip. Important not to.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s13" aria-label="Do — small models need explicit structure">
+    <div class="inner">
+      <span class="tag do">Do</span>
+      <h2>Give small models explicit structure</h2>
+      <p class="lead"><code style="font:500 .95em/1 var(--font-mono);background:var(--raise);border:1px solid var(--line);border-radius:3px;padding:.1em .4em">Return ONLY valid JSON</code> — and still parse defensively, because it sometimes wraps the JSON in a markdown fence anyway.</p>
+<pre><span class="cmt"># what the model actually returned</span>
+<span class="fence">```json</span>
+{"approved": true, "reason": <span class="str">"deep technical write-up"</span>}
+<span class="fence">```</span>
+
+<span class="cmt"># the fix — strip the fence, then json.loads()</span>
+content.removeprefix(<span class="str">"```json"</span>).removesuffix(<span class="str">"```"</span>).strip()</pre>
+      <div class="lesson">
+        <span class="k">Lesson</span>
+        <p>Small local models aren't unreliable — they're literal. Prompting them well means being unambiguous.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s14" aria-label="Do — design for memory">
+    <div class="inner">
+      <span class="tag do">Do</span>
+      <h2>Design for memory, not just one run</h2>
+      <p class="lead">The agent keeps a small file of every URL it has already checked:</p>
+<pre><span class="cmt"># state.json</span>
+{ "seen_urls": [ <span class="str">"…/transfer-learning-for-genomic-prediction"</span>, <span class="str">"…/a-connectomics-milestone"</span> ] }</pre>
+      <p style="margin-top:1.2rem">Rejected articles get marked seen too — so it doesn't re-summarize the same one it already turned down, every single run, forever.</p>
+      <div class="lesson">
+        <span class="k">Lesson</span>
+        <p>What counts as "done" is a real design decision, not an afterthought.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s15" aria-label="Do — expect the real internet to be messy">
+    <div class="inner">
+      <span class="tag do">Do</span>
+      <h2>Expect the real internet to be messy</h2>
+      <div class="ba">
+        <div class="step before">
+          <span class="lbl">Broke</span>
+          <span class="txt">Scraped a blog <em>index</em> page instead of one article — got eight headlines glued together instead of one story.</span>
+        </div>
+        <div class="step before">
+          <span class="lbl">Broke</span>
+          <span class="txt">Images at relative paths — <code>/images/photo.png</code> — silently failed to download until resolved against the page's real URL.</span>
+        </div>
+      </div>
+      <div class="lesson warn">
+        <span class="k">Lesson</span>
+        <p>Defensive coding isn't paranoia. It's what working against real, uncontrolled websites actually requires.</p>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      ~30–45 seconds per story, told as war stories, not bullet points. Keep them specific —
+      "eight headlines glued together" and "/images/photo.png" are what make them land. Don't genericize.
+    </aside>
+  </section>
+  end Block C comment -->
+
+  <!-- demo (live demo cue) ================================================ -->
+  <section class="slide" id="sdemo" aria-label="Slide 17: Demo time">
+    <!-- relative path resolves when the deck runs from docs/ (local double-click / a
+         local server); the /_blob/ path resolves on the hosted Artifact link, which
+         only ships this one HTML file. onerror only fires once both have failed. -->
+    <video class="bgvideo" autoplay muted loop playsinline preload="auto" aria-hidden="true" onerror="this.remove()">
+      <source src="demo.mp4" type="video/mp4">
+      <source src="/_blob/296373244236289a9c3f1ae730b72b2d" type="video/mp4">
+    </video>
+    <div class="inner">
+      <p class="eyebrow">Block A · Live</p>
+      <p class="statement">Demo time <span class="c-local">→</span></p>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Quick live walkthrough here before moving into hands-on — same laptop, same model,
+      no slides for a minute.
+    </aside>
+  </section>
+
+  <!-- 16 ============================================================ -->
+  <section class="slide" id="s16" aria-label="Slide 18: Transition to hands-on">
+    <div class="inner">
+      <p class="eyebrow">Hands-on</p>
+      <p class="statement">Now you're going to be the agent — <span class="c-local">literally</span>.</p>
+      <div class="roles">
+        <span>Scout</span><span>Summarizer</span><span>Judge</span><span>Publisher</span>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      One line, then move — this is the pivot from talk to hands-on. Explain the four roles
+      verbally when you hand out the physical relay (groups of four, one role each, one printed
+      article); the next few slides are for the you-vs-Gemma exercise that follows it.
+    </aside>
+  </section>
+
+  <!-- ex1 (hands-on exercise: the prompt) ================================ -->
+  <section class="slide" id="sex1" aria-label="Slide 19: Your turn — the prompt">
+    <div class="inner">
+      <p class="eyebrow">Hands-on · You vs. Gemma</p>
+      <h2>Judge five articles, then check Gemma's homework</h2>
+      <p class="lead">Groups of five. Same prompt, same five articles — everyone judges by hand first, then
+        runs it through Gemma and sees where they agree.</p>
+      <div class="promptbox">
+        <span class="promptbox-k">Reader's interest</span>
+        <p>I want practical, evidence-backed articles about focus, attention, and deep work — things a busy
+          person could actually try this week. Prefer real research or genuine lived experience behind the
+          claims, concrete techniques over vague advice.</p>
+        <p>Reject generic productivity-app marketing and listicles, opinion pieces with no real evidence or
+          experience behind them, and anything not actually about focus or attention.</p>
+      </div>
+      <div class="demo" style="margin-top:1.6rem">
+        <div class="bar">Whole room · ~40 minutes</div>
+        <ol>
+          <li><b>1</b><span>Alone, 15 min — read the prompt, then all five articles on the next slide. Mark each approve or reject, privately.</span></li>
+          <li><b>2</b><span>Groups of five, 10 min — compare calls, argue the disagreements, agree on one verdict per article.</span></li>
+          <li><b>3</b><span>Run the same prompt and articles through Gemma, 10 min.</span></li>
+          <li><b>4</b><span>Whole room, 5 min — where did you agree with the model? Where didn't you?</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ex2 (hands-on exercise: the articles) =============================== -->
+  <section class="slide wide" id="sex2" aria-label="Slide 20: Five articles">
+    <div class="inner">
+      <p class="eyebrow">Hands-on · You vs. Gemma</p>
+      <h2>Five articles — scan and read</h2>
+      <div class="promptbox">
+        <span class="promptbox-k">Reader's interest — same as last slide</span>
+        <p>I want practical, evidence-backed articles about focus, attention, and deep work — things a busy
+          person could actually try this week. Prefer real research or genuine lived experience behind the
+          claims, concrete techniques over vague advice.</p>
+        <p>Reject generic productivity-app marketing and listicles, opinion pieces with no real evidence or
+          experience behind them, and anything not actually about focus or attention.</p>
+      </div>
+      <div class="qrgrid">
+        <div class="qrcard">
+          <span class="qrslot" data-url="https://www.universityofcalifornia.edu/news/cant-pay-attention-youre-not-alone" role="img" aria-label="QR code linking to the article"></span>
+          <p class="qrtitle">A · Can't pay attention? You're not alone</p>
+        </div>
+        <div class="qrcard">
+          <span class="qrslot" data-url="https://calnewport.com/on-the-value-of-hard-focus/" role="img" aria-label="QR code linking to the article"></span>
+          <p class="qrtitle">B · On the Value of Hard Focus</p>
+        </div>
+        <div class="qrcard">
+          <span class="qrslot" data-url="https://jennakutcherblog.com/productivityhacks/" role="img" aria-label="QR code linking to the article"></span>
+          <p class="qrtitle">C · Productivity Hacks That ACTUALLY Work for Me</p>
+        </div>
+        <div class="qrcard">
+          <span class="qrslot" data-url="https://theconversation.com/aristotle-aelian-and-the-giant-octopus-the-earliest-citizen-science-goes-back-more-than-2-000-years-236709" role="img" aria-label="QR code linking to the article"></span>
+          <p class="qrtitle">D · Aristotle, Aelian and the giant octopus</p>
+        </div>
+        <div class="qrcard">
+          <span class="qrslot" data-url="https://buffer.com/resources/what-the-research-on-habit-formation-reveals-about-willpower-and-overall-well-being/" role="img" aria-label="QR code linking to the article"></span>
+          <p class="qrtitle">E · Habit Formation and Willpower</p>
+        </div>
+      </div>
+
+      <details class="factkey">
+        <summary>Facilitator only — what Gemma actually said</summary>
+        <div class="factkey-body">
+          <p><b>A — approve.</b> &ldquo;The article presents empirical research on the impact of technology on attention spans.&rdquo;</p>
+          <p><b>B — approve.</b> &ldquo;The article directly addresses developing sustained focus through a trainable process.&rdquo; Borderline on evidence quality — did every group agree?</p>
+          <p><b>C — approve.</b> &ldquo;The article provides concrete, actionable systems for improving focus and productivity.&rdquo; Borderline on authenticity — the summarizer never sees the affiliate links and course pitch a human reader would. Would you have approved it after reading the whole page?</p>
+          <p><b>D — reject.</b> &ldquo;The article discusses the history of citizen science rather than focus, attention, or deep work.&rdquo; Clean, correct, no ambiguity.</p>
+          <p><b>E — reject.</b> &ldquo;The article focuses on general habit formation rather than specific, evidence-backed techniques for focus or deep work.&rdquo; Borderline on topic fit — real research, well-argued, but is habit/willpower close enough to count? The one most likely to split the room.</p>
+        </div>
+      </details>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      QR codes point straight at the source articles — no need to read URLs aloud. The facilitator
+      dropdown above is collapsed by default so it stays off the projector; open it only during the
+      compare step. Poll E last — it's the one built to split the room. Full write-up, live-tested
+      against the real pipeline: docs/hands-on-exercise.html.
+    </aside>
+  </section>
+
+  <!-- ex1b (what to click) ================================================= -->
+  <section class="slide wide" id="sex1b" aria-label="Slide 21: What to click, and when">
+    <div class="inner">
+      <p class="eyebrow">Hands-on</p>
+      <h2>What to click, and when</h2>
+      <p class="lead">Same two files on your laptop, every time — no terminal, no typing.</p>
+      <div class="clicktable">
+        <div class="hd">When</div>
+        <div class="hd">🍎 Mac</div>
+        <div class="hd">🪟 Windows</div>
+        <div>First time ever</div>
+        <div><code>run_app.command</code></div>
+        <div><code>run_app.bat</code></div>
+        <div>Every time after that</div>
+        <div><code>Content Curator.app</code></div>
+        <div><code>Content Curator.vbs</code></div>
+      </div>
+      <div class="callout" style="margin-top:1.6rem">
+        <b>No black window, after the first run.</b> The second row opens straight in your
+        browser — the server keeps running quietly in the background and stops itself a
+        little after you close the tab, or with the <b>⏻ Quit the app</b> button in the sidebar.
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      Point at this before "now break it on purpose" — some people will have quit the app,
+      or closed their laptop over the break. Same two icons get everyone back in, no terminal.
+    </aside>
+  </section>
+
+  <!-- ex3 (own build: break it on purpose) ================================= -->
+  <section class="slide" id="sex3" aria-label="Slide 22: Now break it on purpose">
+    <div class="inner">
+      <p class="eyebrow">Hands-on · Your own run</p>
+      <h2>Now break it on purpose</h2>
+      <div class="demo">
+        <div class="bar">10:45 – 11:30 · Run end-to-end</div>
+        <ol>
+          <li><b>1</b><span>Run your own build, start to finish — your prompt (the one you just tuned, or your own from scratch), your sources, for real.</span></li>
+          <li><b>2</b><span>Then break it on purpose: loosen the prompt until junk gets through, or tighten it until nothing survives.</span></li>
+          <li><b>3</b><span>Watch which articles flip, and why — that's the model's judgment changing, not a bug.</span></li>
+        </ol>
+      </div>
+      <div class="demo" style="margin-top:1.4rem">
+        <div class="bar">11:30 – 11:45 · Read &amp; compare</div>
+        <ol>
+          <li><b>4</b><span>Open the result — Calibre, an e-reader, or just your phone. See it in the format it was built for.</span></li>
+          <li><b>5</b><span>Regroup and compare what each track built: what did your prompt keep that a neighbor's rejected?</span></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="note">
+      <b>Speaker note</b>
+      The point of "break it on purpose" is to make the model's judgment visible and adjustable, not
+      mysterious — a looser or stricter prompt is a design choice you made, not a bug you introduced.
+      This is also the moment to let people who are stuck ask for help before the final discussion.
+    </aside>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var curEl = document.getElementById('cur');
+    var bar = document.getElementById('progress');
+    var notesBtn = document.getElementById('notesBtn');
+    var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var idx = 0;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          idx = slides.indexOf(e.target);
+          curEl.textContent = String(idx + 1).padStart(2, '0');
+        }
+      });
+    }, { threshold: 0.55 });
+    slides.forEach(function (s) { io.observe(s); });
+
+    function progress() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', progress, { passive: true });
+    window.addEventListener('resize', progress);
+    progress();
+
+    function go(n) {
+      n = Math.max(0, Math.min(slides.length - 1, n));
+      slides[n].scrollIntoView({ behavior: motionOK ? 'smooth' : 'auto', block: 'start' });
+    }
+
+    function toggleNotes() {
+      var on = document.body.classList.toggle('notes');
+      notesBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    notesBtn.addEventListener('click', toggleNotes);
+
+    // Slides can hold progressively-revealed content (class="reveal"): ↓ shows
+    // the next one instead of leaving the slide; only once none are left does
+    // ↓ actually navigate. ↑ un-reveals them in reverse first, same idea.
+    function revealables() {
+      return Array.prototype.slice.call(slides[idx].querySelectorAll('.reveal'));
+    }
+    function revealNext() {
+      var next = revealables().filter(function (el) { return !el.classList.contains('shown'); })[0];
+      if (!next) return false;
+      next.classList.add('shown');
+      return true;
+    }
+    function hideLast() {
+      var shown = revealables().filter(function (el) { return el.classList.contains('shown'); });
+      var last = shown[shown.length - 1];
+      if (!last) return false;
+      last.classList.remove('shown');
+      return true;
+    }
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (!el.classList.contains('shown')) revealNext();
+      });
+    });
+
+    window.addEventListener('keydown', function (e) {
+      var t = e.target.tagName;
+      if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT' || t === 'BUTTON') return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (!revealNext()) go(idx + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        if (!hideLast()) go(idx - 1);
+      } else if (e.key === 'Home') { e.preventDefault(); go(0); }
+      else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+      else if (e.key === 's' || e.key === 'S') { toggleNotes(); }
+    });
+  })();
+</script>
+
+<script>
+  // Live Ollama widget (slide 12). Talks straight to a local Ollama server via
+  // fetch — nothing goes through Claude or any third party. Needs Ollama
+  // running on this machine. Ollama allows http://localhost:* origins by
+  // default (verified), so serving this page locally — e.g.
+  // `python3 -m http.server` in docs/ — just works with no extra config.
+  // Opened as a file:// page instead, Ollama 403s it; fix with
+  // `OLLAMA_ORIGINS=* ollama serve`. The hosted claude.ai link can never
+  // reach localhost (blocked by both Ollama's CORS and the artifact
+  // sandbox) — it'll show "not reachable" there, which is expected.
+  (function () {
+    var statusEl = document.getElementById('oStatus');
+    var checkBtn = document.getElementById('oCheck');
+    var baseEl   = document.getElementById('oBase');
+    var modelSel = document.getElementById('oModel');
+    var promptEl = document.getElementById('oPrompt');
+    var sendBtn  = document.getElementById('oSend');
+    var outputEl = document.getElementById('oOutput');
+    var timingEl = document.getElementById('oTiming');
+    if (!sendBtn) return; // widget not on this build
+
+    function setStatus(state, msg) {
+      statusEl.className = 'ostatus ostatus--' + state;
+      statusEl.innerHTML = '<i class="odot"></i>' + msg;
+    }
+
+    function base() {
+      return (baseEl.value || 'http://localhost:11434').replace(/\/+$/, '');
+    }
+
+    // A blocked fetch() always throws a generic "Failed to fetch" — the browser
+    // deliberately hides *why* (CORS vs. mixed content vs. connection refused)
+    // from JS. location.protocol is visible, though, and covers the two most
+    // likely causes here, so use it to point at the actual fix.
+    function likelyReason() {
+      var proto = window.location.protocol;
+      if (proto === 'file:') {
+        return 'This deck is open as a local file (file://) — Ollama blocks that by ' +
+          'default. Easiest fix: serve this folder instead of double-clicking it, e.g. ' +
+          '"python3 -m http.server" in docs/, then open http://localhost:8000/agents-at-home.html. ' +
+          'Or keep double-clicking and run Ollama as: OLLAMA_ORIGINS=* ollama serve';
+      }
+      if (proto === 'https:') {
+        return 'This deck is loaded over https (likely the shared claude.ai link) — a secure ' +
+          'page can’t call plain http://localhost (mixed content), and the claude.ai link is ' +
+          'sandboxed against it either way. Open the deck from a local http:// server instead.';
+      }
+      return 'Ollama may not be running, be on a different port, or a firewall is blocking it. ' +
+        'Confirm "ollama serve" is running and the URL above matches.';
+    }
+
+    checkBtn.addEventListener('click', function () {
+      setStatus('checking', 'checking…');
+      fetch(base() + '/api/tags')
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function (data) {
+          var models = (data.models || []).map(function (m) { return m.name; });
+          if (!models.length) { setStatus('warn', 'connected, but no models pulled yet'); return; }
+          modelSel.innerHTML = '';
+          models.forEach(function (name) {
+            var opt = document.createElement('option');
+            opt.value = name; opt.textContent = name;
+            modelSel.appendChild(opt);
+          });
+          var preferred = models.filter(function (n) { return n.indexOf('gemma') === 0; })[0];
+          modelSel.value = preferred || models[0];
+          setStatus('ok', 'connected — ' + models.length + ' model' + (models.length === 1 ? '' : 's'));
+        })
+        .catch(function (err) {
+          setStatus('err', 'not reachable — ' + err.message);
+          outputEl.textContent = 'Could not reach Ollama at ' + base() + '.\n\n' + likelyReason();
+        });
+    });
+
+    sendBtn.addEventListener('click', function () {
+      var prompt = promptEl.value.trim();
+      if (!prompt) { promptEl.focus(); return; }
+      var model = modelSel.value || 'gemma4:e2b';
+      outputEl.textContent = '';
+      timingEl.textContent = '';
+      sendBtn.disabled = true;
+      setStatus('checking', 'thinking…');
+      var t0 = (window.performance || Date).now();
+
+      fetch(base() + '/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model, messages: [{ role: 'user', content: prompt }], stream: true })
+      })
+        .then(function (res) {
+          if (!res.ok || !res.body) throw new Error('HTTP ' + res.status);
+          setStatus('ok', 'streaming…');
+          var reader = res.body.getReader();
+          var decoder = new TextDecoder();
+          var buf = '';
+
+          function pump() {
+            return reader.read().then(function (step) {
+              if (step.done) {
+                sendBtn.disabled = false;
+                setStatus('ok', 'connected');
+                timingEl.textContent = (((window.performance || Date).now() - t0) / 1000).toFixed(1) + 's';
+                return;
+              }
+              buf += decoder.decode(step.value, { stream: true });
+              var lines = buf.split('\n');
+              buf = lines.pop();
+              lines.forEach(function (line) {
+                line = line.trim();
+                if (!line) return;
+                try {
+                  var obj = JSON.parse(line);
+                  if (obj.message && obj.message.content) outputEl.textContent += obj.message.content;
+                } catch (e) { /* partial line, ignore */ }
+              });
+              outputEl.scrollTop = outputEl.scrollHeight;
+              return pump();
+            });
+          }
+          return pump();
+        })
+        .catch(function (err) {
+          sendBtn.disabled = false;
+          setStatus('err', 'request failed — ' + err.message);
+          outputEl.textContent = 'Could not reach Ollama at ' + base() + '.\n\n' + likelyReason();
+        });
+    });
+  })();
+</script>
+
+<script>
+  // The "Chatbot vs Agent" slide's (#s4, currently slide 7) chat/agent demo
+  // plays once, the first time you land on the slide, then holds still
+  // (see the #s4.play rules in the CSS). Reduced
+  // motion shows the finished state immediately instead (own CSS override) —
+  // skip this trigger entirely in that case.
+  (function () {
+    var s4 = document.getElementById('s4');
+    if (!s4 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var played = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !played) {
+          played = true;
+          s4.classList.add('play');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    io.observe(s4);
+  })();
+</script>
+
+<script>
+  // A single ambient network sits fixed behind the whole deck (not just
+  // one slide): dots drift and link up when close, a few tinted --local
+  // to read as "on-device agents talking to each other." Runs continuously
+  // while the tab is visible; pauses on tab-hide to save battery. Reduced
+  // motion gets one static frame instead of a running loop.
+  (function () {
+    var canvas = document.querySelector('.bg-net');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var col = { local: '#2C6E4B', line: '#D5D3C9', ink: '#585B62' };
+    function readColors() {
+      var cs = getComputedStyle(document.documentElement);
+      col.local = cs.getPropertyValue('--local').trim() || col.local;
+      col.line  = cs.getPropertyValue('--line').trim()  || col.line;
+      col.ink   = cs.getPropertyValue('--ink-soft').trim() || col.ink;
+    }
+    readColors();
+    var scheme = matchMedia('(prefers-color-scheme: dark)');
+    if (scheme.addEventListener) scheme.addEventListener('change', readColors);
+
+    var W = 0, H = 0, nodes = [];
+    var LINK_DIST = 150;
+
+    function seed() {
+      var n = Math.max(30, Math.min(90, Math.round((W * H) / 26000)));
+      nodes = [];
+      for (var i = 0; i < n; i++) {
+        nodes.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.16,
+          vy: (Math.random() - 0.5) * 0.16,
+          r: Math.random() * 1.3 + 0.9,
+          local: Math.random() < 0.22
+        });
+      }
+    }
+
+    function resize() {
+      W = Math.max(1, window.innerWidth);
+      H = Math.max(1, window.innerHeight);
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+    }
+
+    var raf = null;
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var i, j, a, b, dx, dy, d;
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i];
+        if (!reduceMotion) {
+          a.x += a.vx; a.y += a.vy;
+          if (a.x < -20) a.x = W + 20; else if (a.x > W + 20) a.x = -20;
+          if (a.y < -20) a.y = H + 20; else if (a.y > H + 20) a.y = -20;
+        }
+      }
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i];
+        for (j = i + 1; j < nodes.length; j++) {
+          b = nodes[j];
+          dx = a.x - b.x; dy = a.y - b.y;
+          d = Math.sqrt(dx * dx + dy * dy);
+          if (d < LINK_DIST) {
+            ctx.globalAlpha = (1 - d / LINK_DIST) * ((a.local || b.local) ? 0.55 : 0.3);
+            ctx.strokeStyle = (a.local || b.local) ? col.local : col.line;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i];
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+        ctx.fillStyle = a.local ? col.local : col.ink;
+        ctx.globalAlpha = a.local ? 0.85 : 0.4;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function frame() {
+      draw();
+      if (!reduceMotion) raf = requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (reduceMotion) { draw(); return; }
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(frame);
+    }
+    function stop() {
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+    }
+
+    resize();
+    start();
+
+    window.addEventListener('resize', function () {
+      resize();
+      if (reduceMotion) draw();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+  })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.5.2/qrcode.min.js"></script>
+<script>
+  // Renders each .qrslot[data-url] as an inline SVG QR code — solid black on
+  // a fixed white tile regardless of theme, since scan reliability matters
+  // more than matching the deck's palette here. Runs once on load; no
+  // interaction needed. If the library failed to load (offline, CDN
+  // blocked), the slots just stay empty rather than erroring.
+  (function () {
+    if (typeof qrcode !== 'function') return;
+    var slots = document.querySelectorAll('.qrslot[data-url]');
+    var svgNS = 'http://www.w3.org/2000/svg';
+    Array.prototype.forEach.call(slots, function (slot) {
+      var url = slot.getAttribute('data-url');
+      var qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      var count = qr.getModuleCount();
+      var svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + count + ' ' + count);
+      svg.setAttribute('shape-rendering', 'crispEdges');
+      for (var r = 0; r < count; r++) {
+        for (var c = 0; c < count; c++) {
+          if (qr.isDark(r, c)) {
+            var rect = document.createElementNS(svgNS, 'rect');
+            rect.setAttribute('x', c); rect.setAttribute('y', r);
+            rect.setAttribute('width', 1); rect.setAttribute('height', 1);
+            rect.setAttribute('fill', '#000');
+            svg.appendChild(rect);
+          }
+        }
+      }
+      slot.appendChild(svg);
+    });
+  })();
+</script>
+<a class="pf-back" href="../../" style="position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:999;background:rgba(23,24,27,.82);color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:9px 13px;border-radius:999px;text-decoration:none;backdrop-filter:blur(6px)" onclick="if(document.referrer.indexOf(location.origin)===0&&history.length>1){history.back();return false}">← Portfolio</a><script>if(window.self!==window.top)document.querySelector('.pf-back').remove()</script>

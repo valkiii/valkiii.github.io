@@ -155,6 +155,17 @@
     });
     canvas.addEventListener("pointerleave", () => { if (hover >= 0) { hover = -1; opts.onHover && opts.onHover(null); } });
     canvas.style.touchAction = "pan-y"; canvas.style.cursor = "grab";
+    // follow the mouse anywhere on the page: horizontal position steers the spin, vertical tilts it
+    let mouse = null;
+    if (opts.follow !== false) {
+      addEventListener("pointermove", e => {
+        if (e.pointerType !== "mouse") return;
+        const r = canvas.getBoundingClientRect(), cx = r.left + geo.x * r.width, cy = r.top + geo.y * r.height;
+        mouse = { x: Math.max(-1, Math.min(1, (e.clientX - cx) / (r.width * .5))), y: Math.max(-1, Math.min(1, (e.clientY - cy) / (r.height * .5))) };
+      }, { passive: true });
+      document.addEventListener("mouseleave", () => { mouse = null; });
+    }
+    let spinV = 0;
 
     // ---------- frame ----------
     function frame(ts) {
@@ -162,7 +173,13 @@
       const dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts;
       if (document.hidden) return;
       if (target) { yaw += (target.yaw - yaw) * Math.min(1, dt * 3); pitch += (target.pitch - pitch) * Math.min(1, dt * 3); if (Math.abs(target.yaw - yaw) < .002) target = null; }
-      else if (spinning && !drag) yaw += dt * (focusUc ? .02 : .07);
+      else if (!drag) {
+        const want = mouse ? mouse.x * (focusUc ? .08 : .3) : 0;
+        spinV += (want - spinV) * Math.min(1, dt * 1.5);
+        yaw += dt * ((spinning ? (focusUc ? .01 : .035) : 0) + spinV);
+        const wp = mouse ? .25 + mouse.y * .55 : .25;
+        if (!focusUc) pitch += (wp - pitch) * Math.min(1, dt * 1);
+      }
       if (gTo) { const k = Math.min(1, (ts - g0) / gDur), q = ease(k); for (const key of ["x", "y", "r"]) geo[key] = gFrom[key] + (gTo[key] - gFrom[key]) * q; if (k >= 1) gTo = null; }
       if (mixT < 1) mixT = reduce ? 1 : Math.min(1, (ts - mixT0) / 900);
       const R = rot(), rr = geo.r * Math.min(W, H);

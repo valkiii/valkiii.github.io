@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Four in a row vs five networks · Valerio Ciotti</title>
+<title>Four in a row against five networks · Valerio Ciotti</title>
 <meta name="description" content="Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,37 +21,30 @@
   <header class="story-hero">
     <div class="wrap">
       <p class="kicker"><a href="../../">Play</a> · Games · Data science · September 2025</p>
-      <h1>Four in a row vs five networks</h1>
-      <p class="question">Can I teach a computer to beat me at Connect 4?</p>
+      <h1>Four in a row against five networks</h1>
+      <p class="question">Four in a row against five networks</p>
       <p class="actions">
-<a class="btn primary" href="../../../play/connect4/">Play the ensemble</a><a class="btn" href="https://github.com/valkiii/forza_quatto" target="_blank" rel="noopener">Code ↗</a>      </p>
+<a class="btn primary" href="../../../play/connect4/">Play the ensemble</a><a class="btn" href="../../writing/connect-4-vs-ai-ensemble/">The essay</a><a class="btn" href="https://github.com/valkiii/forza_quatto" target="_blank" rel="noopener">Code ↗</a>      </p>
     </div>
   </header>
-  <figure class="wrap hero-pic"><img src="../../../media/covers/connect4.jpg" alt="Four in a row vs five networks"></figure>
+  <figure class="wrap hero-pic"><img src="../../../media/covers/connect4.jpg" alt="Four in a row against five networks"></figure>
   <section class="wrap lead"><p>Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.</p></section>
-<section class="wrap nums"><div><b>750k</b><span>training games for the strongest model</span></div><div><b>35+</b><span>AI opponents in the tournament</span></div><div><b>5</b><span>networks voting on every move</span></div></section>  <section class="wrap duo-text"><h2>The idea</h2><p class="big">Connect 4 is small enough to learn and big enough that nothing can memorise it: about 4.5 trillion positions. It is the perfect sandbox to see what reinforcement learning really needs.
-</p></section>
+  <section class="wrap duo-text"><h2>The idea</h2><p class="big">Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.</p></section>
   <section class="wrap"><h2 class="h2">How it works</h2>
-    <ol class="steps"><li><span class="n">1</span><b>Opponents</b><p>A random player and a rule-based one set the bar. The rules player beats random 99% of the time.</p></li><li><span class="n">2</span><b>Learn</b><p>Dueling Double DQNs, first on flat boards, then convolutional networks that see lines like a person does.</p></li><li><span class="n">3</span><b>Stabilise</b><p>Curriculum learning, reservoir replay and slow target updates against catastrophic forgetting.</p></li><li><span class="n">4</span><b>Combine</b><p>The five best checkpoints average their Q-values with fixed weights. In this page they run in your browser.</p></li></ol>
+    <ol class="steps"></ol>
   </section>
-<section class="wrap duo-text"><h2>What I learned</h2><ul class="learned"><li>An agent only gets as good as its sparring partners.</li><li>Ensembles of checkpoints are a cheap way to smooth over a single model&#39;s blind spots.</li></ul></section>  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>PyTorch</span><span>Dueling Double DQN</span><span>CNNs</span><span>curriculum learning</span><span>JavaScript</span></p></section>
+  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>PyTorch</span><span>Dueling Double DQN</span><span>CNNs</span><span>curriculum learning</span><span>JavaScript</span></p></section>
 <section class="wrap"><h2 class="h2">More like this</h2><div class="grid"><a class="tile " href="../pulp/" style="--c: var(--uc-play)">
-  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-play)">
-  <rect width="320" height="200" class="s-bg"/>
-  <circle cx="133.125" cy="61.25" r="86.09375" class="s-a"/>
-  <rect x="178.28125" y="88.75" width="100.6640625" height="100.6640625" rx="22" class="s-b" transform="rotate(-5.625 200 100)"/>
-  <text x="22" y="178" class="s-t">PULP</text>
-</svg>
-</span>
-  <span class="cap"><b>PULP</b><span>Can you play Fruit Ninja with your eyes?</span></span>
+  <span class="pic"><img src="../../../media/covers/pulp.jpg" alt="" loading="lazy"></span>
+  <span class="cap"><b>Slicing fruit with a glance</b><span>Slicing fruit with a glance</span></span>
 </a>
 <a class="tile " href="../spellstorm/" style="--c: var(--uc-play)">
   <span class="pic"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
-  <span class="cap"><b>Spellstorm</b><span>Can a survivors-style game work for a five-year-old and a teenager?</span></span>
+  <span class="cap"><b>A spellbook for the whole family</b><span>A spellbook for the whole family</span></span>
 </a>
 <a class="tile " href="../drawbluff/" style="--c: var(--uc-play)">
   <span class="pic"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
-  <span class="cap"><b>Drawbluff</b><span>Can I host a Drawful-style party game from a laptop?</span></span>
+  <span class="cap"><b>Draw badly, bluff boldly</b><span>Draw badly, bluff boldly</span></span>
 </a>
 </div></section></article>
 </main>

@@ -3,65 +3,89 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PULP · Valerio Ciotti</title>
-<meta name="description" content="A Fruit Ninja style browser game. Your fingertips become blades, and an experimental mode lets you slice with your gaze.">
+<title>Slicing fruit with a glance · Valerio Ciotti</title>
+<meta name="description" content="A browser game where fruit is thrown up from the bottom of the screen and you cut it in mid-air, first with a fingertip, then, in an experimental mode, with your eyes alone.">
 <meta name="theme-color" content="#080b12">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Hanken+Grotesk:ital,wght@0,300..700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../style.css">
 </head>
 <body class="">
 <header class="top">
   <a class="brand" href="../../">Valerio Ciotti</a>
   <nav aria-label="Sections">
-<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../study-group/">Study group</a><a href="../../about/">About</a>  </nav>
 </header>
 <main>
 <article class="story" style="--c: var(--uc-play)">
   <header class="story-hero">
-    <div class="bg"><svg class="glow" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-play)">
-  <rect width="320" height="200" class="g-bg"/>
-<circle cx="112.96875" cy="22.5" r="4.765625" class="g-n"/><circle cx="272.65625" cy="81.25" r="3.0" class="g-n"/><line x1="272.65625" y1="81.25" x2="112.96875" y2="22.5" class="g-e"/><circle cx="225.625" cy="118.125" r="3.8125" class="g-n"/><line x1="225.625" y1="118.125" x2="272.65625" y2="81.25" class="g-e"/><circle cx="120.625" cy="99.375" r="2.578125" class="g-n"/><line x1="120.625" y1="99.375" x2="225.625" y2="118.125" class="g-e"/><circle cx="232.1875" cy="112.5" r="1.625" class="g-n"/><line x1="232.1875" y1="112.5" x2="120.625" y2="99.375" class="g-e"/><circle cx="40.78125" cy="159.375" r="4.828125" class="g-n"/><line x1="40.78125" y1="159.375" x2="232.1875" y2="112.5" class="g-e"/><circle cx="122.8125" cy="146.25" r="3.9375" class="g-n"/><line x1="122.8125" y1="146.25" x2="40.78125" y2="159.375" class="g-e"/><circle cx="242.03125" cy="40.625" r="3.890625" class="g-n"/><line x1="242.03125" y1="40.625" x2="122.8125" y2="146.25" class="g-e"/><circle cx="292.34375" cy="38.125" r="2.53125" class="g-n"/><line x1="292.34375" y1="38.125" x2="242.03125" y2="40.625" class="g-e"/><circle cx="173.125" cy="140.0" r="3.34375" class="g-n"/><line x1="173.125" y1="140.0" x2="292.34375" y2="38.125" class="g-e"/><circle cx="233.28125" cy="70.625" r="4.765625" class="g-n"/><line x1="233.28125" y1="70.625" x2="173.125" y2="140.0" class="g-e"/><circle cx="289.0625" cy="81.25" r="3.0" class="g-n"/><line x1="289.0625" y1="81.25" x2="233.28125" y2="70.625" class="g-e"/><circle cx="170.9375" cy="58.75" r="3.8125" class="g-n"/><line x1="170.9375" y1="58.75" x2="289.0625" y2="81.25" class="g-e"/><circle cx="156.71875" cy="23.125" r="2.578125" class="g-n"/><line x1="156.71875" y1="23.125" x2="170.9375" y2="58.75" class="g-e"/></svg>
-</div>
+    <div class="bg"><img src="../../../media/covers/pulp.jpg" alt=""></div>
     <div class="wrap">
-      <p class="kicker"><a href="../../">Orbit</a> · Games · Seeing · October 2026</p>
-      <h1>PULP</h1>
-      <p class="question">Can you play Fruit Ninja with your eyes?</p>
+      <p class="kicker" data-reveal><a href="../../">Orbit</a> · Games · Seeing · October 2026</p>
+      <h1 class="title" data-reveal>Slicing fruit with a glance</h1>
+      <p class="lede" data-reveal><span class="nm">PULP.</span> A browser game where fruit is thrown up from the bottom of the screen and you cut it in mid-air, first with a fingertip, then, in an experimental mode, with your eyes alone.</p>
     </div>
   </header>
-  <section class="wrap intro">
-    <p class="lede">A Fruit Ninja style browser game. Your fingertips become blades, and an experimental mode lets you slice with your gaze.</p>
+  <section class="scrolly">
+  <div class="stage" aria-hidden="true">
+<figure class="frame on" data-f="0"><img src="../../../media/covers/pulp.jpg" alt="" loading="lazy"></figure><figure class="frame" data-f="1"><img src="../../../media/stories/pulp/title.jpg" alt="The title screen. Everything after it runs in the browser, camera included." loading="lazy"><figcaption>The title screen. Everything after it runs in the browser, camera included.</figcaption></figure><figure class="frame" data-f="2"><img src="../../../media/covers/pulp.jpg" alt="Hands were the warm-up. The real question was the eyes." loading="lazy"><figcaption>Hands were the warm-up. The real question was the eyes.</figcaption></figure><figure class="frame" data-f="3"><img src="../../../media/stories/pulp/title.jpg" alt="" loading="lazy"></figure>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+<figure class="inline"><img src="../../../media/covers/pulp.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>The rules fit in one breath. Fruit is tossed up from the bottom of the screen, hangs for a moment at the top of its arc and falls back. You cut it before it drops. Every whole fruit that gets away costs you, and every so often something that is not fruit comes up with the rest, so you cannot just slash at everything.</p>
+<p>After weeks of teaching my laptop to read my hands for <a href="../../../showcase/precog/">Precog</a>, this was the obvious next question. If the camera can follow a fingertip, it can be a blade.</p></div>
+    </div>
+    <div class="beat" data-f="1">
+<figure class="inline"><img src="../../../media/stories/pulp/title.jpg" alt="The title screen. Everything after it runs in the browser, camera included." loading="lazy"><figcaption>The title screen. Everything after it runs in the browser, camera included.</figcaption></figure>      <div class="prose"><p>Precog was written in Python, and the Python version of the hand tracker kept crashing on my Mac's graphics drivers. So PULP lives in the browser. The hand model runs as WebAssembly next to the game, a canvas draws at sixty frames a second, and the sound is synthesised on the fly. There is no server: open the page, allow the camera, play.</p>
+<p>Your index fingertip leaves a trail. Only fast movements cut, so you can move your hand into position without slicing anything by accident, then flick.</p></div>
+    </div>
+    <div class="beat" data-f="2">
+<figure class="inline"><img src="../../../media/covers/pulp.jpg" alt="Hands were the warm-up. The real question was the eyes." loading="lazy"><figcaption>Hands were the warm-up. The real question was the eyes.</figcaption></figure>      <div class="prose"><p>Then a harder question: what if you only had your eyes?</p>
+<p>Gaze is much noisier than a fingertip. So each session starts with a calibration: thirteen dots appear one at a time and you look at each. Seven more dots check the result, so the game can tell you honestly how well it is following you before you start.</p>
+<p>Behind it is a small ridge regression from the eye features of a face mesh to screen positions. Leave-one-dot-out cross-validation picks between a straight-line and a curved fit, and how strongly to smooth.</p></div>
+    </div>
+    <div class="beat" data-f="3">
+<figure class="inline"><img src="../../../media/stories/pulp/title.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>In eye mode a cut is either a quick flick of the eyes across a fruit or a short dwell on it. Blinks are filtered out, otherwise every blink would be a slash.</p>
+<p>Hand mode is fun. Eye mode is still a beta I keep tuning: the speed a swipe needs, how long a dwell lasts and how sensitive the blink filter is all want a real person in front of a real webcam, and that is the part I am working on now. What I already learned is that a calibration you can check matters more than a cleverer model.</p></div>
+    </div>
+  </div>
+</section>
+
+  <section class="wrap coda" data-reveal>
     <p class="actions">
 <a class="btn primary" href="../../../play/pulp/">Play it (needs a webcam)</a><a class="btn" href="https://github.com/valkiii/fruit_ninja" target="_blank" rel="noopener">Code ↗</a>    </p>
+    <p class="madewith">Made with JavaScript, MediaPipe Tasks (wasm), Canvas, WebAudio.</p>
   </section>
-<section class="wrap nums"><div><b>60</b><span>fps canvas</span></div><div><b>13 + 7</b><span>calibration and validation dots</span></div><div><b>0</b><span>servers: it all runs in the browser</span></div></section>  <section class="wrap block"><h2>The idea</h2><p class="big">After Precog, the obvious next question was a game. Then a harder one: what if you only had your eyes?
-</p></section>
-  <section class="wrap block"><h2>How it works</h2>
-    <ol class="steps"><li><span class="dot" aria-hidden="true"></span><div><b>Hands</b><p>MediaPipe&#39;s hand landmarker runs in the browser. Only fast swipes cut; slow movement doesn&#39;t.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Eyes</b><p>A face mesh with irises, calibrated each session on 13 dots and checked on 7 more.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Fit</b><p>A small ridge regression maps eye features to the screen; leave-one-dot-out cross-validation picks the model.</p></div></li><li><span class="dot" aria-hidden="true"></span><div><b>Cut</b><p>In eye mode a cut is a quick saccade flick or a dwell. Blinks are filtered out.</p></div></li></ol>
-  </section>
-<section class="wrap block"><h2>What I learned</h2><ul class="learned"><li>Moving from Python to the browser removed a whole class of driver and GPU problems, and gave a smooth 60 fps.</li><li>Gaze is noisy. Calibration you can verify matters more than a clever model.</li></ul></section>  <section class="wrap block"><h2>Built with</h2><p class="stack"><span>JavaScript</span><span>MediaPipe Tasks (wasm)</span><span>Canvas</span><span>WebAudio</span></p></section>
-<section class="wrap block"><h2>In the same orbit</h2><div class="rows"><a class="row" href="../../../showcase/precog/" style="--c: var(--uc-vision)">
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/pulp"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+<section class="wrap block"><h2 class="sub">In the same orbit</h2><div class="rows"><a class="row" href="../../../showcase/precog/" style="--c: var(--uc-vision)" data-reveal>
   <span class="thumb"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
   <span class="txt">
-    <span class="q">What if my hands were the mouse?</span>
-    <span class="meta"><b>Precog</b> · Oct 2026 · prototype</span>
+    <span class="q">Conducting my desktop with bare hands</span>
+    <span class="meta"><span class="nm">Precog</span> · Oct 2026 · prototype</span>
   </span>
   <span class="arrow" aria-hidden="true">→</span>
 </a>
-<a class="row" href="../spellstorm/" style="--c: var(--uc-play)">
+<a class="row" href="../spellstorm/" style="--c: var(--uc-play)" data-reveal>
   <span class="thumb"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
   <span class="txt">
-    <span class="q">Can a survivors-style game work for a five-year-old and a teenager?</span>
-    <span class="meta"><b>Spellstorm</b> · Oct 2026 · playable</span>
+    <span class="q">A spellbook for the whole family</span>
+    <span class="meta"><span class="nm">Spellstorm</span> · Oct 2026 · playable</span>
   </span>
   <span class="arrow" aria-hidden="true">→</span>
 </a>
-<a class="row" href="../drawbluff/" style="--c: var(--uc-play)">
+<a class="row" href="../drawbluff/" style="--c: var(--uc-play)" data-reveal>
   <span class="thumb"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
   <span class="txt">
-    <span class="q">Can I host a Drawful-style party game from a laptop?</span>
-    <span class="meta"><b>Drawbluff</b> · Oct 2026 · playable</span>
+    <span class="q">Draw badly, bluff boldly</span>
+    <span class="meta"><span class="nm">Drawbluff</span> · Oct 2026 · playable</span>
   </span>
   <span class="arrow" aria-hidden="true">→</span>
 </a>
@@ -69,7 +93,8 @@
 </main>
 <footer class="foot">
   <p class="big-sign">Imagine, try, solve.</p>
-  <p><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
 </footer>
-<div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="index.html" aria-current=page>Orbit</a><a href="../../../playground/projects/pulp/index.html">Playground</a><a href="../../../reel/projects/pulp/index.html">Reel</a><a href="../../../atlas/projects/pulp/index.html">Atlas</a><a href="../../../notebook/projects/pulp/index.html">Notebook</a><a href="../../../workshop/projects/pulp/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+<script src="../../motion.js"></script>
+<script src="../../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="index.html" aria-current=page>Orbit</a><a href="../../../playground/projects/pulp/index.html">Playground</a><a href="../../../reel/projects/pulp/index.html">Reel</a><a href="../../../atlas/projects/pulp/index.html">Atlas</a><a href="../../../notebook/projects/pulp/index.html">Notebook</a><a href="../../../workshop/projects/pulp/index.html">Workshop</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
 </html>

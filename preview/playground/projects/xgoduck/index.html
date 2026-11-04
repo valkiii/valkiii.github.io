@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>XGO-Duck on a Pi · Valerio Ciotti</title>
+<title>Teaching a duck to walk on a Raspberry Pi · Valerio Ciotti</title>
 <meta name="description" content="Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,39 +21,26 @@
   <header class="story-hero">
     <div class="wrap">
       <p class="kicker"><a href="../../">Play</a> · Robots &amp; devices · October 2026</p>
-      <h1>XGO-Duck on a Pi</h1>
-      <p class="question">Can a 3D-printed duck learn to walk on a Pi Zero?</p>
+      <h1>Teaching a duck to walk on a Raspberry Pi</h1>
+      <p class="question">Teaching a duck to walk on a Raspberry Pi</p>
       <p class="actions">
       </p>
     </div>
   </header>
-  <figure class="wrap hero-pic"><svg class="shape wide" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-robots)">
-  <rect width="320" height="200" class="s-bg"/>
-  <circle cx="178.75" cy="80.3125" r="69.53125" class="s-a"/>
-  <rect x="200.546875" y="58.75" width="105.15625" height="105.15625" rx="22" class="s-b" transform="rotate(-18.90625 200 100)"/>
-  <text x="22" y="178" class="s-t">XGO-Duck on a Pi</text>
-</svg>
-</figure>
+  <figure class="wrap hero-pic"><img src="../../../media/covers/xgoduck.jpg" alt="Teaching a duck to walk on a Raspberry Pi"></figure>
   <section class="wrap lead"><p>Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.</p></section>
-<section class="wrap nums"><div><b>15</b><span>servos</span></div><div><b>50 Hz</b><span>walking policy</span></div><div><b>34</b><span>tests in simulation</span></div></section>  <section class="wrap duo-text"><h2>The idea</h2><p class="big">The duck walks with reinforcement-learned policies. Swapping its controller for a Pi means rewriting the loop that talks to the servos, not the brain.
-</p></section>
+  <section class="wrap duo-text"><h2>The idea</h2><p class="big">Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.</p></section>
   <section class="wrap"><h2 class="h2">How it works</h2>
-    <ol class="steps"><li><span class="n">1</span><b>Port</b><p>The microcontroller sketch rewritten in Python, behind the same interface, so the upstream code runs unchanged.</p></li><li><span class="n">2</span><b>Simulate</b><p>A simulated servo bus and robot, so everything is tested before the hardware arrives.</p></li><li><span class="n">3</span><b>Guide</b><p>A step-by-step setup wizard: parts, servo IDs, wiring scan, SSH, IMU axes, calibration.</p></li></ol>
+    <ol class="steps"></ol>
   </section>
-<section class="wrap duo-text"><h2>What I learned</h2><ul class="learned"><li>Check the bearings list twice.</li></ul></section>  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>Raspberry Pi Zero 2W</span><span>Feetech bus servos</span><span>ONNX policies</span><span>Python</span></p></section>
+  <section class="wrap duo-text"><h2>Built with</h2><p class="stack"><span>Raspberry Pi Zero 2W</span><span>Feetech bus servos</span><span>ONNX policies</span><span>Python</span></p></section>
 <section class="wrap"><h2 class="h2">More like this</h2><div class="grid"><a class="tile " href="../diary/" style="--c: var(--uc-tools)">
-  <span class="pic"><svg class="shape" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="--c: var(--uc-tools)">
-  <rect width="320" height="200" class="s-bg"/>
-  <circle cx="206.875" cy="92.5" r="58.90625" class="s-a"/>
-  <rect x="174.375" y="89.375" width="116.875" height="116.875" rx="22" class="s-b" transform="rotate(18.75 200 100)"/>
-  <text x="22" y="178" class="s-t">The Diary</text>
-</svg>
-</span>
-  <span class="cap"><b>The Diary</b><span>What if a paper notebook wrote back?</span></span>
+  <span class="pic"><img src="../../../media/covers/diary.jpg" alt="" loading="lazy"></span>
+  <span class="cap"><b>A notebook that writes back</b><span>A notebook that writes back</span></span>
 </a>
 <a class="tile " href="../../../showcase/robot/" style="--c: var(--uc-robots)">
   <span class="pic"><img src="../../../media/covers/robot.jpg" alt="" loading="lazy"></span>
-  <span class="cap"><b>Someone to play with</b><span>Could a robot arm sit across the table from me?</span></span>
+  <span class="cap"><b>Someone to play with</b><span>Someone to play with</span></span>
 </a>
 </div></section></article>
 </main>
