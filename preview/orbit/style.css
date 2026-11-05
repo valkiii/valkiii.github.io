@@ -464,9 +464,9 @@ button.btn { cursor: pointer; font-family: var(--body); }
 .card:hover, .card:focus-visible { z-index: 2; transform: translateY(-8px) scale(1.035); border-color: var(--c);
   box-shadow: 0 0 0 1px var(--c), 0 0 38px -6px color-mix(in srgb, var(--c) 55%, transparent), 0 30px 60px -28px rgba(0,0,0,.9); }
 .card:hover .cimg img, .card:hover .cimg svg, .card:focus-visible .cimg img, .card:focus-visible .cimg svg { transform: scale(1.08); }
-.cards:has(.card:focus-visible) .card:not(:focus-visible) { filter: blur(4px); opacity: .45; transform: scale(.97); }
+.cards:has(.card:focus-visible) .card:not(:focus-visible) { filter: blur(1.5px); opacity: .7; transform: scale(.985); }
 @media (hover: hover) {
-  .cards:has(.card:hover) .card:not(:hover) { filter: blur(4px); opacity: .45; transform: scale(.97); }
+  .cards:has(.card:hover) .card:not(:hover) { filter: blur(1.5px); opacity: .7; transform: scale(.985); }
   .cards:has(.card:hover) .card, .cards:has(.card:focus-visible) .card { will-change: transform, filter, opacity; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -475,13 +475,51 @@ button.btn { cursor: pointer; font-family: var(--body); }
   .card:hover .cimg img, .card:hover .cimg svg, .card:focus-visible .cimg img, .card:focus-visible .cimg svg { transform: none; }
   .cards:has(.card:hover) .card:not(:hover), .cards:has(.card:focus-visible) .card:not(:focus-visible) { filter: none; opacity: 1; transform: none; }
 }
-.pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 12px; margin: 56px 0 8px; }
-.pager .nums { display: inline-flex; gap: 6px; }
-.pager .pg { text-decoration: none; min-width: 42px; text-align: center; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--ink-2); font-size: 15px; transition: border-color .2s, color .2s, background .2s; }
-a.pg:hover { border-color: var(--uc-tools); color: var(--ink); }
-.pager .pg[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.pager .pg.off { opacity: .35; }
-.pager .pos { flex-basis: 100%; text-align: center; }
 @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .cards { grid-template-columns: 1fr; gap: 18px; } .pager .pg { padding: 9px 13px; min-width: 38px; } }
+@media (max-width: 620px) { .cards { grid-template-columns: 1fr; gap: 18px; } }
 /* === end === */
+
+/* === radar item right column + score tooltip === */
+.sg-signals .sg-score { align-self: flex-start; background: none; border: 0; padding: 0; margin: 0; cursor: help; font: 500 36px/1 var(--display); letter-spacing: -.03em; color: var(--uc-teach); text-decoration: underline dotted color-mix(in srgb, var(--uc-teach) 55%, transparent); text-underline-offset: 8px; text-decoration-thickness: 1.5px; }
+.sg-signals .sg-score:focus-visible { outline: 2px solid var(--uc-teach); outline-offset: 6px; border-radius: 6px; }
+.sg-side a.sg-propose { align-self: flex-start; margin-top: 6px; text-decoration: none; font: 400 13px/1 var(--mono); color: var(--uc-teach); padding: 8px 12px; border: 1px solid color-mix(in srgb, var(--uc-teach) 55%, transparent); border-radius: 999px; transition: background .2s, border-color .2s; }
+.sg-side a.sg-propose:hover, .sg-side a.sg-propose:focus-visible { background: color-mix(in srgb, var(--uc-teach) 16%, transparent); border-color: var(--uc-teach); }
+.sg-paper .sg-snip { margin-top: 10px; }
+.sg-paper .sg-snip summary { font-size: 12.5px; color: var(--ink-3); }
+.sg-paper .sg-snip summary:hover { color: var(--uc-tools); }
+.sg-scoretip { position: fixed; z-index: 20; width: min(380px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow: auto; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.sg-scoretip[hidden] { display: none; }
+.sg-scoretip p { margin: 0; }
+.sg-scoretip .hc-t { font: 500 17px/1.2 var(--display); color: var(--ink); }
+.sg-scoretip ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.sg-scoretip .w { color: var(--ink); }
+.sg-scoretip .w em { font: 400 12.5px/1 var(--mono); font-style: normal; color: var(--uc-teach); margin: 0 2px; }
+.sg-scoretip .fn { color: var(--ink-3); font-size: 13px; }
+/* === end === */
+
+/* === all work: progressive reveal === */
+.work-more { display: grid; justify-items: center; gap: 10px; margin: 48px 0 8px; text-align: center; }
+.work-more .btn { font: inherit; font-size: 15px; color: var(--ink); cursor: pointer; }
+.work-more .btn[hidden] { display: none; }
+.work-sentinel { height: 1px; }
+.cell[hidden] { display: none; }
+/* === end === */
+
+/* === home zig-zag (desktop): network on one half, the chapter text on the other, alternating === */
+@media (min-width: 861px) {
+  .chapter { min-height: 112vh; padding-block: 9vh; display: grid; align-content: center; overflow-x: clip; }
+  .chapter .wrap { will-change: opacity, transform; width: 100%; }
+  .chapter .wrap > * { max-width: 540px; }
+  .chapter.tr .wrap > * { margin-left: auto; margin-right: 0; }
+  .chapter.tl .wrap > * { margin-left: 0; margin-right: auto; }
+  .chapter.tr .wrap { padding-right: max(56px, 4vw); }
+  .chapter.tl .wrap { padding-left: max(56px, 4vw); }
+  .chapter h2 { font-size: clamp(44px, 5.4vw, 84px); text-shadow: 0 0 40px var(--bg), 0 0 60px color-mix(in srgb, var(--c) 30%, transparent); }
+  .chapter .blurb { font-size: 19px; margin-bottom: 22px; text-shadow: 0 0 14px var(--bg), 0 0 28px var(--bg); }
+  .chapter .rows { gap: 9px; }
+  .chapter .row { grid-template-columns: 84px minmax(0, 1fr) auto; gap: 14px; padding: 9px; background: rgba(14, 19, 29, .78); }
+  .chapter .row .thumb { width: 84px; }
+  .chapter.off .wrap > * { pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) { .chapter .wrap { will-change: auto; } }
+/* === end home zig-zag === */

@@ -31,7 +31,7 @@
   </div>
 </section>
 
-<section class="chapter" id="play" style="--c: var(--uc-play)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"play"}'>
+<section class="chapter tr" id="play" style="--c: var(--uc-play)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"play"}'>
   <div class="wrap">
     <p class="num">01 / 06</p>
     <h2>Games</h2>
@@ -87,7 +87,7 @@
 </div>
   </div>
 </section>
-<section class="chapter" id="vision" style="--c: var(--uc-vision)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"vision"}'>
+<section class="chapter tl" id="vision" style="--c: var(--uc-vision)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"vision"}'>
   <div class="wrap">
     <p class="num">02 / 06</p>
     <h2>Seeing</h2>
@@ -127,7 +127,7 @@
 </div>
   </div>
 </section>
-<section class="chapter" id="robots" style="--c: var(--uc-robots)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"robots"}'>
+<section class="chapter tr" id="robots" style="--c: var(--uc-robots)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"robots"}'>
   <div class="wrap">
     <p class="num">03 / 06</p>
     <h2>Robots &amp; devices</h2>
@@ -159,7 +159,7 @@
 </div>
   </div>
 </section>
-<section class="chapter" id="data" style="--c: var(--uc-data)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"data"}'>
+<section class="chapter tl" id="data" style="--c: var(--uc-data)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"data"}'>
   <div class="wrap">
     <p class="num">04 / 06</p>
     <h2>Data science</h2>
@@ -215,7 +215,7 @@
 </div>
   </div>
 </section>
-<section class="chapter" id="tools" style="--c: var(--uc-tools)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"tools"}'>
+<section class="chapter tr" id="tools" style="--c: var(--uc-tools)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"tools"}'>
   <div class="wrap">
     <p class="num">05 / 06</p>
     <h2>Tools</h2>
@@ -271,7 +271,7 @@
 </div>
   </div>
 </section>
-<section class="chapter" id="teach" style="--c: var(--uc-teach)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"teach"}'>
+<section class="chapter tl" id="teach" style="--c: var(--uc-teach)" data-sphere='{"x":0.76,"y":0.5,"r":0.33,"focus":"teach"}'>
   <div class="wrap">
     <p class="num">06 / 06</p>
     <h2>Teaching</h2>
@@ -364,8 +364,12 @@
     },
   });
   // each section tells the sphere where to float and what to light up
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const narrow = () => innerWidth < 860;
+  const secs = [...document.querySelectorAll("[data-sphere]")];
+  const hero = secs[0], outro = secs[secs.length - 1], chapters = secs.slice(1, -1);
   let active = null;
+  // mobile: the sphere sits above the text and changes with the section in view
   function apply(sec, instant) {
     const st = JSON.parse(sec.dataset.sphere);
     let g = { x: st.x, y: st.y, r: st.r };
@@ -374,14 +378,66 @@
     sph.focus(st.focus);
     document.body.dataset.focus = st.focus || "";
   }
-  const secs = [...document.querySelectorAll("[data-sphere]")];
   const io = new IntersectionObserver(es => {
+    if (!narrow()) return;
     const vis = es.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (vis && vis.target !== active) { active = vis.target; apply(active); }
   }, { threshold: [.25, .5, .75], rootMargin: "-20% 0px -30% 0px" });
   secs.forEach(s => io.observe(s));
-  apply(secs[0], true);
-  addEventListener("resize", () => active && apply(active, true));
+
+  // desktop zig-zag: stations hero -> chapter 1 (network left, text right) -> chapter 2 (network right, text left) ... -> outro.
+  // Station i is reached as its heading climbs from 75% to 25% of the viewport (the group switches at 50%);
+  // the sphere state is the stations mixed in sequence with an eased progress, so the glide follows the scroll.
+  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const clamp01 = x => Math.max(0, Math.min(1, x));
+  const heads = secs.map(s => s.querySelector("h2") || s);
+  const station = (i, W, H) => {
+    if (i === 0) return { x: .7, y: .5, r: .36 };
+    if (i === secs.length - 1) return { x: .5, y: .42, r: .26 };
+    const left = i % 2 === 1;
+    return { x: left ? .27 : .73, y: .5, r: Math.min(.52, .36 * W / H) };
+  };
+  let cur = { x: .7, y: .5, r: .36 }, goal = cur, desk = false, lastFocus = undefined, raf = 0, lastT = 0;
+  const lit = new Array(secs.length).fill(-1);
+  function plan(instant) {
+    const W = innerWidth, H = innerHeight;
+    if (narrow()) {
+      if (desk) { desk = false; chapters.forEach(c => { const w = c.firstElementChild; w.style.opacity = w.style.transform = ""; c.classList.remove("off"); }); }
+      return;
+    }
+    desk = true;
+    const t = secs.map((s, i) => { if (!i) return 1; const k = clamp01((.75 * H - heads[i].getBoundingClientRect().top) / (.5 * H)); return reduce ? (k >= .5 ? 1 : 0) : ease(k); });
+    let g = station(0, W, H), foc = null, idx = 0;
+    for (let i = 1; i < secs.length; i++) {
+      const s = station(i, W, H);
+      for (const key of ["x", "y", "r"]) g[key] += (s[key] - g[key]) * t[i];
+      if (t[i] >= .5) { foc = JSON.parse(secs[i].dataset.sphere).focus; idx = i; }
+    }
+    goal = g;
+    if (foc !== lastFocus) { lastFocus = foc; sph.focus(foc); document.body.dataset.focus = foc || ""; }
+    chapters.forEach((c, j) => {
+      const i = j + 1, inn = t[i], out = 1 - t[i + 1], k = inn * out, w = c.firstElementChild;
+      const side = c.classList.contains("tr") ? 1 : -1;
+      w.style.opacity = k.toFixed(3);
+      w.style.transform = reduce ? "" : `translate3d(${(side * (1 - k) * 70).toFixed(1)}px,0,0)`;
+      c.classList.toggle("off", k < .15);
+    });
+    if (instant || reduce) { cur = { ...goal }; sph.place(cur); } else if (!raf) { lastT = performance.now(); raf = requestAnimationFrame(chase); }
+  }
+  function chase(ts) {
+    raf = 0;
+    if (document.hidden || !desk) return;
+    const k = 1 - Math.exp(-Math.min(.05, (ts - lastT) / 1000) * 9); lastT = ts;
+    let d = 0;
+    for (const key of ["x", "y", "r"]) { cur[key] += (goal[key] - cur[key]) * k; d += Math.abs(goal[key] - cur[key]); }
+    if (d < .0005) cur = { ...goal };
+    sph.place(cur);
+    if (d >= .0005) raf = requestAnimationFrame(chase);
+  }
+  addEventListener("scroll", () => plan(false), { passive: true });
+  document.addEventListener("visibilitychange", () => plan(false));
+  addEventListener("resize", () => { if (narrow()) { lastFocus = undefined; active && apply(active, true); } else plan(true); });
+  if (narrow()) { active = hero; apply(hero, true); } else plan(true);
 })();
 </script>
 <div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="index.html" aria-current=page>Orbit</a><a href="../playground/index.html">Playground</a><a href="../reel/index.html">Reel</a><a href="../atlas/index.html">Atlas</a><a href="../notebook/index.html">Notebook</a><a href="../workshop/index.html">Workshop</a><a href="../soft/index.html">Soft</a><a href="../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
