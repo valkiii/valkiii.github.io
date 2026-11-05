@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slicing fruit with a glance · Valerio Ciotti</title>
+<meta name="description" content="A browser game where fruit is thrown up from the bottom of the screen and you cut it in mid-air, first with a fingertip, then, in an experimental mode, with your eyes alone.">
+<meta name="color-scheme" content="light dark">
+<script>
+/* apply the saved colour mode before first paint, so there is no flash */
+(function () {
+  var root = document.documentElement;
+  try {
+    /* namespaced key; "soft-mode" is the old one, read once for migration */
+    var m = localStorage.getItem("portfolio-soft-mode") || localStorage.getItem("soft-mode");
+    if (m === "light" || m === "dark") root.setAttribute("data-theme", m);
+  } catch (e) {}
+  root.classList.add("js");
+  /* giscus reads data-theme once, when its script runs: hand it the resolved mode, not "preferred_color_scheme" */
+  try {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    new MutationObserver(function (list) {
+      list.forEach(function (r) { [].forEach.call(r.addedNodes, function (n) {
+        if (n.nodeName === "SCRIPT" && /giscus\.app\/client\.js/.test(n.src || "")) {
+          var a = root.getAttribute("data-theme"), d = a ? a === "dark" : mq.matches;
+          n.setAttribute("data-theme", d ? "dark_dimmed" : "light");
+        }
+      }); });
+    }).observe(document, { childList: true, subtree: true });
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../" aria-current="page">Work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+  <button class="mode" id="mode" type="button" aria-pressed="false" aria-label="Dark mode" title="Switch light and dark">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"/></svg>
+  </button>
+</header>
+<main id="main" tabindex="-1">
+<article class="story" style="--c: var(--uc-play)">
+  <header class="wrap pagehead">
+    <p class="kicker"><a href="../">Work</a> · October 2026</p>
+    <h1 class="title">Slicing fruit with a glance</h1>
+    <p class="lede"><span class="nm">PULP.</span> A browser game where fruit is thrown up from the bottom of the screen and you cut it in mid-air, first with a fingertip, then, in an experimental mode, with your eyes alone.</p>
+    <p class="chips">
+      <span class="chip static"><span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="udot" style="--c: var(--uc-vision)" title="Seeing"></span><span class="ulabel">Games · Seeing</span></span></span><span class="chip static mono">beta</span><span class="chip static mono">Oct 2026</span>
+    </p>
+    <p class="actions">
+<a class="btn primary" href="../../../play/pulp/">Play it (needs a webcam)</a><a class="btn" href="https://github.com/valkiii/fruit_ninja" target="_blank" rel="noopener">Code ↗</a>    </p>
+  </header>
+
+
+
+  <section class="wrap chapters">
+    <section class="chapter panel" aria-label="Chapter 1">
+      <p class="chno" aria-hidden="true">01</p>
+<figure class="frame"><img src="../../../media/covers/pulp.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>The rules fit in one breath. Fruit is tossed up from the bottom of the screen, hangs for a moment at the top of its arc and falls back. You cut it before it drops. Every whole fruit that gets away costs you, and every so often something that is not fruit comes up with the rest, so you cannot just slash at everything.</p>
+<p>After weeks of teaching my laptop to read my hands for <a href="../../../showcase/precog/">Precog</a>, this was the obvious next question. If the camera can follow a fingertip, it can be a blade.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 2">
+      <p class="chno" aria-hidden="true">02</p>
+<figure class="frame"><img src="../../../media/stories/pulp/title.jpg" alt="The title screen. Everything after it runs in the browser, camera included." loading="lazy"><figcaption>The title screen. Everything after it runs in the browser, camera included.</figcaption></figure>      <div class="prose"><p>Precog was written in Python, and the Python version of the hand tracker kept crashing on my Mac's graphics drivers. So PULP lives in the browser. The hand model runs as WebAssembly next to the game, a canvas draws at sixty frames a second, and the sound is synthesised on the fly. There is no server: open the page, allow the camera, play.</p>
+<p>Your index fingertip leaves a trail. Only fast movements cut, so you can move your hand into position without slicing anything by accident, then flick.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 3">
+      <p class="chno" aria-hidden="true">03</p>
+<figure class="frame"><img src="../../../media/covers/pulp.jpg" alt="Hands were the warm-up. The real question was the eyes." loading="lazy"><figcaption>Hands were the warm-up. The real question was the eyes.</figcaption></figure>      <div class="prose"><p>Then a harder question: what if you only had your eyes?</p>
+<p>Gaze is much noisier than a fingertip. So each session starts with a calibration: thirteen dots appear one at a time and you look at each. Seven more dots check the result, so the game can tell you honestly how well it is following you before you start.</p>
+<p>Behind it is a small ridge regression from the eye features of a face mesh to screen positions. Leave-one-dot-out cross-validation picks between a straight-line and a curved fit, and how strongly to smooth.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 4">
+      <p class="chno" aria-hidden="true">04</p>
+<figure class="frame"><img src="../../../media/stories/pulp/title.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>In eye mode a cut is either a quick flick of the eyes across a fruit or a short dwell on it. Blinks are filtered out, otherwise every blink would be a slash.</p>
+<p>Hand mode is fun. Eye mode is still a beta I keep tuning: the speed a swipe needs, how long a dwell lasts and how sensitive the blink filter is all want a real person in front of a real webcam, and that is the part I am working on now. What I already learned is that a calibration you can check matters more than a cleverer model.</p></div>
+    </section>
+  </section>
+
+
+  <section class="wrap block"><h2 class="sub">Made with</h2>
+    <p class="chips"><span class="chip static mono">JavaScript</span><span class="chip static mono">MediaPipe Tasks (wasm)</span><span class="chip static mono">Canvas</span><span class="chip static mono">WebAudio</span></p>
+  </section>
+
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/pulp"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+
+  <section class="wrap block"><h2 class="sub">Nearby projects</h2>
+    <div class="grid"><a class="card" href="../../../showcase/precog/" data-uc="vision tools">
+  <span class="media"><img src="../../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-vision)" title="Seeing"></span><span class="udot" style="--c: var(--uc-tools)" title="Tools"></span><span class="ulabel">Seeing · Tools</span></span>
+    <span class="ctitle">Conducting my desktop with bare hands</span>
+    <span class="ctag">Gesture control for macOS. Swipe between desktops in mid-air, pinch to click, throw windows to the other screen.</span>
+    <span class="cmeta">Precog · Oct 2026 · prototype</span>
+  </span>
+</a>
+<a class="card" href="../spellstorm/" data-uc="play">
+  <span class="media"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Games</span></span>
+    <span class="ctitle">A spellbook for the whole family</span>
+    <span class="ctag">A wizard survival game in the browser. You only move; your spells cast themselves while waves of creatures close in, and every level ends with a boss.</span>
+    <span class="cmeta">Spellstorm · Oct 2026 · playable</span>
+  </span>
+</a>
+<a class="card" href="../drawbluff/" data-uc="play">
+  <span class="media"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Games</span></span>
+    <span class="ctitle">Draw badly, bluff boldly</span>
+    <span class="ctag">A party game for 3 to 10 players. Everyone draws a secret prompt on their phone, invents fake titles for the others&#39; drawings, then tries to spot the real one.</span>
+    <span class="cmeta">Drawbluff · Oct 2026 · playable</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div class="foot-panel">
+    <p class="foot-motto">Imagine, try, solve.</p>
+    <p class="foot-links"><a class="chip" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a class="chip" href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="chip" href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><a class="chip" href="../../privacy/">Privacy</a></p>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById("mode");
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function dark() { var a = root.getAttribute("data-theme"); return a ? a === "dark" : mq.matches; }
+  function sync() {
+    var d = dark();
+    btn.setAttribute("aria-pressed", d ? "true" : "false");
+    var meta = document.querySelector('meta[name="theme-color"]') || document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    meta.content = d ? "#23272e" : "#e4e9f0";
+    pushGiscus();
+  }
+  /* giscus: follow the toggle and the system. The iframe is added late and emits no message with emit-metadata=0, so watch for it and post on its load */
+  function pushGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (g && g.contentWindow) g.contentWindow.postMessage({ giscus: { setConfig: { theme: dark() ? "dark_dimmed" : "light" } } }, "https://giscus.app");
+  }
+  function watchGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (!g || g.__soft) return;
+    g.__soft = true;
+    g.addEventListener("load", function () { pushGiscus(); setTimeout(pushGiscus, 1200); });
+    pushGiscus();
+  }
+  try { new MutationObserver(watchGiscus).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  watchGiscus();
+  var skip = document.querySelector(".skip"), main = document.getElementById("main");
+  if (skip && main) skip.addEventListener("click", function () { main.focus({ preventScroll: false }); });
+  btn.addEventListener("click", function () {
+    var next = dark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-soft-mode", next); } catch (e) {}
+    sync();
+  });
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  window.addEventListener("message", function (e) { if (e.origin === "https://giscus.app" && e.data && e.data.giscus) sync(); });
+  sync();
+})();
+</script>
+<link rel="stylesheet" href="../../../assets/lenis.css">
+<script src="../../../assets/lenis.min.js" defer></script>
+<script src="../../../assets/smooth-scroll.js" defer></script>
+<script src="../../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/pulp/index.html">Orbit</a><a href="../../../playground/projects/pulp/index.html">Playground</a><a href="../../../reel/projects/pulp/index.html">Reel</a><a href="../../../atlas/projects/pulp/index.html">Atlas</a><a href="../../../notebook/projects/pulp/index.html">Notebook</a><a href="../../../workshop/projects/pulp/index.html">Workshop</a><a href="index.html" aria-current=page>Soft</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

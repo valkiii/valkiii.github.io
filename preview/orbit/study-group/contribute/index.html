@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contribute · Paper Study Group · Valerio Ciotti</title>
+<meta name="description" content="Propose a paper, submit a presentation, share notes or an idea. Each form prepares a GitHub discussion for you to review and post.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../../projects/">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../" aria-current="page">Study group</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<section class="pagehead wrap">
+  <p class="kicker" data-reveal><a href="../">Study group</a> · Contribute</p>
+  <h1 class="title" data-reveal>Take<br><em>part.</em></h1>
+  <p class="lede" data-reveal>Propose a paper, hand in your presentation, share your notes or an idea. Each form prepares a GitHub discussion; you read it, edit it if you like, and press post.</p>
+  <nav class="sg-nav" aria-label="Study group">
+<a href="../">Overview</a><a href="../sessions/">Sessions</a><a href="../papers/">Library</a><a href="../radar/">On the radar</a><a href="../map/">Map</a><a href="./" aria-current="page">Contribute</a></nav>
+
+</section>
+
+<section class="wrap sg-block" id="sgc" data-repo="valkiii/valkiii.github.io">
+  <div class="sg-card sg-notice" data-reveal>
+    <p class="kicker">Before you post</p>
+    <p>Contributions are <span class="sg-em">public on GitHub</span> and need a free GitHub account. Never include internal data, customer information or confidential material, and keep to published work.</p>
+  </div>
+
+  <div class="sg-fgroup" role="group" aria-label="What would you like to do" id="sgc-tabs" data-reveal>
+    <button type="button" class="sg-toggle" data-tab="paper" aria-pressed="false">Propose a paper</button>
+    <button type="button" class="sg-toggle" data-tab="presentation" aria-pressed="false">Submit my presentation</button>
+    <button type="button" class="sg-toggle" data-tab="notes" aria-pressed="false">Share notes</button>
+    <button type="button" class="sg-toggle" data-tab="idea" aria-pressed="false">Share an idea</button>
+  </div>
+  <noscript><p class="meta">The forms need JavaScript. Without it, open a <a href="https://github.com/valkiii/valkiii.github.io/discussions/new/choose">new discussion</a> and start it with the tag in the templates.</p></noscript>
+
+  <form class="sg-form" id="form-paper" data-form="paper" data-category="ideas" data-prefix="[Paper] " novalidate hidden>
+    <h2 class="sub">Propose a paper</h2>
+    <p class="lede">Found something the group should read? It goes to the shortlist after a quick look by the curator, with your name as the proposer.</p>
+    <div class="sg-field" data-field="ref">
+  <label for="f-ref">arXiv id or link <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-ref">An arXiv id (2501.12345), an arXiv link, or any other link to the paper.</p><input id="f-ref" data-f="ref" data-label="arXiv id or link" type="text" placeholder="2501.12345" autocomplete="off" data-required aria-describedby="h-ref">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="title">
+  <label for="f-title">Title</label>
+<p class="meta" id="h-title">Optional for arXiv papers, we fetch it. Required for other links.</p><input id="f-title" data-f="title" data-label="Title" type="text" placeholder="" autocomplete="off" aria-describedby="h-title">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="why">
+  <label for="f-why">Why it matters <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-why">Two or three lines: what is in it for us.</p><textarea id="f-why" data-f="why" data-label="Why it matters" rows="3" placeholder="" data-required aria-describedby="h-why"></textarea>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="tags"><span class="sg-lab" id="l-tags">Topics</span>
+      <div class="sg-fgroup" role="group" aria-labelledby="l-tags" data-chips="tags" data-label="Topics">
+<button type="button" class="sg-toggle" data-v="genai-llm" style="--c: var(--uc-play)" aria-pressed="false">GenAI &amp; LLMs</button><button type="button" class="sg-toggle" data-v="agents" style="--c: var(--uc-vision)" aria-pressed="false">Agents &amp; tool use</button><button type="button" class="sg-toggle" data-v="recsys-nba" style="--c: var(--uc-tools)" aria-pressed="false">Recommenders &amp; Next Best Action</button><button type="button" class="sg-toggle" data-v="causal-uplift" style="--c: var(--uc-data)" aria-pressed="false">Causal inference &amp; uplift</button><button type="button" class="sg-toggle" data-v="bandits-rl" style="--c: var(--uc-robots)" aria-pressed="false">Bandits &amp; reinforcement learning</button><button type="button" class="sg-toggle" data-v="ml-methods" style="--c: var(--uc-teach)" aria-pressed="false">ML methods &amp; theory</button><button type="button" class="sg-toggle" data-v="tabular-timeseries" style="--c: var(--uc-data)" aria-pressed="false">Tabular &amp; time series</button><button type="button" class="sg-toggle" data-v="eval-safety" style="--c: var(--uc-vision)" aria-pressed="false">Evaluation, safety &amp; governance</button><button type="button" class="sg-toggle" data-v="applied-finance" style="--c: var(--uc-home)" aria-pressed="false">Applied: banking &amp; customer journey</button>      </div></div>
+    <div class="sg-row">
+      <div class="sg-field" data-field="kind"><label for="f-kind">Kind</label>
+        <select id="f-kind" data-f="kind" data-label="Kind" class="sg-select"><option value="">Not sure</option><option value="method">Method</option><option value="survey">Survey</option><option value="benchmark">Benchmark</option><option value="system">System</option><option value="theory">Theory</option><option value="position">Position</option><option value="case-study">Case study</option><option value="tutorial">Tutorial</option></select></div>
+      <div class="sg-field" data-field="relevance"><label for="f-relevance">Relevance to our work</label>
+        <select id="f-relevance" data-f="relevance" data-label="Relevance" class="sg-select"><option value="">Not sure</option><option value="core">Core: Directly usable for banking</option><option value="adjacent">Adjacent: Close to our work; needs some translation.</option><option value="general">General: Good to know</option></select></div>
+      <div class="sg-field" data-field="level"><label for="f-level">Level</label>
+        <select id="f-level" data-f="level" data-label="Level" class="sg-select"><option value="">Not sure</option><option value="1">1 Gentle</option><option value="2">2 Accessible</option><option value="3">3 Intermediate</option><option value="4">4 Advanced</option><option value="5">5 Expert</option></select></div>
+    </div>
+    <div class="sg-field" data-field="present"><span class="sg-lab" id="l-present">I would present it</span>
+      <div class="sg-fgroup" role="radiogroup" aria-labelledby="l-present" data-label="Would present">
+        <label class="sg-check"><input type="radio" name="present" data-f="present" value="yes"> Yes</label>
+        <label class="sg-check"><input type="radio" name="present" data-f="present" value="no" checked> No</label></div></div>
+    <div class="sg-field" data-field="name">
+  <label for="f-name">Your first name</label>
+<p class="meta" id="h-name">Optional. Your GitHub login is shown anyway.</p><input id="f-name" data-f="name" data-label="Your first name" type="text" placeholder="" autocomplete="off" aria-describedby="h-name">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field sg-confirm" data-field="confirm">
+  <label class="sg-check"><input type="checkbox" data-confirm data-required id="f-confirm"> <span>I understand that this will be public on GitHub, and it contains no internal data, customer information or confidential material.</span></label>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+<div class="sg-previewbox"><p class="kicker">Preview of what will be posted</p><pre class="sg-preview" data-preview tabindex="0"></pre></div>
+<div class="actions">
+  <button type="submit" class="btn primary">Review and post on GitHub ↗</button>
+  <button type="button" class="btn" data-copy>Copy the text</button>
+</div>
+<p class="meta sg-status" aria-live="polite" data-status></p>
+
+  </form>
+
+  <form class="sg-form" id="form-presentation" data-form="presentation" data-category="show-and-tell" data-prefix="[Presentation] " novalidate hidden>
+    <h2 class="sub">Submit my presentation</h2>
+    <p class="lede">Presented a paper, or about to? Share the slides and a short summary so they can be published beside the paper.</p>
+    <div class="sg-field" data-field="session"><label for="f-session">Session <span class="sg-req">required</span></label>
+      <select id="f-session" data-f="session" data-label="Session" data-required class="sg-select"><option value="">Choose a session</option><option value="2026-11-25-kickoff" data-title="Session 1 — kick-off">25 November 2026 · Session 1 — kick-off</option><option value="other">Another session or not sure</option></select>
+      <p class="sg-err" hidden role="alert"></p></div>
+    <div class="sg-field" data-field="paper">
+  <label for="f-paper">Paper <span class="sg-req" title="required">required</span></label>
+  <select id="f-paper" data-f="paper" data-label="Paper" data-required class="sg-select">
+    <option value="">Choose a paper</option>
+<option value="react" data-title="ReAct: Synergizing Reasoning and Acting in Language Models">ReAct: Synergizing Reasoning and Acting in Language Models</option><option value="tiger-generative-retrieval" data-title="Recommender Systems with Generative Retrieval">Recommender Systems with Generative Retrieval</option><option value="llm-recsys-survey" data-title="A Survey on Large Language Models for Recommendation">A Survey on Large Language Models for Recommendation</option>    <option value="other">Another paper (not in the library)</option>
+  </select>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+<div class="sg-field" data-field="paper_other" hidden>
+  <label for="f-paper_other">Which paper? <span class="sg-req">required</span></label>
+  <p class="meta">Title, arXiv id or a link.</p>
+  <input id="f-paper_other" data-f="paper_other" data-label="Paper title or link" type="text" autocomplete="off">
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="slides">
+  <label for="f-slides">Link to the slides <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-slides">A shareable link (Drive, Notion, GitHub Pages, PDF).</p><input id="f-slides" data-f="slides" data-label="Link to the slides" type="url" placeholder="https://" autocomplete="off" data-kind="url" inputmode="url" data-required aria-describedby="h-slides">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="summary">
+  <label for="f-summary">Summary in three sentences <span class="sg-req" title="required">required</span></label>
+<textarea id="f-summary" data-f="summary" data-label="Summary in three sentences" rows="3" placeholder="" data-required></textarea>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="takeaways"><span class="sg-lab" id="l-take">Key takeaways <span class="sg-req">at least one</span></span>
+      <input data-f="takeaways" data-label="Key takeaways" data-required-any aria-labelledby="l-take" type="text" placeholder="First takeaway">
+      <input data-f="takeaways" data-label="Key takeaways" aria-labelledby="l-take" type="text" placeholder="Second takeaway">
+      <input data-f="takeaways" data-label="Key takeaways" aria-labelledby="l-take" type="text" placeholder="Third takeaway">
+      <p class="sg-err" hidden role="alert"></p></div>
+    <div class="sg-field" data-field="name">
+  <label for="f-name">Your first name <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-name">Shown beside the slides.</p><input id="f-name" data-f="name" data-label="Your first name" type="text" placeholder="" autocomplete="off" data-required aria-describedby="h-name">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field sg-confirm" data-field="confirm">
+  <label class="sg-check"><input type="checkbox" data-confirm data-required id="f-confirm"> <span>I understand that this will be public on GitHub, and it contains no internal data, customer information or confidential material.</span></label>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+<div class="sg-previewbox"><p class="kicker">Preview of what will be posted</p><pre class="sg-preview" data-preview tabindex="0"></pre></div>
+<div class="actions">
+  <button type="submit" class="btn primary">Review and post on GitHub ↗</button>
+  <button type="button" class="btn" data-copy>Copy the text</button>
+</div>
+<p class="meta sg-status" aria-live="polite" data-status></p>
+
+  </form>
+
+  <form class="sg-form" id="form-notes" data-form="notes" data-category="show-and-tell" data-prefix="[Notes] " novalidate hidden>
+    <h2 class="sub">Share notes or annotations</h2>
+    <p class="lede">Read a paper in the library and made notes? Link them and say what you took away.</p>
+    <div class="sg-field" data-field="paper">
+  <label for="f-paper">Paper <span class="sg-req" title="required">required</span></label>
+  <select id="f-paper" data-f="paper" data-label="Paper" data-required class="sg-select">
+    <option value="">Choose a paper</option>
+<option value="react" data-title="ReAct: Synergizing Reasoning and Acting in Language Models">ReAct: Synergizing Reasoning and Acting in Language Models</option><option value="tiger-generative-retrieval" data-title="Recommender Systems with Generative Retrieval">Recommender Systems with Generative Retrieval</option><option value="llm-recsys-survey" data-title="A Survey on Large Language Models for Recommendation">A Survey on Large Language Models for Recommendation</option>    <option value="other">Another paper (not in the library)</option>
+  </select>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+<div class="sg-field" data-field="paper_other" hidden>
+  <label for="f-paper_other">Which paper? <span class="sg-req">required</span></label>
+  <p class="meta">Title, arXiv id or a link.</p>
+  <input id="f-paper_other" data-f="paper_other" data-label="Paper title or link" type="text" autocomplete="off">
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="link">
+  <label for="f-link">Link to the notes <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-link">An annotated PDF, a Hypothes.is group, a Drive, Notion or GitHub page.</p><input id="f-link" data-f="link" data-label="Link to the notes" type="url" placeholder="https://" autocomplete="off" data-kind="url" inputmode="url" data-required aria-describedby="h-link">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="insights">
+  <label for="f-insights">Key insights <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-insights">What would you tell someone who has not read it?</p><textarea id="f-insights" data-f="insights" data-label="Key insights" rows="3" placeholder="" data-required aria-describedby="h-insights"></textarea>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="doubts">
+  <label for="f-doubts">Open doubts</label>
+<p class="meta" id="h-doubts">Optional. What did not convince you, or what is unclear?</p><textarea id="f-doubts" data-f="doubts" data-label="Open doubts" rows="3" placeholder="" aria-describedby="h-doubts"></textarea>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="name">
+  <label for="f-name">Your first name</label>
+<p class="meta" id="h-name">Optional.</p><input id="f-name" data-f="name" data-label="Your first name" type="text" placeholder="" autocomplete="off" aria-describedby="h-name">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field sg-confirm" data-field="confirm">
+  <label class="sg-check"><input type="checkbox" data-confirm data-required id="f-confirm"> <span>I understand that this will be public on GitHub, and it contains no internal data, customer information or confidential material.</span></label>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+<div class="sg-previewbox"><p class="kicker">Preview of what will be posted</p><pre class="sg-preview" data-preview tabindex="0"></pre></div>
+<div class="actions">
+  <button type="submit" class="btn primary">Review and post on GitHub ↗</button>
+  <button type="button" class="btn" data-copy>Copy the text</button>
+</div>
+<p class="meta sg-status" aria-live="polite" data-status></p>
+
+  </form>
+
+  <form class="sg-form" id="form-idea" data-form="idea" data-category="ideas" data-prefix="[Idea] " novalidate hidden>
+    <h2 class="sub">Share an idea</h2>
+    <p class="lede">A paper made you think of something we could try? Write it down while it is fresh.</p>
+    <div class="sg-field" data-field="headline">
+  <label for="f-headline">The idea in one line <span class="sg-req" title="required">required</span></label>
+<input id="f-headline" data-f="headline" data-label="The idea in one line" type="text" placeholder="" autocomplete="off" data-required>  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="papers">
+  <label for="f-papers">Related paper or papers</label>
+<p class="meta" id="h-papers">Titles, library names or arXiv ids.</p><input id="f-papers" data-f="papers" data-label="Related paper or papers" type="text" placeholder="" autocomplete="off" aria-describedby="h-papers">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="application">
+  <label for="f-application">How could this apply to the customer journey, Next Best Action or cross-sell? <span class="sg-req" title="required">required</span></label>
+<textarea id="f-application" data-f="application" data-label="How could this apply to the customer journey, Next Best Action or cross-sell?" rows="3" placeholder="" data-required></textarea>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="needs">
+  <label for="f-needs">What would we need to try it? <span class="sg-req" title="required">required</span></label>
+<p class="meta" id="h-needs">Data, people, a test, a first small experiment.</p><textarea id="f-needs" data-f="needs" data-label="What would we need to try it?" rows="3" placeholder="" data-required aria-describedby="h-needs"></textarea>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field" data-field="name">
+  <label for="f-name">Your first name</label>
+<p class="meta" id="h-name">Optional.</p><input id="f-name" data-f="name" data-label="Your first name" type="text" placeholder="" autocomplete="off" aria-describedby="h-name">  <p class="sg-err" hidden role="alert"></p>
+</div>
+
+    <div class="sg-field sg-confirm" data-field="confirm">
+  <label class="sg-check"><input type="checkbox" data-confirm data-required id="f-confirm"> <span>I understand that this will be public on GitHub, and it contains no internal data, customer information or confidential material.</span></label>
+  <p class="sg-err" hidden role="alert"></p>
+</div>
+<div class="sg-previewbox"><p class="kicker">Preview of what will be posted</p><pre class="sg-preview" data-preview tabindex="0"></pre></div>
+<div class="actions">
+  <button type="submit" class="btn primary">Review and post on GitHub ↗</button>
+  <button type="button" class="btn" data-copy>Copy the text</button>
+</div>
+<p class="meta sg-status" aria-live="polite" data-status></p>
+
+  </form>
+
+  <details class="sg-disclosure sg-curator" data-reveal>
+    <summary>Curator</summary>
+    <p class="sg-note">Contributions arrive as discussions in <a href="https://github.com/valkiii/valkiii.github.io/discussions" target="_blank" rel="noopener">valkiii/valkiii.github.io</a>. The curator reads them with <code>tools/sg_promote.py list</code> and turns them into library entries, session updates and paper notes with <code>add-paper</code>, <code>mark</code> and <code>add-notes</code>. The workflow is described in <code>content/study-group/README.md</code>.</p>
+  </details>
+</section>
+
+<script type="application/json" id="sgc-data">{"levels": [{"id": 1, "label": "Gentle", "blurb": "Readable without a machine learning background."}, {"id": 2, "label": "Accessible", "blurb": "Needs the basics of machine learning."}, {"id": 3, "label": "Intermediate", "blurb": "Needs working familiarity with the area."}, {"id": 4, "label": "Advanced", "blurb": "Dense maths or many prerequisites."}, {"id": 5, "label": "Expert", "blurb": "Specialist reading; plan extra preparation."}], "tags": ["genai-llm", "agents", "recsys-nba", "causal-uplift", "bandits-rl", "ml-methods", "tabular-timeseries", "eval-safety", "applied-finance"]}</script>
+<div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="study-group/contribute"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../../assets/lenis.css">
+<script src="../../../assets/lenis.min.js" defer></script>
+<script src="../../../assets/smooth-scroll.js" defer></script>
+<script src="../../motion.js"></script>
+<script src="../../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><script src="../../sg-contribute.js"></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="index.html" aria-current=page>Orbit</a><a href="../../../playground/">Playground</a><a href="../../../reel/">Reel</a><a href="../../../atlas/">Atlas</a><a href="../../../notebook/">Notebook</a><a href="../../../workshop/">Workshop</a><a href="../../../soft/">Soft</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

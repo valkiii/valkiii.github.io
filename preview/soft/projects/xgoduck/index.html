@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teaching a duck to walk on a Raspberry Pi · Valerio Ciotti</title>
+<meta name="description" content="Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.">
+<meta name="color-scheme" content="light dark">
+<script>
+/* apply the saved colour mode before first paint, so there is no flash */
+(function () {
+  var root = document.documentElement;
+  try {
+    /* namespaced key; "soft-mode" is the old one, read once for migration */
+    var m = localStorage.getItem("portfolio-soft-mode") || localStorage.getItem("soft-mode");
+    if (m === "light" || m === "dark") root.setAttribute("data-theme", m);
+  } catch (e) {}
+  root.classList.add("js");
+  /* giscus reads data-theme once, when its script runs: hand it the resolved mode, not "preferred_color_scheme" */
+  try {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    new MutationObserver(function (list) {
+      list.forEach(function (r) { [].forEach.call(r.addedNodes, function (n) {
+        if (n.nodeName === "SCRIPT" && /giscus\.app\/client\.js/.test(n.src || "")) {
+          var a = root.getAttribute("data-theme"), d = a ? a === "dark" : mq.matches;
+          n.setAttribute("data-theme", d ? "dark_dimmed" : "light");
+        }
+      }); });
+    }).observe(document, { childList: true, subtree: true });
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../" aria-current="page">Work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+  <button class="mode" id="mode" type="button" aria-pressed="false" aria-label="Dark mode" title="Switch light and dark">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"/></svg>
+  </button>
+</header>
+<main id="main" tabindex="-1">
+<article class="story" style="--c: var(--uc-robots)">
+  <header class="wrap pagehead">
+    <p class="kicker"><a href="../">Work</a> · October 2026</p>
+    <h1 class="title">Teaching a duck to walk on a Raspberry Pi</h1>
+    <p class="lede"><span class="nm">XGO-Duck.</span> Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.</p>
+    <p class="chips">
+      <span class="chip static"><span class="dots"><span class="udot" style="--c: var(--uc-robots)" title="Robots &amp; devices"></span><span class="ulabel">Robots &amp; devices</span></span></span><span class="chip static mono">building</span><span class="chip static mono">Oct 2026</span>
+    </p>
+    <p class="actions">
+    </p>
+  </header>
+
+
+
+  <section class="wrap chapters">
+    <section class="chapter panel" aria-label="Chapter 1">
+      <p class="chno" aria-hidden="true">01</p>
+<figure class="frame"><img src="../../../media/covers/xgoduck.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>The XGO-Duck is a small open-source robot duck that walks on two legs. It is 3D-printed, it has fifteen servos, and its gait comes from policies trained with reinforcement learning in simulation. I printed the parts. Then, instead of buying the recommended controller board, I decided to use the Raspberry Pi Zero 2W I already had.</p>
+<p>That decision changes almost nothing about the brain and almost everything about the plumbing.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 2">
+      <p class="chno" aria-hidden="true">02</p>
+<figure class="frame"><img src="../../../media/covers/xgoduck.jpg" alt="Servos at the hips and knees, the Pi on its back." loading="lazy"><figcaption>Servos at the hips and knees, the Pi on its back.</figcaption></figure>      <div class="prose"><p>On the original board a microcontroller talks to the servos a hundred times a second, while a Linux side runs the walking policy fifty times a second. On the Pi both have to live in Python. So I rewrote the microcontroller's loop behind exactly the same interface, so the upstream code and its trained policies run unchanged on top.</p>
+<p>The parts arrived at different times, so everything was first tested against a simulated servo bus and a simulated robot: 34 tests passed before a single real servo moved.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 3">
+      <p class="chno" aria-hidden="true">03</p>
+<figure class="frame"><img src="../../../media/covers/xgoduck.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>To make the build repeatable I wrote a setup wizard that walks through it step by step: checking the parts, setting servo IDs, scanning the wiring, setting up SSH to the Pi, finding which way the motion sensor's axes point, and calibrating.</p>
+<p>The first real servo answered at a millisecond round trip and moved to within a step or two of where it was told. The other fourteen, and the first steps, are next. One lesson already learned the hard way: check the bearings list twice.</p></div>
+    </section>
+  </section>
+
+
+  <section class="wrap block"><h2 class="sub">Made with</h2>
+    <p class="chips"><span class="chip static mono">Raspberry Pi Zero 2W</span><span class="chip static mono">Feetech bus servos</span><span class="chip static mono">ONNX policies</span><span class="chip static mono">Python</span></p>
+  </section>
+
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/xgoduck"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+
+  <section class="wrap block"><h2 class="sub">Nearby projects</h2>
+    <div class="grid"><a class="card" href="../diary/" data-uc="tools robots">
+  <span class="media"><img src="../../../media/covers/diary.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-tools)" title="Tools"></span><span class="udot" style="--c: var(--uc-robots)" title="Robots &amp; devices"></span><span class="ulabel">Tools · Robots &amp; devices</span></span>
+    <span class="ctitle">A notebook that writes back</span>
+    <span class="ctag">Tom Riddle&#39;s diary on a Supernote e-ink tablet. Write and rest your pen; your ink fades into the page and an answer writes itself back, letter by letter.</span>
+    <span class="cmeta">The Diary · Oct 2026 · prototype</span>
+  </span>
+</a>
+<a class="card" href="../../../showcase/robot/" data-uc="robots vision play">
+  <span class="media"><img src="../../../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-robots)" title="Robots &amp; devices"></span><span class="udot" style="--c: var(--uc-vision)" title="Seeing"></span><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Robots &amp; devices · Seeing · Games</span></span>
+    <span class="ctitle">Someone to play with</span>
+    <span class="ctag">The Connect 4 brain, given eyes and an arm. A camera on the wrist reads the board, and an SO-101 arm drops the token.</span>
+    <span class="cmeta">SO-101 robot arm · Sep 2026 · in progress</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div class="foot-panel">
+    <p class="foot-motto">Imagine, try, solve.</p>
+    <p class="foot-links"><a class="chip" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a class="chip" href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="chip" href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><a class="chip" href="../../privacy/">Privacy</a></p>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById("mode");
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function dark() { var a = root.getAttribute("data-theme"); return a ? a === "dark" : mq.matches; }
+  function sync() {
+    var d = dark();
+    btn.setAttribute("aria-pressed", d ? "true" : "false");
+    var meta = document.querySelector('meta[name="theme-color"]') || document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    meta.content = d ? "#23272e" : "#e4e9f0";
+    pushGiscus();
+  }
+  /* giscus: follow the toggle and the system. The iframe is added late and emits no message with emit-metadata=0, so watch for it and post on its load */
+  function pushGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (g && g.contentWindow) g.contentWindow.postMessage({ giscus: { setConfig: { theme: dark() ? "dark_dimmed" : "light" } } }, "https://giscus.app");
+  }
+  function watchGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (!g || g.__soft) return;
+    g.__soft = true;
+    g.addEventListener("load", function () { pushGiscus(); setTimeout(pushGiscus, 1200); });
+    pushGiscus();
+  }
+  try { new MutationObserver(watchGiscus).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  watchGiscus();
+  var skip = document.querySelector(".skip"), main = document.getElementById("main");
+  if (skip && main) skip.addEventListener("click", function () { main.focus({ preventScroll: false }); });
+  btn.addEventListener("click", function () {
+    var next = dark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-soft-mode", next); } catch (e) {}
+    sync();
+  });
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  window.addEventListener("message", function (e) { if (e.origin === "https://giscus.app" && e.data && e.data.giscus) sync(); });
+  sync();
+})();
+</script>
+<link rel="stylesheet" href="../../../assets/lenis.css">
+<script src="../../../assets/lenis.min.js" defer></script>
+<script src="../../../assets/smooth-scroll.js" defer></script>
+<script src="../../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/xgoduck/index.html">Orbit</a><a href="../../../playground/projects/xgoduck/index.html">Playground</a><a href="../../../reel/projects/xgoduck/index.html">Reel</a><a href="../../../atlas/projects/xgoduck/index.html">Atlas</a><a href="../../../notebook/projects/xgoduck/index.html">Notebook</a><a href="../../../workshop/projects/xgoduck/index.html">Workshop</a><a href="index.html" aria-current=page>Soft</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

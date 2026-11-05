@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About · Valerio Ciotti</title>
+<meta name="description" content="I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.">
+<meta name="color-scheme" content="light dark">
+<script>
+/* apply the saved colour mode before first paint, so there is no flash */
+(function () {
+  var root = document.documentElement;
+  try {
+    /* namespaced key; "soft-mode" is the old one, read once for migration */
+    var m = localStorage.getItem("portfolio-soft-mode") || localStorage.getItem("soft-mode");
+    if (m === "light" || m === "dark") root.setAttribute("data-theme", m);
+  } catch (e) {}
+  root.classList.add("js");
+  /* giscus reads data-theme once, when its script runs: hand it the resolved mode, not "preferred_color_scheme" */
+  try {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    new MutationObserver(function (list) {
+      list.forEach(function (r) { [].forEach.call(r.addedNodes, function (n) {
+        if (n.nodeName === "SCRIPT" && /giscus\.app\/client\.js/.test(n.src || "")) {
+          var a = root.getAttribute("data-theme"), d = a ? a === "dark" : mq.matches;
+          n.setAttribute("data-theme", d ? "dark_dimmed" : "light");
+        }
+      }); });
+    }).observe(document, { childList: true, subtree: true });
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../"><span class="mark" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../projects/">Work</a><a href="../writing/">Writing</a><a href="../research/">Research</a><a href="./" aria-current="page">About</a>  </nav>
+  <button class="mode" id="mode" type="button" aria-pressed="false" aria-label="Dark mode" title="Switch light and dark">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"/></svg>
+  </button>
+</header>
+<main id="main" tabindex="-1">
+<section class="wrap pagehead">
+  <p class="kicker">About</p>
+  <h1 class="title">Valerio Ciotti</h1>
+  <p class="lede">Data scientist · network scientist · tinkerer</p>
+</section>
+<section class="wrap about">
+  <figure class="hero-well"><span class="ring"><img src="../../media/valerio.jpg" alt="Valerio Ciotti speaking on stage"></span></figure>
+  <div class="panel bio prose"><p>I am a data science professional with more than eight years of experience in banking and fintech, in large and small organisations. I work in Python, big data and machine learning, and I like solving business problems with data, in a team, by trying ideas early.
+</p><p>Today I lead a data science team in retail banking in Amsterdam, working on churn, propensity to buy and recommender systems. Before that I was a data scientist at Barclays in London, and lead data scientist at FXCintel.
+</p><p>I received my PhD from the School of Mathematical Sciences at Queen Mary University of London, in the Complex Systems and Networks group of Prof. Vito Latora. Networks still shape how I look at almost everything.
+</p></div>
+</section>
+<section class="wrap block">
+  <h2 class="sub">Skills</h2>
+  <p class="chips"><span class="chip">Machine learning</span><span class="chip">Network analysis</span><span class="chip">Python</span><span class="chip">Reinforcement learning</span><span class="chip">Computer vision</span><span class="chip">Leadership</span><span class="chip">Raspberry Pi</span></p>
+</section>
+<section class="wrap block">
+  <h2 class="sub">The way here</h2>
+  <div class="xp">
+    <details class="xp-item" open>
+      <summary>
+        <span class="xp-when">2022 – today</span>
+        <span class="xp-main"><span class="ctitle">Data Science Team Lead · ABN AMRO</span><span class="ctag">Leads a team of 10 data scientists in the retail banking centre of excellence.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">Amsterdam</p><ul><li>Appointed to lead the data science team of the retail banking centre of excellence, with data scientists from junior to senior.</li><li>Builds analytical models for eCommerce and engagement, customer experience, digital channels, customer interaction and the contact centre.</li><li>Leads a long-running, bank-wide project to choose the next best action for each customer, in line with the bank&#39;s strategy.</li><li>With the team, delivered more than five product use cases. Model-driven audience selection raised conversions by 30–70%, a recommender raised newsletter engagement by 80%, and a model now sorts open-text reviews into a taxonomy automatically.</li></ul></div>
+    </details>
+    <details class="xp-item">
+      <summary>
+        <span class="xp-when">2022</span>
+        <span class="xp-main"><span class="ctitle">Research consultant · Independent</span><span class="ctag">A 20-year study of founder-led, VC-backed tech IPOs against the market, for the CEO of a fund.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">London</p><ul><li>Evaluated an investment strategy for a fund that invests in founder-led companies.</li><li>Studied the market performance of venture-backed tech companies that went public with their founder still as CEO.</li><li>Tested whether they beat the market composite index over twenty years, and delivered the results as a written report to the fund&#39;s CEO.</li></ul></div>
+    </details>
+    <details class="xp-item">
+      <summary>
+        <span class="xp-when">2021 – 2022</span>
+        <span class="xp-main"><span class="ctitle">Senior Data Scientist · ABN AMRO</span><span class="ctag">Scientific lead of the team; NPS drivers, churn and propensity models, a recommender.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">Amsterdam</p><ul><li>Scientific lead for the data science team, guiding colleagues towards solutions for their use cases.</li><li>Turned unstructured click data into successful and unsuccessful customer journeys, the groundwork for a next-best-action system.</li><li>Found the drivers of the bank&#39;s net promoter score, with a method written up for a scientific paper.</li><li>Product owner for churn prevention and propensity-to-buy models, and helped build a collaborative-filtering recommender for newsletter articles.</li><li>Member of the Data Science Review Board, setting good practice for teams across the bank.</li></ul></div>
+    </details>
+    <details class="xp-item">
+      <summary>
+        <span class="xp-when">2021</span>
+        <span class="xp-main"><span class="ctitle">Consultant · Helium Foundation</span><span class="ctag">LondHeNet, performance indicators and placement optimisation for Helium hotspots in London.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">London / San Francisco</p><ul><li>Designed and ran the data science behind LondHeNet, a research project sponsored by the Decentralized Wireless Alliance.</li><li>Defined performance indicators for the Helium hotspots already active in London and predicted the performance and rewards of new ones.</li><li>Built a pipeline of models and simulations to choose where new hotspots should go, and worked with the app developer to serve the results in real time in an Android app.</li></ul></div>
+    </details>
+    <details class="xp-item">
+      <summary>
+        <span class="xp-when">2019 – 2021</span>
+        <span class="xp-main"><span class="ctitle">Senior Data Scientist · Barclays</span><span class="ctag">Forecasting UK spending during COVID, start-up discovery with Barclays Ventures, the Data Bites talks.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">London</p><ul><li>Technical lead on forecasting total UK spending from transaction data and customer behaviour, to follow the economy&#39;s recovery from the COVID crisis.</li><li>Proposed and led a project to find promising early-stage start-ups with Barclays Ventures and the Eagle Labs accelerator.</li><li>Technical lead on two confidential projects with Barclays Ventures, on transaction insights and on cyber-security.</li><li>Part of the winning team of a bank-wide, Kaggle-style competition on credit default.</li><li>Founded the Data Bites talk series, member of the Innovation Hub, and mentor in the Women in Machine Learning programme.</li></ul></div>
+    </details>
+    <details class="xp-item">
+      <summary>
+        <span class="xp-when">2017 – 2019</span>
+        <span class="xp-main"><span class="ctitle">Lead Data Scientist · FXCintel</span><span class="ctag">Dynamic FX price optimisation, lead generation from unstructured data, crawlers in production.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">London</p><ul><li>Built and led a dynamic price optimisation system for foreign exchange providers, combining models with customer behaviour. It went into production in the company&#39;s client portal.</li><li>Found and sized import and export businesses for FX providers from unstructured data such as company accounts, with gradient-boosted models.</li><li>Wrote web crawlers and scrapers, automated with Jenkins and Docker, to enrich the company&#39;s data.</li><li>Presented results to technical and non-technical clients, and supervised junior data scientists and analysts.</li></ul></div>
+    </details>
+    <details class="xp-item">
+      <summary>
+        <span class="xp-when">2014 – 2018</span>
+        <span class="xp-main"><span class="ctitle">PhD, complex networks · Queen Mary University of London</span><span class="ctag">School of Mathematical Sciences, Complex Systems and Networks group of Prof. Vito Latora.</span></span>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-more"><p class="cmeta">London</p><ul><li>Thesis on positive and negative connections and homophily in complex networks.</li><li>Papers on degree correlations in signed social networks, missing links in citation networks, and predicting success in the worldwide start-up network.</li><li>The reason almost everything on this site ends up drawn as a graph.</li></ul></div>
+    </details>
+  </div>
+</section>
+<section class="wrap block">
+  <h2 class="sub">Publications</h2>
+  <div class="rows">    <a class="postrow" href="https://www.nature.com/articles/s41598-019-57209-w" target="_blank" rel="noopener"><span class="pdate">2020</span><span class="ptext"><span class="ctitle">Predicting success in the worldwide start-up network</span><span class="ctag">Scientific Reports</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a class="postrow" href="https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/31787/CIOTTI_Valerio_PhD_final_170118.pdf?sequence=1" target="_blank" rel="noopener"><span class="pdate">2018</span><span class="ptext"><span class="ctitle">Positive and negative connections and homophily in complex networks</span><span class="ctag">PhD thesis, Queen Mary University of London</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a class="postrow" href="https://link.springer.com/content/pdf/10.1140/epjds/s13688-016-0068-2.pdf" target="_blank" rel="noopener"><span class="pdate">2016</span><span class="ptext"><span class="ctitle">Homophily and missing links in citation networks</span><span class="ctag">EPJ Data Science</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a class="postrow" href="https://www.sciencedirect.com/science/article/abs/pii/S0378437114010334" target="_blank" rel="noopener"><span class="pdate">2015</span><span class="ptext"><span class="ctitle">Degree correlations in signed social networks</span><span class="ctag">Physica A</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+</div>
+</section>
+<section class="wrap block">
+  <h2 class="sub">Talks</h2>
+  <div class="rows">    <a class="postrow" href="../writing/hunting-unicorns-with-network-analysis/"><span class="pdate">2024</span><span class="ptext"><span class="ctitle">Hunting unicorns with network analysis</span><span class="ctag">PyData Amsterdam</span></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="postrow" href="../writing/from-individual-contributor-to-leader/"><span class="pdate">2025</span><span class="ptext"><span class="ctitle">From individual contributor to leader</span><span class="ctag">Bind2Tech podcast</span></span><span class="arrow" aria-hidden="true">→</span></a>
+</div>
+</section>
+</main>
+<footer class="foot">
+  <div class="foot-panel">
+    <p class="foot-motto">Imagine, try, solve.</p>
+    <p class="foot-links"><a class="chip" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a class="chip" href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="chip" href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><a class="chip" href="../privacy/">Privacy</a></p>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById("mode");
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function dark() { var a = root.getAttribute("data-theme"); return a ? a === "dark" : mq.matches; }
+  function sync() {
+    var d = dark();
+    btn.setAttribute("aria-pressed", d ? "true" : "false");
+    var meta = document.querySelector('meta[name="theme-color"]') || document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    meta.content = d ? "#23272e" : "#e4e9f0";
+    pushGiscus();
+  }
+  /* giscus: follow the toggle and the system. The iframe is added late and emits no message with emit-metadata=0, so watch for it and post on its load */
+  function pushGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (g && g.contentWindow) g.contentWindow.postMessage({ giscus: { setConfig: { theme: dark() ? "dark_dimmed" : "light" } } }, "https://giscus.app");
+  }
+  function watchGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (!g || g.__soft) return;
+    g.__soft = true;
+    g.addEventListener("load", function () { pushGiscus(); setTimeout(pushGiscus, 1200); });
+    pushGiscus();
+  }
+  try { new MutationObserver(watchGiscus).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  watchGiscus();
+  var skip = document.querySelector(".skip"), main = document.getElementById("main");
+  if (skip && main) skip.addEventListener("click", function () { main.focus({ preventScroll: false }); });
+  btn.addEventListener("click", function () {
+    var next = dark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-soft-mode", next); } catch (e) {}
+    sync();
+  });
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  window.addEventListener("message", function (e) { if (e.origin === "https://giscus.app" && e.data && e.data.giscus) sync(); });
+  sync();
+})();
+</script>
+<link rel="stylesheet" href="../../assets/lenis.css">
+<script src="../../assets/lenis.min.js" defer></script>
+<script src="../../assets/smooth-scroll.js" defer></script>
+<script src="../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../orbit/about/index.html">Orbit</a><a href="../../playground/about/index.html">Playground</a><a href="../../reel/about/index.html">Reel</a><a href="../../atlas/about/index.html">Atlas</a><a href="../../notebook/about/index.html">Notebook</a><a href="../../workshop/about/index.html">Workshop</a><a href="index.html" aria-current=page>Soft</a><a href="../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

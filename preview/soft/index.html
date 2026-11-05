@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valerio Ciotti</title>
+<meta name="description" content="I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.">
+<meta name="color-scheme" content="light dark">
+<script>
+/* apply the saved colour mode before first paint, so there is no flash */
+(function () {
+  var root = document.documentElement;
+  try {
+    /* namespaced key; "soft-mode" is the old one, read once for migration */
+    var m = localStorage.getItem("portfolio-soft-mode") || localStorage.getItem("soft-mode");
+    if (m === "light" || m === "dark") root.setAttribute("data-theme", m);
+  } catch (e) {}
+  root.classList.add("js");
+  /* giscus reads data-theme once, when its script runs: hand it the resolved mode, not "preferred_color_scheme" */
+  try {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    new MutationObserver(function (list) {
+      list.forEach(function (r) { [].forEach.call(r.addedNodes, function (n) {
+        if (n.nodeName === "SCRIPT" && /giscus\.app\/client\.js/.test(n.src || "")) {
+          var a = root.getAttribute("data-theme"), d = a ? a === "dark" : mq.matches;
+          n.setAttribute("data-theme", d ? "dark_dimmed" : "light");
+        }
+      }); });
+    }).observe(document, { childList: true, subtree: true });
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="./" aria-current="page"><span class="mark" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="projects/">Work</a><a href="writing/">Writing</a><a href="research/">Research</a><a href="about/">About</a>  </nav>
+  <button class="mode" id="mode" type="button" aria-pressed="false" aria-label="Dark mode" title="Switch light and dark">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"/></svg>
+  </button>
+</header>
+<main id="main" tabindex="-1">
+<section class="wrap hero panel">
+  <div class="hero-text">
+    <p class="kicker">Data scientist · network scientist · tinkerer</p>
+    <h1 class="title hero-title">Valerio Ciotti</h1>
+    <p class="motto">Imagine, try, solve.</p>
+    <p class="lede">I lead data science teams by day and build things by night: games, hand-gesture interfaces, robot arms, self-hosted tools and the occasional network of my own heartbeat. Each project here started as a question. Some became products, some became talks, all of them taught me something.
+</p>
+    <p class="actions"><a class="btn primary" href="projects/">See the work</a><a class="btn" href="about/">About me</a></p>
+  </div>
+  <figure class="hero-well" aria-label="Valerio Ciotti">
+    <span class="ring"><img src="../media/valerio.jpg" alt="Valerio Ciotti speaking on stage"></span>
+    <figcaption>Imagine, try, solve.</figcaption>
+  </figure>
+</section>
+
+<section class="wrap block">
+  <div class="sechead"><h2 class="sub">Featured work</h2><a class="chip" href="projects/">All projects →</a></div>
+  <div class="grid"><a class="card" href="../showcase/precog/" data-uc="vision tools">
+  <span class="media"><img src="../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-vision)" title="Seeing"></span><span class="udot" style="--c: var(--uc-tools)" title="Tools"></span><span class="ulabel">Seeing · Tools</span></span>
+    <span class="ctitle">Conducting my desktop with bare hands</span>
+    <span class="ctag">Gesture control for macOS. Swipe between desktops in mid-air, pinch to click, throw windows to the other screen.</span>
+    <span class="cmeta">Precog · Oct 2026 · prototype</span>
+  </span>
+</a>
+<a class="card" href="projects/spellstorm/" data-uc="play">
+  <span class="media"><img src="../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Games</span></span>
+    <span class="ctitle">A spellbook for the whole family</span>
+    <span class="ctag">A wizard survival game in the browser. You only move; your spells cast themselves while waves of creatures close in, and every level ends with a boss.</span>
+    <span class="cmeta">Spellstorm · Oct 2026 · playable</span>
+  </span>
+</a>
+<a class="card" href="../showcase/clustering/" data-uc="data">
+  <span class="media"><img src="../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-data)" title="Data science"></span><span class="ulabel">Data science</span></span>
+    <span class="ctitle">Cluster the reasons</span>
+    <span class="ctag">Supervised clustering, told on a simulated animal shelter. A model explains every animal with SHAP, and the explanations, not the raw data, get clustered into five kinds of animal.</span>
+    <span class="cmeta">Supervised clustering · Oct 2026 · essay</span>
+  </span>
+</a>
+<a class="card" href="../showcase/robot/" data-uc="robots vision play">
+  <span class="media"><img src="../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-robots)" title="Robots &amp; devices"></span><span class="udot" style="--c: var(--uc-vision)" title="Seeing"></span><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Robots &amp; devices · Seeing · Games</span></span>
+    <span class="ctitle">Someone to play with</span>
+    <span class="ctag">The Connect 4 brain, given eyes and an arm. A camera on the wrist reads the board, and an SO-101 arm drops the token.</span>
+    <span class="cmeta">SO-101 robot arm · Sep 2026 · in progress</span>
+  </span>
+</a>
+<a class="card" href="projects/connect4/" data-uc="play data">
+  <span class="media"><img src="../media/covers/connect4.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="udot" style="--c: var(--uc-data)" title="Data science"></span><span class="ulabel">Games · Data science</span></span>
+    <span class="ctitle">Four in a row against five networks</span>
+    <span class="ctag">Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.</span>
+    <span class="cmeta">Connect 4 ensemble · Sep 2025 · playable</span>
+  </span>
+</a>
+<a class="card" href="../showcase/heartbeat/" data-uc="data">
+  <span class="media"><img src="../media/covers/heartbeat.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-data)" title="Data science"></span><span class="ulabel">Data science</span></span>
+    <span class="ctitle">My heart beats like a network</span>
+    <span class="ctag">Fifty-three minutes of a run, one heart-rate reading at a time, turned into a visibility graph. Peaks become hubs.</span>
+    <span class="cmeta">Visibility graph · Aug 2024 · essay</span>
+  </span>
+</a>
+</div>
+</section>
+
+<section class="wrap block">
+  <div class="sechead"><h2 class="sub">What it is for</h2></div>
+  <div class="tiles">
+    <a class="tile" href="projects/#play" style="--c: var(--uc-play)">
+      <span class="udot big" aria-hidden="true"></span>
+      <span class="ctitle">Games</span>
+      <span class="ctag">Things to play, alone or with a room full of people.</span>
+      <span class="cmeta">6 projects</span>
+    </a>
+    <a class="tile" href="projects/#vision" style="--c: var(--uc-vision)">
+      <span class="udot big" aria-hidden="true"></span>
+      <span class="ctitle">Seeing</span>
+      <span class="ctag">Cameras that understand hands, eyes and a pulse.</span>
+      <span class="cmeta">4 projects</span>
+    </a>
+    <a class="tile" href="projects/#robots" style="--c: var(--uc-robots)">
+      <span class="udot big" aria-hidden="true"></span>
+      <span class="ctitle">Robots &amp; devices</span>
+      <span class="ctag">Hardware that moves, listens or sits on the desk.</span>
+      <span class="cmeta">3 projects</span>
+    </a>
+    <a class="tile" href="projects/#data" style="--c: var(--uc-data)">
+      <span class="udot big" aria-hidden="true"></span>
+      <span class="ctitle">Data science</span>
+      <span class="ctag">Methods, models and the research behind them.</span>
+      <span class="cmeta">6 projects</span>
+    </a>
+    <a class="tile" href="projects/#tools" style="--c: var(--uc-tools)">
+      <span class="udot big" aria-hidden="true"></span>
+      <span class="ctitle">Tools</span>
+      <span class="ctag">Small apps that each fix one annoyance.</span>
+      <span class="cmeta">6 projects</span>
+    </a>
+    <a class="tile" href="projects/#teach" style="--c: var(--uc-teach)">
+      <span class="udot big" aria-hidden="true"></span>
+      <span class="ctitle">Teaching</span>
+      <span class="ctag">Workshops and courses for other people to learn from.</span>
+      <span class="cmeta">5 projects</span>
+    </a>
+  </div>
+</section>
+
+<section class="wrap block">
+  <div class="sechead"><h2 class="sub">Writing</h2><a class="chip" href="writing/">All writing →</a></div>
+  <div class="rows"><a class="postrow" href="writing/from-individual-contributor-to-leader/">
+  <span class="pdate">Jan 2025</span>
+  <span class="ptext"><span class="ctitle">From Individual Contributor to Leader</span></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="postrow" href="writing/connect-4-vs-ai-ensemble/">
+  <span class="pdate">Jan 2025</span>
+  <span class="ptext"><span class="ctitle">Connect 4 vs AI Ensemble</span><span class="ctag">Challenge a tournament-winning AI ensemble in Connect 4. This AI combines 5 neural networks trained on 750k games and won first place against 35+ AI opponents.</span></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="postrow" href="writing/hunting-unicorns-with-network-analysis/">
+  <span class="pdate">Sep 2024</span>
+  <span class="ptext"><span class="ctitle">Hunting unicorns with Network analysis</span></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="postrow" href="writing/my-heart-beats-like-a-network/">
+  <span class="pdate">Aug 2024</span>
+  <span class="ptext"><span class="ctitle">My heart beats like a network</span><span class="ctag">A heartbeat time series becomes a network. An introduction to visibility graphs, with my own run.</span></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div>
+</section>
+</main>
+<footer class="foot">
+  <div class="foot-panel">
+    <p class="foot-motto">Imagine, try, solve.</p>
+    <p class="foot-links"><a class="chip" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a class="chip" href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="chip" href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><a class="chip" href="privacy/">Privacy</a></p>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById("mode");
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function dark() { var a = root.getAttribute("data-theme"); return a ? a === "dark" : mq.matches; }
+  function sync() {
+    var d = dark();
+    btn.setAttribute("aria-pressed", d ? "true" : "false");
+    var meta = document.querySelector('meta[name="theme-color"]') || document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    meta.content = d ? "#23272e" : "#e4e9f0";
+    pushGiscus();
+  }
+  /* giscus: follow the toggle and the system. The iframe is added late and emits no message with emit-metadata=0, so watch for it and post on its load */
+  function pushGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (g && g.contentWindow) g.contentWindow.postMessage({ giscus: { setConfig: { theme: dark() ? "dark_dimmed" : "light" } } }, "https://giscus.app");
+  }
+  function watchGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (!g || g.__soft) return;
+    g.__soft = true;
+    g.addEventListener("load", function () { pushGiscus(); setTimeout(pushGiscus, 1200); });
+    pushGiscus();
+  }
+  try { new MutationObserver(watchGiscus).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  watchGiscus();
+  var skip = document.querySelector(".skip"), main = document.getElementById("main");
+  if (skip && main) skip.addEventListener("click", function () { main.focus({ preventScroll: false }); });
+  btn.addEventListener("click", function () {
+    var next = dark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-soft-mode", next); } catch (e) {}
+    sync();
+  });
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  window.addEventListener("message", function (e) { if (e.origin === "https://giscus.app" && e.data && e.data.giscus) sync(); });
+  sync();
+})();
+</script>
+<link rel="stylesheet" href="../assets/lenis.css">
+<script src="../assets/lenis.min.js" defer></script>
+<script src="../assets/smooth-scroll.js" defer></script>
+<script src="../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../orbit/index.html">Orbit</a><a href="../playground/index.html">Playground</a><a href="../reel/index.html">Reel</a><a href="../atlas/index.html">Atlas</a><a href="../notebook/index.html">Notebook</a><a href="../workshop/index.html">Workshop</a><a href="index.html" aria-current=page>Soft</a><a href="../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>

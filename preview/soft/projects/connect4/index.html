@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Four in a row against five networks · Valerio Ciotti</title>
+<meta name="description" content="Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.">
+<meta name="color-scheme" content="light dark">
+<script>
+/* apply the saved colour mode before first paint, so there is no flash */
+(function () {
+  var root = document.documentElement;
+  try {
+    /* namespaced key; "soft-mode" is the old one, read once for migration */
+    var m = localStorage.getItem("portfolio-soft-mode") || localStorage.getItem("soft-mode");
+    if (m === "light" || m === "dark") root.setAttribute("data-theme", m);
+  } catch (e) {}
+  root.classList.add("js");
+  /* giscus reads data-theme once, when its script runs: hand it the resolved mode, not "preferred_color_scheme" */
+  try {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    new MutationObserver(function (list) {
+      list.forEach(function (r) { [].forEach.call(r.addedNodes, function (n) {
+        if (n.nodeName === "SCRIPT" && /giscus\.app\/client\.js/.test(n.src || "")) {
+          var a = root.getAttribute("data-theme"), d = a ? a === "dark" : mq.matches;
+          n.setAttribute("data-theme", d ? "dark_dimmed" : "light");
+        }
+      }); });
+    }).observe(document, { childList: true, subtree: true });
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../" aria-current="page">Work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../about/">About</a>  </nav>
+  <button class="mode" id="mode" type="button" aria-pressed="false" aria-label="Dark mode" title="Switch light and dark">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"/></svg>
+  </button>
+</header>
+<main id="main" tabindex="-1">
+<article class="story" style="--c: var(--uc-play)">
+  <header class="wrap pagehead">
+    <p class="kicker"><a href="../">Work</a> · September 2025</p>
+    <h1 class="title">Four in a row against five networks</h1>
+    <p class="lede"><span class="nm">Connect 4 ensemble.</span> Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.</p>
+    <p class="chips">
+      <span class="chip static"><span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="udot" style="--c: var(--uc-data)" title="Data science"></span><span class="ulabel">Games · Data science</span></span></span><span class="chip static mono">playable</span><span class="chip static mono">Sep 2025</span>
+    </p>
+    <p class="actions">
+<a class="btn primary" href="../../../play/connect4/">Play the ensemble</a><a class="btn" href="../../writing/connect-4-vs-ai-ensemble/">The essay</a><a class="btn" href="https://github.com/valkiii/forza_quatto" target="_blank" rel="noopener">Code ↗</a>    </p>
+  </header>
+
+
+
+  <section class="wrap chapters">
+    <section class="chapter panel" aria-label="Chapter 1">
+      <p class="chno" aria-hidden="true">01</p>
+<figure class="frame"><img src="../../../media/covers/connect4.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>Connect 4 is small enough to learn and big enough that nothing can memorise it: about 4.5 trillion positions. That makes it a perfect sandbox to see what reinforcement learning really needs.</p>
+<p>I started with two simple opponents to set the bar: one that plays at random and one that follows a few hand-written rules. The rules player beats random 99% of the time, so any learning agent first has to beat it.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 2">
+      <p class="chno" aria-hidden="true">02</p>
+<figure class="frame"><img src="../../../media/covers/connect4.jpg" alt="Every agent learned only by playing." loading="lazy"><figcaption>Every agent learned only by playing.</figcaption></figure>      <div class="prose"><p>The agents are Dueling Double DQNs. The first versions looked at the board as a flat list of 42 cells. The later ones are convolutional networks, which see lines and diagonals much as a person does.</p>
+<p>The hardest problem was forgetting. An agent that learns to beat one opponent often loses what it knew against the previous one. Curriculum learning, a reservoir of old games to replay and slowly updated target networks kept the knowledge in place. The strongest model trained on 750,000 games.</p></div>
+    </section>
+    <section class="chapter panel" aria-label="Chapter 3">
+      <p class="chno" aria-hidden="true">03</p>
+<figure class="frame"><img src="../../../media/stories/connect4/board.jpg" alt="The ensemble, running in your browser. The washes under the board show which column each network prefers." loading="lazy"><figcaption>The ensemble, running in your browser. The washes under the board show which column each network prefers.</figcaption></figure>      <div class="prose"><p>The lesson I took away is that an agent only gets as good as its sparring partners.</p>
+<p>In the end no single network won. I took the five best checkpoints and let them vote: each scores every column, the scores are averaged with fixed weights, and the best legal move is played. That ensemble beat 35 other AIs in a tournament.</p>
+<p>The five networks now run directly in this page, so you can <a href="../../../play/connect4/">try your luck</a>.</p></div>
+    </section>
+  </section>
+
+
+  <section class="wrap block"><h2 class="sub">Made with</h2>
+    <p class="chips"><span class="chip static mono">PyTorch</span><span class="chip static mono">Dueling Double DQN</span><span class="chip static mono">CNNs</span><span class="chip static mono">curriculum learning</span><span class="chip static mono">JavaScript</span></p>
+  </section>
+
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/connect4"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+
+  <section class="wrap block"><h2 class="sub">Nearby projects</h2>
+    <div class="grid"><a class="card" href="../pulp/" data-uc="play vision">
+  <span class="media"><img src="../../../media/covers/pulp.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="udot" style="--c: var(--uc-vision)" title="Seeing"></span><span class="ulabel">Games · Seeing</span></span>
+    <span class="ctitle">Slicing fruit with a glance</span>
+    <span class="ctag">A browser game where fruit is thrown up from the bottom of the screen and you cut it in mid-air, first with a fingertip, then, in an experimental mode, with your eyes alone.</span>
+    <span class="cmeta">PULP · Oct 2026 · beta</span>
+  </span>
+</a>
+<a class="card" href="../spellstorm/" data-uc="play">
+  <span class="media"><img src="../../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Games</span></span>
+    <span class="ctitle">A spellbook for the whole family</span>
+    <span class="ctag">A wizard survival game in the browser. You only move; your spells cast themselves while waves of creatures close in, and every level ends with a boss.</span>
+    <span class="cmeta">Spellstorm · Oct 2026 · playable</span>
+  </span>
+</a>
+<a class="card" href="../drawbluff/" data-uc="play">
+  <span class="media"><img src="../../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="body">
+    <span class="dots"><span class="udot" style="--c: var(--uc-play)" title="Games"></span><span class="ulabel">Games</span></span>
+    <span class="ctitle">Draw badly, bluff boldly</span>
+    <span class="ctag">A party game for 3 to 10 players. Everyone draws a secret prompt on their phone, invents fake titles for the others&#39; drawings, then tries to spot the real one.</span>
+    <span class="cmeta">Drawbluff · Oct 2026 · playable</span>
+  </span>
+</a>
+</div>
+  </section>
+</article>
+</main>
+<footer class="foot">
+  <div class="foot-panel">
+    <p class="foot-motto">Imagine, try, solve.</p>
+    <p class="foot-links"><a class="chip" href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a class="chip" href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="chip" href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a><a class="chip" href="../../privacy/">Privacy</a></p>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById("mode");
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function dark() { var a = root.getAttribute("data-theme"); return a ? a === "dark" : mq.matches; }
+  function sync() {
+    var d = dark();
+    btn.setAttribute("aria-pressed", d ? "true" : "false");
+    var meta = document.querySelector('meta[name="theme-color"]') || document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    meta.content = d ? "#23272e" : "#e4e9f0";
+    pushGiscus();
+  }
+  /* giscus: follow the toggle and the system. The iframe is added late and emits no message with emit-metadata=0, so watch for it and post on its load */
+  function pushGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (g && g.contentWindow) g.contentWindow.postMessage({ giscus: { setConfig: { theme: dark() ? "dark_dimmed" : "light" } } }, "https://giscus.app");
+  }
+  function watchGiscus() {
+    var g = document.querySelector("iframe.giscus-frame");
+    if (!g || g.__soft) return;
+    g.__soft = true;
+    g.addEventListener("load", function () { pushGiscus(); setTimeout(pushGiscus, 1200); });
+    pushGiscus();
+  }
+  try { new MutationObserver(watchGiscus).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  watchGiscus();
+  var skip = document.querySelector(".skip"), main = document.getElementById("main");
+  if (skip && main) skip.addEventListener("click", function () { main.focus({ preventScroll: false }); });
+  btn.addEventListener("click", function () {
+    var next = dark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-soft-mode", next); } catch (e) {}
+    sync();
+  });
+  if (mq.addEventListener) mq.addEventListener("change", sync);
+  window.addEventListener("message", function (e) { if (e.origin === "https://giscus.app" && e.data && e.data.giscus) sync(); });
+  sync();
+})();
+</script>
+<link rel="stylesheet" href="../../../assets/lenis.css">
+<script src="../../../assets/lenis.min.js" defer></script>
+<script src="../../../assets/smooth-scroll.js" defer></script>
+<script src="../../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script><div class="pf-preview" role="navigation" aria-label="Preview: switch theme" style="position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:999;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:#17181b;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;max-width:calc(100vw - 24px);overflow-x:auto"><a href="../../../orbit/projects/connect4/index.html">Orbit</a><a href="../../../playground/projects/connect4/index.html">Playground</a><a href="../../../reel/projects/connect4/index.html">Reel</a><a href="../../../atlas/projects/connect4/index.html">Atlas</a><a href="../../../notebook/projects/connect4/index.html">Notebook</a><a href="../../../workshop/projects/connect4/index.html">Workshop</a><a href="index.html" aria-current=page>Soft</a><a href="../../../index.html" style="opacity:.7">All</a><style>.pf-preview a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px}.pf-preview a[aria-current]{background:#fff;color:#17181b}</style></div></body>
+</html>
