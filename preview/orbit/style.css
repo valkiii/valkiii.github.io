@@ -476,7 +476,10 @@ button.btn { cursor: pointer; font-family: var(--body); }
   .cards:has(.card:hover) .card:not(:hover), .cards:has(.card:focus-visible) .card:not(:focus-visible) { filter: none; opacity: 1; transform: none; }
 }
 @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .cards { grid-template-columns: 1fr; gap: 18px; } }
+@media (max-width: 620px) { .cards { grid-template-columns: 1fr; gap: 18px; }
+  /* on phones every work picture stays a landscape frame, never a tall one */
+  .card .cimg { aspect-ratio: 16 / 10; height: auto; max-height: none; }
+  .card .cimg img, .card .cimg svg { aspect-ratio: 16 / 10; object-fit: cover; } }
 /* === end === */
 
 /* === radar item right column + score tooltip === */
