@@ -737,7 +737,7 @@ button.btn { cursor: pointer; font-family: var(--body); }
 .wx-close { all: unset; position: absolute; z-index: 1; top: calc(18px + env(safe-area-inset-top, 0px)); right: max(24px, 2.4vw); cursor: pointer; color: var(--ink); padding: 10px 16px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(5,7,11,.4); font: 400 13px/1 var(--mono); }
 .wx-close:hover { border-color: var(--ink-2); }
 .wx-close:focus-visible { outline: 2px solid var(--uc-tools); outline-offset: 3px; }
-/* phone: portrait cards, caption under the card, the next one peeking off the bottom */
+/* phone: landscape cards, caption under the card, the next one peeking off the bottom */
 @media (max-width: 760px) {
   .wx-index { display: none; }
   .wx-cap-l, .wx-cap-r { left: 20px; right: 20px; width: auto; text-align: center; }

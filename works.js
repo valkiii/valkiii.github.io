@@ -76,7 +76,7 @@
     const topH = (document.querySelector(".top") || {}).offsetHeight || 60;
     R = phone ? Math.min(vw * .4, vh * .3) : Math.min(vw * .32, vh * .33);
     chipW = Math.min(124, 2 * Math.PI * R / N * .8); chipH = chipW * .64;
-    if (phone) { cw = Math.min(vw - 64, (vh - topH - 250) * .72); ch = cw / .72; }
+    if (phone) { cw = vw - 48; ch = cw / 1.6; }   // phones: landscape cards too, never portrait
     else { cw = Math.min(vw * .33, vh * .58 * 1.6); ch = cw / 1.6; }
     chips.forEach(c => { c.style.width = chipW + "px"; c.style.height = chipH + "px"; });
     cards.forEach(c => { c.style.width = cw + "px"; c.style.height = ch + "px"; });
