@@ -1,0 +1,476 @@
+{
+"name": "Custom-Ensemble-Top5Models-q",
+"models": [
+{
+"name": "M1-CNN-750k",
+"weight": 0.3,
+"layout": {
+"conv_block.0.weight": [
+0,
+576
+],
+"conv_block.0.bias": [
+576,
+32
+],
+"conv_block.2.weight": [
+608,
+32
+],
+"conv_block.2.bias": [
+640,
+32
+],
+"conv_block.2.running_mean": [
+672,
+32
+],
+"conv_block.2.running_var": [
+704,
+32
+],
+"conv_block.3.weight": [
+736,
+18432
+],
+"conv_block.3.bias": [
+19168,
+64
+],
+"conv_block.5.weight": [
+19232,
+64
+],
+"conv_block.5.bias": [
+19296,
+64
+],
+"conv_block.5.running_mean": [
+19360,
+64
+],
+"conv_block.5.running_var": [
+19424,
+64
+],
+"spatial_reduce.weight": [
+19488,
+6144
+],
+"spatial_reduce.bias": [
+25632,
+32
+],
+"feature_fc.0.weight": [
+25664,
+43008
+],
+"feature_fc.0.bias": [
+68672,
+96
+],
+"feature_fc.3.weight": [
+68768,
+4608
+],
+"feature_fc.3.bias": [
+73376,
+48
+],
+"value_head.weight": [
+73424,
+48
+],
+"value_head.bias": [
+73472,
+1
+],
+"advantage_head.weight": [
+73473,
+336
+],
+"advantage_head.bias": [
+73809,
+7
+]
+}
+},
+{
+"name": "M1-CNN-700k",
+"weight": 0.2,
+"layout": {
+"conv_block.0.weight": [
+73816,
+576
+],
+"conv_block.0.bias": [
+74392,
+32
+],
+"conv_block.2.weight": [
+74424,
+32
+],
+"conv_block.2.bias": [
+74456,
+32
+],
+"conv_block.2.running_mean": [
+74488,
+32
+],
+"conv_block.2.running_var": [
+74520,
+32
+],
+"conv_block.3.weight": [
+74552,
+18432
+],
+"conv_block.3.bias": [
+92984,
+64
+],
+"conv_block.5.weight": [
+93048,
+64
+],
+"conv_block.5.bias": [
+93112,
+64
+],
+"conv_block.5.running_mean": [
+93176,
+64
+],
+"conv_block.5.running_var": [
+93240,
+64
+],
+"spatial_reduce.weight": [
+93304,
+6144
+],
+"spatial_reduce.bias": [
+99448,
+32
+],
+"feature_fc.0.weight": [
+99480,
+43008
+],
+"feature_fc.0.bias": [
+142488,
+96
+],
+"feature_fc.3.weight": [
+142584,
+4608
+],
+"feature_fc.3.bias": [
+147192,
+48
+],
+"value_head.weight": [
+147240,
+48
+],
+"value_head.bias": [
+147288,
+1
+],
+"advantage_head.weight": [
+147289,
+336
+],
+"advantage_head.bias": [
+147625,
+7
+]
+}
+},
+{
+"name": "M1-CNN-650k",
+"weight": 0.2,
+"layout": {
+"conv_block.0.weight": [
+147632,
+576
+],
+"conv_block.0.bias": [
+148208,
+32
+],
+"conv_block.2.weight": [
+148240,
+32
+],
+"conv_block.2.bias": [
+148272,
+32
+],
+"conv_block.2.running_mean": [
+148304,
+32
+],
+"conv_block.2.running_var": [
+148336,
+32
+],
+"conv_block.3.weight": [
+148368,
+18432
+],
+"conv_block.3.bias": [
+166800,
+64
+],
+"conv_block.5.weight": [
+166864,
+64
+],
+"conv_block.5.bias": [
+166928,
+64
+],
+"conv_block.5.running_mean": [
+166992,
+64
+],
+"conv_block.5.running_var": [
+167056,
+64
+],
+"spatial_reduce.weight": [
+167120,
+6144
+],
+"spatial_reduce.bias": [
+173264,
+32
+],
+"feature_fc.0.weight": [
+173296,
+43008
+],
+"feature_fc.0.bias": [
+216304,
+96
+],
+"feature_fc.3.weight": [
+216400,
+4608
+],
+"feature_fc.3.bias": [
+221008,
+48
+],
+"value_head.weight": [
+221056,
+48
+],
+"value_head.bias": [
+221104,
+1
+],
+"advantage_head.weight": [
+221105,
+336
+],
+"advantage_head.bias": [
+221441,
+7
+]
+}
+},
+{
+"name": "M1-CNN-600k",
+"weight": 0.15,
+"layout": {
+"conv_block.0.weight": [
+221448,
+576
+],
+"conv_block.0.bias": [
+222024,
+32
+],
+"conv_block.2.weight": [
+222056,
+32
+],
+"conv_block.2.bias": [
+222088,
+32
+],
+"conv_block.2.running_mean": [
+222120,
+32
+],
+"conv_block.2.running_var": [
+222152,
+32
+],
+"conv_block.3.weight": [
+222184,
+18432
+],
+"conv_block.3.bias": [
+240616,
+64
+],
+"conv_block.5.weight": [
+240680,
+64
+],
+"conv_block.5.bias": [
+240744,
+64
+],
+"conv_block.5.running_mean": [
+240808,
+64
+],
+"conv_block.5.running_var": [
+240872,
+64
+],
+"spatial_reduce.weight": [
+240936,
+6144
+],
+"spatial_reduce.bias": [
+247080,
+32
+],
+"feature_fc.0.weight": [
+247112,
+43008
+],
+"feature_fc.0.bias": [
+290120,
+96
+],
+"feature_fc.3.weight": [
+290216,
+4608
+],
+"feature_fc.3.bias": [
+294824,
+48
+],
+"value_head.weight": [
+294872,
+48
+],
+"value_head.bias": [
+294920,
+1
+],
+"advantage_head.weight": [
+294921,
+336
+],
+"advantage_head.bias": [
+295257,
+7
+]
+}
+},
+{
+"name": "M1-CNN-550k",
+"weight": 0.15,
+"layout": {
+"conv_block.0.weight": [
+295264,
+576
+],
+"conv_block.0.bias": [
+295840,
+32
+],
+"conv_block.2.weight": [
+295872,
+32
+],
+"conv_block.2.bias": [
+295904,
+32
+],
+"conv_block.2.running_mean": [
+295936,
+32
+],
+"conv_block.2.running_var": [
+295968,
+32
+],
+"conv_block.3.weight": [
+296000,
+18432
+],
+"conv_block.3.bias": [
+314432,
+64
+],
+"conv_block.5.weight": [
+314496,
+64
+],
+"conv_block.5.bias": [
+314560,
+64
+],
+"conv_block.5.running_mean": [
+314624,
+64
+],
+"conv_block.5.running_var": [
+314688,
+64
+],
+"spatial_reduce.weight": [
+314752,
+6144
+],
+"spatial_reduce.bias": [
+320896,
+32
+],
+"feature_fc.0.weight": [
+320928,
+43008
+],
+"feature_fc.0.bias": [
+363936,
+96
+],
+"feature_fc.3.weight": [
+364032,
+4608
+],
+"feature_fc.3.bias": [
+368640,
+48
+],
+"value_head.weight": [
+368688,
+48
+],
+"value_head.bias": [
+368736,
+1
+],
+"advantage_head.weight": [
+368737,
+336
+],
+"advantage_head.bias": [
+369073,
+7
+]
+}
+}
+],
+"floats": 369080
+}

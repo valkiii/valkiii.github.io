@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The record sleeve, back on my desk · Valerio Ciotti</title>
+<meta name="description" content="A native macOS album-art widget for Spotify and Apple Music, with hover controls and a mini player that lives around the notch.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../study-group/">Study group</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-tools)">
+  <header class="story-hero">
+    <div class="bg"><img src="../../media/covers/spindle.jpg" alt=""></div>
+    <div class="wrap">
+      <p class="kicker" data-reveal><a href="../../">Orbit</a> · Tools · September 2026</p>
+      <h1 class="title" data-reveal>The record sleeve, back on my desk</h1>
+      <p class="lede" data-reveal><span class="nm">Spindle.</span> A native macOS album-art widget for Spotify and Apple Music, with hover controls and a mini player that lives around the notch.</p>
+    </div>
+  </header>
+  <section class="scrolly">
+  <div class="stage" aria-hidden="true">
+<figure class="frame on" data-f="0"><img src="../../media/stories/spindle/cover.jpg" alt="The tile on the desktop and the player around the notch." loading="lazy"><figcaption>The tile on the desktop and the player around the notch.</figcaption></figure><figure class="frame" data-f="1"><img src="../../media/covers/spindle.jpg" alt="" loading="lazy"></figure>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+<figure class="inline"><img src="../../media/stories/spindle/cover.jpg" alt="The tile on the desktop and the player around the notch." loading="lazy"><figcaption>The tile on the desktop and the player around the notch.</figcaption></figure>      <div class="prose"><p>Album art used to be something you held while the music played. On a Mac the closest thing is a small widget that shows the cover of whatever is playing. The good ones exist, and they are good, but they cost a little more than I think such a small utility should.</p>
+<p>So I wrote my own. Spindle puts the album art on the desktop as a tile. Hover over it and the controls appear. A second mini player sits around the notch at the top of the screen and expands when the pointer comes near.</p></div>
+    </div>
+    <div class="beat" data-f="1">
+<figure class="inline"><img src="../../media/covers/spindle.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>There are no API keys and no logins. Every second, a short AppleScript asks Spotify or Music what is playing, and the answer is all Spindle needs.</p>
+<p>The most useful lesson was a dull one. Swift swallows AppleScript syntax errors into vague failures at runtime, so I now test every script on its own in the terminal before it goes anywhere near the app.</p>
+<p>Spindle comes with a seven-day trial and a licence check that works offline, at a lower price than the widgets that inspired it.</p></div>
+    </div>
+  </div>
+</section>
+
+  <section class="wrap coda" data-reveal>
+    <p class="actions">
+    </p>
+    <p class="madewith">Made with Swift, SwiftUI, AppKit, AppleScript.</p>
+  </section>
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/spindle"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+<section class="wrap block"><h2 class="sub">In the same orbit</h2><div class="rows"><a class="row" href="../../showcase/precog/" style="--c: var(--uc-vision)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Conducting my desktop with bare hands</span>
+    <span class="meta"><span class="nm">Precog</span> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../diary/" style="--c: var(--uc-tools)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/diary.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">A notebook that writes back</span>
+    <span class="meta"><span class="nm">The Diary</span> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../kindlebot/" style="--c: var(--uc-tools)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/kindlebot.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Classics by text message</span>
+    <span class="meta"><span class="nm">Books to my Kindle</span> · Oct 2026 · in use</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../assets/lenis.css">
+<script src="../../assets/lenis.min.js" defer></script>
+<script src="../../assets/smooth-scroll.js" defer></script>
+<script src="../../motion.js"></script>
+<script src="../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script></body>
+</html>

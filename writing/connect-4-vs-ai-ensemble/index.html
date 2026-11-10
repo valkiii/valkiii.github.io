@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Connect 4 vs AI Ensemble · Valerio Ciotti</title>
+<meta name="description" content="Challenge a tournament-winning AI ensemble in Connect 4. This AI combines 5 neural networks trained on 750k games and won first place against 35+ AI opponents.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../../projects/">All work</a><a href="../" aria-current="page">Writing</a><a href="../../research/">Research</a><a href="../../study-group/">Study group</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="post">
+  <header class="wrap posthead">
+    <p class="kicker" data-reveal><a href="../">Writing</a> · January 2025</p>
+    <h1 class="title" data-reveal>Connect 4 vs AI Ensemble</h1>
+<p class="lede" data-reveal>Challenge a tournament-winning AI ensemble in Connect 4. This AI combines 5 neural networks trained on 750k games and won first place against 35+ AI opponents.</p><p class="tags" data-reveal><span>competition</span><span>coding</span></p>  </header>
+  <div class="mathzone">
+<section class="scrolly no-frames">
+  <div class="stage" aria-hidden="true">
+<canvas class="netcanvas"></canvas>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+      <div class="prose"><p>Challenge a tournament-winning AI system in Connect 4. This ensemble of 5 neural networks dominated a comprehensive tournament against 35+ other AI opponents.</p>
+<h2>The AI Opponent</h2>
+<p>You're playing against <strong>"Custom-Ensemble-Top5Models-q"</strong> - a sophisticated AI system that:</p>
+<ul>
+<li><strong>Combines 5 CNN-based Deep Q-Networks</strong> trained on 550k to 750k games each</li>
+<li><strong>Uses Q-value averaging</strong> for strategic decision making  </li>
+<li><strong>Achieved #1 ranking</strong> with 63.4% win rate in tournament play</li>
+<li><strong>Applies weighted strategy</strong> (30%, 20%, 20%, 15%, 15%) based on model performance</li>
+</ul>
+<hr /></div>
+    </div>
+  </div>
+</section>
+<div class="wrap widebox prose" data-reveal><iframe class="embed" src="../../play/connect4/?embed" height="1180" title="Connect 4 against the ensemble" loading="lazy"></iframe></div>
+<section class="scrolly no-frames">
+  <div class="stage" aria-hidden="true">
+<canvas class="netcanvas"></canvas>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+      <div class="prose"><p class="note">Updated in October 2026: the five networks now run directly in your browser instead of on a server, so the first move is instant. <a href="../../play/connect4/">Open the game full screen</a>.</p>
+
+<h2>How the AI Works</h2>
+<h3>Ensemble Architecture</h3>
+<p>Combines 5 CNN-based Deep Q-Networks trained on different amounts of gameplay experience (550k to 750k episodes each)</p>
+<h3>Q-Value Averaging</h3>
+<p>Each model predicts Q-values for all moves, then weights are applied and averaged for final decision</p>
+<h3>Weighted Strategy</h3>
+<p>Model weights: 30%, 20%, 20%, 15%, 15% based on training progression and performance</p>
+<h3>Tournament Proven</h3>
+<p>Winner of comprehensive tournament against 35+ AI opponents including other ensembles and individual models</p>
+<hr />
+<p><strong>Controls:</strong> click a column to drop a disc, or press 1–7. Press H for a hint, N for a new game.</p></div>
+    </div>
+  </div>
+</section>
+  </div>
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="writing/connect-4-vs-ai-ensemble"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+</article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../assets/lenis.css">
+<script src="../../assets/lenis.min.js" defer></script>
+<script src="../../assets/smooth-scroll.js" defer></script>
+<script src="../../motion.js"></script>
+<script src="../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script></body>
+</html>

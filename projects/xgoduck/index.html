@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teaching a duck to walk on a Raspberry Pi · Valerio Ciotti</title>
+<meta name="description" content="Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../study-group/">Study group</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-robots)">
+  <header class="story-hero">
+    <div class="bg"><img src="../../media/covers/xgoduck.jpg" alt=""></div>
+    <div class="wrap">
+      <p class="kicker" data-reveal><a href="../../">Orbit</a> · Robots &amp; devices · October 2026</p>
+      <h1 class="title" data-reveal>Teaching a duck to walk on a Raspberry Pi</h1>
+      <p class="lede" data-reveal><span class="nm">XGO-Duck.</span> Building an open-source biped duck with a Raspberry Pi Zero 2W in place of the original controller, porting its real-time loop to Python.</p>
+    </div>
+  </header>
+  <section class="scrolly">
+  <div class="stage" aria-hidden="true">
+<figure class="frame on" data-f="0"><img src="../../media/covers/xgoduck.jpg" alt="" loading="lazy"></figure><figure class="frame" data-f="1"><img src="../../media/covers/xgoduck.jpg" alt="Servos at the hips and knees, the Pi on its back." loading="lazy"><figcaption>Servos at the hips and knees, the Pi on its back.</figcaption></figure><figure class="frame" data-f="2"><img src="../../media/covers/xgoduck.jpg" alt="" loading="lazy"></figure>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+<figure class="inline"><img src="../../media/covers/xgoduck.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>The XGO-Duck is a small open-source robot duck that walks on two legs. It is 3D-printed, it has fifteen servos, and its gait comes from policies trained with reinforcement learning in simulation. I printed the parts. Then, instead of buying the recommended controller board, I decided to use the Raspberry Pi Zero 2W I already had.</p>
+<p>That decision changes almost nothing about the brain and almost everything about the plumbing.</p></div>
+    </div>
+    <div class="beat" data-f="1">
+<figure class="inline"><img src="../../media/covers/xgoduck.jpg" alt="Servos at the hips and knees, the Pi on its back." loading="lazy"><figcaption>Servos at the hips and knees, the Pi on its back.</figcaption></figure>      <div class="prose"><p>On the original board a microcontroller talks to the servos a hundred times a second, while a Linux side runs the walking policy fifty times a second. On the Pi both have to live in Python. So I rewrote the microcontroller's loop behind exactly the same interface, so the upstream code and its trained policies run unchanged on top.</p>
+<p>The parts arrived at different times, so everything was first tested against a simulated servo bus and a simulated robot: 34 tests passed before a single real servo moved.</p></div>
+    </div>
+    <div class="beat" data-f="2">
+<figure class="inline"><img src="../../media/covers/xgoduck.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>To make the build repeatable I wrote a setup wizard that walks through it step by step: checking the parts, setting servo IDs, scanning the wiring, setting up SSH to the Pi, finding which way the motion sensor's axes point, and calibrating.</p>
+<p>The first real servo answered at a millisecond round trip and moved to within a step or two of where it was told. The other fourteen, and the first steps, are next. One lesson already learned the hard way: check the bearings list twice.</p></div>
+    </div>
+  </div>
+</section>
+
+  <section class="wrap coda" data-reveal>
+    <p class="actions">
+    </p>
+    <p class="madewith">Made with Raspberry Pi Zero 2W, Feetech bus servos, ONNX policies, Python.</p>
+  </section>
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/xgoduck"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+<section class="wrap block"><h2 class="sub">In the same orbit</h2><div class="rows"><a class="row" href="../diary/" style="--c: var(--uc-tools)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/diary.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">A notebook that writes back</span>
+    <span class="meta"><span class="nm">The Diary</span> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../../showcase/robot/" style="--c: var(--uc-robots)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/robot.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Someone to play with</span>
+    <span class="meta"><span class="nm">SO-101 robot arm</span> · Sep 2026 · in progress</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../assets/lenis.css">
+<script src="../../assets/lenis.min.js" defer></script>
+<script src="../../assets/smooth-scroll.js" defer></script>
+<script src="../../motion.js"></script>
+<script src="../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script></body>
+</html>

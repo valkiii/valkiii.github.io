@@ -1,0 +1,8 @@
+/* Shared by the hand-made story pages so the whole site reads as one: the same title face as the portfolio,
+   and no bold text anywhere. Injected by build.py (copy_shared). */
+@import url("https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..600&display=swap");
+h1, h2, h3, .title, .display { font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif !important; font-weight: 500 !important; font-style: normal !important; letter-spacing: -.025em !important; }
+body :not(h1):not(h2):not(h3) { font-weight: 400 !important; }
+b, strong { font-weight: 400 !important; }
+/* the page title itself: same size and setting as the portfolio's own titles */
+h1 { font-size: clamp(44px, 7vw, 104px) !important; line-height: .95 !important; letter-spacing: -.04em !important; text-transform: none !important; font-variation-settings: normal !important; }

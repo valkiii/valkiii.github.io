@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recommender Systems with Generative Retrieval · Paper Study Group · Valerio Ciotti</title>
+<meta name="description" content="Replaces nearest-neighbour retrieval with a model that generates item identifiers directly. A different way to think about recommending.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../../">Orbit</a><a href="../../../projects/">All work</a><a href="../../../writing/">Writing</a><a href="../../../research/">Research</a><a href="../../" aria-current="page">Study group</a><a href="../../../about/">About</a>  </nav>
+</header>
+<main>
+<article>
+<header class="pagehead wrap">
+  <p class="kicker" data-reveal><a href="../">Study group library</a> · 2023 · NeurIPS 2023 · arXiv 2305.05065</p>
+  <h1 class="title sg-papertitle" data-reveal>Recommender Systems with Generative Retrieval</h1>
+  <p class="lede" data-reveal>Shashank Rajput, Nikhil Mehta, Anima Singh, Raghunandan H. Keshavan, Trung Vu, Lukasz Heldt, Lichan Hong, Yi Tay, Vinh Q. Tran, Jonah Samost, Maciej Kula, Ed H. Chi, Maheswaran Sathiamoorthy</p>
+  <p class="sg-meta" data-reveal><span class="sg-chip sg-shortlisted">Shortlisted</span> <span class="sg-facets">
+<span class="sg-chip sg-kind" title="Proposes a new model">Method</span><span class="sg-chip sg-rel-core" title="Directly usable for banking">Core relevance</span><span class="sg-chip sg-level" title="Needs working familiarity with the area.">Level 3/5</span></span> <span class="tags sg-tags"><span style="--c: var(--uc-tools)">Recommenders &amp; Next Best Action</span><span style="--c: var(--uc-play)">GenAI &amp; LLMs</span></span></p>
+  <div class="actions" data-reveal>
+<a class="btn primary" href="https://arxiv.org/abs/2305.05065" target="_blank" rel="noopener">Abstract ↗</a><a class="btn" href="https://arxiv.org/pdf/2305.05065" download>Download PDF</a>    <a class="btn" href="../../contribute/?form=notes&amp;paper=tiger-generative-retrieval">Add my notes</a>
+    <a class="btn" href="../../contribute/?form=presentation&amp;paper=tiger-generative-retrieval">Submit my presentation</a>
+  </div>
+</header>
+
+<section class="wrap sg-block sg-join">
+<div class="sg-card" data-reveal><p class="kicker">Why it is here</p><p>Replaces nearest-neighbour retrieval with a model that generates item identifiers directly. A different way to think about recommending.</p></div>  <div class="sg-card" data-reveal><p class="kicker">Presentation</p>
+<p>Nobody has claimed this paper yet. <a href="../../">Take a slot</a>.</p>  </div>
+</section>
+
+<section class="wrap sg-block">
+  <details class="sg-disclosure" data-reveal><summary>Abstract</summary><p class="sg-abstract">Modern recommender systems perform large-scale retrieval by first embedding queries and item candidates in the same unified space, followed by approximate nearest neighbor search to select top candidates given a query embedding. In this paper, we propose a novel generative retrieval approach, where the retrieval model autoregressively decodes the identifiers of the target candidates. To that end, we create semantically meaningful tuple of codewords to serve as a Semantic ID for each item. Given Semantic IDs for items in a user session, a Transformer-based sequence-to-sequence model is trained to predict the Semantic ID of the next item that the user will interact with. To the best of our knowledge, this is the first Semantic ID-based generative model for recommendation tasks. We show that recommender systems trained with the proposed paradigm significantly outperform the current SOTA models on various datasets. In addition, we show that incorporating Semantic IDs into the sequence-to-sequence model enhances its ability to generalize, as evidenced by the improved retrieval performance observed for items with no prior interaction history.</p></details>
+</section>
+
+<section class="wrap sg-block">
+  <h2 class="sub" data-reveal>Paper card</h2>
+<p class="lede" data-reveal>The presenter's one-page card will appear here after the session.</p></section>
+<section class="wrap sg-block">
+  <h2 class="sub" data-reveal>Related papers</h2>
+  <p class="lede" data-reveal>The nearest neighbours on the <a href="../../map/#focus=tiger-generative-retrieval">map of papers</a>, by shared topics and by the words of their abstracts.</p>
+  <ul class="sg-related">
+    <li data-reveal>
+<a href="../llm-recsys-survey/">A Survey on Large Language Models for Recommendation</a>      <span class="meta">2023 · Shortlisted · closeness 0.78</span>
+      <span class="sg-note">Shared topics: Recommenders &amp; Next Best Action, GenAI &amp; LLMs. Common terms: system, item, recommendation.</span>
+    </li>
+    <li data-reveal>
+<a href="https://arxiv.org/abs/2611.00172" target="_blank" rel="noopener">From Fragmentation to Fusion: A Survey and Roadmap for Omnimodal Embeddings ↗</a>      <span class="meta">2026 · on the radar · closeness 0.46</span>
+      <span class="sg-note">Shared topics: Recommenders &amp; Next Best Action. Common terms: embedding, system, modern.</span>
+    </li>
+    <li data-reveal>
+<a href="https://arxiv.org/abs/2611.04720" target="_blank" rel="noopener">OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer ↗</a>      <span class="meta">2026 · on the radar · closeness 0.42</span>
+      <span class="sg-note">Shared topics: Recommenders &amp; Next Best Action. Common terms: recommender, generative, candidate.</span>
+    </li>
+    <li data-reveal>
+<a href="https://arxiv.org/abs/2610.16927" target="_blank" rel="noopener">WeFair: Fidelity-Aware Alignment from Human Feedback for Personalized Query Rewriting in Short-Video Search ↗</a>      <span class="meta">2026 · on the radar · closeness 0.41</span>
+      <span class="sg-note">Shared topics: GenAI &amp; LLMs. Common terms: query, search, user.</span>
+    </li>
+    <li data-reveal>
+<a href="https://arxiv.org/abs/2610.26185" target="_blank" rel="noopener">MoveBench: A Rubric-Based Benchmark for Evaluating Large Language Models in Sports and Health Coaching ↗</a>      <span class="meta">2026 · on the radar · closeness 0.36</span>
+      <span class="sg-note">Shared topics: Recommenders &amp; Next Best Action, GenAI &amp; LLMs. Common terms: system, user, large-scale.</span>
+    </li>
+  </ul>
+  <p class="meta"><a href="../../map/#focus=tiger-generative-retrieval">Show this paper on the map →</a></p>
+</section>
+<div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="study-group/papers/tiger-generative-retrieval"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+</article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../../assets/lenis.css">
+<script src="../../../assets/lenis.min.js" defer></script>
+<script src="../../../assets/smooth-scroll.js" defer></script>
+<script src="../../../motion.js"></script>
+<script src="../../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script></body>
+</html>

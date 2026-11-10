@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Four in a row against five networks · Valerio Ciotti</title>
+<meta name="description" content="Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../study-group/">Study group</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-play)">
+  <header class="story-hero">
+    <div class="bg"><img src="../../media/covers/connect4.jpg" alt=""></div>
+    <div class="wrap">
+      <p class="kicker" data-reveal><a href="../../">Orbit</a> · Games · Data science · September 2025</p>
+      <h1 class="title" data-reveal>Four in a row against five networks</h1>
+      <p class="lede" data-reveal><span class="nm">Connect 4 ensemble.</span> Deep reinforcement learning agents trained on hundreds of thousands of games. An ensemble of the best five won a tournament against 35 other AIs, and you can play it here.</p>
+    </div>
+  </header>
+  <section class="scrolly">
+  <div class="stage" aria-hidden="true">
+<figure class="frame on" data-f="0"><img src="../../media/covers/connect4.jpg" alt="" loading="lazy"></figure><figure class="frame" data-f="1"><img src="../../media/covers/connect4.jpg" alt="Every agent learned only by playing." loading="lazy"><figcaption>Every agent learned only by playing.</figcaption></figure><figure class="frame" data-f="2"><img src="../../media/stories/connect4/board.jpg" alt="The ensemble, running in your browser. The washes under the board show which column each network prefers." loading="lazy"><figcaption>The ensemble, running in your browser. The washes under the board show which column each network prefers.</figcaption></figure>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+<figure class="inline"><img src="../../media/covers/connect4.jpg" alt="" loading="lazy"></figure>      <div class="prose"><p>Connect 4 is small enough to learn and big enough that nothing can memorise it: about 4.5 trillion positions. That makes it a perfect sandbox to see what reinforcement learning really needs.</p>
+<p>I started with two simple opponents to set the bar: one that plays at random and one that follows a few hand-written rules. The rules player beats random 99% of the time, so any learning agent first has to beat it.</p></div>
+    </div>
+    <div class="beat" data-f="1">
+<figure class="inline"><img src="../../media/covers/connect4.jpg" alt="Every agent learned only by playing." loading="lazy"><figcaption>Every agent learned only by playing.</figcaption></figure>      <div class="prose"><p>The agents are Dueling Double DQNs. The first versions looked at the board as a flat list of 42 cells. The later ones are convolutional networks, which see lines and diagonals much as a person does.</p>
+<p>The hardest problem was forgetting. An agent that learns to beat one opponent often loses what it knew against the previous one. Curriculum learning, a reservoir of old games to replay and slowly updated target networks kept the knowledge in place. The strongest model trained on 750,000 games.</p></div>
+    </div>
+    <div class="beat" data-f="2">
+<figure class="inline"><img src="../../media/stories/connect4/board.jpg" alt="The ensemble, running in your browser. The washes under the board show which column each network prefers." loading="lazy"><figcaption>The ensemble, running in your browser. The washes under the board show which column each network prefers.</figcaption></figure>      <div class="prose"><p>The lesson I took away is that an agent only gets as good as its sparring partners.</p>
+<p>In the end no single network won. I took the five best checkpoints and let them vote: each scores every column, the scores are averaged with fixed weights, and the best legal move is played. That ensemble beat 35 other AIs in a tournament.</p>
+<p>The five networks now run directly in this page, so you can <a href="../../play/connect4/">try your luck</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+  <section class="wrap coda" data-reveal>
+    <p class="actions">
+<a class="btn primary" href="../../play/connect4/">Play the ensemble</a><a class="btn" href="../../writing/connect-4-vs-ai-ensemble/">The essay</a><a class="btn" href="https://github.com/valkiii/forza_quatto" target="_blank" rel="noopener">Code ↗</a>    </p>
+    <p class="madewith">Made with PyTorch, Dueling Double DQN, CNNs, curriculum learning, JavaScript.</p>
+  </section>
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/connect4"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+<section class="wrap block"><h2 class="sub">In the same orbit</h2><div class="rows"><a class="row" href="../pulp/" style="--c: var(--uc-play)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/pulp.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Slicing fruit with a glance</span>
+    <span class="meta"><span class="nm">PULP</span> · Oct 2026 · beta</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../spellstorm/" style="--c: var(--uc-play)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">A spellbook for the whole family</span>
+    <span class="meta"><span class="nm">Spellstorm</span> · Oct 2026 · playable</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../drawbluff/" style="--c: var(--uc-play)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/drawbluff.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Draw badly, bluff boldly</span>
+    <span class="meta"><span class="nm">Drawbluff</span> · Oct 2026 · playable</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../assets/lenis.css">
+<script src="../../assets/lenis.min.js" defer></script>
+<script src="../../assets/smooth-scroll.js" defer></script>
+<script src="../../motion.js"></script>
+<script src="../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script></body>
+</html>

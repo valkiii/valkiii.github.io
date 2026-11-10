@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The org chart nobody draws · Valerio Ciotti</title>
+<meta name="description" content="An organisation as one graph of goals, projects, people and skills, with the views leaders ask for. Built on a synthetic demo company.">
+<meta name="theme-color" content="#080b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="">
+<header class="top">
+  <a class="brand" href="../../">Valerio Ciotti</a>
+  <nav aria-label="Sections">
+<a href="../../">Orbit</a><a href="../" aria-current="page">All work</a><a href="../../writing/">Writing</a><a href="../../research/">Research</a><a href="../../study-group/">Study group</a><a href="../../about/">About</a>  </nav>
+</header>
+<main>
+<article class="story" style="--c: var(--uc-data)">
+  <header class="story-hero">
+    <div class="bg"><img src="../../media/covers/maieutica.jpg" alt=""></div>
+    <div class="wrap">
+      <p class="kicker" data-reveal><a href="../../">Orbit</a> · Data science · Tools · September 2026</p>
+      <h1 class="title" data-reveal>The org chart nobody draws</h1>
+      <p class="lede" data-reveal><span class="nm">Maieutica.</span> An organisation as one graph of goals, projects, people and skills, with the views leaders ask for. Built on a synthetic demo company.</p>
+    </div>
+  </header>
+  <section class="scrolly">
+  <div class="stage" aria-hidden="true">
+<figure class="frame on" data-f="0"><img src="../../media/stories/maieutica/layers.jpg" alt="Goals, projects, people and skills in one picture, for a made-up company." loading="lazy"><figcaption>Goals, projects, people and skills in one picture, for a made-up company.</figcaption></figure><figure class="frame" data-f="1"><img src="../../media/stories/maieutica/leaver.jpg" alt="The "who is leaving?" view." loading="lazy"><figcaption>The &#34;who is leaving?&#34; view.</figcaption></figure><figure class="frame" data-f="2"><img src="../../media/stories/maieutica/gaps.jpg" alt="Single points of failure, goals resting on thin skills, people with no slack." loading="lazy"><figcaption>Single points of failure, goals resting on thin skills, people with no slack.</figcaption></figure><figure class="frame" data-f="3"><img src="../../media/stories/maieutica/usecase.jpg" alt="An idea in plain words, mapped to skills, people and a rough business case." loading="lazy"><figcaption>An idea in plain words, mapped to skills, people and a rough business case.</figcaption></figure>  </div>
+  <div class="beats">
+    <div class="beat on" data-f="0">
+<figure class="inline"><img src="../../media/stories/maieutica/layers.jpg" alt="Goals, projects, people and skills in one picture, for a made-up company." loading="lazy"><figcaption>Goals, projects, people and skills in one picture, for a made-up company.</figcaption></figure>      <div class="prose"><p>Maieutics is Socrates' method: he said he was a midwife for ideas, helping people bring out knowledge they already carried. I keep thinking about it as a team lead, because most of what an organisation needs to know is already inside it, spread over people's heads and tickets. Nobody has drawn it.</p>
+<p>Maieutica draws it as one graph with four layers: goals, the projects that serve them, the people on those projects and the skills those people use. Four link tables are enough. The networks of people, of skills and of use cases are computed from them.</p></div>
+    </div>
+    <div class="beat" data-f="1">
+<figure class="inline"><img src="../../media/stories/maieutica/leaver.jpg" alt="The "who is leaving?" view." loading="lazy"><figcaption>The &#34;who is leaving?&#34; view.</figcaption></figure>      <div class="prose"><p>The first question every manager asks is uncomfortable: what breaks if this person leaves?</p>
+<p>Network science answers it surprisingly directly. Betweenness shows who sits on the paths between groups. Structural holes show who is the only bridge between two people who would otherwise never talk. Pick a person and Maieutica lists the projects they touch, the skills where they are the last expert, the collaborations that would disappear and who could step in.</p></div>
+    </div>
+    <div class="beat" data-f="2">
+<figure class="inline"><img src="../../media/stories/maieutica/gaps.jpg" alt="Single points of failure, goals resting on thin skills, people with no slack." loading="lazy"><figcaption>Single points of failure, goals resting on thin skills, people with no slack.</figcaption></figure>      <div class="prose"><p>The same graph answers the questions leaders ask in planning: which goals rest on skills only one or two people have, who is booked at a hundred percent, and which projects serve no goal at all.</p></div>
+    </div>
+    <div class="beat" data-f="3">
+<figure class="inline"><img src="../../media/stories/maieutica/usecase.jpg" alt="An idea in plain words, mapped to skills, people and a rough business case." loading="lazy"><figcaption>An idea in plain words, mapped to skills, people and a rough business case.</figcaption></figure>      <div class="prose"><p>It also works in the other direction. Describe an idea in plain words and Maieutica maps it to the skills it needs, estimates effort, finds the people who have both the skills and the time, and recommends a hire when nobody does. A Jira or Kanban export feeds the graph, and an approved proposal can go back as an epic with its stories.</p>
+<p>Everything you see here runs on a synthetic company. The point is the method: once the graph is right, management questions become graph queries.</p></div>
+    </div>
+  </div>
+</section>
+
+  <section class="wrap coda" data-reveal>
+    <p class="actions">
+    </p>
+    <p class="madewith">Made with SQLite / Postgres, D3, Python, Jira REST.</p>
+  </section>
+  <div class="wrap"><section class="comments" aria-label="Comments">
+  <h2 class="sub">Comments</h2>
+  <p class="meta">Sign in with GitHub to leave a comment or react.</p>
+  <script src="https://giscus.app/client.js" data-repo="valkiii/valkiii.github.io" data-repo-id="R_kgDOI1xkyw"
+    data-category="Announcements" data-category-id="DIC_kwDOI1xky84DJokK" data-mapping="specific" data-term="projects/maieutica"
+    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="transparent_dark" data-lang="en"
+    data-loading="lazy" crossorigin="anonymous" async></script>
+</section>
+</div>
+<section class="wrap block"><h2 class="sub">In the same orbit</h2><div class="rows"><a class="row" href="../../showcase/precog/" style="--c: var(--uc-vision)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/precog.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Conducting my desktop with bare hands</span>
+    <span class="meta"><span class="nm">Precog</span> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../../showcase/clustering/" style="--c: var(--uc-data)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/clustering.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Cluster the reasons</span>
+    <span class="meta"><span class="nm">Supervised clustering</span> · Oct 2026 · essay</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="row" href="../../showcase/eulerian/" style="--c: var(--uc-vision)" data-reveal>
+  <span class="thumb"><img src="../../media/covers/eulerian.jpg" alt="" loading="lazy"></span>
+  <span class="txt">
+    <span class="q">Seeing the invisible</span>
+    <span class="meta"><span class="nm">Eulerian magnification</span> · Oct 2026 · prototype</span>
+  </span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+</div></section></article>
+</main>
+<footer class="foot">
+  <p class="big-sign">Imagine, try, solve.</p>
+  <p><a href="../../privacy/">Privacy</a><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk ↗</a></p>
+</footer>
+<link rel="stylesheet" href="../../assets/lenis.css">
+<script src="../../assets/lenis.min.js" defer></script>
+<script src="../../assets/smooth-scroll.js" defer></script>
+<script src="../../motion.js"></script>
+<script src="../../assets/beacon.js" data-endpoint="https://pihole1.tail448243.ts.net:10000/hit" defer></script></body>
+</html>
