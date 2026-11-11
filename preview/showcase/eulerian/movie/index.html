@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seeing the Invisible, Explained</title>
+<meta name="description" content="A scroll-through film of how Eulerian video magnification works: one pixel at a time, filtered in time, split in space and amplified. Every frame is synthetic and computed live in your browser.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500..800;1,6..96,500..700&family=Public+Sans:ital,wght@0,300..700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>document.documentElement.classList.add("js");</script>
+<link rel="stylesheet" href="movie.css">
+</head>
+<body>
+<a class="skip" href="#sources">Skip to sources</a>
+
+<div class="movie" id="movie">
+  <div class="stage" id="stage">
+    <canvas id="cv" role="img" aria-label="Animated explainer of Eulerian video magnification. The picture changes as you scroll; each chapter's text describes it."></canvas>
+    <p class="loading" id="loading" aria-hidden="true">preparing the synthetic clip</p>
+  </div>
+
+  <noscript><p class="nojs">The animation on this page needs JavaScript. All of the text is below, in order.</p></noscript>
+
+  <main class="track" id="track">
+
+  <!-- 0. Cold open (story) -->
+  <section class="chap" id="ch-0" data-tone="night" aria-labelledby="h-0">
+    <div class="step head" data-w="0.9">
+      <div class="txt">
+        <p class="kicker">Eulerian video magnification, as a scroll-through film</p>
+        <h1 id="h-0">Seeing the <i>invisible</i></h1>
+        <p class="sub">How a camera can show a pulse that your eyes cannot see.</p>
+        <p class="cue" aria-hidden="true">scroll</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="txt">
+        <p>Look at a person sitting still and you see a person sitting still. But with every heartbeat, a little blood washes into the face, and the skin turns a touch redder, then a touch paler. The change is real, and it is far too small for your eyes to catch. A camera records it anyway, buried in every frame of ordinary video.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="txt">
+        <p>Nobody was looking for it. In 2012, a team at MIT asked a simple question. What if we looked at each pixel as a tiny clock, watched how its colour rose and fell over time, picked out only the rhythm of a heartbeat, and turned that rhythm up? The face began to pulse. This is how a microscope for time was built.</p>
+        <div class="seg" role="group" aria-label="Which video to show">
+          <button type="button" data-ui="coldView" data-v="camera" aria-pressed="false">What the camera sees</button>
+          <button type="button" data-ui="coldView" data-v="filter" aria-pressed="false">What the filter sees</button>
+        </div>
+        <p class="note">Synthetic face, computed in your browser. Pulse band 0.83 to 1 Hz, multiplied by 50.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. A face that seems still -->
+  <section class="chap" id="ch-1" data-tone="night" aria-labelledby="h-1">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 1</p>
+        <h2 id="h-1">A face that seems still</h2>
+        <p class="sub">Your heartbeat changes your skin colour, far too little to see.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Look at this face. Nothing moves, and the skin looks the same colour in every frame. Yet with each heartbeat, blood rushes into the skin and the colour shifts, very slightly.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>How slightly? In a typical video, the change is well under one percent of the pixel value. On a scale of 0 to 255, that is often less than one step. Your eye cannot see it. A camera records it anyway, buried under sensor noise.</p>
+      <p class="note">Illustrative: the synthetic clip adds 0.5 grey levels of green at 1 Hz, under noise of about 2 grey levels.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>This is the idea of the whole explainer. The paper by Wu and colleagues (MIT, 2012) shows how to pick that tiny change out of ordinary video and make it big enough to see, without ever tracking the face.</p>
+      <div class="ctl"><label for="ghostA">Multiply the hidden change by <output id="ghostAo">50</output></label><input type="range" id="ghostA" data-ui="ghostAlpha" min="0" max="100" step="1" value="50"></div>
+    </div></div>
+    <div class="step" data-w="0.7"><div class="txt">
+      <p>Scroll to find out how, one piece at a time.</p>
+    </div></div>
+  </section>
+
+  <!-- 2. Interlude: before 2012 (story beats 1 and 2) -->
+  <section class="chap" id="ch-2" data-tone="paper" aria-labelledby="h-2">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Interlude · before 2012</p>
+        <h2 id="h-2">A signal hiding in plain sight</h2>
+        <p class="sub">Two good ideas, two separate toolboxes.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Researchers had already noticed that skin colour wobbles slightly with each heartbeat. Earlier papers pulled a pulse rate out of ordinary video of a face, for example Verkruysse in 2008 and Poh in 2010. But those methods boiled the whole thing down to one number. You could read the rate, yet you could not see the blood move.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Meanwhile, a different idea existed for motion. In 2005, Liu and colleagues showed that tiny movements could be found and exaggerated. Two good ideas, two separate toolboxes, and a gap between them.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <h3>The fragile way to magnify motion</h3>
+      <p>The 2005 approach followed motion the way you would follow a boat on a river. It estimated where each point in the picture moved, then pushed it further along.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>That is costly to compute, and any mistake in the tracking shows up as visible glitches, especially at edges where objects pass in front of each other. The authors of the 2005 work needed extra steps, such as separating moving regions and filling in gaps, to get good pictures. The 2012 team named this the Lagrangian view, borrowing a term from fluid mechanics.</p>
+      <div class="ctl"><label for="trackErr">Tracking error <output id="trackErro">medium</output></label><input type="range" id="trackErr" data-ui="trackErr" min="0" max="1" step="0.01" value="0.5"></div>
+    </div></div>
+  </section>
+
+  <!-- 3. Follow it, or watch here (technical 1 + story beat 3) -->
+  <section class="chap" id="ch-3" data-tone="paper" aria-labelledby="h-3">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 2 · 2012</p>
+        <h2 id="h-3">Follow it, or watch here</h2>
+        <p class="sub">Do not follow the thing; watch one place and record it.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>There are two ways to study something that moves. You can follow it, like a photographer tracking one bird across the sky. Fluid scientists call this the Lagrangian view. Or you can stand still and watch one spot, noting what flows past. That is the Eulerian view.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The MIT team flipped the viewpoint. Stand on a bridge and watch the water pass one fixed spot. They stopped tracking anything. The authors are Hao-Yu Wu, Michael Rubinstein, Eugene Shih, John Guttag, Frédo Durand and William Freeman, from MIT CSAIL, with Shih at Quanta Research Cambridge.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The paper takes the second view. It never tracks anything. It picks a pixel and writes down its value in every frame. That list of numbers, value against time, is a signal.</p>
+      <p class="note"><span class="pointer-fine">Hover</span><span class="pointer-coarse">Tap</span> the face to move the probe. The plot is that pixel's real green value in the synthetic clip.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Every pixel gives one signal. Everything else in this method works on those signals.</p>
+    </div></div>
+  </section>
+
+  <!-- 4. Every signal is waves -->
+  <section class="chap" id="ch-4" data-tone="paper" aria-labelledby="h-4">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 3</p>
+        <h2 id="h-4">Every signal is waves</h2>
+        <p class="sub">Any signal is a stack of sine waves, shown as bars.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Take any wiggly line. You can build it by stacking simple waves, called sine waves. Each wave has a frequency, how many ups and downs per second, an amplitude, how tall it is, and a phase, where it starts.</p>
+    </div></div>
+    <div class="step" data-w="1.4"><div class="txt">
+      <p>Start with one slow wave. Add a faster, smaller one. The line begins to look more complicated. Add a third. Add a tenth, and you can draw almost any shape.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>This works in reverse too. Given a wiggly line, the Fourier transform tells you exactly which waves it contains and how big each one is.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Draw one bar per frequency, with the height showing amplitude, and you get the spectrum. It is the same signal, seen as a recipe.</p>
+      <div class="chips" role="group" aria-label="Waves in the sum">
+        <button type="button" data-ui="sine" data-v="0" aria-pressed="true">0.3 Hz</button>
+        <button type="button" data-ui="sine" data-v="1" aria-pressed="true">1 Hz</button>
+        <button type="button" data-ui="sine" data-v="2" aria-pressed="true">2 Hz</button>
+        <button type="button" data-ui="sine" data-v="3" aria-pressed="true">3.7 Hz</button>
+      </div>
+      <p class="note">Switch waves off and on: the line and the bars change together.</p>
+    </div></div>
+  </section>
+
+  <!-- 5. Sorting signals by frequency -->
+  <section class="chap" id="ch-5" data-tone="paper" aria-labelledby="h-5">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 4</p>
+        <h2 id="h-5">Sorting signals by frequency</h2>
+        <p class="sub">Pulse, breath and noise sit at different frequencies, so we can separate them.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Now put real life into the spectrum. A resting heart beats about once a second, so it shows up near 1 Hz. Breathing is slower, about 15 to 20 breaths a minute, so it sits near 0.3 Hz.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Everything else is clutter. Sensor noise is spread across all frequencies. Mains lights flicker at a fixed, faster rate. Slow drift from changing daylight sits near zero.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Because these things live at different frequencies, the spectrum separates them. You do not need to know where the pulse is in the picture. You only need to know how fast it repeats.</p>
+      <p class="note"><span class="pointer-fine">Hover</span><span class="pointer-coarse">Tap</span> the spectrum to read any bar in hertz and beats per minute.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The paper suggests 0.4 to 4 Hz for a pulse, which is 24 to 240 beats per minute.</p>
+    </div></div>
+  </section>
+
+  <!-- 6. Keep one band -->
+  <section class="chap" id="ch-6" data-tone="paper" aria-labelledby="h-6">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 5</p>
+        <h2 id="h-6">Keep one band, drop the rest</h2>
+        <p class="sub">A bandpass filter keeps one frequency window and erases everything else.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>A temporal bandpass filter keeps the frequencies inside a chosen band and removes the rest. In the spectrum view, think of a window cut into a wall: bars in the window stay, bars outside are erased.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Apply that to our pixel signal and the wobbly line becomes a clean wave at the heart rate.</p>
+      <p class="note"><span class="pointer-fine">Drag the window's edges on the spectrum, or use</span><span class="pointer-coarse">Use</span> the sliders below.</p>
+      <div class="ctl"><label for="bandLo">Low edge <output id="bandLoo">0.83 Hz</output></label><input type="range" id="bandLo" data-ui="bandLo" min="0.1" max="4.5" step="0.01" value="0.83"></div>
+      <div class="ctl"><label for="bandHi">High edge <output id="bandHio">1.00 Hz</output></label><input type="range" id="bandHi" data-ui="bandHi" min="0.2" max="5" step="0.01" value="1"></div>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The ideal filter has a perfectly sharp edge. It is used for colour changes, and the paper builds it with a discrete cosine transform. But it needs the whole clip in memory.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The cheap alternative is the IIR filter. It uses two simple low-pass filters, one for the high cutoff and one for the low cutoff, and updates one frame at a time. Its edges are softer, so it lets in a broader band, but it can run live.</p>
+      <div class="seg" role="group" aria-label="Filter type">
+        <button type="button" data-ui="bandMode" data-v="ideal" aria-pressed="false">Ideal</button>
+        <button type="button" data-ui="bandMode" data-v="iir" aria-pressed="true">IIR</button>
+      </div>
+      <p class="note">The IIR curve is the true response of the filter running here: the difference of two first-order low-pass filters, 0.4 and 3 Hz.</p>
+    </div></div>
+  </section>
+
+  <!-- 7. Split the picture -->
+  <section class="chap" id="ch-7" data-tone="night" aria-labelledby="h-7">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 6</p>
+        <h2 id="h-7">Split the picture first</h2>
+        <p class="sub">Split the picture by detail size, because coarse scales are cleaner.</p>
+      </div>
+    </div>
+    <div class="step" data-w="1.2"><div class="txt">
+      <p>Before filtering in time, the method splits each frame by spatial scale. Think of a Laplacian pyramid as a stack of copies of the picture. The top copy holds only coarse blobs, the broad shape of the face. Lower copies hold finer and finer detail, down to sharp edges and grain.</p>
+      <p class="note"><span class="pointer-fine">Hover</span><span class="pointer-coarse">Tap</span> a level to lift it out of the stack.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Why bother? Two reasons. First, noise. Camera noise is random from pixel to pixel, so averaging many pixels cancels it. A pulse changes smoothly across a whole cheek, so it survives the averaging. The coarse levels have a much better signal to noise ratio.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Second, how far each scale can be amplified safely differs. Fine detail breaks first. Chapter 7 shows why.</p>
+    </div></div>
+  </section>
+
+  <!-- 8. Amplify and add (technical 6 + story beat 3) -->
+  <section class="chap" id="ch-8" data-tone="paper" aria-labelledby="h-8">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 7</p>
+        <h2 id="h-8">Amplify, add, and why it works</h2>
+        <p class="sub">Multiply the filtered change by alpha; it mimics motion only for smooth detail.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Now the simple part. Take the band-passed signal, multiply it by alpha, and add it back to the original. If alpha is 50, the 0.5 grey-level pulse becomes 25 and is easy to see.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The paper shows why this also magnifies small motions. For a tiny shift, the brightness at a pixel changes in proportion to the shift, so boosting the change looks like a bigger shift.</p>
+    </div></div>
+    <div class="step" data-w="1.3"><div class="txt">
+      <p>This also works for movement. Picture a blurry edge shifting a tiny bit to the right. Look at one pixel on the slope. As the edge moves, that pixel gets brighter or darker, in proportion to how steep the slope is. A small brightness change at a pixel is therefore a small shift in disguise. Boost the brightness change and the edge looks shifted much further.</p>
+      <div class="ctl"><label for="edgeA">alpha <output id="edgeAo">4</output></label><input type="range" id="edgeA" data-ui="edgeAlpha" min="0" max="12" step="0.5" value="4"></div>
+    </div></div>
+    <div class="step" data-w="1.3"><div class="txt">
+      <p>That trick only holds while the shift is small compared with the blur. Fine, sharp detail breaks it, so alpha must shrink at fine scales.</p>
+      <div class="ctl"><label for="ladderA">alpha for all three <output id="ladderAo">20</output></label><input type="range" id="ladderA" data-ui="ladderAlpha" min="0" max="80" step="1" value="20"></div>
+      <p class="note">Shift 0.1 px. Dashed: the true shifted curve. Solid: original plus alpha times the change.</p>
+    </div></div>
+  </section>
+
+  <!-- 9. The whole pipeline (technical 7 + story beat 4) -->
+  <section class="chap" id="ch-9" data-tone="night" aria-labelledby="h-9">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 8</p>
+        <h2 id="h-9">The whole pipeline in action</h2>
+        <p class="sub">Split, filter in time, multiply, add; noise and big motion are the limits.</p>
+      </div>
+    </div>
+    <div class="step" data-w="1.3"><div class="txt">
+      <p>Here is the full recipe in one picture. Split each frame into spatial levels. For each pixel in each level, filter its signal in time to keep one band. Multiply by alpha, with smaller alpha at fine levels. Add to the original and rebuild the frame from its levels.</p>
+    </div></div>
+    <div class="step" data-w="1.3"><div class="txt">
+      <h3>Turning the face red</h3>
+      <p>The first showpiece was a face. The team kept only colour changes between 0.83 and 1 hertz, which is 50 to 60 beats per minute, blurred the picture slightly so random sensor fuzz averaged out, and multiplied the result by about 100. The video was filmed at 30 frames per second.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>A calm, still face now flushed green to red in time with the heart, and you could watch blood fill the skin in waves. The CACM overview notes the true change is typically about half a grey level out of 256. They also filmed newborns, including at a hospital nursery, and checked the result against a hospital monitor.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>For colour, use a narrow band around the pulse and amplify only coarse levels. The face blushes and pales with each beat. For motion, use a wider band and the limits of chapter 7. A breathing chest visibly rises, and a guitar string at its own frequency stands out.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>It has limits. Noise is amplified with the signal, so a larger alpha means a grainier picture. Large movements break the small-motion assumption and leave ghosts.</p>
+    </div></div>
+  </section>
+
+  <!-- 10. Interlude: motion nobody could see (story beat 5) -->
+  <section class="chap" id="ch-10" data-tone="night" aria-labelledby="h-10">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Interlude · the demos</p>
+        <h2 id="h-10">Motion nobody could see</h2>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Colour was only half of it. In the paper's motion examples, a sleeping baby's breathing was made clearer, a wrist showed its arteries pulsing (amplification 10, band 0.4 to 3 hertz), a subway scene was exaggerated on purpose, and a guitar's strings were picked apart one by one with narrow bands, for example 72 to 92 hertz for the low E string, at 600 frames per second.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>In a separate follow-up summary, a building crane that looks perfectly still was shown to sway, with motion in the 0.2 to 0.4 hertz range magnified 75 times. The team even filmed a DSLR camera at 300 frames per second and showed the mirror's tiny shake, then checked it with a laser pointer.</p>
+      <div class="ctl"><label for="motionMix">Amplify <output id="motionMixo">100%</output></label><input type="range" id="motionMix" data-ui="motionMix" min="0" max="1" step="0.01" value="1"></div>
+      <p class="note">Generated shapes, magnified for real here. Frequencies are illustrative, slowed to fit a 30 fps clip.</p>
+    </div></div>
+  </section>
+
+  <!-- 11. Try it -->
+  <section class="chap" id="ch-11" data-tone="night" aria-labelledby="h-11">
+    <div class="step head" data-w="0.6">
+      <div class="txt">
+        <p class="kicker">Chapter 9</p>
+        <h2 id="h-11">Try it yourself</h2>
+        <p class="sub">Choose the band and alpha, and watch what the filter reveals.</p>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>Now you drive. The clip on screen is synthetic: a cartoon face with a pulse at 1 Hz, and a chest breathing at 0.3 Hz.</p>
+      <p>Set the frequency band first. Put it around 1 Hz and the face starts to flush. Move it to 0.3 Hz and the chest comes alive instead. Put it somewhere with nothing in it, and you only amplify noise.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Then raise alpha. At first the effect grows. Push too far and you see grain, clipping, and distorted edges. That is the trade the paper describes.</p>
+      <p>Notice that the tool never looks for the face. It only looks at one pixel at a time.</p>
+    </div></div>
+    <div class="step console" data-w="2.2">
+      <div class="txt" id="console">
+        <div class="chips" role="group" aria-label="Presets">
+          <button type="button" data-preset="pulse" aria-pressed="true">Pulse</button>
+          <button type="button" data-preset="breath" aria-pressed="false">Breath</button>
+          <button type="button" data-preset="wrong" aria-pressed="false">Wrong band</button>
+          <button type="button" data-preset="much" aria-pressed="false">Too much</button>
+        </div>
+        <div class="ctl"><label for="tA">alpha <output id="tAo">100</output></label><input type="range" id="tA" data-ui="tAlpha" min="0" max="300" step="1" value="100"></div>
+        <div class="ctl"><label for="tLo">band low <output id="tLoo">0.83 Hz</output></label><input type="range" id="tLo" data-ui="tLo" min="0.1" max="4" step="0.01" value="0.83"></div>
+        <div class="ctl"><label for="tHi">band high <output id="tHio">1.00 Hz</output></label><input type="range" id="tHi" data-ui="tHi" min="0.2" max="4" step="0.01" value="1"></div>
+        <div class="ctl"><label for="tL">spatial cutoff lambda_c <output id="tLo2">16 px</output></label><input type="range" id="tL" data-ui="tLam" min="4" max="128" step="1" value="16"></div>
+        <div class="seg" role="group" aria-label="Temporal filter">
+          <button type="button" data-ui="tMode" data-v="ideal" aria-pressed="true">Ideal</button>
+          <button type="button" data-ui="tMode" data-v="iir" aria-pressed="false">IIR</button>
+          <button type="button" data-ui="tPlay" data-v="toggle" aria-pressed="true" id="tPlay">Pause</button>
+        </div>
+        <p class="note" id="tNote">Drag the line on the picture to compare original and magnified.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Interlude: release (story beat 6) -->
+  <section class="chap" id="ch-12" data-tone="paper" aria-labelledby="h-12">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Interlude · after 2012</p>
+        <h2 id="h-12">Release, and a wider world</h2>
+      </div>
+    </div>
+    <div class="step"><div class="txt">
+      <p>The method was light enough for a prototype that ran live on a laptop, around 45 frames per second at 640 by 480, and the team posted code for it on the project page.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The paper was presented at SIGGRAPH 2012 and published in ACM Transactions on Graphics that July. Mainstream press followed in early 2013, with coverage in the New York Times and in Science.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>Then the same group kept going. In 2013 came phase-based magnification, which handles bigger boosts with less noise. In 2014 came Riesz pyramids, a faster version that can run in real time, and the Visual Microphone, which recovered speech from tiny vibrations of a chip bag filmed with a fast camera.</p>
+    </div></div>
+  </section>
+
+  <!-- 13. Beyond the paper -->
+  <section class="chap" id="ch-13" data-tone="paper" aria-labelledby="h-13">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Chapter 10</p>
+        <h2 id="h-13">Beyond the paper</h2>
+        <p class="sub">Later methods amplify phase, run faster, and read heart rate directly.</p>
+      </div>
+    </div>
+    <div class="step" data-w="1.3"><div class="txt">
+      <p>Pixel values are crude. Later work, by Wadhwa and colleagues, amplifies the local phase of a complex steerable pyramid instead. Phase tells you where an edge sits, so amplifying it moves the edge. In the authors' tests this allows about four times larger amplification, and noise is not amplified (SIGGRAPH 2013).</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The Riesz pyramid does something similar with a much smaller, faster representation, real time on a laptop (2014).</p>
+    </div></div>
+    <div class="step" data-w="1.2"><div class="txt">
+      <p>And the pulse idea has its own life. Reading heart rate from a face camera is called remote photoplethysmography, or rPPG. The paper cites earlier work by Verkruysse and by Poh, which averages skin colour over the face and picks the strongest frequency.</p>
+      <p class="note">Measured live on the synthetic clip: the mean green of a skin patch, its spectrum, and the peak times 60.</p>
+    </div></div>
+  </section>
+
+  <!-- 14. What it is not (story beat 7) -->
+  <section class="chap" id="ch-14" data-tone="night" aria-labelledby="h-14">
+    <div class="step head" data-w="0.7">
+      <div class="txt">
+        <p class="kicker">Honest limits</p>
+        <h2 id="h-14">What it is not</h2>
+      </div>
+    </div>
+    <div class="step" data-w="1.3"><div class="txt">
+      <p>It works best on small motions. Big movement produces ghosting, and cranking the dial too high clips brightness at edges. Noise gets amplified along with the signal, which is why the pulse demo blurs the picture first.</p>
+    </div></div>
+    <div class="step"><div class="txt">
+      <p>The pulse view is a visualization, and the authors do hint at possible medical uses, but the paper is a research method, not a clinical device. Related ideas, called remote photoplethysmography, are an active area of research and products, but this story keeps to what the sources show.</p>
+    </div></div>
+  </section>
+
+  </main>
+</div>
+
+<nav class="rail" id="rail" aria-label="Chapters">
+  <button type="button" class="railbtn" id="railbtn" aria-expanded="false" aria-controls="raillist"><span id="stepcue">Step 1 of 15</span></button>
+  <ol id="raillist">
+    <li><a href="#ch-0" data-ch="0" title="Your skin flushes with every heartbeat; a camera can see it.">Cold open</a></li>
+    <li><a href="#ch-1" data-ch="1" title="Your heartbeat changes your skin colour, far too little to see.">A face that seems still</a></li>
+    <li><a href="#ch-2" data-ch="2" title="Pulse from video, and motion by tracking: two toolboxes and a gap.">Before 2012</a></li>
+    <li><a href="#ch-3" data-ch="3" title="Do not follow the thing; watch one place and record it.">Follow it, or watch here</a></li>
+    <li><a href="#ch-4" data-ch="4" title="Any signal is a stack of sine waves, shown as bars.">Every signal is waves</a></li>
+    <li><a href="#ch-5" data-ch="5" title="Pulse, breath and noise sit at different frequencies, so we can separate them.">Sorting by frequency</a></li>
+    <li><a href="#ch-6" data-ch="6" title="A bandpass filter keeps one frequency window and erases everything else.">Keep one band</a></li>
+    <li><a href="#ch-7" data-ch="7" title="Split the picture by detail size, because coarse scales are cleaner.">Split the picture</a></li>
+    <li><a href="#ch-8" data-ch="8" title="Multiply the filtered change by alpha; it mimics motion only for smooth detail.">Amplify and add</a></li>
+    <li><a href="#ch-9" data-ch="9" title="Split, filter in time, multiply, add; noise and big motion are the limits.">The whole pipeline</a></li>
+    <li><a href="#ch-10" data-ch="10" title="Breathing, strings and a crane, magnified.">Motion nobody could see</a></li>
+    <li><a href="#ch-11" data-ch="11" title="Choose the band and alpha, and watch what the filter reveals.">Try it yourself</a></li>
+    <li><a href="#ch-12" data-ch="12" title="A live prototype, the press, and the follow-ups.">Release</a></li>
+    <li><a href="#ch-13" data-ch="13" title="Later methods amplify phase, run faster, and read heart rate directly.">Beyond the paper</a></li>
+    <li><a href="#ch-14" data-ch="14" title="Small motions only, noise grows, and it is not a medical device.">What it is not</a></li>
+  </ol>
+</nav>
+
+<p class="sr" id="live" aria-live="polite"></p>
+
+<footer class="sources" id="sources">
+  <div class="col">
+    <p class="kicker">Sources</p>
+    <h2>Where this comes from</h2>
+    <ul>
+      <li>Wu, Rubinstein, Shih, Guttag, Durand and Freeman, <a href="https://people.csail.mit.edu/mrub/papers/vidmag.pdf">Eulerian Video Magnification for Revealing Subtle Changes in the World</a>, SIGGRAPH 2012, ACM Transactions on Graphics 31(4). <a href="https://dspace.mit.edu/handle/1721.1/86955">Open-access record at MIT DSpace</a>.</li>
+      <li><a href="https://people.csail.mit.edu/mrub/vidmag/">MIT CSAIL project page</a>: people, code, press, and the later publications.</li>
+      <li>Wadhwa, Wu, Davis, Rubinstein, Shih, Mysore, Chen, Buyukozturk, Guttag, Freeman and Durand, <a href="https://people.csail.mit.edu/mrub/papers/EulerianVideoMagnificationAndAnalysis.pdf">Eulerian Video Magnification and Analysis</a>, Communications of the ACM, January 2017.</li>
+      <li><a href="https://people.csail.mit.edu/nwadhwa/phase-video">Phase-based Video Motion Processing</a> (SIGGRAPH 2013) and <a href="https://people.csail.mit.edu/mrub/VisualMic">The Visual Microphone</a> (SIGGRAPH 2014).</li>
+    </ul>
+    <p class="fine">All footage on this page is synthetic: a cartoon face and chest generated in your browser from a fixed seed, with an illustrative pulse of 0.5 grey levels at 1 Hz and breathing of 0.5 px at 0.3 Hz. The magnified pictures are computed live with a Laplacian pyramid, a temporal bandpass filter and amplification. Numbers marked illustrative are demo choices, not values from the paper. Nothing here is a medical device or a measurement of anyone's health.</p>
+    <p class="fine"><a href="../">Back to the long-form notebook on Eulerian video magnification</a></p>
+  </div>
+</footer>
+
+<script src="dsp.js"></script>
+<script src="scenes.js"></script>
+<script src="movie.js"></script>
+</body>
+</html>
