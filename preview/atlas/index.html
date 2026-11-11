@@ -38,13 +38,13 @@
 
 <section class="wrap filters" aria-label="Filter by use case">
   <span class="label">Show</span>
-  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>20</span></button>
+  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>18</span></button>
   <button type="button" class="f" data-uc="play" aria-pressed="false" style="--c: var(--uc-play)"><i></i>Games <span>6</span></button>
   <button type="button" class="f" data-uc="vision" aria-pressed="false" style="--c: var(--uc-vision)"><i></i>Seeing <span>4</span></button>
   <button type="button" class="f" data-uc="robots" aria-pressed="false" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices <span>3</span></button>
   <button type="button" class="f" data-uc="data" aria-pressed="false" style="--c: var(--uc-data)"><i></i>Data science <span>6</span></button>
-  <button type="button" class="f" data-uc="tools" aria-pressed="false" style="--c: var(--uc-tools)"><i></i>Tools <span>6</span></button>
-  <button type="button" class="f" data-uc="teach" aria-pressed="false" style="--c: var(--uc-teach)"><i></i>Teaching <span>5</span></button>
+  <button type="button" class="f" data-uc="tools" aria-pressed="false" style="--c: var(--uc-tools)"><i></i>Tools <span>5</span></button>
+  <button type="button" class="f" data-uc="teach" aria-pressed="false" style="--c: var(--uc-teach)"><i></i>Teaching <span>4</span></button>
 </section>
 
 <section class="wrap" aria-labelledby="start">
@@ -102,7 +102,7 @@
 </section>
 
 <section class="wrap" aria-labelledby="index">
-  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 20 projects, newest first.</p></div>
+  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 18 projects, newest first.</p></div>
   <div class="table-wrap">
   <table class="index">
     <thead><tr><th>When</th><th>Project</th><th>The question</th><th>Use cases</th><th>Status</th><th></th></tr></thead>
@@ -195,14 +195,6 @@
         <td class="mono">building</td>
         <td class="mono"></td>
       </tr>
-      <tr data-uc="tools">
-        <td class="mono">Oct 2026</td>
-        <td><a href="projects/kindlebot/"><b>Classics by text message</b></a></td>
-        <td class="q">Classics by text message</td>
-        <td><span class="chips"><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
-        <td class="mono">in use</td>
-        <td class="mono"></td>
-      </tr>
       <tr data-uc="robots vision play">
         <td class="mono">Sep 2026</td>
         <td><a href="../showcase/robot/"><b>Someone to play with</b></a></td>
@@ -218,14 +210,6 @@
         <td><span class="chips"><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
         <td class="mono">prototype</td>
         <td class="mono"></td>
-      </tr>
-      <tr data-uc="teach">
-        <td class="mono">Sep 2026</td>
-        <td><a href="../showcase/agent/"><b>An agent that fits in a laptop</b></a></td>
-        <td class="q">An agent that fits in a laptop</td>
-        <td><span class="chips"><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span></td>
-        <td class="mono">shipped</td>
-        <td class="mono"><a href="https://github.com/valkiii/build_your_agent_workshop" target="_blank" rel="noopener">code ↗</a></td>
       </tr>
       <tr data-uc="tools teach">
         <td class="mono">Sep 2026</td>
@@ -289,7 +273,7 @@
   <span>Valerio Ciotti · Imagine, try, solve.</span>
   <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
 </footer>
-<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Tools", "Teaching"], "projects": ["studygroup", "precog", "pulp", "spellstorm", "drawbluff", "wisecrack", "clustering", "eulerian", "sqlsprint", "diary", "xgoduck", "kindlebot", "robot", "maieutica", "agentworkshop", "retro", "spindle", "connect4", "pydata", "heartbeat"]}</script>
+<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Tools", "Teaching"], "projects": ["studygroup", "precog", "pulp", "spellstorm", "drawbluff", "wisecrack", "clustering", "eulerian", "sqlsprint", "diary", "xgoduck", "robot", "maieutica", "retro", "spindle", "connect4", "pydata", "heartbeat"]}</script>
 <script>
 window.ATLAS = [
   {slug: "studygroup", title: "Six papers, seventy minutes, every two weeks", q: "Six papers, seventy minutes, every two weeks", uc: ["teach"], stack: ["Python", "arXiv", "Hacker News", "Hugging Face"], href: "study-group/", featured: false, date: "Nov 2026"},
@@ -303,10 +287,8 @@ window.ATLAS = [
   {slug: "sqlsprint", title: "Back at the keyboard, one query at a time", q: "Back at the keyboard, one query at a time", uc: ["teach"], stack: ["sql.js (SQLite in WebAssembly)", "JavaScript"], href: "projects/sqlsprint/", featured: false, date: "Oct 2026"},
   {slug: "diary", title: "A notebook that writes back", q: "A notebook that writes back", uc: ["tools", "robots"], stack: ["TypeScript", "Kotlin", "Supernote plugin SDK", "Claude / Ollama"], href: "projects/diary/", featured: false, date: "Oct 2026"},
   {slug: "xgoduck", title: "Teaching a duck to walk on a Raspberry Pi", q: "Teaching a duck to walk on a Raspberry Pi", uc: ["robots"], stack: ["Raspberry Pi Zero 2W", "Feetech bus servos", "ONNX policies", "Python"], href: "projects/xgoduck/", featured: false, date: "Oct 2026"},
-  {slug: "kindlebot", title: "Classics by text message", q: "Classics by text message", uc: ["tools"], stack: ["Python", "Telegram Bot API", "Gutendex", "SMTP", "Raspberry Pi"], href: "projects/kindlebot/", featured: false, date: "Oct 2026"},
   {slug: "robot", title: "Someone to play with", q: "Someone to play with", uc: ["robots", "vision", "play"], stack: ["LeRobot", "SO-101 arm", "PyTorch", "OpenCV", "inverse kinematics"], href: "../showcase/robot/", featured: true, date: "Sep 2026"},
   {slug: "maieutica", title: "The org chart nobody draws", q: "The org chart nobody draws", uc: ["data", "tools"], stack: ["SQLite / Postgres", "D3", "Python", "Jira REST"], href: "projects/maieutica/", featured: false, date: "Sep 2026"},
-  {slug: "agentworkshop", title: "An agent that fits in a laptop", q: "An agent that fits in a laptop", uc: ["teach"], stack: ["Python", "local LLMs", "RSS", "EPUB"], href: "../showcase/agent/", featured: false, date: "Sep 2026"},
   {slug: "retro", title: "One prompt, one retro", q: "One prompt, one retro", uc: ["tools", "teach"], stack: ["Node.js", "Claude", "Kokoro TTS"], href: "projects/retro/", featured: false, date: "Sep 2026"},
   {slug: "spindle", title: "The record sleeve, back on my desk", q: "The record sleeve, back on my desk", uc: ["tools"], stack: ["Swift", "SwiftUI", "AppKit", "AppleScript"], href: "projects/spindle/", featured: false, date: "Sep 2026"},
   {slug: "connect4", title: "Four in a row against five networks", q: "Four in a row against five networks", uc: ["play", "data"], stack: ["PyTorch", "Dueling Double DQN", "CNNs", "curriculum learning", "JavaScript"], href: "projects/connect4/", featured: true, date: "Sep 2025"},
