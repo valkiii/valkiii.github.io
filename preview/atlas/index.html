@@ -38,8 +38,8 @@
 
 <section class="wrap filters" aria-label="Filter by use case">
   <span class="label">Show</span>
-  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>18</span></button>
-  <button type="button" class="f" data-uc="play" aria-pressed="false" style="--c: var(--uc-play)"><i></i>Games <span>6</span></button>
+  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>15</span></button>
+  <button type="button" class="f" data-uc="play" aria-pressed="false" style="--c: var(--uc-play)"><i></i>Games <span>3</span></button>
   <button type="button" class="f" data-uc="vision" aria-pressed="false" style="--c: var(--uc-vision)"><i></i>Seeing <span>4</span></button>
   <button type="button" class="f" data-uc="robots" aria-pressed="false" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices <span>3</span></button>
   <button type="button" class="f" data-uc="data" aria-pressed="false" style="--c: var(--uc-data)"><i></i>Data science <span>6</span></button>
@@ -58,15 +58,7 @@
     <span class="q">Conducting my desktop with bare hands</span>
   </span>
 </a>
-<a class="card big" href="projects/spellstorm/" data-uc="play">
-  <span class="media"><img src="../media/covers/spellstorm.jpg" alt="" loading="lazy"></span>
-  <span class="body">
-    <span class="meta">Oct 2026 · playable</span>
-    <b>A spellbook for the whole family</b>
-    <span class="q">A spellbook for the whole family</span>
-  </span>
-</a>
-<a class="card" href="../showcase/clustering/" data-uc="data">
+<a class="card big" href="../showcase/clustering/" data-uc="data">
   <span class="media"><img src="../media/covers/clustering.jpg" alt="" loading="lazy"></span>
   <span class="body">
     <span class="meta">Oct 2026 · essay</span>
@@ -102,7 +94,7 @@
 </section>
 
 <section class="wrap" aria-labelledby="index">
-  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 18 projects, newest first.</p></div>
+  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 15 projects, newest first.</p></div>
   <div class="table-wrap">
   <table class="index">
     <thead><tr><th>When</th><th>Project</th><th>The question</th><th>Use cases</th><th>Status</th><th></th></tr></thead>
@@ -130,30 +122,6 @@
         <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span><span class="chip" style="--c: var(--uc-vision)"><i></i>Seeing</span></span></td>
         <td class="mono">beta</td>
         <td class="mono"><a href="https://github.com/valkiii/fruit_ninja" target="_blank" rel="noopener">code ↗</a></td>
-      </tr>
-      <tr data-uc="play">
-        <td class="mono">Oct 2026</td>
-        <td><a href="projects/spellstorm/"><b>A spellbook for the whole family</b></a></td>
-        <td class="q">A spellbook for the whole family</td>
-        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
-        <td class="mono">playable</td>
-        <td class="mono"></td>
-      </tr>
-      <tr data-uc="play">
-        <td class="mono">Oct 2026</td>
-        <td><a href="projects/drawbluff/"><b>Draw badly, bluff boldly</b></a></td>
-        <td class="q">Draw badly, bluff boldly</td>
-        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
-        <td class="mono">playable</td>
-        <td class="mono"></td>
-      </tr>
-      <tr data-uc="play">
-        <td class="mono">Oct 2026</td>
-        <td><a href="projects/wisecrack/"><b>Two answers enter, one laugh leaves</b></a></td>
-        <td class="q">Two answers enter, one laugh leaves</td>
-        <td><span class="chips"><span class="chip" style="--c: var(--uc-play)"><i></i>Games</span></span></td>
-        <td class="mono">playable</td>
-        <td class="mono"></td>
       </tr>
       <tr data-uc="data">
         <td class="mono">Oct 2026</td>
@@ -273,15 +241,12 @@
   <span>Valerio Ciotti · Imagine, try, solve.</span>
   <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
 </footer>
-<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Tools", "Teaching"], "projects": ["studygroup", "precog", "pulp", "spellstorm", "drawbluff", "wisecrack", "clustering", "eulerian", "sqlsprint", "diary", "xgoduck", "robot", "maieutica", "retro", "spindle", "connect4", "pydata", "heartbeat"]}</script>
+<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Tools", "Teaching"], "projects": ["studygroup", "precog", "pulp", "clustering", "eulerian", "sqlsprint", "diary", "xgoduck", "robot", "maieutica", "retro", "spindle", "connect4", "pydata", "heartbeat"]}</script>
 <script>
 window.ATLAS = [
   {slug: "studygroup", title: "Six papers, seventy minutes, every two weeks", q: "Six papers, seventy minutes, every two weeks", uc: ["teach"], stack: ["Python", "arXiv", "Hacker News", "Hugging Face"], href: "study-group/", featured: false, date: "Nov 2026"},
   {slug: "precog", title: "Conducting my desktop with bare hands", q: "Conducting my desktop with bare hands", uc: ["vision", "tools"], stack: ["Python", "OpenCV", "MediaPipe", "PyObjC", "dynamic time warping"], href: "../showcase/precog/", featured: true, date: "Oct 2026"},
   {slug: "pulp", title: "Slicing fruit with a glance", q: "Slicing fruit with a glance", uc: ["play", "vision"], stack: ["JavaScript", "MediaPipe Tasks (wasm)", "Canvas", "WebAudio"], href: "projects/pulp/", featured: false, date: "Oct 2026"},
-  {slug: "spellstorm", title: "A spellbook for the whole family", q: "A spellbook for the whole family", uc: ["play"], stack: ["JavaScript", "Canvas", "WebAudio", "Gamepad API"], href: "projects/spellstorm/", featured: true, date: "Oct 2026"},
-  {slug: "drawbluff", title: "Draw badly, bluff boldly", q: "Draw badly, bluff boldly", uc: ["play"], stack: ["Node.js (no dependencies)", "Server-Sent Events", "Canvas", "Kokoro TTS", "WebAudio"], href: "projects/drawbluff/", featured: false, date: "Oct 2026"},
-  {slug: "wisecrack", title: "Two answers enter, one laugh leaves", q: "Two answers enter, one laugh leaves", uc: ["play"], stack: ["Node.js (no dependencies)", "Server-Sent Events", "Kokoro TTS", "WebAudio"], href: "projects/wisecrack/", featured: false, date: "Oct 2026"},
   {slug: "clustering", title: "Cluster the reasons", q: "Cluster the reasons", uc: ["data"], stack: ["XGBoost", "SHAP", "UMAP", "HDBSCAN"], href: "../showcase/clustering/", featured: true, date: "Oct 2026"},
   {slug: "eulerian", title: "Seeing the invisible", q: "Seeing the invisible", uc: ["vision", "data"], stack: ["Python", "NumPy", "SciPy", "OpenCV", "Riesz pyramids", "rPPG"], href: "../showcase/eulerian/", featured: false, date: "Oct 2026"},
   {slug: "sqlsprint", title: "Back at the keyboard, one query at a time", q: "Back at the keyboard, one query at a time", uc: ["teach"], stack: ["sql.js (SQLite in WebAssembly)", "JavaScript"], href: "projects/sqlsprint/", featured: false, date: "Oct 2026"},
