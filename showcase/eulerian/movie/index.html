@@ -314,7 +314,7 @@
       </div>
     </div>
     <div class="step"><div class="txt">
-      <p>Now you drive. The clip on screen is synthetic: a cartoon face with a pulse at 1 Hz, and a chest breathing at 0.3 Hz.</p>
+      <p>Now you drive. The clip on screen is synthetic: a face with a pulse at 1 Hz, and a chest breathing at 0.3 Hz.</p>
       <p>Set the frequency band first. Put it around 1 Hz and the face starts to flush. Move it to 0.3 Hz and the chest comes alive instead. Put it somewhere with nothing in it, and you only amplify noise.</p>
     </div></div>
     <div class="step"><div class="txt">
@@ -336,7 +336,7 @@
         <div class="seg" role="group" aria-label="Temporal filter">
           <button type="button" data-ui="tMode" data-v="ideal" aria-pressed="true">Ideal</button>
           <button type="button" data-ui="tMode" data-v="iir" aria-pressed="false">IIR</button>
-          <button type="button" data-ui="tPlay" data-v="toggle" aria-pressed="true" id="tPlay">Pause</button>
+          <button type="button" data-ui="tPlay" data-v="toggle" id="tPlay">Pause</button>
         </div>
         <p class="note" id="tNote">Drag the line on the picture to compare original and magnified.</p>
       </div>
@@ -435,13 +435,15 @@
       <li>Wadhwa, Wu, Davis, Rubinstein, Shih, Mysore, Chen, Buyukozturk, Guttag, Freeman and Durand, <a href="https://people.csail.mit.edu/mrub/papers/EulerianVideoMagnificationAndAnalysis.pdf">Eulerian Video Magnification and Analysis</a>, Communications of the ACM, January 2017.</li>
       <li><a href="https://people.csail.mit.edu/nwadhwa/phase-video">Phase-based Video Motion Processing</a> (SIGGRAPH 2013) and <a href="https://people.csail.mit.edu/mrub/VisualMic">The Visual Microphone</a> (SIGGRAPH 2014).</li>
     </ul>
-    <p class="fine">All footage on this page is synthetic: a cartoon face and chest generated in your browser from a fixed seed, with an illustrative pulse of 0.5 grey levels at 1 Hz and breathing of 0.5 px at 0.3 Hz. The magnified pictures are computed live with a Laplacian pyramid, a temporal bandpass filter and amplification. Numbers marked illustrative are demo choices, not values from the paper. Nothing here is a medical device or a measurement of anyone's health.</p>
+    <p class="fine">All footage on this page is synthetic: a procedurally rendered face and shoulders (no photograph, no real person), generated in your browser from a fixed seed, with an illustrative pulse of 0.5 grey levels at 1 Hz and breathing of 0.5 px at 0.3 Hz. The magnified pictures are computed live with a Laplacian pyramid, a temporal bandpass filter and amplification. Numbers marked illustrative are demo choices, not values from the paper. Nothing here is a medical device or a measurement of anyone's health.</p>
     <p class="fine"><a href="../">Back to the long-form notebook on Eulerian video magnification</a></p>
   </div>
 </footer>
 
+<script src="portrait.js"></script>
 <script src="dsp.js"></script>
 <script src="scenes.js"></script>
+<script src="scenes2.js"></script>
 <script src="movie.js"></script>
 </body>
 </html>

@@ -16,8 +16,14 @@ const into = (e, p, i, span) => seg(p, mid(e, i) - (span || .06), mid(e, i) + (s
 
 function text(e, s, x, y, o) {
   o = o || {}; const g = e.ctx;
-  g.font = `${o.weight || 400} ${o.size || 13}px ${FONT[o.font || "mono"]}`;
-  g.textAlign = o.align || "left"; g.textBaseline = o.base || "alphabetic";
+  let size = o.size || 13;
+  g.font = `${o.weight || 400} ${size}px ${FONT[o.font || "mono"]}`;
+  // keep every label inside the picture: shrink a little, then slide it in from the edge
+  const al = o.align || "left", wd = g.measureText(s).width, lim = e.W - 12;
+  if (wd > lim - 0) { size = Math.max(8.5, size * lim / wd); g.font = `${o.weight || 400} ${size}px ${FONT[o.font || "mono"]}`; }
+  const w2 = g.measureText(s).width, x0 = al === "left" ? x : al === "right" ? x - w2 : x - w2 / 2;
+  if (x0 + w2 > e.W - 6) x -= x0 + w2 - (e.W - 6); else if (x0 < 6) x += 6 - x0;
+  g.textAlign = al; g.textBaseline = o.base || "alphabetic";
   g.fillStyle = o.color || e.pal.c("ink2");
   if (o.alpha != null) g.globalAlpha *= o.alpha;
   if (o.halo) { g.lineWidth = 4; g.strokeStyle = e.pal.c("bg", .85); g.lineJoin = "round"; g.strokeText(s, x, y); }
@@ -55,12 +61,15 @@ function series(e, m, xs, ys, color, wd, n) {
 }
 
 // ---------- drawing the clip ----------
-const fc = document.createElement("canvas"); fc.width = fc.height = 128;
-const fctx = fc.getContext("2d"); const img = fctx.createImageData(128, 128);
-function putRGBA(rgba, w, h) {
+const CW = window.EVM.W;                 // clip size in pixels
+const fc = document.createElement("canvas"); fc.width = fc.height = CW;
+const fctx = fc.getContext("2d"); const img = fctx.createImageData(CW, CW);
+function putRGBA(rgba, w, h, matte) {
   if (fc.width !== w || fc.height !== h) { fc.width = w; fc.height = h; }
-  const id = (w === 128 && h === 128) ? img : fctx.createImageData(w, h);
-  id.data.set(rgba); fctx.putImageData(id, 0, 0); return fc;
+  const id = (w === CW && h === CW) ? img : fctx.createImageData(w, h);
+  id.data.set(rgba);
+  if (matte) { const d = id.data; for (let i = 0; i < matte.length; i++) d[i * 4 + 3] = matte[i] * 255; }
+  fctx.putImageData(id, 0, 0); return fc;
 }
 function vignette(e, r, f, color) {      // feather the picture into the page: the video has no frame
   if (!f) return;
@@ -72,8 +81,8 @@ function vignette(e, r, f, color) {      // feather the picture into the page: t
   g.fillStyle = gr; g.fillRect(-1.03, -1.03, 2.06, 2.06); g.restore();
 }
 function drawRGBA(e, rgba, r, o) {
-  o = o || {}; const g = e.ctx, w = o.w || 128, h = o.h || 128;
-  const c = putRGBA(rgba, w, h);
+  o = o || {}; const g = e.ctx, w = o.w || CW, h = o.h || CW;
+  const c = putRGBA(rgba, w, h, o.matte ? e.D.clip.model.fg : null);
   g.save(); if (o.alpha != null) g.globalAlpha *= o.alpha;
   g.imageSmoothingEnabled = !o.pixel; g.imageSmoothingQuality = "high";
   if (o.clip) { g.beginPath(); g.rect(o.clip.x, o.clip.y, o.clip.w, o.clip.h); g.clip(); }
@@ -90,12 +99,14 @@ function waiting(e, r) {
 }
 function square(e, cx, cy, s) { return { x: cx - s / 2, y: cy - s / 2, w: s, h: s }; }
 // the big face position, shared by several chapters so cuts line up
-function heroRect(e, scale) {
-  const F = e.F, s = Math.min(F.w, F.h) * (scale || 1);
-  return square(e, F.x + F.w / 2, F.y + F.h / 2, s);
+function heroRect(e, scale) {        // large, anchored to the bottom of the picture so the bust rises out of the page
+  const F = e.F, k = scale || 1;
+  const s = (e.phone ? Math.min(e.W * 1.02, e.H * 1.08) : Math.min(e.W * .6, e.H * 1.12)) * k;
+  const cx = e.phone ? e.W / 2 : F.x + F.w * .5;
+  return { x: cx - s / 2, y: e.H - s * .97, w: s, h: s };
 }
-const clipToRect = (r, x, y) => ({ x: r.x + (x + .5) / 128 * r.w, y: r.y + (y + .5) / 128 * r.h });
-const rectToClip = (r, X, Y) => ({ x: Math.max(0, Math.min(127, Math.floor((X - r.x) / r.w * 128))), y: Math.max(0, Math.min(127, Math.floor((Y - r.y) / r.h * 128))) });
+const clipToRect = (r, x, y) => ({ x: r.x + (x + .5) / CW * r.w, y: r.y + (y + .5) / CW * r.h });
+const rectToClip = (r, X, Y) => ({ x: Math.max(0, Math.min(CW - 1, Math.floor((X - r.x) / r.w * CW))), y: Math.max(0, Math.min(CW - 1, Math.floor((Y - r.y) / r.h * CW))) });
 
 // ---------- deterministic noise for the illustrative 1D signals ----------
 function noiseSeq(seed, n, sd) { const g = window.EVM.gaussFactory(window.EVM.rng32(seed)); return Array.from({ length: n }, () => sd * g()); }
@@ -118,11 +129,11 @@ SCENES[0] = {
     if (!e.D.ready) { waiting(e, r); return; }
     const auto = into(e, p, 2, .08);
     const m = e.ui.coldView === "filter" ? 1 : e.ui.coldView === "camera" ? 0 : auto;
-    drawRGBA(e, clipFrame(e, 50 * m), r, { feather: .42 });
-    const y = r.y + r.h - r.h * .07;
+    drawRGBA(e, clipFrame(e, 50 * m), r, { matte: true });
+    const y = Math.min(e.H - 18, r.y + r.h * .97);
     withAlpha(e, 1 - m, () => text(e, "Can you see a pulse?", r.x + r.w / 2, y, { size: 15, align: "center", color: e.pal.c("ink2"), halo: true }));
     withAlpha(e, m, () => text(e, "same video · pulse band × 50", r.x + r.w / 2, y, { size: 15, align: "center", color: e.pal.c("skin"), halo: true }));
-    text(e, `30 fps · frame ${String(e.fi + 1).padStart(3, "0")} of 300 · synthetic`, r.x + r.w / 2, r.y + r.h * .06, { size: 12, align: "center", color: e.pal.c("ink3"), halo: true });
+    text(e, `30 fps · frame ${String(e.fi + 1).padStart(3, "0")} of 300 · synthetic`, r.x + r.w / 2, Math.max(e.F.y + 4, r.y + r.h * .1), { size: 12, align: "center", color: e.pal.c("ink3"), halo: true });
   },
 };
 
@@ -138,14 +149,13 @@ SCENES[1] = {
     const side = e.phone ? square(e, F.x + F.w * .26, F.y + F.h * .38, Math.min(F.w * .5, F.h * .72)) : square(e, F.x + F.w * .27, F.y + F.h * .5, Math.min(F.w * .52, F.h * .7));
     const r = lerpR(hero, side, z);
     const ghost = zout;
-    drawRGBA(e, clipFrame(e, 0), r, { feather: .42 });
-    if (ghost > 0) withAlpha(e, ghost * .55, () => drawRGBA(e, clipFrame(e, e.ui.ghostAlpha), r, {}));
-    if (ghost > 0) vignette(e, r, .42);
+    drawRGBA(e, clipFrame(e, 0), r, { matte: true });
+    if (ghost > 0) withAlpha(e, ghost * .6, () => drawRGBA(e, clipFrame(e, e.ui.ghostAlpha), r, { matte: true }));
     // forehead swatch and the grey ruler
-    const fp = clipToRect(r, 64, 38);
-    withAlpha(e, 1 - zin, () => text(e, "Can you see a pulse?", r.x + r.w / 2, r.y + r.h * .93, { size: 15, align: "center", color: e.pal.c("ink2"), halo: true }));
+    const fp = clipToRect(r, e.D.ready ? e.D.clip.model.L.forehead.x : 96, e.D.ready ? e.D.clip.model.L.forehead.y : 57);
+    withAlpha(e, 1 - zin, () => text(e, "Can you see a pulse?", r.x + r.w / 2, Math.min(e.H - 18, r.y + r.h * .97), { size: 15, align: "center", color: e.pal.c("ink2"), halo: true }));
     if (z > 0.01) withAlpha(e, z, () => {
-      const g = e.ctx, base = e.D.clip.model.base, i = (38 * 128 + 64) * 3;
+      const g = e.ctx, base = e.D.clip.model.base, LF = e.D.clip.model.L.forehead, i = (LF.y * CW + LF.x) * 3;
       const pulse = Math.sin(TAU * e.t);
       const G = Math.round(base[i + 1] + 0.5 * pulse), R = Math.round(base[i] + .25 * pulse), B = Math.round(base[i + 2]);
       const sx = e.phone ? F.x + F.w * .56 : F.x + F.w * .58, sw = e.phone ? F.w * .4 : F.w * .36, sy = e.phone ? F.y + F.h * .06 : F.y + F.h * .14, sh = e.phone ? F.h * .36 : F.h * .3;
@@ -171,7 +181,7 @@ SCENES[1] = {
       line(e, [[mx, ry + 16], [sx + cw * 2, iy - 2]], e.pal.c("ink3"), 1, [2, 3]); line(e, [[mx, ry + 16], [sx + cw * 4, iy - 2]], e.pal.c("ink3"), 1, [2, 3]);
       text(e, "difference of 1 in 255, about 0.4 percent", sx, iy + (e.phone ? 66 : 74), { size: 13, color: e.pal.c("ink") });
     });
-    withAlpha(e, ghost, () => text(e, `Same video. Different numbers. × ${e.ui.ghostAlpha}`, r.x + r.w / 2, r.y + r.h * .93, { size: 15, align: "center", color: e.pal.c("skin"), halo: true }));
+    withAlpha(e, ghost, () => text(e, `Same video. Different numbers. × ${e.ui.ghostAlpha}`, r.x + r.w / 2, Math.min(e.H - 18, r.y + r.h * .97), { size: 15, align: "center", color: e.pal.c("skin"), halo: true }));
   },
 };
 
@@ -298,9 +308,9 @@ function probeScene(e, p, grid) {
   const face = { x: F.x + (e.phone ? 0 : F.w * .02), y: F.y, w: s, h: s };
   const pr = e.phone ? { x: F.x + 34, y: face.y + s + 34, w: F.w - 40, h: F.h - s - 66 } : { x: F.x + 44, y: face.y + s + 44, w: F.w - 60, h: F.h - s - 84 };
   if (!e.D.ready) { waiting(e, face); return; }
-  drawRGBA(e, clipFrame(e, 0), face, { feather: .3 });
+  drawRGBA(e, clipFrame(e, 0), face, { matte: true });
   e.hit(face, "probe", { cursor: "crosshair", move: (x, y, r) => { const q = rectToClip(r, x, y); e.ui.probe = q; } });
-  const pb = e.ui.probe, q = clipToRect(face, pb.x, pb.y), ps = Math.max(8, face.w / 128 * 4);
+  const pb = e.ui.probe, q = clipToRect(face, pb.x, pb.y), ps = Math.max(8, face.w / CW * 6);
   const ser = e.D.series(pb.x, pb.y, 1), n = 150;
   let lo = Infinity, hi = -Infinity; for (let i = 0; i < 300; i++) { lo = Math.min(lo, ser[i]); hi = Math.max(hi, ser[i]); }
   const mid = (lo + hi) / 2, half = Math.max(6, (hi - lo) / 2 + 1);
@@ -318,7 +328,7 @@ function probeScene(e, p, grid) {
   if (grid > .01) withAlpha(e, grid, () => {
     const G = e.phone ? 3 : 5;
     for (let j = 0; j < G; j++) for (let i = 0; i < G; i++) {
-      const cx = 44 + i * 40 / (G - 1), cy = 26 + j * 52 / (G - 1), c = clipToRect(face, cx, cy), sr = e.D.series(cx, cy, 1);
+      const FB = e.D.clip.model.L.face, cx = Math.round(FB[0] + 8 + i * (FB[2] - FB[0] - 16) / (G - 1)), cy = Math.round(FB[1] + 4 + j * (FB[3] - FB[1] - 14) / (G - 1)), c = clipToRect(face, cx, cy), sr = e.D.series(cx, cy, 1);
       g.strokeStyle = e.pal.c("skin", .9); g.lineWidth = 1; g.strokeRect(c.x - 3, c.y - 3, 6, 6);
       let a = 0; for (let k = 0; k < 60; k++) a += sr[k]; a /= 60;
       const sp = []; for (let k = 0; k < 60; k++) sp.push([c.x + 5 + k * .42 * face.w / 300, c.y - (sr[k] - a) * .9]);

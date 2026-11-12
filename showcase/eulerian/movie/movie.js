@@ -14,14 +14,14 @@ const S = {                       // engine state
 };
 // ---------- UI state, shared with scenes ----------
 const ui = {
-  coldView: null, ghostAlpha: 50, trackErr: 0.5, probe: { x: 64, y: 40 }, sines: [true, true, true, true],
+  coldView: null, ghostAlpha: 50, trackErr: 0.5, probe: { x: 96, y: 57 }, sines: [true, true, true, true],
   bandLo: 0.83, bandHi: 1.0, bandMode: null, edgeAlpha: 4, ladderAlpha: 20, motionMix: null, levelHover: -1, specHover: null,
   tAlpha: 100, tLo: 0.83, tHi: 1.0, tLam: 16, tMode: "ideal", tRamp: false, tSplit: 0.5, tPreset: "pulse", tPlay: true,
 };
 const PRESETS = {   // ILLUSTRATIVE demo settings (technical.md chapter 8), measured in the node test
   pulse: { tAlpha: 100, tLo: 0.83, tHi: 1.0, tMode: "ideal", tLam: 16, tRamp: false },
   breath: { tAlpha: 10, tLo: 0.2, tHi: 0.5, tMode: "ideal", tLam: 48, tRamp: true },
-  wrong: { tAlpha: 100, tLo: 2.0, tHi: 3.0, tMode: "ideal", tLam: 16, tRamp: false },
+  wrong: { tAlpha: 100, tLo: 3.0, tHi: 4.0, tMode: "ideal", tLam: 16, tRamp: false },   // empty band: the clip has flicker at 2.5 Hz
   much: { tAlpha: 300, tLo: 0.83, tHi: 1.0, tMode: "ideal", tLam: 4, tRamp: false },
 };
 
@@ -47,14 +47,16 @@ function buildData() {
     if (r && r.done) {
       $("loading").hidden = true;
       const clip = r.value;
-      D.clip = clip; D.bank = E.DFTBank(clip.frames, clip.n, clip.P * 3);
+      D.clip = clip; ui.probe = { x: clip.model.L.forehead.x, y: clip.model.L.forehead.y }; D.bank = E.DFTBank(clip.frames, clip.n, clip.P * 3);
       D.mag.pulse = E.Magnifier(clip, D.bank); D.mag.pulse.set({ mode: "ideal", lo: 0.83, hi: 1.0, lambdaC: 16, ramp: false, chrom: 1 });
       D.mag.breath = E.Magnifier(clip, D.bank); D.mag.breath.set({ mode: "ideal", lo: 0.2, hi: 0.5, lambdaC: 48, ramp: true, chrom: 1 });
       D.mag.user = E.Magnifier(clip, D.bank);
       D.mag.free = E.Magnifier(clip, D.bank);
       // DFT bins for the pulse band, then the breathing band, in idle slices
       const ks = [9, 10, 2, 3, 4, 5]; let j = 0;
-      const binSlice = () => { if (j < ks.length) { D.bank.bin(ks[j++]); setTimeout(binSlice, 0); } else { D.ready = true; $("loading").classList.add("done"); afterReady(); } };
+      const later = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+      const binSlice = () => { if (j < ks.length) { D.bank.bin(ks[j++]); setTimeout(binSlice, 0); } else { D.ready = true; $("loading").classList.add("done"); afterReady(); idle(); } };
+      const idle = () => { if (!later.length) return; const k = later.shift(); (window.requestIdleCallback || setTimeout)(() => { D.bank.bin(k); idle(); }); };
       binSlice();
       return;
     }
@@ -160,15 +162,28 @@ function render(chIndex, p) {
     if (pp < zone && chIndex > 0) { other = [C[chIndex - 1], 1]; w = 1 - smooth(0.5 + pp / (2 * zone)); }
     else if (pp > 1 - zone && chIndex < C.length - 1) { other = [C[chIndex + 1], 0]; w = smooth((pp - (1 - zone)) / (2 * zone)); }
   }
-  let tone = c.tone;
+  let tone = c.tone, wiping = false;
   if (other && w > 0.002) {
     const [L0, L1] = layers;
     for (const L of layers) if (L.width !== cv.width || L.height !== cv.height) { L.width = cv.width; L.height = cv.height; }
     const keepHits = S.hits; paint(L0.getContext("2d"), c, pp);
     const mine = S.hits; S.hits = []; paint(L1.getContext("2d"), other[0], other[1]); S.hits = w < .5 ? mine : S.hits;
-    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.drawImage(L0, 0, 0);
-    ctx.globalAlpha = w; ctx.drawImage(L1, 0, 0); ctx.globalAlpha = 1;
-    tone = c.tone + (other[0].tone - c.tone) * w;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+    // the next act always arrives from below: a soft wipe when the page tone changes, a dissolve otherwise
+    const next = other[1] === 0, A = next ? L0 : L1, B = next ? L1 : L0, wb = next ? w : 1 - w;
+    ctx.drawImage(A, 0, 0);
+    if (other[0].tone !== c.tone) {
+      const b = B.getContext("2d"), H = B.height, f = 90 * S.dpr, edge = (H + 2 * f) * (1 - wb) - f;
+      b.setTransform(1, 0, 0, 1, 0, 0); b.globalCompositeOperation = "destination-in";
+      const gr = b.createLinearGradient(0, edge - f, 0, edge + f); gr.addColorStop(0, "rgba(0,0,0,0)"); gr.addColorStop(1, "rgba(0,0,0,1)");
+      b.fillStyle = gr; b.fillRect(0, 0, B.width, H); b.globalCompositeOperation = "source-over";
+      ctx.drawImage(B, 0, 0);
+      const tw = smooth((wb - .35) / .3); wiping = true;
+      tone = (next ? c.tone : other[0].tone) + ((next ? other[0].tone : c.tone) - (next ? c.tone : other[0].tone)) * tw;
+    } else {
+      ctx.globalAlpha = wb; ctx.drawImage(B, 0, 0); ctx.globalAlpha = 1;
+      tone = c.tone;
+    }
     void keepHits;
   } else paint(ctx, c, pp);
   if (S.phone) {          // the band's lower edge melts into the page so type slides under it softly
@@ -177,6 +192,7 @@ function render(chIndex, p) {
     ctx.fillStyle = gr; ctx.fillRect(0, S.H - 18, S.W, 18);
   }
   setTone(tone);
+  if (wiping !== S.wiping) { S.wiping = wiping; movie.classList.toggle("wiping", wiping); }
 }
 let lastToneKey = "";
 function setTone(t) {
@@ -261,7 +277,7 @@ function syncControls() {
   document.querySelectorAll("button[data-ui]").forEach(b => {
     const k = b.dataset.ui, v = b.dataset.v;
     if (k === "sine") b.setAttribute("aria-pressed", ui.sines[+v]);
-    else if (k === "tPlay") { b.setAttribute("aria-pressed", S.playing); b.textContent = S.playing ? "Pause" : "Play"; }
+    else if (k === "tPlay") { b.removeAttribute("aria-pressed"); b.textContent = S.playing ? "Pause" : "Play"; }
     else if (k === "bandMode") b.setAttribute("aria-pressed", (ui.bandMode || "iir") === v);
     else b.setAttribute("aria-pressed", ui[k] === v);
   });

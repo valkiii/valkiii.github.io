@@ -5,7 +5,7 @@
 (function (root) {
 "use strict";
 
-const FS = 30, N = 300, W = 128, H = 128;          // 10 s loop at 30 fps, so 1 Hz and 0.3 Hz loop exactly
+const FS = 30, N = 300, W = 192, H = 192;          // 10 s loop at 30 fps, so 1 Hz and 0.3 Hz loop exactly
 const TAU = Math.PI * 2;
 
 // ---------- deterministic randomness ----------
@@ -42,90 +42,58 @@ const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
 const SIG = { pulseHz: 1.0, pulseG: 0.5, pulseR: 0.25, breathHz: 0.3, breathPx: 0.5,
   flickerHz: 2.5, flicker: 0.4, driftHz: 0.1, drift: 1.0, noise: 2.0 };
 
-function sceneModel(w, h) {
-  w = w || W; h = h || H;
-  const P = w * h, base = new Float32Array(P * 3), skin = new Float32Array(P);
-  const k = w / 128;
-  const SK = [224, 172, 150], HAIR = [58, 40, 34], SHIRT = [62, 104, 150];
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-    const X = (x + .5) / k, Y = (y + .5) / k, i = y * w + x;
-    // wall: soft gradient with a faint lamp glow
-    const glow = Math.exp(-((X - 96) ** 2 + (Y - 18) ** 2) / 1800);
-    let r = 64 + 14 * glow - Y * .08, g = 72 + 12 * glow - Y * .08, b = 82 + 8 * glow - Y * .06;
-    // head
-    const hx = (X - 64) / 25, hy = (Y - 50) / 31, hd = Math.sqrt(hx * hx + hy * hy);
-    const head = sig((1 - hd) * 26);
-    const shade = 1 - .12 * Math.max(0, hd - .55) - .05 * Math.max(0, hx);
-    let s = head;
-    r = r * (1 - head) + SK[0] * shade * head; g = g * (1 - head) + SK[1] * shade * head; b = b * (1 - head) + SK[2] * shade * head;
-    // neck
-    const neck = sig((9.5 - Math.abs(X - 64)) * 1.5) * sig((Y - 72) * 1.2);
-    r = r * (1 - neck) + 206 * neck; g = g * (1 - neck) + 155 * neck; b = b * (1 - neck) + 134 * neck;
-    s = Math.max(s, neck);
-    // hair: a cap over the top of the head
-    const ax = (X - 64) / 27.5, ay = (Y - 45) / 30, ad = Math.sqrt(ax * ax + ay * ay);
-    const fringe = 30 + 4 * Math.cos((X - 64) / 6);
-    const hair = sig((1 - ad) * 22) * sig((fringe - Y) * 1.1);
-    r = r * (1 - hair) + HAIR[0] * hair; g = g * (1 - hair) + HAIR[1] * hair; b = b * (1 - hair) + HAIR[2] * hair;
-    s *= (1 - hair);
-    // eyes, brows, mouth, nose, cheeks
-    const feat = (cx, cy, rx, ry, sharp) => sig((1 - Math.hypot((X - cx) / rx, (Y - cy) / ry)) * sharp);
-    const eyes = Math.max(feat(54, 52, 3.4, 2.1, 6), feat(74, 52, 3.4, 2.1, 6));
-    r = r * (1 - eyes) + 40 * eyes; g = g * (1 - eyes) + 34 * eyes; b = b * (1 - eyes) + 36 * eyes; s *= (1 - eyes);
-    const brow = Math.max(feat(54, 46.5, 5, 1.1, 5), feat(74, 46.5, 5, 1.1, 5));
-    r = r * (1 - brow) + 92 * brow; g = g * (1 - brow) + 62 * brow; b = b * (1 - brow) + 52 * brow; s *= (1 - .7 * brow);
-    const mouthY = 68 + .02 * (X - 64) ** 2;
-    const mouth = sig((6.5 - Math.abs(X - 64)) * 2) * sig((1 - Math.abs(Y - mouthY)) * 2.4);
-    r = r * (1 - mouth) + 170 * mouth; g = g * (1 - mouth) + 92 * mouth; b = b * (1 - mouth) + 92 * mouth; s *= (1 - mouth);
-    const nose = feat(65.5, 60, 2.2, 4.6, 3) * .18;
-    r *= 1 - nose; g *= 1 - nose; b *= 1 - nose;
-    const cheek = (feat(50, 62, 6, 4, 2) + feat(78, 62, 6, 4, 2)) * .25 * head;
-    r += 8 * cheek; g -= 4 * cheek; b -= 2 * cheek;
-    base[i * 3] = r; base[i * 3 + 1] = g; base[i * 3 + 2] = b; skin[i] = clamp(s, 0, 1);
-  }
-  return { w, h, P, base, skin, SHIRT, k };
-}
+const PORTRAIT = (typeof module !== "undefined" && module.exports) ? require("./portrait.js") : root.EVMPortrait;
 
-// torso outline: shoulders that drop away from the neck; d moves it up (breathing)
-function torsoTop(X) { const u = (X - 64) / 56; return 88 + 24 * u * u; }
-const TORSO_SOFT = 4.5;   // logistic scale in px: a soft edge, about 14 px from 10% to 90%
-
-function renderFrame(model, t, gauss, out, opt) {
+// A frame of the synthetic webcam clip. The portrait is rendered once (see portrait.js); every frame then adds
+// the same physical signals as a camera would record them, on top of the static scene:
+// pulse on the skin only (green +0.5, red +0.25 grey levels at the forehead, weighted by the skin map),
+// breathing as a 0.5 px vertical sway of the top and shoulders, lamp flicker, slow drift, sensor noise, 8-bit.
+function renderFrame(model, t, noiseT, off, out, opt) {
   opt = opt || {};
-  const { w, h, P, base, skin, SHIRT, k } = model;
-  const amp = opt.breathPx != null ? opt.breathPx : SIG.breathPx;
+  const { w, h, under, top, skin, topRow } = model;
+  const amp = opt.breathPx != null ? opt.breathPx : SIG.breathPx, nzs = opt.noise != null ? opt.noise : SIG.noise;
   const pulse = Math.sin(TAU * SIG.pulseHz * t);
   const d = amp * Math.sin(TAU * SIG.breathHz * t);
   const glob = SIG.flicker * Math.sin(TAU * SIG.flickerHz * t) + SIG.drift * Math.sin(TAU * SIG.driftHz * t);
-  const noise = opt.noise != null ? opt.noise : SIG.noise;
+  const pr = SIG.pulseR * pulse, pg = SIG.pulseG * pulse, M = noiseT.length - 1;
   for (let y = 0; y < h; y++) {
-    const Y = (y + .5) / k;
+    const yy = y + d, y0 = Math.floor(yy), f = yy - y0, r0 = Math.max(0, Math.min(h - 1, y0)) * w, r1 = Math.max(0, Math.min(h - 1, y0 + 1)) * w;
+    const withTop = y >= topRow;
     for (let x = 0; x < w; x++) {
-      const i = y * w + x, X = (x + .5) / k;
-      let r = base[i * 3], g = base[i * 3 + 1], b = base[i * 3 + 2];
-      const sk = skin[i];
-      r += SIG.pulseR * pulse * sk; g += SIG.pulseG * pulse * sk;
-      // torso (drawn over neck), with a soft edge, displaced upward by d
-      const top = torsoTop(X) - d;
-      const m = sig((Y - top) / TORSO_SOFT);
-      if (m > 1e-4) {
-        const sh = 1 - .1 * Math.abs(X - 64) / 64;
-        r = r * (1 - m) + SHIRT[0] * sh * m; g = g * (1 - m) + SHIRT[1] * sh * m; b = b * (1 - m) + SHIRT[2] * sh * m;
+      const i = y * w + x, sk = skin[i];
+      let r = under[i * 3] + pr * sk, g = under[i * 3 + 1] + pg * sk, b = under[i * 3 + 2];
+      if (withTop) {
+        const a0 = (r0 + x) * 4, a1 = (r1 + x) * 4, a = top[a0 + 3] * (1 - f) + top[a1 + 3] * f;
+        if (a > 1e-4) {
+          const k = 1 - a;
+          r = top[a0] * (1 - f) + top[a1] * f + k * r; g = top[a0 + 1] * (1 - f) + top[a1 + 1] * f + k * g; b = top[a0 + 2] * (1 - f) + top[a1 + 2] * f + k * b;
+        }
       }
-      r += glob + noise * gauss(); g += glob + noise * gauss(); b += glob + noise * gauss();
-      out[i * 3] = clamp(Math.round(r), 0, 255); out[i * 3 + 1] = clamp(Math.round(g), 0, 255); out[i * 3 + 2] = clamp(Math.round(b), 0, 255);
+      const n = (off + i * 3) & M;
+      r += glob + nzs * noiseT[n]; g += glob + nzs * noiseT[(n + 1) & M]; b += glob + nzs * noiseT[(n + 2) & M];
+      out[i * 3] = r < 0 ? 0 : r > 255 ? 255 : Math.round(r); out[i * 3 + 1] = g < 0 ? 0 : g > 255 ? 255 : Math.round(g); out[i * 3 + 2] = b < 0 ? 0 : b > 255 ? 255 : Math.round(b);
     }
   }
 }
 
-// generator so the browser can build the clip in slices; node can just run it to the end
+// generator so the browser can build the portrait and the clip in slices; node can just run it to the end
 function* clipBuilder(seed) {
-  const model = sceneModel(W, H), P = W * H;
+  const gp = PORTRAIT.portraitGen(W, seed || 20120701);
+  let r; while (!(r = gp.next()).done) yield .45 * r.value;
+  const pt = r.value, P = W * H;
+  let topRow = H; for (let i = 0; i < P; i++) if (pt.top[i * 4 + 3] > 1e-4) { topRow = Math.floor(i / W); break; }
+  // the scene at rest (top composited, no signals): used for the forehead swatch
+  const base = new Float32Array(P * 3);
+  for (let i = 0; i < P; i++) { const a = pt.top[i * 4 + 3]; for (let q = 0; q < 3; q++) base[i * 3 + q] = pt.top[i * 4 + q] + (1 - a) * pt.under[i * 3 + q]; }
+  const model = { w: W, h: H, P, under: pt.under, top: pt.top, skin: pt.skin, fg: pt.fg, base, L: pt.L, topRow: Math.max(0, topRow - 2) };
+  // sensor noise: a seeded table of 2^20 Gaussian samples, read from a random offset each frame
+  const rnd = rng32((seed || 20120701) ^ 0x5bd1e995), gauss = gaussFactory(rnd), noiseT = new Float32Array(1 << 20);
+  for (let i = 0; i < noiseT.length; i++) noiseT[i] = gauss();
+  yield .5;
   const frames = new Uint8Array(N * P * 3);
-  const gauss = gaussFactory(rng32(seed || 20120701));
   for (let n = 0; n < N; n++) {
-    renderFrame(model, n / FS, gauss, frames.subarray(n * P * 3, (n + 1) * P * 3));
-    if (n % 10 === 9) yield (n + 1) / N;
+    renderFrame(model, n / FS, noiseT, Math.floor(rnd() * noiseT.length), frames.subarray(n * P * 3, (n + 1) * P * 3));
+    if (n % 15 === 14) yield .5 + .5 * (n + 1) / N;
   }
   return { w: W, h: H, n: N, fs: FS, P, frames, model };
 }
@@ -382,7 +350,7 @@ function greyMagnifier(clip, lo, hi) {
   };
 }
 
-const api = { FS, N, W, H, SIG, TAU, rng32, gaussFactory, sceneModel, renderFrame, torsoTop, TORSO_SOFT, clipBuilder, buildClipSync,
+const api = { FS, N, W, H, SIG, TAU, rng32, gaussFactory, renderFrame, clipBuilder, buildClipSync, landmarks: PORTRAIT.landmarks,
   blurDown, upsample, lapBuild, lapCollapse, LEVELS, levelLambda, levelAlphas, binsIn, DFTBank, lpCoef, iirResponse, iir1D,
   dft1D, ampSpectrum, ideal1D, Magnifier, greyClip, greyMagnifier, clamp };
 if (typeof module !== "undefined" && module.exports) module.exports = api; else root.EVM = api;
