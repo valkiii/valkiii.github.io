@@ -4,6 +4,13 @@
 (() => {
   const root = document.getElementById("filters"), list = document.getElementById("papers");
   if (!root || !list) return;
+  let reread = null;
+  // the radar page replaces its list with a fresher one and announces it; the panel is then rebuilt on the new items
+  addEventListener("sg:radar-updated", () => init(root.querySelector("details")));
+  addEventListener("hashchange", () => reread && reread());
+  init(null);
+  function init(prev) {
+  root.textContent = "";
   const cfg = JSON.parse(root.dataset.config), items = [...list.children].filter(li => li.matches(".sg-paper"));
   const count = document.getElementById("count"), none = document.getElementById("none");
   const vals = (li, k) => (li.getAttribute("data-f-" + k) || "").split("|").filter(Boolean);
@@ -45,11 +52,11 @@
   });
   const active = document.createElement("div"); active.className = "sg-active"; active.setAttribute("aria-label", "Active filters");
   const details = document.createElement("details"); details.className = "sg-disclosure";
-  details.open = innerWidth > 860;
+  details.open = prev ? prev.open : innerWidth > 860;
   details.innerHTML = '<summary>Filters <span class="sg-nact"></span></summary>';
   details.append(panel);
   root.append(details, active);
-  root.hidden = false;
+  root.hidden = !items.length;
 
   const matches = (li, skip) => {
     if (q && !q.toLowerCase().split(/\s+/).every(w => li.dataset.text.includes(w))) return false;
@@ -112,6 +119,7 @@
   }
   input.addEventListener("input", () => { q = input.value.trim(); paint(); });
   select.addEventListener("change", () => { sort = select.value; paint(); });
-  addEventListener("hashchange", () => { read(); paint(); });
+  reread = () => { read(); paint(); };
   read(); paint();
+  }
 })();
