@@ -38,12 +38,12 @@
 
 <section class="wrap filters" aria-label="Filter by use case">
   <span class="label">Show</span>
-  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>15</span></button>
+  <button type="button" class="f" data-uc="all" aria-pressed="true">Everything <span>16</span></button>
   <button type="button" class="f" data-uc="play" aria-pressed="false" style="--c: var(--uc-play)"><i></i>Games <span>3</span></button>
   <button type="button" class="f" data-uc="vision" aria-pressed="false" style="--c: var(--uc-vision)"><i></i>Seeing <span>4</span></button>
   <button type="button" class="f" data-uc="robots" aria-pressed="false" style="--c: var(--uc-robots)"><i></i>Robots &amp; devices <span>3</span></button>
-  <button type="button" class="f" data-uc="data" aria-pressed="false" style="--c: var(--uc-data)"><i></i>Data science <span>6</span></button>
-  <button type="button" class="f" data-uc="tools" aria-pressed="false" style="--c: var(--uc-tools)"><i></i>Tools <span>5</span></button>
+  <button type="button" class="f" data-uc="data" aria-pressed="false" style="--c: var(--uc-data)"><i></i>Data science <span>7</span></button>
+  <button type="button" class="f" data-uc="tools" aria-pressed="false" style="--c: var(--uc-tools)"><i></i>Tools <span>6</span></button>
   <button type="button" class="f" data-uc="teach" aria-pressed="false" style="--c: var(--uc-teach)"><i></i>Teaching <span>4</span></button>
 </section>
 
@@ -94,7 +94,7 @@
 </section>
 
 <section class="wrap" aria-labelledby="index">
-  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 15 projects, newest first.</p></div>
+  <div class="sechead"><h2 id="index" class="sec">The index</h2><p>All 16 projects, newest first.</p></div>
   <div class="table-wrap">
   <table class="index">
     <thead><tr><th>When</th><th>Project</th><th>The question</th><th>Use cases</th><th>Status</th><th></th></tr></thead>
@@ -106,6 +106,14 @@
         <td><span class="chips"><span class="chip" style="--c: var(--uc-teach)"><i></i>Teaching</span></span></td>
         <td class="mono">running</td>
         <td class="mono"></td>
+      </tr>
+      <tr data-uc="data tools">
+        <td class="mono">Nov 2026</td>
+        <td><a href="../showcase/claudesphere/"><b>Every prompt I sent, as a sphere</b></a></td>
+        <td class="q">Every prompt I sent, as a sphere</td>
+        <td><span class="chips"><span class="chip" style="--c: var(--uc-data)"><i></i>Data science</span><span class="chip" style="--c: var(--uc-tools)"><i></i>Tools</span></span></td>
+        <td class="mono">prototype</td>
+        <td class="mono"><a href="https://github.com/valkiii/claudesphere" target="_blank" rel="noopener">code ↗</a></td>
       </tr>
       <tr data-uc="robots">
         <td class="mono">Nov 2026</td>
@@ -241,10 +249,11 @@
   <span>Valerio Ciotti · Imagine, try, solve.</span>
   <span><a href="https://github.com/valkiii" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/valerio-ciotti-ph-d-668b191b/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/watch?v=tvSWHWG3iCY" target="_blank" rel="noopener">PyData talk</a></span>
 </footer>
-<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Tools", "Teaching"], "projects": ["studygroup", "xgoduck", "precog", "pulp", "clustering", "eulerian", "sqlsprint", "diary", "robot", "maieutica", "retro", "spindle", "connect4", "pydata", "heartbeat"]}</script>
+<script id="mapdata" type="application/json">{"usecases": ["play", "vision", "robots", "data", "tools", "teach"], "labels": ["Games", "Seeing", "Robots & devices", "Data science", "Tools", "Teaching"], "projects": ["studygroup", "claudesphere", "xgoduck", "precog", "pulp", "clustering", "eulerian", "sqlsprint", "diary", "robot", "maieutica", "retro", "spindle", "connect4", "pydata", "heartbeat"]}</script>
 <script>
 window.ATLAS = [
   {slug: "studygroup", title: "Six papers, seventy minutes, every two weeks", q: "Six papers, seventy minutes, every two weeks", uc: ["teach"], stack: ["Python", "arXiv", "Hacker News", "Hugging Face"], href: "study-group/", featured: false, date: "Nov 2026"},
+  {slug: "claudesphere", title: "Every prompt I sent, as a sphere", q: "Every prompt I sent, as a sphere", uc: ["data", "tools"], stack: ["Python", "JavaScript", "Canvas", "Swift", "Claude Code"], href: "../showcase/claudesphere/", featured: false, date: "Nov 2026"},
   {slug: "xgoduck", title: "A robot duck, rebuilt around a Raspberry Pi", q: "A robot duck, rebuilt around a Raspberry Pi", uc: ["robots"], stack: ["Raspberry Pi Zero 2W", "Feetech bus servos", "ONNX policies", "Python"], href: "../showcase/xgoduck/", featured: false, date: "Nov 2026"},
   {slug: "precog", title: "Conducting my desktop with bare hands", q: "Conducting my desktop with bare hands", uc: ["vision", "tools"], stack: ["Python", "OpenCV", "MediaPipe", "PyObjC", "dynamic time warping"], href: "../showcase/precog/", featured: true, date: "Oct 2026"},
   {slug: "pulp", title: "Slicing fruit with a glance", q: "Slicing fruit with a glance", uc: ["play", "vision"], stack: ["JavaScript", "MediaPipe Tasks (wasm)", "Canvas", "WebAudio"], href: "projects/pulp/", featured: false, date: "Oct 2026"},
