@@ -1,84 +1,7 @@
 {
-  "generated": "2026-11-19T19:29:28Z",
+  "generated": "2026-11-20T05:31:49Z",
   "window_days": 42,
   "items": [
-    {
-      "id": "2611.19937",
-      "title": "AllocFlow: End-to-End Portfolio Trading Action Generation from Raw Market Data",
-      "authors": [
-        "Annan Wang",
-        "Yuchen Xie",
-        "Yu Cen",
-        "Leon Liangyu Chen",
-        "Qianyu Julie Zhu",
-        "Xin Li",
-        "Tianyi Wei",
-        "Weisi Lin"
-      ],
-      "abstract": "Real-world portfolio management requires converting noisy market observations into coordinated, simultaneous allocations across multiple assets under shared capital constraints. Advances in forecasting models and alpha discovery help identify opportunities. However, traditional pipelines often decouple signal forecasting from portfolio construction, potentially misaligning learning with allocation and execution objectives. We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories. To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly. To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme: strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that refines joint decisions using portfolio-level financial rewards and a frozen policy reference. On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from $27.79\\%$ to $51.38\\%$ and its Calmar ratio from $0.955$ to $4.043$, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of $4.90$ on six further months of unseen 2026 data without retraining.",
-      "published": "2026-11-15",
-      "categories": [
-        "cs.LG",
-        "q-fin.TR"
-      ],
-      "tags": [
-        "applied-finance",
-        "tabular-timeseries",
-        "bandits-rl"
-      ],
-      "score": 63.58,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 72
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "theory",
-      "url": "https://arxiv.org/abs/2611.19937",
-      "pdf": "https://arxiv.org/pdf/2611.19937"
-    },
-    {
-      "id": "2611.02618",
-      "title": "USDB: Scaling Storage for Next-Generation Recommender Systems at ByteDance",
-      "authors": [
-        "Xiaoran Zhu",
-        "Jieming Cai",
-        "Weiping Yu",
-        "Xi Chen",
-        "Shu Cai",
-        "Jiahao Li",
-        "Yifan Xiao",
-        "Yan Deng",
-        "Yisha Zhou",
-        "Yu Lin",
-        "Shiru Ren",
-        "Siqiang Luo",
-        "Peng Xu",
-        "Junjun Chai"
-      ],
-      "abstract": "Recommendation models consume increasingly long, attribute-rich user histories, making small continuous updates and repeated large reads a central storage asymmetry. We present USDB, ByteDance's unified sequence storage practice for streaming and batch workloads. CascadeLSM time-based compaction stages materialize application-specific histories; differentiated replicas share persistent files; partial dumps reconstruct inference inputs from captured recent state and versioned history; and a hybrid columnar format accelerates projected reads. These designs reuse maintenance results across ingestion, inference, and training. Production migration records show 85.8% lower mean write latency, while normalized deployment accounting shows 42.1% lower infrastructure cost. Controlled comparisons with an Optimized RocksDB sequence baseline show faster long-history reads across projections and client loads. Aggregation pushdown sustains 8.5x the throughput of ordinary reads under a constrained receive budget. Production reconstruction and direct-file training results demonstrate how shared sequence maintenance supports fresh serving and repeated historical access.",
-      "published": "2026-11-02",
-      "categories": [
-        "cs.DB"
-      ],
-      "tags": [
-        "recsys-nba"
-      ],
-      "score": 60.02,
-      "signals": {
-        "hn_points": 49,
-        "hn_comments": 8,
-        "hn_url": "https://news.ycombinator.com/item?id=50354250",
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.02618",
-      "pdf": "https://arxiv.org/pdf/2611.02618"
-    },
     {
       "id": "2611.04720",
       "title": "OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer",
@@ -102,15 +25,13 @@
       ],
       "abstract": "Industrial recommender systems allocate substantial computation to pointwise candidate scoring, yet separate reranking and mix-ranking stages still assemble the final exposure slate using hand-crafted rules and specialized low-capacity models. Mix-ranking combines product cards, short videos, livestreams, and advertising cards supplied by distinct upstream business channels. Although these rules and models encode valuable domain knowledge, they are inherently limited in leveraging additional data and computation. They constrain the combinatorial space of candidate slates and determine objective trade-offs through manual tuning. To enable scalable and effective slate generation, we reformulate reranking and mix-ranking as a unified learning problem whose performance can improve with computation. Specifically, we instantiate this formulation across the reranking and mix-ranking stages and propose OneTrans-GSR, a single decoder-only policy that extends our deployed OneTrans backbone to generate the exposure slate end-to-end. During training, a reward model evaluates complete slates and guides reinforcement learning toward slate-level and long-term objectives. During decoding, business constraints are explicitly enforced. Offline evaluation shows that slate quality consistently improves as reward-model and policy compute increase. Deployed in a large-scale industrial recommendation system, OneTrans-GSR mixes heterogeneous content types within a unified slate. In online A/B tests, it improves GMV/u by 2.63%, advertiser value by 2.06%, and repurchase rate by 2.03%, while reducing end-to-end latency across the reranking and mix-ranking stages by 13%. These results mark a paradigm shift in slate generation: moving beyond human-engineered heuristics toward a general learned policy creates a scalable path for further algorithmic optimization and compute-driven improvement.",
       "published": "2026-11-03",
-      "categories": [
-        "cs.IR"
-      ],
+      "categories": [],
       "tags": [
         "recsys-nba",
         "bandits-rl",
         "causal-uplift"
       ],
-      "score": 57.66,
+      "score": 57.33,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -124,89 +45,69 @@
       "pdf": "https://arxiv.org/pdf/2611.04720"
     },
     {
-      "id": "2611.07464",
-      "title": "FINCOSMOS: An Open-World Evaluation Paradigm for Agents in Finance",
+      "id": "2611.19937",
+      "title": "AllocFlow: End-to-End Portfolio Trading Action Generation from Raw Market Data",
       "authors": [
-        "Yupeng Cao",
-        "Xueqing Peng",
-        "Lingfei Qian",
-        "Haohang Li",
-        "Yangyang Yu",
-        "Anke Xu",
-        "Wenbo Cao",
-        "Yan Wang",
-        "Yuechen Jiang",
-        "Yuyan Wang",
-        "Zhuohan Xie",
-        "Yankai Chen",
-        "Zehan Li",
-        "Jimin Huang",
-        "Xue Liu",
-        "Jian-Yun Nie",
-        "Sophia Ananiadou"
+        "Annan Wang",
+        "Yuchen Xie",
+        "Yu Cen",
+        "Leon Liangyu Chen",
+        "Qianyu Julie Zhu",
+        "Xin Li",
+        "Tianyi Wei",
+        "Weisi Lin"
       ],
-      "abstract": "Language agents increasingly work for users on the open Web, and finance is where trusting them is hardest. The data must come from the Web, the strategy lives in the user's head, and correctness depends on time, so an agent can fail silently: a strategy the user never asked for, unverified data, or a backtest that uses the future yields a report as convincing as a correct one. Existing benchmarks close the world somewhere, fixing the task, the data, or the timeline, and thereby remove these failures instead of measuring them. We introduce FINCOSMOS, an open-world evaluation paradigm for agents doing financial work. A simulated user holds a hidden strategy sampled from a compositional grammar and reveals it only when asked. The agent receives no data, so it must acquire data from the Web, build its own backtest under a data cutoff, and deliver verifiable results. Grading needs no reference answer. Programs verify point-in-time correctness and recompute every reported metric, the delivered strategy is checked against the hidden specification, and a run is accepted only when the user is satisfied and none of 15 veto checks fails. Across four coding agents and a model without tools in 150 sessions, no session is accepted: every session that the simulated user signed off fails a program check, and agents raise only 54--64\\% of the details they were not told. Human experts attribute 88.33\\% of failures to the agents. With FINCOSMOS feedback, an agent with persistent memory learned all ten tasks.",
-      "published": "2026-11-05",
-      "categories": [
-        "cs.AI",
-        "cs.CL",
-        "q-fin.CP"
-      ],
+      "abstract": "Real-world portfolio management requires converting noisy market observations into coordinated, simultaneous allocations across multiple assets under shared capital constraints. Advances in forecasting models and alpha discovery help identify opportunities. However, traditional pipelines often decouple signal forecasting from portfolio construction, potentially misaligning learning with allocation and execution objectives. We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories. To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly. To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme: strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that refines joint decisions using portfolio-level financial rewards and a frozen policy reference. On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from 27.79% to 51.38% and its Calmar ratio from 0.955 to 4.043, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of 4.90 on six further months of unseen 2026 data without retraining.",
+      "published": "2026-11-15",
+      "categories": [],
       "tags": [
         "applied-finance",
-        "agents"
-      ],
-      "score": 52.93,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 25
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.07464",
-      "pdf": "https://arxiv.org/pdf/2611.07464"
-    },
-    {
-      "id": "2611.03743",
-      "title": "EvoMemState: Evolving Memory State for Personal Agents",
-      "authors": [
-        "Zhishang Xiang",
-        "Yunbo Tang",
-        "Zhongqiao Liu",
-        "Junkai Chen",
-        "Zerui Chen",
-        "Qingguo Hu",
-        "Yuxuan Zhang",
-        "William Grant",
-        "Qinggang Zhang",
-        "Jinsong Su"
-      ],
-      "abstract": "Long-term memory enables large language model (LLM) agents to provide continuous personalized assistance by retaining user information across interactions. Existing systems support this process through fact extraction, organization, updating, and retrieval, but largely maintain memories as independent facts. This fact-centric paradigm may overlook how new facts update, constrain, or conflict with earlier ones, while leaving their applicability, role, and priority for the current request implicit. In this paper, we introduce EvoMemState, a state-centric framework that augments persistent facts with two complementary states: Relational States that capture how facts remain valid and relate to one another as memory evolves, and a Reasoning State that determines how these facts should be applied to the current request. Specifically, EvoMemState consists of three key components: (i) Ontology-Guided Memory State Induction extracts Persistent Facts and constructs Relational States that maintain their validity, scope, and evolving relations. (ii) RL-Based State Evolution internalizes memory-use experience into a policy through reinforcement learning to generate a request-specific Reasoning State. (iii) State-Aware Reasoning then combines the relevant facts with their Relational States and the generated Reasoning State to guide the personal agent. Extensive experiments on long-term dialogue and memory-use benchmarks demonstrate consistent improvements over existing memory systems in retrieval completeness and memory-grounded response accuracy. Our code and implementation details are available at https://github.com/XMUDeepLIT/EvoMemState.git.",
-      "published": "2026-11-02",
-      "categories": [
-        "cs.IR",
-        "cs.AI"
-      ],
-      "tags": [
-        "genai-llm",
-        "recsys-nba",
+        "tabular-timeseries",
         "bandits-rl"
       ],
-      "score": 48.89,
+      "score": 56.68,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 36
+        "hf_upvotes": 72
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "theory",
+      "url": "https://arxiv.org/abs/2611.19937",
+      "pdf": "https://arxiv.org/pdf/2611.19937"
+    },
+    {
+      "id": "2611.23808",
+      "title": "PReMind: When Personal Memory Meets Visual Hazards",
+      "authors": [
+        "Yeongtak Oh",
+        "Donghyeok Lee",
+        "Joonhee Oh",
+        "Jaewon Jeong",
+        "Sungroh Yoon"
+      ],
+      "abstract": "Personalized vision-language assistants use visual observations and personal memories to provide advice tailored to the user. When the observed scene contains a physical hazard, personal context, such as allergies, medical conditions, or mobility constraints, can change what help is appropriate. Responding appropriately therefore requires recognizing the visible hazard and applying the relevant person's information. We introduce PReMind-Bench, a diagnostic benchmark that evaluates this combination across diverse hazards and personal-memory conditions. It separately measures memory access, grounding, abstention, and hazard response, and assesses joint success on interdependency cases. Existing models often satisfy one requirement while failing the other, and training only for safety or personalization leaves a gap in joint success. We therefore propose PReMind, a two-phase reinforcement learning framework that combines on-demand and forced-call interactions (memory always retrieved) to jointly train grounded memory use and hazard response. At 4B, PReMind raises joint success from 12.9% to 28.6% over its base on the interdependency set and improves hazard adequacy and correct abstention on the main test. Joint-success gains persist under forced-call evaluation and under a second LLM judge across three Phase II seeds; averaged over these seeds, joint success also improves on unseen hazard groups. These findings highlight the need to evaluate and train personal assistants to connect visual evidence with the relevant person's context.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "recsys-nba",
+        "eval-safety",
+        "genai-llm"
+      ],
+      "score": 51.61,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 9
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.03743",
-      "pdf": "https://arxiv.org/pdf/2611.03743"
+      "url": "https://arxiv.org/abs/2611.23808",
+      "pdf": "https://arxiv.org/pdf/2611.23808"
     },
     {
       "id": "2611.10866",
@@ -221,15 +122,12 @@
       ],
       "abstract": "How little of a pretrained large language model (LLM) has to change for it to acquire new capabilities? We find that zeroing fewer than 0.05% of its weights, with no other modification, matches full fine-tuning (FFT) at scale across three LLM post-training regimes: reinforcement learning with verifiable rewards, supervised fine-tuning, and on-policy distillation. Our method, Deletion Tuning, learns a binary mask over the gate projection of transformer blocks. Two practical advantages follow: the trained mask is hundreds to thousands of times smaller than the corresponding FFT checkpoint, and Deletion Tuning forgets far less, which addresses a central challenge in continual learning. Under reinforcement learning, its prior-task accuracy stays near the base level while FFT, LoRA, and random sparse fine-tuning lose up to 5.4 points. To understand why masking alone suffices, we analyze the geometry of the learned weight changes under reinforcement learning using stable rank, spectrum drift, and principal-weight overlap. Compared with LoRA and random sparse fine-tuning, Deletion Tuning is closest to FFT across the three measures.",
       "published": "2026-11-07",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
+      "categories": [],
       "tags": [
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 48.51,
+      "score": 48.11,
       "signals": {
         "hn_points": 31,
         "hn_comments": 0,
@@ -241,42 +139,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.10866",
       "pdf": "https://arxiv.org/pdf/2611.10866"
-    },
-    {
-      "id": "2610.21375",
-      "title": "Memorilla: Latent Semantic Memory for LLMs",
-      "authors": [
-        "Adibvafa Fallahpour",
-        "Parsa Idehpour",
-        "Vignesh Kothapalli",
-        "Nikita Mounier",
-        "Shirley Wu",
-        "Shayan Pardis",
-        "Jure Leskovec"
-      ],
-      "abstract": "Memory enables large language models (LLMs) to use information beyond their parameters, such as past user conversations, long documents, or an agent's earlier actions. For a frozen LLM, access to this accumulated knowledge is limited to what a memory system places in its context window. However, gathering and combining relevant information needed for each query while keeping the model's context short remains challenging for existing systems. Here we introduce Memorilla, a memory system that gathers information from an entire document collection into a fixed number of query-dependent 'memory tokens' for a frozen LLM. Memorilla encodes documents (such as user chats, book chapters) once into reusable embeddings, then learns to retrieve and place query-specific information in the LLM's input embedding space. Using only 16 memory tokens, Memorilla achieves the best performance against baselines including Mem0 and MemoRAG on five of eight benchmarks spanning personalization, long-document and knowledge-intensive question answering. Notably, on FactKG, it reaches 84.33% accuracy versus 80.43% with full-context inference, while using 108x fewer tokens to represent the source documents. Furthermore, Memorilla can facilitate continual learning in agentic systems where the document count (the agent's past turns) increases throughout the trajectory. In a TextWorld environment, we show that Memorilla reduces the agent's tendency to wander between rooms it has already explored, and improves its average success rate from 18.6% with full-history in-context learning to 24.2%. Overall, Memorilla aids frozen LLMs in accumulating and using knowledge effectively across long-context interactions and takes a step towards building continually learning AI systems.",
-      "published": "2026-10-15",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "tags": [
-        "genai-llm",
-        "agents",
-        "recsys-nba"
-      ],
-      "score": 46.76,
-      "signals": {
-        "hn_points": 125,
-        "hn_comments": 14,
-        "hn_url": "https://news.ycombinator.com/item?id=50395919",
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2610.21375",
-      "pdf": "https://arxiv.org/pdf/2610.21375"
     },
     {
       "id": "2611.18397",
@@ -312,17 +174,13 @@
       ],
       "abstract": "We introduce Gamer, a generalist agent framework built for long-horizon tasks in complex interactive environments. Its end-to-end architecture combines perception, memory management, and multi-step reasoning. A shared training and deployment pipeline supports interaction with both conventional 2D graphical interfaces and complex 3D simulated worlds. We first continue pre-training on a dataset constructed from tens of thousands of hours of device-level keyboard and mouse interaction. These trajectories span simulated games and embodied environments, allowing the model to learn environmental dynamics across both physical and virtual domains. Sparse-thinking instruction tuning then substantially reduces redundant computation while preserving the reasoning needed for complex decisions. We train the policy for long-horizon interaction with a stable multi-turn reinforcement learning method that addresses finite context windows, accumulated rollout errors, and sparse rewards. For real-time interaction, a cloud-edge inference engine serves numerous simulated game environments concurrently, supports unbounded-context execution, and keeps online inference latency low. Across multiple challenging 3D open-world games, Gamer demonstrates solid generalization and operational efficiency comparable to skilled players. It also achieves competitive results on a range of conventional 2D game benchmarks. These results suggest that even repetitive keyboard and mouse trajectories can support substantial gains from scaling data and learning algorithms. Training on these trajectories helps Gamer learn complex skills more steadily in environments with both physical and digital properties. This approach offers a path toward generalist agents that can interact across digital and physical worlds.",
       "published": "2026-11-13",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.CV"
-      ],
+      "categories": [],
       "tags": [
         "genai-llm",
         "bandits-rl",
         "agents"
       ],
-      "score": 46.18,
+      "score": 45.64,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -345,15 +203,13 @@
       ],
       "abstract": "Large language models (LLMs) are increasingly applied to finance, creating a need for benchmarks that evaluate their capabilities across financial systems with different regulations and practices. However, existing financial benchmarks provide limited coverage of country-specific financial systems, and they are difficult to keep up to date as released questions leak into training data. We introduce JFinBench, a Japanese financial benchmark comprising 321 examples from the 2026 editions of six regularly administered certification exams covering accounting, tax, financial planning, and banking. To construct it, we develop a human-in-the-loop agentic pipeline in which a coding agent writes exam-specific conversion code and a review page, while a human verifies every example and feeds corrections back to the agent. This pipeline adapts to heterogeneous exam formats and reduces the effort of incorporating new exam editions, enabling periodic refreshes that mitigate data contamination. Evaluating 12 recent LLMs, we find that Claude Fable 5 and GPT-6 Astra exceed 93% overall, while even the best open-weight model, Kimi K3.1 Pro, trails Claude Fable 5 by 12 percentage points. When models can additionally use a terminal and web access, they retrieve the knowledge they lack and every model improves. The gap narrows but about 4 points remain, and the ranking of models stays largely the same, suggesting that knowledge held in the model itself remains valuable even with tools. We release the dataset, the evaluation code, and the construction pipeline.",
       "published": "2026-11-13",
-      "categories": [
-        "cs.AI"
-      ],
+      "categories": [],
       "tags": [
         "genai-llm",
         "applied-finance",
         "agents"
       ],
-      "score": 45.99,
+      "score": 45.45,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -380,15 +236,12 @@
       ],
       "abstract": "We present LCM-Promo, an LLM-based uplift model for promotion allocation. LCM-Promo is a task-specific Large Commerce Model (LCM): a finetuned LLM trained on transactional commerce data to predict user intent and promotion response. It learns monotonic promotion-response curves from production logs by interpreting single-token outputs as conversion-threshold probabilities, while conditioning on session context such as day and delivery shift. In a production A/B test on churn reactivation, LCM-Promo increased conversion by 1% and reduced promotion cost by 6% relative to the Segment-EMA production baseline.",
       "published": "2026-10-27",
-      "categories": [
-        "cs.LG",
-        "cs.IR"
-      ],
+      "categories": [],
       "tags": [
         "causal-uplift",
         "recsys-nba"
       ],
-      "score": 44.94,
+      "score": 44.71,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -400,6 +253,38 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2610.37570",
       "pdf": "https://arxiv.org/pdf/2610.37570"
+    },
+    {
+      "id": "2611.23236",
+      "title": "PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation",
+      "authors": [
+        "Shengxiang Lin",
+        "Jiajie Su",
+        "Pengyang Zhou",
+        "Xiang Chen",
+        "Xiaolin Zheng",
+        "Feng Tian",
+        "Chaochao Chen"
+      ],
+      "abstract": "LLM-enhanced recommender systems encode item side information into semantic embeddings, but these embeddings may leak sensitive textual attributes through inversion attacks. Existing input-side defenses rely on trusted collection or local token perturbation, often disrupting the inter-item semantic topology needed for recommendation. To address it, we introduce relational fidelity as the key objective, requiring semantic shift for privacy while preserving relative item relations for utility. Based on this principle, we propose prototype-guided progressive obfuscation (PGPO), which learns topology-aware obfuscation anchors for high-influence prototype words and propagates them through a static semantic graph. PGPO is optimized with GRPO using individual dissimilarity, structural consistency, and semantic constraint rewards. Experiments on two benchmarks show strong inversion defense with near-upper-bound recommendation performance. The code is available at https://github.com/Shengxiang-Lin/PGPO.",
+      "published": "2026-08-26",
+      "categories": [],
+      "tags": [
+        "recsys-nba",
+        "eval-safety"
+      ],
+      "score": 43.71,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 2
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.23236",
+      "pdf": "https://arxiv.org/pdf/2611.23236"
     },
     {
       "id": "2611.24283",
@@ -420,7 +305,7 @@
         "recsys-nba",
         "causal-uplift"
       ],
-      "score": 44.28,
+      "score": 43.59,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -432,38 +317,6 @@
       "kind": "system",
       "url": "https://arxiv.org/abs/2611.24283",
       "pdf": "https://arxiv.org/pdf/2611.24283"
-    },
-    {
-      "id": "2611.23969",
-      "title": "ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation",
-      "authors": [
-        "Dae Kyoo Kim",
-        "Heejung Cho",
-        "Sungmoo Hong",
-        "Eunil Park"
-      ],
-      "abstract": "CoT-style LLM recommenders generate a natural-language preference note as a chain-of-thought prefix to ranking, but the note is trusted without verification, and the ranker never consults behaviorally similar users. We propose ReflectRec, organized around a preference-to-history round-trip verifier whose recall score serves as an operational signal of preference-to-history recoverability, enabling conditional regeneration for low-recoverability preferences and selection among regeneration attempts. Around this verifier, we wire a semantic Stage-1 prompt, conditional regeneration, and Forward-Look retrieval that injects future watches of behaviorally similar users as a collaborative hint. On MovieLens-100K and MovieLens-1M, the full pipeline outperforms CoT4Rec-ICL by +16.25 / +4.46 pp Hit@10, with positive gains across all ValScore buckets and three LLM backbones (Qwen3-30B, Qwen2.5-72B, and Llama-3.3-70B). We also observe a similar verifier-guided regeneration pattern on Amazon Electronics.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.CL",
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba",
-        "genai-llm"
-      ],
-      "score": 44.28,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23969",
-      "pdf": "https://arxiv.org/pdf/2611.23969"
     },
     {
       "id": "2611.24006",
@@ -497,7 +350,7 @@
         "bandits-rl",
         "agents"
       ],
-      "score": 44.28,
+      "score": 43.59,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -530,7 +383,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 44.28,
+      "score": 43.59,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -544,26 +397,23 @@
       "pdf": "https://arxiv.org/pdf/2611.23710"
     },
     {
-      "id": "2611.22274",
-      "title": "GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation",
+      "id": "2611.23969",
+      "title": "ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation",
       "authors": [
-        "Shiyi Yang",
-        "Xinshu Li",
-        "Chen Wang",
-        "Xiwei Xu",
-        "Liming Zhu",
-        "Lina Yao"
+        "Dae Kyoo Kim",
+        "Heejung Cho",
+        "Sungmoo Hong",
+        "Eunil Park"
       ],
-      "abstract": "In traditional recommender systems (RSs), textual information typically serves as auxiliary signals for representation learning. In contrast, in LLM-based RSs, textual information becomes the primary medium for recommendation generation through semantic understanding and reasoning. This shift fundamentally changes the attack surface, making promotion-driven manipulations more feasible, effective, and harder to detect. However, effectively detecting such attacks remains largely unexplored. To fill this gap, we present the first systematic study on detecting promotion-driven attacks against LLM-based RSs, aiming to safeguard next-generation recommendation platforms. Specifically, we propose GuardAgent, a novel LLM-powered agentic detection framework that operates through a loop of Perception, Action, Reflection and Memory. In contrast to conventional LLM-based detectors that function in a static, one-off, and opaque fashion, GuardAgent continually learns and self-evolves to adapt to unseen threat patterns while generating explainable reasoning traces and outcomes. Extensive experiments on real-world datasets demonstrate that GuardAgent achieves state-of-the-art generalization performance, laying the foundation for robust and trustworthy recommendation in practical settings.",
-      "published": "2026-11-17",
+      "abstract": "CoT-style LLM recommenders generate a natural-language preference note as a chain-of-thought prefix to ranking, but the note is trusted without verification, and the ranker never consults behaviorally similar users. We propose ReflectRec, organized around a preference-to-history round-trip verifier whose recall score serves as an operational signal of preference-to-history recoverability, enabling conditional regeneration for low-recoverability preferences and selection among regeneration attempts. Around this verifier, we wire a semantic Stage-1 prompt, conditional regeneration, and Forward-Look retrieval that injects future watches of behaviorally similar users as a collaborative hint. On MovieLens-100K and MovieLens-1M, the full pipeline outperforms CoT4Rec-ICL by +16.25 / +4.46 pp Hit@10, with positive gains across all ValScore buckets and three LLM backbones (Qwen3-30B, Qwen2.5-72B, and Llama-3.3-70B). We also observe a similar verifier-guided regeneration pattern on Amazon Electronics.",
+      "published": "2026-11-18",
       "categories": [
-        "cs.IR",
-        "cs.CR"
+        "cs.CL",
+        "cs.IR"
       ],
       "tags": [
         "recsys-nba",
-        "ml-methods",
-        "agents"
+        "genai-llm"
       ],
       "score": 43.59,
       "signals": {
@@ -573,10 +423,70 @@
         "hf_upvotes": null
       },
       "why": null,
-      "difficulty": 1,
+      "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.22274",
-      "pdf": "https://arxiv.org/pdf/2611.22274"
+      "url": "https://arxiv.org/abs/2611.23969",
+      "pdf": "https://arxiv.org/pdf/2611.23969"
+    },
+    {
+      "id": "2611.17820",
+      "title": "Aligning AI Teams",
+      "authors": [
+        "Siddarth Srinivasan",
+        "Morgan Jane Matthews",
+        "Jascha Sohl-Dickstein",
+        "Erik Jones"
+      ],
+      "abstract": "Previous work has shown that alignment training on individual LLM agents can fail to transfer to multi-agent settings. We investigate the underlying mechanisms for this failure, and explore interventions to preserve alignment transfer to multi-agent LLM teams. We focus on two software-engineering tasks (sepsis triage, a news recommender) and ten consulting-proposal generation tasks. We present four findings: (1) The single-vs-team safety gap does not show a clear trend with more capable models. We find that Anthropic's Mythos Preview shows the largest gap on one of our tasks but the smallest on another; (2) Many natural interventions, such as having agents critique each other's work or coordinate in a group chat, do not reliably bring agent teams back to single-agent alignment behavior; (3) diffusion of responsibility substantially accounts for the safety gap: agents in teams are less likely to proactively check for system-level safety failures and more likely to ignore, rationalize, or deflect responsibility for issues when they arise; (4) having a designated safety lead agent ensure system-level safety, and having a coordinator agent publish a safety specifications document are effective at restoring single-agent alignment. We also release magelab, a multi-agent LLM orchestration and experimentation framework. Our findings can help practitioners design agent teams that successfully preserve the behaviors expected of aligned individual agents.",
+      "published": "2026-11-13",
+      "categories": [],
+      "tags": [
+        "agents",
+        "eval-safety",
+        "recsys-nba"
+      ],
+      "score": 43.04,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 8
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.17820",
+      "pdf": "https://arxiv.org/pdf/2611.17820"
+    },
+    {
+      "id": "2611.22756",
+      "title": "Learning Cross-Domain Media Similarity from Amazon Reviews",
+      "authors": [
+        "Gabrielly Xavier dos Santos",
+        "Lucas Dias Cler",
+        "Luciana Fujii Pontello",
+        "Olga Goussevskaia"
+      ],
+      "abstract": "Collaborative filtering is a basic foundation of many recommendation algorithms. It works by analyzing a user's history and then suggesting items similar to those in that history. This method typically relies on user data to compute item similarity, data that is widely available to commercial systems but is usually sparse or inaccessible for independent systems and research, especially across multiple media domains. In this work, we propose a method to generalize similarity information between items using supervised learning. As input to our model, we use semantic and temporal features extracted from Amazon product reviews, which are publicly available. As the training target, we use item (product) co-occurrence in the reviewing history of Amazon customers. We evaluate the quality of the predicted similarities across two media domains: books and movies. Experimental results demonstrate the robustness of our methodology, yielding positive outcomes in zero-shot cross-domain transfer tasks. Furthermore, feature attribution analysis reveals a structural shift in how feature groups are utilized across setups: intra-domain models rely heavily on linguistic semantics, whereas cross-domain environments pivot toward behavioral popularity cues. Incorporating even limited target-domain context during training bridges this domain sparsity gap, significantly enhancing framework generalization.",
+      "published": "2026-11-17",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "recsys-nba"
+      ],
+      "score": 42.93,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "survey",
+      "url": "https://arxiv.org/abs/2611.22756",
+      "pdf": "https://arxiv.org/pdf/2611.22756"
     },
     {
       "id": "2611.17167",
@@ -595,16 +505,13 @@
       ],
       "abstract": "Decision models answer a question with a typed output, such as a choice among options with a probability for each, so one model can choose an agent's actions, evaluate actions already taken, or score every action to teach a policy with reinforcement learning. Prior work has studied them mainly as actors, judging their usefulness by how well they act. We ask whether a decision model that acts poorly can still teach well. We compare three decision models and three general LLMs as actors and judges on ALFWorld, and use JEV as a teacher on ALFWorld and WebShop. As actors, all six models are pulled away from a subgoal that must come first by an easier one. As judges that see the whole trajectory, the same models credit the steps toward that subgoal, and asking whether each action helped, rather than whether the task will succeed, separates useful from useless actions. As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop. These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate. Code is available at https://github.com/ZJU-REAL/decision-agents.",
       "published": "2026-11-12",
-      "categories": [
-        "cs.AI",
-        "cs.CL"
-      ],
+      "categories": [],
       "tags": [
         "bandits-rl",
         "genai-llm",
         "agents"
       ],
-      "score": 43.33,
+      "score": 42.82,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -643,15 +550,12 @@
       ],
       "abstract": "Models for physical AI tasks, such as robotics and autonomous driving, need not reason solely in language. They can use visual plans--points, bounding boxes, and trajectories--to represent spatial goals and anticipate motion. However, autoregressive vision-language models generate these plans one coordinate token at a time, making richer predictions increasingly costly. We introduce VFlash, a method for fast, accurate visual planning through Flash Primitive Decoding. VFlash exploits the known structure of visual primitives to predict their coordinates jointly, using a lightweight drafter that generates an entire primitive in one forward pass. The layout adapts to the primitive's type, dimensionality, and length, supporting compact boxes and long, variable-length trajectories. Crucially, spatial accuracy need not require reproducing an autoregressive model's exact token sequence. VFlash therefore trains on annotated primitives and directly accepts structurally valid predictions without target-token agreement. Across the evaluated 2D and 3D robot trajectory tasks, VFlash consistently reduces prediction errors relative to autoregressive decoding. Preliminary single-rollout measurements indicate approximately 25x faster generation for 3D point motion forecasting. A world action model conditioned on VFlash plans achieves 70.2% average success across four MolmoSpaces task suites, compared with 62.6% for the baseline.",
       "published": "2026-11-05",
-      "categories": [
-        "cs.RO",
-        "cs.CV"
-      ],
+      "categories": [],
       "tags": [
         "tabular-timeseries",
         "genai-llm"
       ],
-      "score": 42.63,
+      "score": 42.27,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -665,37 +569,6 @@
       "pdf": "https://arxiv.org/pdf/2611.08449"
     },
     {
-      "id": "2609.37820",
-      "title": "Information Games: Strategic Crowding and Firm Repositioning in Language-Model Space",
-      "authors": [
-        "Marcus Gawronsky",
-        "Chun-Sung Huang"
-      ],
-      "abstract": "When firms respond to new market opportunities, their capacity choices alter the future discounted free cash flows available to both competitors and investors. In competitive markets, these investment decisions publicized in news articles and analyst reports, measuring the changes in capital structure, product mix, firm leadership, risk exposure and operating procedure made by the firm. Modern search engines rely on Large Language Models to measure the relevancy of source documents to given search query. These measurements let researchers represent these news articles as clouds of dense vectors whose information geometry reflects the dissimilarity of firms over time. Building on Xu et al. (2022), we develop a model of costly competitive adjustment in which firms allocate capacity in which firms make firm capacity adjustment towards free cash flow shocks. Using a novel sandwich estimator, we analyse the sign and magnitude of this predicted adjustment using multi-agent simulation, and validate our findings on a sample of news and analyst reports from Nasdaq-listed companies between 2018-2022.",
-      "published": "2026-09-29",
-      "categories": [
-        "q-fin.CP",
-        "econ.GN"
-      ],
-      "tags": [
-        "applied-finance",
-        "genai-llm",
-        "agents"
-      ],
-      "score": 42.34,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 3
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2609.37820",
-      "pdf": "https://arxiv.org/pdf/2609.37820"
-    },
-    {
       "id": "2611.12886",
       "title": "Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning",
       "authors": [
@@ -706,14 +579,12 @@
       ],
       "abstract": "Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges. Models may overlook useful tool-returned observations, while poorly grounded actions can limit the evidence available for subsequent distillation. We introduce Reframe, a post-training framework that treats the observation state, rather than only the output distribution, as an object of alignment. First, Ground-Drop-GRPO (GD-GRPO) trains spatial and temporal specialists with evidence-aware rewards and stochastic removal of the original visual input, encouraging them to acquire grounded evidence and use the returned observations. Second, Observation-Gated-MOPD (OG-MOPD) replaces deficient tool actions with canonical ones mid-rollout and resumes distillation from the repaired observation. The two stages complement each other, as learning to rely on tool-returned observations can help the policy benefit from observation repair. Neither stage requires a task-specific SFT cold start. Extensive experiments over 14 image and video benchmarks demonstrate that Reframe outperforms both Mix-RL and vanilla MOPD. Ablation results show that GD-GRPO increases observation dependence and tool gain compared with outcome-based GRPO.",
       "published": "2026-11-09",
-      "categories": [
-        "cs.CV"
-      ],
+      "categories": [],
       "tags": [
         "agents",
         "bandits-rl"
       ],
-      "score": 42.29,
+      "score": 41.84,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -734,18 +605,15 @@
         "Yeseul Chang",
         "Jaewoo Lee"
       ],
-      "abstract": "Tool-using agents act on email, files, and payments, so an instruction hidden in a web page or a shared document can make an agent send data or money to an attacker. Many runtime defenses put a language model on the decision that lets an action through, so the decision depends on a model that may read the attacker's text and adds model calls to every step. Provenance defenses keep the model off the final check but need a model to plan or route each task first. Where an action goes can instead be read from the tools' typed returns: an email's sender or a payment's account arrives in a typed field, while injected instructions arrive as free text. SPILLWAY turns this observation into a deterministic floor with no per-task plan. The check admits a call when each target value that appears in tool output but not in the user's task was returned by a read-only tool in a typed field or is covered by a fixed delegation rule. A deterministic sanitizer removes instruction-like regions its fixed rules match before the model reads them and retains the removed spans as evidence, and a local judge may restore a refused call, never one whose target lies in the removed text. Across three backbones, and seven task suites on one of them, no standard templated injection redirects an action to an attacker's target under SPILLWAY, at the highest observed mean utility and composite scores (NRP, ERS) of the defenses we run under that attack. A forged chat template also produces a raw zero, and mean in-scope attack success under a released reinforcement-learning attacker is .005. SPILLWAY reaches this floor with no defense-triggered backbone re-run and almost no added model call. As personal AI agents act on users' email, files, and payments, SPILLWAY gives them an auditable refusal floor on where their actions go that keeps them useful and holds across backbones.",
+      "abstract": "Tool-using agents act on email, files, and payments, so an instruction hidden in a web page or a shared document can make an agent send data or money to an attacker. Many runtime defenses put a language model on the decision that lets an action through, so the decision depends on a model that may read the attacker's text and adds model calls to every step. Provenance defenses keep the model off the final check but need a model to plan or route each task first. Where an action goes can instead be read from the tools' typed returns: an email's sender or a payment's account arrives in a typed field, while injected instructions arrive as free text. SPILLWAY turns this observation into a deterministic floor with no per-task plan. The check admits a call when each target value that appears in tool output but not in the user's task was returned by a read-only tool in a typed field or is covered by a fixed delegation rule. A deterministic sanitizer removes instruction-like regions its fixed rules match before the model reads them and retains the removed spans as evidence, and a local judge may restore a refused call, never one whose target lies in the removed text. Across three backbones, and seven task suites on one of them, no standard templated injection redirects an action to an attacker's target under SPILLWAY, at the highest observed mean utility and composite scores (NRP, ERS) of the defenses we run under that attack. A forged chat template also produces a raw zero, and mean in-scope attack success under a released reinforcement-learning attacker is .007. SPILLWAY reaches this floor with no defense-triggered backbone re-run and almost no added model call. As personal AI agents act on users' email, files, and payments, SPILLWAY gives them an auditable refusal floor on where their actions go that keeps them useful and holds across backbones.",
       "published": "2026-11-04",
-      "categories": [
-        "cs.CR",
-        "cs.AI"
-      ],
+      "categories": [],
       "tags": [
         "agents",
         "genai-llm",
         "applied-finance"
       ],
-      "score": 42.17,
+      "score": 41.83,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -757,6 +625,199 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.07222",
       "pdf": "https://arxiv.org/pdf/2611.07222"
+    },
+    {
+      "id": "2611.24789",
+      "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
+      "authors": [
+        "Phuong Tuan Dat",
+        "Qi Li",
+        "Xinchao Wang"
+      ],
+      "abstract": "World action models (WAMs) have shown promising generalization and data efficiency in robot manipulation by coupling action generation with predictions of future visual dynamics. Translating these capabilities into reliable task execution, however, remains a challenge for existing post-training methods. Offline supervised fine-tuning provides dense supervision on expert trajectories, but its flow-matching action expert is trained only on noised demonstration actions and never on the intermediate states produced by its own sampler; task-specific adaptation can also compromise pretrained capabilities. On-policy reinforcement learning trains on the policy's own behavior, yet sparse task rewards make exploration and credit assignment difficult, while dense reward shaping still provides scalar evaluations rather than direct action targets. We introduce HINT-WAM, the first on-policy self-distillation framework that supervises the action expert on its own sampling trajectories using hindsight, the future video of the demonstration, as privileged information available to the WAM itself. For each demonstration observation, the student generates its action through its own denoising trajectory, and at the states along this trajectory the same model acts as a teacher conditioned additionally on this hindsight, providing a conditional action distribution as a dense training target, while the student sees only deployment-time inputs and needs no environmental rewards or simulator interaction. To transfer this supervision to a flow-matching action expert, HINT-WAM distills the teacher into the student with an energy score, a distribution-level objective that matches the teacher's action distribution from the student's own samples rather than regressing its velocity field. The project web is available in https://tuandattt.github.io/hintwam/.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "bandits-rl",
+        "ml-methods"
+      ],
+      "score": 41.72,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 22
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.24789",
+      "pdf": "https://arxiv.org/pdf/2611.24789"
+    },
+    {
+      "id": "2611.22115",
+      "title": "TeleChat to Xing4: Advancing Frontier Agentic Models on Domestic Chips and Frameworks",
+      "authors": [
+        "Xingchen AGI Lab",
+        "Baotian Hu",
+        "Bingkai Yang",
+        "Boyang Wang",
+        "Changzai Pan",
+        "Chao Lyu",
+        "Chao Wang",
+        "Chen Li",
+        "Chenshuo Pan",
+        "Chenyu Lin",
+        "Chenyuan Zhang",
+        "Chongming Liu",
+        "Dawei Fan",
+        "Di Wu",
+        "Dong Guo",
+        "Dong Li",
+        "Dongfang Li",
+        "Enlin Liu",
+        "Fanye Xiao",
+        "Fengkai Li",
+        "Fubei Yao",
+        "Gang Lin",
+        "Han Gao",
+        "Hanming Wu",
+        "Haowei He",
+        "Huapeng Liu",
+        "Hua Wang",
+        "Huinan Xu",
+        "Jiahong Xiong",
+        "Jiaxin Peng",
+        "Jianxiang Ma",
+        "Jianxing Zhuge",
+        "Jie Zhang",
+        "Ji Xiong",
+        "Jinglin Chen",
+        "Jingqi Li",
+        "Jingxuan Li",
+        "Jiwang Ye",
+        "Junchen Li",
+        "Junbiao Li",
+        "Junyang Wu",
+        "Kaidong Yu",
+        "Kaipeng Jia",
+        "Kehai Chen",
+        "Kuai Li",
+        "Laobin Liu",
+        "Lei Li",
+        "Libo Qin",
+        "Lingling Shi",
+        "Luwen Pu",
+        "Menghao Xu",
+        "Mengjiao Bao",
+        "Mengqi Chen",
+        "Min Zhang",
+        "Mingrui Wang",
+        "Naying Wang",
+        "Peicong Han",
+        "Peiming Guo",
+        "Pengfei Li",
+        "Qiang Feng",
+        "Qi Wang",
+        "Qingjun Zhu",
+        "Qingli Li",
+        "Qitai Ding",
+        "Qiyi Xie",
+        "Quanchao Zhao",
+        "Rongbao Han",
+        "Rui Xue",
+        "Ruiyu Fang",
+        "Ruiting Song",
+        "Shijie Li",
+        "Shiquan Wang",
+        "Shuangyong Song",
+        "Sishi Xiong",
+        "Teng Su",
+        "Wankang Bao",
+        "Weijie Zhang",
+        "Wei Mao",
+        "Weiwei Fu",
+        "Weiyang Huang",
+        "Wenmin Deng",
+        "Wenqing Hu",
+        "Wujie Zhong",
+        "Xi Yu",
+        "Xiaohui Hu",
+        "Xiaomin Fang",
+        "Xiaomeng Huang",
+        "Xiaoqiong Shi",
+        "Xiaotong Shang",
+        "Xiaoyu Li",
+        "Xinglei Xu",
+        "Xin Jiang",
+        "Xin Wang",
+        "Xin Zhang",
+        "Xinzhang Liu",
+        "Xue Liu",
+        "Xuefeng Bai",
+        "Xuewei He",
+        "Yahan Li",
+        "Yanhan Zhang",
+        "Yanlei Xue",
+        "Yanzhang Wu",
+        "Yang Yu",
+        "Yi Liu",
+        "Yin Zhang",
+        "Yingyan Li",
+        "Yitong Yao",
+        "Yixuan Li",
+        "Yongqiang Xia",
+        "Yongxiang Li",
+        "Yinzhou Zhu",
+        "Yu Zhao",
+        "Yuhao Jiang",
+        "Yunpeng Zhang",
+        "Yuting Lin",
+        "Yuxuan Wu",
+        "Yuyao Huang",
+        "Yuyi Wang",
+        "Zebo Peng",
+        "Zhenwu Pei",
+        "Zhenxiong Li",
+        "Zhao Wang",
+        "Zhaoxi Zhang",
+        "Zhihao Yang",
+        "Zhiqiang Dong",
+        "Zhiwei Yan",
+        "Zhilong Lu",
+        "Zhonghao Guo",
+        "Zhongheng Wu",
+        "Zhongjiang He",
+        "Zhongqiu Li",
+        "Zhu Yuan",
+        "Zhuoru Jiang",
+        "Zhuoyi Wei",
+        "Zijia Guo",
+        "Zilu Huang",
+        "Zhipeng Guo",
+        "Zirui Li",
+        "Zihan Wang"
+      ],
+      "abstract": "We present Xing 4, a series of large language models that extends the TeleChat lineage through coordinated advances in model architecture and training infrastructure on Ascend. This report describes the design principles and systems engineering behind the series, spanning architecture selection, large-scale pretraining, and reasoning and agentic post-training. We study how sparse activation, attention design, model depth and width, and speculative decoding balance model capacity with computation, memory access, and execution overhead. Our pretraining infrastructure builds on MindSpore HyperParallel, combining topology-aware hybrid sharding, efficient distributed optimizer execution, and coordinated management of long-sequence workloads and activation memory. CPU affinity and core isolation further reduce host scheduling interference. Together, these mechanisms support the pretraining of a 285B-parameter model on 8,192 Ascend 910C cards, providing a concrete setting for the architectural and systems studies. For post-training, we introduce TeleGym, a unified agent execution platform that connects execution, evaluation, and trajectory construction to policy optimization. Disaggregated asynchronous execution, bounded oversampling, and partial rollout accommodate heterogeneous task durations while preserving trajectory continuity across policy updates. Together, these advances establish an Ascend-oriented training foundation for the continued development of Xing 4 across model scales and increasingly demanding reasoning and agent workloads.",
+      "published": "2026-11-17",
+      "categories": [],
+      "tags": [
+        "genai-llm",
+        "agents",
+        "ml-methods"
+      ],
+      "score": 41.67,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 160
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.22115",
+      "pdf": "https://arxiv.org/pdf/2611.22115"
     },
     {
       "id": "2611.15348",
@@ -771,25 +832,84 @@
       ],
       "abstract": "Electronic nose (eNose) technology offers a portable, non-invasive route for disease screening via exhaled breath analysis. However, progress in the field is hindered by the lack of systematic benchmarks that compare machine learning methods under realistic conditions, particularly sensor drift, a known but rarely quantified failure mode. Most existing studies rely on small, private datasets with inconsistent protocols, rendering results non-comparable and slowing progress. We introduce Breath-Dx, the first comprehensive benchmark of time series classification methods for breath-based disease screening. Our work leverages the Scent of Health (S-OH) dataset, the largest public clinical eNose collection to date, comprising 1,234 patients across nine diagnostic groups, each providing a 17-channel multivariate time series with explicit temporal train/test splits that account for sensor drift. We systematically evaluate 10 methods spanning four families: feature-based tabular learners, convolution-based models, graph-based, and time series architectures. All methods degrade significantly under temporal validation (0.05-0.12 AUC drop compared to random cross-validation), confirming that drift embeds a strong temporal signal. Under this realistic evaluation, the best methods achieve ROC AUC of 0.74-0.76 for some lung conditions, though others remain near chance. Recurrent architectures show the most consistent performance across diseases, while specialized time series methods achieve the highest peak results. Demographic confounders matter: breath signals provide independent diagnostic value for some conditions but add little beyond age for others. We release the S-OH dataset, all temporal splits, evaluation protocols, and code to enable reproducible research and accelerate progress in clinical breathomics.",
       "published": "2026-11-11",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
+      "categories": [],
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 41.87,
+      "score": 41.55,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 32
+        "hf_upvotes": 33
       },
       "why": null,
       "difficulty": 2,
       "kind": "benchmark",
       "url": "https://arxiv.org/abs/2611.15348",
       "pdf": "https://arxiv.org/pdf/2611.15348"
+    },
+    {
+      "id": "2611.24738",
+      "title": "Jeveration: System One Models Now Generate",
+      "authors": [
+        "Yuhe Liu",
+        "Qi Li",
+        "Shihua Zhang",
+        "Xinchao Wang"
+      ],
+      "abstract": "System One models such as Jev return decisions through fast, parallel prediction. In this paper, we introduce Jeveration, showing that the same decision paradigm can also generate high-quality images in a single forward pass. Jeveration builds on a frozen vision-language model, repurposing its visual-semantic knowledge for holistic image generation. The key challenge is to maintain global consistency. A single prompt admits many valid images, yet parallel predictions must converge on a coherent whole. We therefore condition all positions on a shared random state to coordinate parallel predictions, so that each draw yields a different but coherent image. Since the model tends to ignore this state under direct image supervision, we first learn a distribution over discrete image codes to guide single-pass generation. Beyond text-to-image generation, we further unify image-to-image generation and dense prediction within the same architecture, so that one checkpoint supports all three tasks, each in one forward pass. Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models, while maintaining competitive image quality and dense prediction performance.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "genai-llm"
+      ],
+      "score": 40.71,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 120
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.24738",
+      "pdf": "https://arxiv.org/pdf/2611.24738"
+    },
+    {
+      "id": "2611.24102",
+      "title": "IDEA: Intent-Dominance Evidence Audit for Inference-Time Backdoor Detection in GUI Agents",
+      "authors": [
+        "Zhizhuo Kou",
+        "Sizai Hou",
+        "Jian Yang",
+        "Ge Sun",
+        "Junyu Luo",
+        "Wenkai Zhang",
+        "Sirui Han",
+        "Yike Guo"
+      ],
+      "abstract": "Organizations increasingly deploy downloaded open-weight GUI agents. A backdoored agent passes acceptance tests on clean data and misbehaves only when a visual trigger appears on screen, turning an unvetted checkpoint into a supply-chain risk. However, existing sample-level detectors target image classifiers and CLIP-style encoders, leaving step-level backdoor detection for GUI agents unaddressed. On clean steps, the instruction drives the action; when an unreferenced screen region hijacks the step, the instruction loses control over the decision state or that region dictates it instead. We term this signature intent--evidence dominance inversion and propose IDEA (Intent-Dominance Evidence Audit) to detect backdoor activation at inference time for each step without trigger knowledge or attack data. Specifically, Intent Counterfactual Probing (ICP) measures how far redirected instructions move the decision state, and Region Causal Audit (RCA) quantifies how far ablating a candidate region moves it. A gated conformal score compares both displacements against clean steps at the same distance from the clean manifold, providing a finite-sample false-positive guarantee. Extensive experiments on Qwen2.5-VL-3B across five attack families show that IDEA consistently detects backdoor activation under a controlled false-positive rate and outperforms state-of-the-art detection methods, while localizing the trigger region for every alarm and adding only modest inference overhead.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "causal-uplift",
+        "agents",
+        "ml-methods"
+      ],
+      "score": 40.69,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 4
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.24102",
+      "pdf": "https://arxiv.org/pdf/2611.24102"
     },
     {
       "id": "2611.24143",
@@ -811,7 +931,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 41.28,
+      "score": 40.59,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -851,7 +971,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 41.28,
+      "score": 40.59,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -863,64 +983,6 @@
       "kind": "benchmark",
       "url": "https://arxiv.org/abs/2611.24321",
       "pdf": "https://arxiv.org/pdf/2611.24321"
-    },
-    {
-      "id": "2611.22339",
-      "title": "Small Area Causal Inference",
-      "authors": [
-        "Yilin Li",
-        "Jiangshan Zhang",
-        "Jiming Jiang"
-      ],
-      "abstract": "We develop a framework for small area causal inference (SACI). Unlike the traditional doubly robust (DR) estimation approach, the new framework is based on the empirical best prediction (EBP) method. EBP takes into consideration not only the bias but also the variance factor, which is often a more dominant component in the mean squared prediction error (MSPE). Under a linear mixed model for SACI, we establish consistency and asymptotic normality of the maximum likelihood estimator of the model parameters. More relevant to our main objective, we establish asymptotic optimality of the EBP in terms of minimizing the MSPE of the area-specific causal-effect (ASCE) predictor. Moreover, in view of the traditional interest in causal inference, we establish asymptotic normality of the EBP of the ASCE , which is used to construct prediction intervals for the ASCEs. We carry out extensive simulation studies to investigate finite-sample performance of the proposed EBP and its comparison with the traditional DR and other existing methods. Our simulation results show that the proposed EBP method has significant advantage over the comparing methods in terms of MSPE and coverage probability and length of the resulting prediction interval. A real-data example from agricultural-animal genetics is discussed.",
-      "published": "2026-11-17",
-      "categories": [
-        "stat.ME"
-      ],
-      "tags": [
-        "causal-uplift"
-      ],
-      "score": 40.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 4,
-      "kind": "theory",
-      "url": "https://arxiv.org/abs/2611.22339",
-      "pdf": "https://arxiv.org/pdf/2611.22339"
-    },
-    {
-      "id": "2611.23524",
-      "title": "Balancing Partition Forest for Causal Weighting",
-      "authors": [
-        "Felipe Angelim",
-        "Alessandro Leite"
-      ],
-      "abstract": "Balancing weights are used in observational causal inference to construct a population in which the treatment is independent of observed pretreatment covariates. The ideal weight is the ratio between the product of the covariate and treatment marginals and their joint distribution, for binary and continuous treatments alike. We propose Balancing Partition Tree (BPT) and Balancing Partition Forest (BPF), which estimate this ratio on a learned rectangular partition of covariate--treatment space. Each split maximizes the gain in a Bregman divergence computed from joint and marginal counts. Two choices of divergence yield criteria that maximize the mutual information captured by the partition or reduce the squared error of the weights. We show that the population residual of either criterion bounds the bias of inverse-probability-weighted and doubly robust response estimators that use the population partition weights. Across 17 synthetic and semi-synthetic settings and three response estimators, BPF obtains the lowest mean RMSE rank among seven weight estimators, and a single tree fits in 0.14 seconds on 16,512 observations.",
-      "published": "2026-11-17",
-      "categories": [
-        "stat.ME",
-        "cs.LG"
-      ],
-      "tags": [
-        "causal-uplift"
-      ],
-      "score": 40.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 3,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23524",
-      "pdf": "https://arxiv.org/pdf/2611.23524"
     }
   ]
 }
