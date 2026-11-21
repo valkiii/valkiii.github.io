@@ -5,6 +5,7 @@
   const root = document.getElementById("sgmap"), cv = document.getElementById("mapcanvas");
   if (!root || !cv) return;
   const D = JSON.parse(document.getElementById("mapdata").textContent);
+  const go = () => {
   const nodes = D.nodes, edges = D.edges, topics = D.topics, L = D.labels;
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarse = matchMedia("(pointer: coarse)").matches;
@@ -278,4 +279,37 @@
   resize(); sync(); focusNow();
   if (S.focus !== null) stage.scrollIntoView({ block: "start" });
   window.__sgmap = { S, T, nodes, hits: () => hits, fit };
+  };
+
+  // The Pi rebuilds study-group/map.json every day with the radar. If it is newer than the page, draw that instead.
+  const mk = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+  function relist(d) {
+    const l = document.getElementById("maplist"); if (!l) return;
+    l.querySelectorAll("h3, ul").forEach(e => e.remove());
+    const base = root.dataset.papers, st = Object.assign({}, d.labels.status, { radar: "radar" });
+    [...d.clusters, { id: -1, label: "Unclustered" }].forEach(c => {
+      const ns = d.nodes.filter(n => n.c === c.id); if (!ns.length) return;
+      l.append(mk("h3", "kicker", c.label));
+      const ul = mk("ul", "sg-list");
+      ns.forEach(n => {
+        const li = mk("li"); li.dataset.id = n.id;
+        const a = mk("a", "", n.t); a.href = n.slug ? base + n.slug + "/" : n.u;
+        if (!n.slug) { a.target = "_blank"; a.rel = "noopener"; }
+        const meta = mk("span", "meta", " " + (n.y || "") + " · " + (st[n.st] || n.st) + (n.tg.length ? " · " + n.tg.map(t => (d.labels.tag || {})[t] || t).join(", ") : ""));
+        li.append(a, n.slug ? "" : " ↗", meta); ul.append(li);
+      });
+      l.append(ul);
+    });
+  }
+  const url = root.dataset.liveUrl;
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 2500);
+  (url ? fetch(url, { cache: "no-cache", signal: ctl.signal }).then(r => (r.ok ? r.json() : null)) : Promise.resolve(null))
+    .then(live => {
+      if (live && live.nodes && live.generated && (!D.generated || live.generated > D.generated)) {
+        ["nodes", "edges", "clusters", "topics", "generated"].forEach(k => (D[k] = live[k]));
+        relist(D); root.dataset.live = "1";
+      }
+    })
+    .catch(() => {})
+    .finally(() => { clearTimeout(timer); go(); });
 })();
