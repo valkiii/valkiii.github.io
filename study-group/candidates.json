@@ -1,7 +1,42 @@
 {
-  "generated": "2026-11-20T05:31:49Z",
+  "generated": "2026-11-21T05:31:49Z",
   "window_days": 42,
   "items": [
+    {
+      "id": "2611.21885",
+      "title": "Language Models Can Rewrite Their Own Weights",
+      "authors": [
+        "Jiajun Fan",
+        "Neil He",
+        "Changyi Yang",
+        "Andy Mao",
+        "Xi Zhu",
+        "Chaoran Cheng",
+        "Kaiqu Liang",
+        "Shuaike Shen",
+        "Zetian Li",
+        "Ruihan Guo",
+        "Ge Liu"
+      ],
+      "abstract": "Language models are trained once, frozen and deployed: improving one again takes another training run, and a prompt, a scaffold or extra computation at inference is gone once the task ends. A frontier model has been shown to edit the weights of a much smaller one. We ask whether a model can rewrite its own weights to make itself better, and find that it can, by its own reasoning, with no gradients and no training; we call this self-rewriting. Given its weights, graded answers and the ability to run itself, a 27B model diagnoses its failure and edits the weights behind it. It surpasses itself: its own edit makes it 6.6 points more accurate on 490 problems it never saw, in a test fixed in advance, and another session's edit also makes it significantly better. It keeps getting better: it submits an edit only when its own tests support it, each edit replacing the last, and over its first eight such sessions its accuracy only rises. Unlike test-time scaling, the gain persists in its weights and adds no cost per answer; unlike training, it needs no pre- or post-training infrastructure, only an open model and hours on one GPU. It repairs a damaged copy of itself: it locates the corrupted matrix and rewrites it with values of its own, never reading the undamaged weights; found on text math problems alone, the repair lifts the copy on six image benchmarks it never saw from 7% to 70% accuracy, 83% of the undamaged model's. And the ability emerges with scale: across four sizes of one family, the 2B model makes no edit and the 4B and 9B models break themselves; only the 27B model works on itself as a human would, comparing its hidden states on answers that finish and on answers that run out of tokens, weakening the direction that separates them. Like a human, a model need not separate training from inference; improving a language model may come to take a conversation rather than a training run.",
+      "published": "2026-11-16",
+      "categories": [],
+      "tags": [
+        "genai-llm"
+      ],
+      "score": 60.92,
+      "signals": {
+        "hn_points": 368,
+        "hn_comments": 116,
+        "hn_url": "https://news.ycombinator.com/item?id=50577265",
+        "hf_upvotes": 6
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.21885",
+      "pdf": "https://arxiv.org/pdf/2611.21885"
+    },
     {
       "id": "2611.04720",
       "title": "OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer",
@@ -31,7 +66,7 @@
         "bandits-rl",
         "causal-uplift"
       ],
-      "score": 57.33,
+      "score": 57.02,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -65,7 +100,7 @@
         "tabular-timeseries",
         "bandits-rl"
       ],
-      "score": 56.68,
+      "score": 56.12,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -96,7 +131,7 @@
         "eval-safety",
         "genai-llm"
       ],
-      "score": 51.61,
+      "score": 50.95,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -127,7 +162,7 @@
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 48.11,
+      "score": 47.73,
       "signals": {
         "hn_points": 31,
         "hn_comments": 0,
@@ -139,6 +174,35 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.10866",
       "pdf": "https://arxiv.org/pdf/2611.10866"
+    },
+    {
+      "id": "2611.25200",
+      "title": "Squoosh Bench: Evaluating UX-1 on 318 Historical Website A/B Tests",
+      "authors": [
+        "Rohith Pasula",
+        "Johari Dramiga",
+        "Viraj Shah",
+        "Suzan Halim",
+        "Tyler Dooskin"
+      ],
+      "abstract": "Experimentation teams must decide which proposed website changes to test with live traffic. We evaluated whether forecasts from simulated shoppers could inform that choice. We screened 412 historical website A/B tests and evaluated four systems on the 318 that ran longer than 21 days. Each system predicted an original win, a variant win, or an inconclusive result. Page roles were masked and recorded outcomes were withheld during inference. Squoosh UX-1, a model fine-tuned on human browsing data, simulated 1,000 shoppers per arm and correctly classified 267 of 318 outcomes (84.0%, 95% Wilson interval 79.5-87.6%, treating experiments as independent). Qwen3 Next 80B, the strongest general-purpose configuration on outcome accuracy, correctly classified 196 of 318 (61.6%). UX-1 favored the variant in 126 experiments. In the live tests, 118 of those variants won (93.7%), four lost, and four had inconclusive results. The remaining 192 experiments included 19 additional variant wins.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "causal-uplift"
+      ],
+      "score": 46.14,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 2
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.25200",
+      "pdf": "https://arxiv.org/pdf/2611.25200"
     },
     {
       "id": "2611.18397",
@@ -180,18 +244,50 @@
         "bandits-rl",
         "agents"
       ],
-      "score": 45.64,
+      "score": 45.45,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 136
+        "hf_upvotes": 144
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.18397",
       "pdf": "https://arxiv.org/pdf/2611.18397"
+    },
+    {
+      "id": "2611.23236",
+      "title": "PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation",
+      "authors": [
+        "Shengxiang Lin",
+        "Jiajie Su",
+        "Pengyang Zhou",
+        "Xiang Chen",
+        "Xiaolin Zheng",
+        "Feng Tian",
+        "Chaochao Chen"
+      ],
+      "abstract": "LLM-enhanced recommender systems encode item side information into semantic embeddings, but these embeddings may leak sensitive textual attributes through inversion attacks. Existing input-side defenses rely on trusted collection or local token perturbation, often disrupting the inter-item semantic topology needed for recommendation. To address it, we introduce relational fidelity as the key objective, requiring semantic shift for privacy while preserving relative item relations for utility. Based on this principle, we propose prototype-guided progressive obfuscation (PGPO), which learns topology-aware obfuscation anchors for high-influence prototype words and propagates them through a static semantic graph. PGPO is optimized with GRPO using individual dissimilarity, structural consistency, and semantic constraint rewards. Experiments on two benchmarks show strong inversion defense with near-upper-bound recommendation performance. The code is available at https://github.com/Shengxiang-Lin/PGPO.",
+      "published": "2026-08-26",
+      "categories": [],
+      "tags": [
+        "recsys-nba",
+        "eval-safety"
+      ],
+      "score": 45.34,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 3
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.23236",
+      "pdf": "https://arxiv.org/pdf/2611.23236"
     },
     {
       "id": "2611.18130",
@@ -209,7 +305,7 @@
         "applied-finance",
         "agents"
       ],
-      "score": 45.45,
+      "score": 44.94,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -241,7 +337,7 @@
         "causal-uplift",
         "recsys-nba"
       ],
-      "score": 44.71,
+      "score": 44.49,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -253,180 +349,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2610.37570",
       "pdf": "https://arxiv.org/pdf/2610.37570"
-    },
-    {
-      "id": "2611.23236",
-      "title": "PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation",
-      "authors": [
-        "Shengxiang Lin",
-        "Jiajie Su",
-        "Pengyang Zhou",
-        "Xiang Chen",
-        "Xiaolin Zheng",
-        "Feng Tian",
-        "Chaochao Chen"
-      ],
-      "abstract": "LLM-enhanced recommender systems encode item side information into semantic embeddings, but these embeddings may leak sensitive textual attributes through inversion attacks. Existing input-side defenses rely on trusted collection or local token perturbation, often disrupting the inter-item semantic topology needed for recommendation. To address it, we introduce relational fidelity as the key objective, requiring semantic shift for privacy while preserving relative item relations for utility. Based on this principle, we propose prototype-guided progressive obfuscation (PGPO), which learns topology-aware obfuscation anchors for high-influence prototype words and propagates them through a static semantic graph. PGPO is optimized with GRPO using individual dissimilarity, structural consistency, and semantic constraint rewards. Experiments on two benchmarks show strong inversion defense with near-upper-bound recommendation performance. The code is available at https://github.com/Shengxiang-Lin/PGPO.",
-      "published": "2026-08-26",
-      "categories": [],
-      "tags": [
-        "recsys-nba",
-        "eval-safety"
-      ],
-      "score": 43.71,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 2
-      },
-      "why": null,
-      "difficulty": 1,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23236",
-      "pdf": "https://arxiv.org/pdf/2611.23236"
-    },
-    {
-      "id": "2611.24283",
-      "title": "X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction",
-      "authors": [
-        "Alexander Ploshkin",
-        "Nikita Stepanov",
-        "Alexey Pismenny",
-        "Viacheslav Ovchinnikov",
-        "Nikolay Savushkin"
-      ],
-      "abstract": "Accurate click-through rate (CTR) prediction depends on user representations that capture both persistent preferences and recent intent, yet processing extensive behavioral histories for every ranking request is costly under production compute and latency constraints. We present X-split ARGUS, a framework for ad ranking whose history compressor and online ranker are trained end to end. The compressor encodes past interactions into a compact set of tokens that are computed offline and reused across candidates, while the online ranker scores ads through cross-attention to these tokens and representations of recent events. Training combines an autoregressive loss for click feedback with distillation of candidate-specific click logits from a larger teacher that scores each candidate using the uncompressed history. The number of compressed history tokens and the length of recent history can be adjusted to fit serving compute and latency budgets. Offline evaluation shows a 0.81% relative reduction in normalized entropy (NE) compared with the production baseline. Deployment in a large-scale real-time bidding system increases online inference cost by 15% relative to the production baseline. An online A/B test against this baseline yields relative gains of 4.65% in a business metric reflecting the monetary value of conversions generated for advertisers and 2.96% in clicks.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba",
-        "causal-uplift"
-      ],
-      "score": 43.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.24283",
-      "pdf": "https://arxiv.org/pdf/2611.24283"
-    },
-    {
-      "id": "2611.24006",
-      "title": "MARS Technical Report",
-      "authors": [
-        "Tong Liu",
-        "Chaoqun Hou",
-        "Longxiang Xiong",
-        "Junhong Lou",
-        "Jiaqi Zheng",
-        "Qixin Li",
-        "Zixin Zhao",
-        "Yong Duan",
-        "Xiannian Hu",
-        "Fengze Jiang",
-        "Yu Zhu",
-        "Cheng Guo",
-        "Xinyuan Qi",
-        "Zi Zhuang",
-        "Ping Liu",
-        "Lv Shao",
-        "Zongwei Wang"
-      ],
-      "abstract": "Modern industrial recommender systems use multi-stage cascades--retrieval, pre-ranking, ranking, and re-ranking--to narrow millions of candidates to a personalized list. While each stage deploys sophisticated models, pipeline-level decisions on channel activation, quotas, model selection, and score fusion remain engineer-tuned and user-agnostic within each scenario. This report presents MARS (Multi-stage Agentic Recommendation System), extending personalization from individual-stage predictions to full pipeline orchestration. A near-line agent built on fine-tuned Qwen3-0.6B generates per-user configurations--a seven-dimensional action covering pipeline mode, retrieval quotas, model selection, fusion weights, and reranker settings--from a constrained action space. Configurations are validated, cached, and consumed asynchronously; the cascade never waits for LLM inference. Schema checks, fallbacks, and a kill switch ensure serving safety. The policy is trained in three stages: Confidence-aware SFT distills schema-valid generation from a teacher model; Format-Anchored Preference Optimization (FAPO) learns action preferences via ActionMask with posterior weighting; Group Relative Policy Optimization (GRPO) refines the policy through Sandbox replay with a frozen reward model, without exposing exploratory actions to live traffic. Two-week A/B tests across five Taobao scenarios with over ten million daily users show positive gains on all key metrics. The largest reach +5.22% V2P and +7.34% GMV, with positive CTR lifts on both click surfaces. About 20% of requests use a lightweight Minimal mode, and deployment shows 12 ms lower mean serving latency versus production.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba",
-        "bandits-rl",
-        "agents"
-      ],
-      "score": 43.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "case-study",
-      "url": "https://arxiv.org/abs/2611.24006",
-      "pdf": "https://arxiv.org/pdf/2611.24006"
-    },
-    {
-      "id": "2611.23710",
-      "title": "CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation",
-      "authors": [
-        "Haopeng Jin",
-        "Bingkang Shi",
-        "Tao Yu",
-        "Yifei Ma",
-        "Hao Liu",
-        "Hongzhu Yi",
-        "Jinwen Luo"
-      ],
-      "abstract": "Multimodal generative recommendation with discrete semantic identifiers (SIDs) requires distinguishing historical modalities that merely alter token predictions from those that genuinely reduce catalog-level ambiguity. When audiovisual, visual, or textual streams are missing, degraded, or semantically conflicting, uniform fusion and unconstrained token gates can propagate misleading content across iterative denoising steps. We propose CONCORD-Rec, a reliability-conditioned discrete diffusion recommender supervised by counterfactual catalog-partition utility. Given a fixed tokenizer and a partially masked SID state, CONCORD-Rec evaluates out-of-fold teacher coalitions over the exact feasible catalog support and aggregates item posteriors across the target code partition at each unresolved position. Rather than distilling raw token probabilities directly, the resulting counterfactual loss differences supervise an availability-masked tokenwise gate that allocates bounded modality residuals around a behavioral denoiser while retaining an exact behavioral fallback slot. We establish theoretical fixed-support ranking stability bounds under gate perturbations and evaluate position-level and code-conditional allocation across audiovisual and image-text recommendation benchmarks under controlled missingness, signal degradation, and semantic conflict. Across 20 source-compatible protocol-dataset rows, CONCORD-Rec improves NDCG by 4%; under matched 30% conflict it improves NDCG by 14.63%. The full-vs-uniform-T=16 sweep improves quality by 2.00-3.58% while reducing p95 latency by up to 86.89%.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba"
-      ],
-      "score": 43.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "theory",
-      "url": "https://arxiv.org/abs/2611.23710",
-      "pdf": "https://arxiv.org/pdf/2611.23710"
-    },
-    {
-      "id": "2611.23969",
-      "title": "ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation",
-      "authors": [
-        "Dae Kyoo Kim",
-        "Heejung Cho",
-        "Sungmoo Hong",
-        "Eunil Park"
-      ],
-      "abstract": "CoT-style LLM recommenders generate a natural-language preference note as a chain-of-thought prefix to ranking, but the note is trusted without verification, and the ranker never consults behaviorally similar users. We propose ReflectRec, organized around a preference-to-history round-trip verifier whose recall score serves as an operational signal of preference-to-history recoverability, enabling conditional regeneration for low-recoverability preferences and selection among regeneration attempts. Around this verifier, we wire a semantic Stage-1 prompt, conditional regeneration, and Forward-Look retrieval that injects future watches of behaviorally similar users as a collaborative hint. On MovieLens-100K and MovieLens-1M, the full pipeline outperforms CoT4Rec-ICL by +16.25 / +4.46 pp Hit@10, with positive gains across all ValScore buckets and three LLM backbones (Qwen3-30B, Qwen2.5-72B, and Llama-3.3-70B). We also observe a similar verifier-guided regeneration pattern on Amazon Electronics.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.CL",
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba",
-        "genai-llm"
-      ],
-      "score": 43.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23969",
-      "pdf": "https://arxiv.org/pdf/2611.23969"
     },
     {
       "id": "2611.17820",
@@ -445,7 +367,7 @@
         "eval-safety",
         "recsys-nba"
       ],
-      "score": 43.04,
+      "score": 42.52,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -457,36 +379,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.17820",
       "pdf": "https://arxiv.org/pdf/2611.17820"
-    },
-    {
-      "id": "2611.22756",
-      "title": "Learning Cross-Domain Media Similarity from Amazon Reviews",
-      "authors": [
-        "Gabrielly Xavier dos Santos",
-        "Lucas Dias Cler",
-        "Luciana Fujii Pontello",
-        "Olga Goussevskaia"
-      ],
-      "abstract": "Collaborative filtering is a basic foundation of many recommendation algorithms. It works by analyzing a user's history and then suggesting items similar to those in that history. This method typically relies on user data to compute item similarity, data that is widely available to commercial systems but is usually sparse or inaccessible for independent systems and research, especially across multiple media domains. In this work, we propose a method to generalize similarity information between items using supervised learning. As input to our model, we use semantic and temporal features extracted from Amazon product reviews, which are publicly available. As the training target, we use item (product) co-occurrence in the reviewing history of Amazon customers. We evaluate the quality of the predicted similarities across two media domains: books and movies. Experimental results demonstrate the robustness of our methodology, yielding positive outcomes in zero-shot cross-domain transfer tasks. Furthermore, feature attribution analysis reveals a structural shift in how feature groups are utilized across setups: intra-domain models rely heavily on linguistic semantics, whereas cross-domain environments pivot toward behavioral popularity cues. Incorporating even limited target-domain context during training bridges this domain sparsity gap, significantly enhancing framework generalization.",
-      "published": "2026-11-17",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba"
-      ],
-      "score": 42.93,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "survey",
-      "url": "https://arxiv.org/abs/2611.22756",
-      "pdf": "https://arxiv.org/pdf/2611.22756"
     },
     {
       "id": "2611.17167",
@@ -511,7 +403,7 @@
         "genai-llm",
         "agents"
       ],
-      "score": 42.82,
+      "score": 42.33,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -523,79 +415,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.17167",
       "pdf": "https://arxiv.org/pdf/2611.17167"
-    },
-    {
-      "id": "2611.08449",
-      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
-      "authors": [
-        "Yu-Cheng Chou",
-        "Shihao Wang",
-        "Jin Huang",
-        "Chi-Pin Huang",
-        "Chiao-An Yang",
-        "Xianzhe Fan",
-        "Jing Wang",
-        "Zhiqi Li",
-        "Yuanguo Kuang",
-        "Ruijie Zheng",
-        "Johan Bjorck",
-        "Sifei Liu",
-        "Hang Su",
-        "Abhishek Badki",
-        "Lei Zhang",
-        "Alan Yuille",
-        "Linxi \"Jim'' Fan",
-        "Jan Kautz",
-        "Zhiding Yu"
-      ],
-      "abstract": "Models for physical AI tasks, such as robotics and autonomous driving, need not reason solely in language. They can use visual plans--points, bounding boxes, and trajectories--to represent spatial goals and anticipate motion. However, autoregressive vision-language models generate these plans one coordinate token at a time, making richer predictions increasingly costly. We introduce VFlash, a method for fast, accurate visual planning through Flash Primitive Decoding. VFlash exploits the known structure of visual primitives to predict their coordinates jointly, using a lightweight drafter that generates an entire primitive in one forward pass. The layout adapts to the primitive's type, dimensionality, and length, supporting compact boxes and long, variable-length trajectories. Crucially, spatial accuracy need not require reproducing an autoregressive model's exact token sequence. VFlash therefore trains on annotated primitives and directly accepts structurally valid predictions without target-token agreement. Across the evaluated 2D and 3D robot trajectory tasks, VFlash consistently reduces prediction errors relative to autoregressive decoding. Preliminary single-rollout measurements indicate approximately 25x faster generation for 3D point motion forecasting. A world action model conditioned on VFlash plans achieves 70.2% average success across four MolmoSpaces task suites, compared with 62.6% for the baseline.",
-      "published": "2026-11-05",
-      "categories": [],
-      "tags": [
-        "tabular-timeseries",
-        "genai-llm"
-      ],
-      "score": 42.27,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 120
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.08449",
-      "pdf": "https://arxiv.org/pdf/2611.08449"
-    },
-    {
-      "id": "2611.12886",
-      "title": "Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning",
-      "authors": [
-        "Haozhi Yuan",
-        "Handong Li",
-        "Yifan Zhang",
-        "Qianshan Wei"
-      ],
-      "abstract": "Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges. Models may overlook useful tool-returned observations, while poorly grounded actions can limit the evidence available for subsequent distillation. We introduce Reframe, a post-training framework that treats the observation state, rather than only the output distribution, as an object of alignment. First, Ground-Drop-GRPO (GD-GRPO) trains spatial and temporal specialists with evidence-aware rewards and stochastic removal of the original visual input, encouraging them to acquire grounded evidence and use the returned observations. Second, Observation-Gated-MOPD (OG-MOPD) replaces deficient tool actions with canonical ones mid-rollout and resumes distillation from the repaired observation. The two stages complement each other, as learning to rely on tool-returned observations can help the policy benefit from observation repair. Neither stage requires a task-specific SFT cold start. Extensive experiments over 14 image and video benchmarks demonstrate that Reframe outperforms both Mix-RL and vanilla MOPD. Ablation results show that GD-GRPO increases observation dependence and tool gain compared with outcome-based GRPO.",
-      "published": "2026-11-09",
-      "categories": [],
-      "tags": [
-        "agents",
-        "bandits-rl"
-      ],
-      "score": 41.84,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 41
-      },
-      "why": null,
-      "difficulty": 1,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.12886",
-      "pdf": "https://arxiv.org/pdf/2611.12886"
     },
     {
       "id": "2611.07222",
@@ -613,12 +432,12 @@
         "genai-llm",
         "applied-finance"
       ],
-      "score": 41.83,
+      "score": 41.62,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 44
+        "hf_upvotes": 45
       },
       "why": null,
       "difficulty": 2,
@@ -627,32 +446,33 @@
       "pdf": "https://arxiv.org/pdf/2611.07222"
     },
     {
-      "id": "2611.24789",
-      "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
+      "id": "2611.12886",
+      "title": "Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning",
       "authors": [
-        "Phuong Tuan Dat",
-        "Qi Li",
-        "Xinchao Wang"
+        "Haozhi Yuan",
+        "Handong Li",
+        "Yifan Zhang",
+        "Qianshan Wei"
       ],
-      "abstract": "World action models (WAMs) have shown promising generalization and data efficiency in robot manipulation by coupling action generation with predictions of future visual dynamics. Translating these capabilities into reliable task execution, however, remains a challenge for existing post-training methods. Offline supervised fine-tuning provides dense supervision on expert trajectories, but its flow-matching action expert is trained only on noised demonstration actions and never on the intermediate states produced by its own sampler; task-specific adaptation can also compromise pretrained capabilities. On-policy reinforcement learning trains on the policy's own behavior, yet sparse task rewards make exploration and credit assignment difficult, while dense reward shaping still provides scalar evaluations rather than direct action targets. We introduce HINT-WAM, the first on-policy self-distillation framework that supervises the action expert on its own sampling trajectories using hindsight, the future video of the demonstration, as privileged information available to the WAM itself. For each demonstration observation, the student generates its action through its own denoising trajectory, and at the states along this trajectory the same model acts as a teacher conditioned additionally on this hindsight, providing a conditional action distribution as a dense training target, while the student sees only deployment-time inputs and needs no environmental rewards or simulator interaction. To transfer this supervision to a flow-matching action expert, HINT-WAM distills the teacher into the student with an energy score, a distribution-level objective that matches the teacher's action distribution from the student's own samples rather than regressing its velocity field. The project web is available in https://tuandattt.github.io/hintwam/.",
-      "published": "2026-11-18",
+      "abstract": "Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges. Models may overlook useful tool-returned observations, while poorly grounded actions can limit the evidence available for subsequent distillation. We introduce Reframe, a post-training framework that treats the observation state, rather than only the output distribution, as an object of alignment. First, Ground-Drop-GRPO (GD-GRPO) trains spatial and temporal specialists with evidence-aware rewards and stochastic removal of the original visual input, encouraging them to acquire grounded evidence and use the returned observations. Second, Observation-Gated-MOPD (OG-MOPD) replaces deficient tool actions with canonical ones mid-rollout and resumes distillation from the repaired observation. The two stages complement each other, as learning to rely on tool-returned observations can help the policy benefit from observation repair. Neither stage requires a task-specific SFT cold start. Extensive experiments over 14 image and video benchmarks demonstrate that Reframe outperforms both Mix-RL and vanilla MOPD. Ablation results show that GD-GRPO increases observation dependence and tool gain compared with outcome-based GRPO.",
+      "published": "2026-11-09",
       "categories": [],
       "tags": [
-        "bandits-rl",
-        "ml-methods"
+        "agents",
+        "bandits-rl"
       ],
-      "score": 41.72,
+      "score": 41.42,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 22
+        "hf_upvotes": 41
       },
       "why": null,
-      "difficulty": 2,
+      "difficulty": 1,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.24789",
-      "pdf": "https://arxiv.org/pdf/2611.24789"
+      "url": "https://arxiv.org/abs/2611.12886",
+      "pdf": "https://arxiv.org/pdf/2611.12886"
     },
     {
       "id": "2611.22115",
@@ -806,18 +626,46 @@
         "agents",
         "ml-methods"
       ],
-      "score": 41.67,
+      "score": 41.22,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 160
+        "hf_upvotes": 165
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.22115",
       "pdf": "https://arxiv.org/pdf/2611.22115"
+    },
+    {
+      "id": "2611.24738",
+      "title": "Jeveration: System One Models Now Generate",
+      "authors": [
+        "Yuhe Liu",
+        "Qi Li",
+        "Shihua Zhang",
+        "Xinchao Wang"
+      ],
+      "abstract": "System One models such as Jev return decisions through fast, parallel prediction. In this paper, we introduce Jeveration, showing that the same decision paradigm can also generate high-quality images in a single forward pass. Jeveration builds on a frozen vision-language model, repurposing its visual-semantic knowledge for holistic image generation. The key challenge is to maintain global consistency. A single prompt admits many valid images, yet parallel predictions must converge on a coherent whole. We therefore condition all positions on a shared random state to coordinate parallel predictions, so that each draw yields a different but coherent image. Since the model tends to ignore this state under direct image supervision, we first learn a distribution over discrete image codes to guide single-pass generation. Beyond text-to-image generation, we further unify image-to-image generation and dense prediction within the same architecture, so that one checkpoint supports all three tasks, each in one forward pass. Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models, while maintaining competitive image quality and dense prediction performance.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "genai-llm"
+      ],
+      "score": 41.2,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 147
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.24738",
+      "pdf": "https://arxiv.org/pdf/2611.24738"
     },
     {
       "id": "2611.15348",
@@ -836,7 +684,7 @@
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 41.55,
+      "score": 41.09,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -850,32 +698,32 @@
       "pdf": "https://arxiv.org/pdf/2611.15348"
     },
     {
-      "id": "2611.24738",
-      "title": "Jeveration: System One Models Now Generate",
+      "id": "2611.24789",
+      "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
       "authors": [
-        "Yuhe Liu",
+        "Phuong Tuan Dat",
         "Qi Li",
-        "Shihua Zhang",
         "Xinchao Wang"
       ],
-      "abstract": "System One models such as Jev return decisions through fast, parallel prediction. In this paper, we introduce Jeveration, showing that the same decision paradigm can also generate high-quality images in a single forward pass. Jeveration builds on a frozen vision-language model, repurposing its visual-semantic knowledge for holistic image generation. The key challenge is to maintain global consistency. A single prompt admits many valid images, yet parallel predictions must converge on a coherent whole. We therefore condition all positions on a shared random state to coordinate parallel predictions, so that each draw yields a different but coherent image. Since the model tends to ignore this state under direct image supervision, we first learn a distribution over discrete image codes to guide single-pass generation. Beyond text-to-image generation, we further unify image-to-image generation and dense prediction within the same architecture, so that one checkpoint supports all three tasks, each in one forward pass. Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models, while maintaining competitive image quality and dense prediction performance.",
+      "abstract": "World action models (WAMs) have shown promising generalization and data efficiency in robot manipulation by coupling action generation with predictions of future visual dynamics. Translating these capabilities into reliable task execution, however, remains a challenge for existing post-training methods. Offline supervised fine-tuning provides dense supervision on expert trajectories, but its flow-matching action expert is trained only on noised demonstration actions and never on the intermediate states produced by its own sampler; task-specific adaptation can also compromise pretrained capabilities. On-policy reinforcement learning trains on the policy's own behavior, yet sparse task rewards make exploration and credit assignment difficult, while dense reward shaping still provides scalar evaluations rather than direct action targets. We introduce HINT-WAM, the first on-policy self-distillation framework that supervises the action expert on its own sampling trajectories using hindsight, the future video of the demonstration, as privileged information available to the WAM itself. For each demonstration observation, the student generates its action through its own denoising trajectory, and at the states along this trajectory the same model acts as a teacher conditioned additionally on this hindsight, providing a conditional action distribution as a dense training target, while the student sees only deployment-time inputs and needs no environmental rewards or simulator interaction. To transfer this supervision to a flow-matching action expert, HINT-WAM distills the teacher into the student with an energy score, a distribution-level objective that matches the teacher's action distribution from the student's own samples rather than regressing its velocity field. The project web is available in https://tuandattt.github.io/hintwam/.",
       "published": "2026-11-18",
       "categories": [],
       "tags": [
-        "genai-llm"
+        "bandits-rl",
+        "ml-methods"
       ],
-      "score": 40.71,
+      "score": 41.07,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 120
+        "hf_upvotes": 22
       },
       "why": null,
       "difficulty": 2,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.24738",
-      "pdf": "https://arxiv.org/pdf/2611.24738"
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.24789",
+      "pdf": "https://arxiv.org/pdf/2611.24789"
     },
     {
       "id": "2611.24102",
@@ -898,12 +746,12 @@
         "agents",
         "ml-methods"
       ],
-      "score": 40.69,
+      "score": 41.07,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 4
+        "hf_upvotes": 5
       },
       "why": null,
       "difficulty": 2,
@@ -912,77 +760,404 @@
       "pdf": "https://arxiv.org/pdf/2611.24102"
     },
     {
-      "id": "2611.24143",
-      "title": "Fill-Distance-Guided Active Learning for Causal Function Recovery under Network Interference",
+      "id": "2611.21373",
+      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
       "authors": [
-        "Peiyao Liu",
-        "Hongtao Zhu",
-        "Sizhe Zhang",
-        "Yang Su",
-        "Zhenyu Zhao",
-        "Nan Chen"
+        "Yipeng Du",
+        "Yuxi Li",
+        "Ying Zhang",
+        "Chong Sun",
+        "Chen Li",
+        "Jing Lyu",
+        "Ying Tai"
       ],
-      "abstract": "Causal inference seeks to learn how outcomes change under alternative interventions, but network interactions complicate this task. Under network interference, outcomes depend on both own treatment and neighbors' treatments, making causal effects functions of neighborhood exposure rather than single treatment contrasts. Existing methods primarily target prespecified causal contrasts or their estimation precision, leaving global response-function recovery largely unexplored. We study sequential experimentation under a limited experimental budget, with the goal of recovering the full exposure-dependent population-average response function. To this end, we propose FANCI (Fill-Distance-Guided Active Learning for Network-Interference Causal Inference). For function learning, treatment-specific Gaussian processes flexibly model nonlinear conditional response surfaces. For experimental design, we formulate global response-function recovery as a coverage problem and propose a fill-distance criterion that guides new experiments toward poorly covered regions. To account for network constraints on attainable exposure patterns, we develop full-network and target-screened strategies for selecting feasible network--assignment pairs. Theoretically, we derive uniform error bounds linking fill distance to response-function estimation and characterize the approximation loss from target screening. Simulations and an online-game experiment show that FANCI improves recovery of nonlinear exposure-dependent effects and reveals treatment patterns obscured when network interference is ignored.",
-      "published": "2026-11-18",
-      "categories": [
-        "stat.ME",
-        "cs.LG"
-      ],
+      "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
+      "published": "2026-11-16",
+      "categories": [],
       "tags": [
-        "causal-uplift"
+        "agents",
+        "bandits-rl"
       ],
-      "score": 40.59,
+      "score": 41.04,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": null
+        "hf_upvotes": 49
       },
       "why": null,
-      "difficulty": 3,
+      "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.24143",
-      "pdf": "https://arxiv.org/pdf/2611.24143"
+      "url": "https://arxiv.org/abs/2611.21373",
+      "pdf": "https://arxiv.org/pdf/2611.21373"
     },
     {
-      "id": "2611.24321",
-      "title": "Benchmarking LLM abilities on postdoc-level natural science problems",
+      "id": "2611.21366",
+      "title": "ALIVE: Making Streaming Video Models Interactive",
       "authors": [
-        "Alina Avanesyan",
-        "Alexey Boldyrev",
-        "Liqun Deng",
-        "Denis Derkach",
-        "Mary Godunova",
-        "Mikhail Hushchyn",
-        "Dmitry Ilvovsky",
-        "Irina Knyazeva",
-        "Irina Piontkovskaya",
-        "Dmitry Polubotko",
-        "Fedor Ratnikov",
-        "Ekaterina Trofimova",
-        "Zhenhe Zhang"
+        "Jinzhao Li",
+        "Yuan Xu",
+        "Jinxuan Wu",
+        "Yukun Wang",
+        "Yijia Lei",
+        "Hanyu Ji",
+        "Yinuo Chen",
+        "Zining Huang",
+        "Chi Zhang",
+        "Hang Ye",
+        "Yiwu Zhong",
+        "Honglei Yan",
+        "Panwang Pan",
+        "Yizhou Wang",
+        "Yin Li",
+        "Miao Liu"
       ],
-      "abstract": "Scientific problems have no answer key, so evaluating an agent means deciding what counts as a better solution before any agent is run. Existing benchmarks either match a symbolic answer against a key or, where they require executable work, score it by unit tests, by a rubric, or by position on a competition leaderboard. None of these is the criterion by which a field decides that one published method beats another. STEMBench adopts that criterion directly. Each of its twelve research problems in high-energy physics, astrophysics and neuroscience is scored by its own field's figure of merit, and each comes with two measured anchors: a submission that uses no domain knowledge, and an expert reference reproducing a published method, both obtained by running code shipped with the benchmark. The interval between them states how much of a problem is crossed by scientific insight rather than by engineering. Across eight frontier models, task-level wins and domain-level leadership dissociate: a model that wins five of the twelve tasks leads no domain mean. In the high-effort cross-model comparison, at least one model's mean score exceeds the expert anchor on seven of twelve tasks. The remaining five span uncertainty estimation, latent and causal inference, and cross-site clinical classification. Numerical scores and official-submission validity capture different aspects of performance and are reported separately. We release the tasks, graders, anchors and harness.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.AI",
-        "physics.data-an"
-      ],
+      "abstract": "Streaming video LLMs can continuously observe the world, yet often handle user requests in isolation. We introduce ALIVE, an interactive streaming video model supporting proactive monitoring, streaming task coordination, and feedback-seeking interaction. We construct ALIVE-SFT-288K and ALIVE-RL-3K for two-stage training. Contrastive supervised fine-tuning teaches when and how to respond, while reinforcement learning with Behavior-Aligned Credit Assignment (BACA) combines trajectory-level and local advantages to refine decisions, responses, and silence across multi-turn interactions. We also introduce FSI-Bench to evaluate feedback seeking and subsequent task completion. ALIVE achieves the highest overall scores among the compared models on four public benchmarks and FSI-Bench, demonstrating strong streaming understanding and interactive capabilities.",
+      "published": "2026-11-16",
+      "categories": [],
       "tags": [
-        "causal-uplift"
+        "genai-llm",
+        "bandits-rl"
       ],
-      "score": 40.59,
+      "score": 39.92,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": null
+        "hf_upvotes": 40
       },
       "why": null,
       "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.21366",
+      "pdf": "https://arxiv.org/pdf/2611.21366"
+    },
+    {
+      "id": "2611.23779",
+      "title": "TabBioMed: A Large-Scale Benchmark for Biomedical Tabular Learning",
+      "authors": [
+        "Pau Mateo-Bernadó",
+        "Saivenkata Nagavyjayanthi Polapragada",
+        "David Bonet",
+        "Pol Arbiol Rakuljic",
+        "Laia Mogas Pladevall",
+        "Marçal Comajoan Cara",
+        "Jesus Gonzalez-Ferrer",
+        "Jordi Abante",
+        "Daniel Mas Montserrat",
+        "David Haussler",
+        "Alexander G. Ioannidis"
+      ],
+      "abstract": "Recent advances in machine learning have accelerated biomedical prediction, but evaluation on structured biomedical data remains fragmented, especially for datasets with high dimensionality, large sample size, missingness, and class imbalance. We introduce TabBioMed, a large-scale benchmark of 94 curated public biomedical tabular datasets spanning electronic health records, drug discovery, genomics, transcriptomics, proteomics, metabolomics, single-cell omics, and systems biology. TabBioMed unifies these datasets through a standardized, dataset-aware preprocessing and evaluation framework, enabling reproducible comparison across classification, regression, and multi-target tasks. We benchmark 23 models across classical baselines, gradient-boosted trees, neural tabular architectures, and tabular foundation models. Foundation models deliver the strongest family-level predictive performance. However, their gains are regime-dependent: tree-based models and tuned multilayer perceptrons remain highly competitive, often dominating under inference-time or training-cost constraints. Overall, TabBioMed shows that biomedical tabular learning is strongly context-dependent, with optimal model choice depending on data regime, task type, and computational budget. We release TabBioMed with curated datasets and splits, preprocessing code, baselines, and results, providing a reproducible benchmark for practical model selection and future methods development in biomedical machine learning, available at https://github.com/AI-sandbox/TabBioMed.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "tabular-timeseries"
+      ],
+      "score": 39.44,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 12
+      },
+      "why": null,
+      "difficulty": 2,
       "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.24321",
-      "pdf": "https://arxiv.org/pdf/2611.24321"
+      "url": "https://arxiv.org/abs/2611.23779",
+      "pdf": "https://arxiv.org/pdf/2611.23779"
+    },
+    {
+      "id": "2611.13001",
+      "title": "One Table, Many Queries: Benchmarking Generalist Tabular Models Across Generation, Imputation, and Prediction",
+      "authors": [
+        "Yuanrui Wang",
+        "Kaifang Li",
+        "Xuanyue Li",
+        "Ziyun Li",
+        "Yan Lu",
+        "Xingxuan Zhang",
+        "Peng Cui"
+      ],
+      "abstract": "Generation, imputation, and prediction query different aspects of the same tabular distribution, but are usually evaluated separately. This leaves unclear which capabilities they share, how their training objectives interact, and whether one model can perform all three well. We introduce the One Table Benchmark (), spanning 56 datasets, 46 registered methods, and 20 capability axes under aligned data splits and explicit task contracts. We compare task ranks on aligned support, train five backbones under all seven non-empty objective combinations on five datasets with three seeds, and contrast fixed-model profiles with specialist portfolios. Rank comparisons connect imputation and prediction through numerical recovery and dependence preservation, and link generation to both through predictive utility; distributional fidelity follows different, sometimes opposing, rankings. Objective interventions show the largest pooled gains from including the recipient's own objective. Generation has the broadest coverage of positive pooled auxiliary effects, while prediction shows potential to improve imputation and synthetic-data utility, with responses that vary across backbones. Cross-addition effects reveal that objective benefits need not add and depend on the objectives already present. Fixed-model comparisons expose corresponding utility--fidelity trade-offs: some generalists surpass specialist portfolios on utility, while fidelity continues to favor specialization. Frozen foundation models show strong prediction and numerical point imputation, together with promising synthetic-data utility, highlighting their potential across all three tasks. These findings motivate unified tabular models that share useful conditional information while improving categorical reconstruction and faithful joint sampling.",
+      "published": "2026-11-08",
+      "categories": [],
+      "tags": [
+        "tabular-timeseries"
+      ],
+      "score": 38.6,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 38
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.13001",
+      "pdf": "https://arxiv.org/pdf/2611.13001"
+    },
+    {
+      "id": "2611.21072",
+      "title": "Sage S2.1 Flash Technical Report",
+      "authors": [
+        "Kun Cai",
+        "Haodong Chen",
+        "Guangran Cheng",
+        "Qingxiu Cheng",
+        "Xu Dai",
+        "Guanting Dong",
+        "Qiming Ge",
+        "Lixin Gu",
+        "Tao Gui",
+        "Honglin Guo",
+        "Yuyang Hu",
+        "Zixian Huang",
+        "Jiajie Jin",
+        "Alexander Lam",
+        "Jiaqiang Li",
+        "Yining Li",
+        "Jiahang Lin",
+        "Yanjiang Liu",
+        "Xinyu Lu",
+        "Haijun Lv",
+        "Ningsheng Ma",
+        "Zerun Ma",
+        "Minlong Peng",
+        "Jianmin Qian",
+        "Huayu Sha",
+        "Junlin Shang",
+        "Shuo Shen",
+        "Qisheng Su",
+        "Jiajun Sun",
+        "Yanan Sun",
+        "Zhichao Sun",
+        "Ran Tao",
+        "Zhongbo Tian",
+        "Guoqiang Wang",
+        "Hui Wang",
+        "Rui Wang",
+        "Yiding Wang",
+        "Zhecan Wang",
+        "Hao Xiang",
+        "Xinchen Xie",
+        "Shuhao Xing",
+        "Xiaoyu Xing",
+        "Wanghan Xu",
+        "Xinyu Yang",
+        "Yajie Yang",
+        "Dingbo Yuan",
+        "Yuhang Zang",
+        "Hongjie Zhang",
+        "Chengfeng Zhao",
+        "Haoran Zhao",
+        "Penghao Zhao",
+        "Ruojun Zhou",
+        "Dongsheng Zhu",
+        "Yicheng Zou",
+        "Qiye Cai",
+        "Yifei Cao",
+        "Xinmeng Che",
+        "Hongji Chen",
+        "Jiabei Chen",
+        "Jiadong Chen",
+        "Jiahao Chen",
+        "Jiayi Chen",
+        "Xinjie Chen",
+        "Yujia Chen",
+        "Xin Deng",
+        "Yi Dong",
+        "Yichen Dong",
+        "Wenjie Fu",
+        "Jianing Geng",
+        "Chenyang Gu",
+        "Ding Han",
+        "Han Han",
+        "Feiyang Hao",
+        "Haotan He",
+        "Qiushi He",
+        "Xufeng He",
+        "Xin Hong",
+        "Jie Hou",
+        "Binze Hu",
+        "Yongkang Hu",
+        "Zijian Hu",
+        "Enfu Huang",
+        "Junhao Huang",
+        "Changhao Jiang",
+        "Huicheng Jiang",
+        "Jiazhen Jiang",
+        "Shufan Jiang",
+        "Wenqing Jing",
+        "Jiahao Kuang",
+        "Bowen Lai",
+        "Bo Li",
+        "Qi Li",
+        "Qilong Li",
+        "Zhuoqun Li",
+        "Tianhao Liang",
+        "Jiaxiang Liu",
+        "Junzhang Liu",
+        "Shaofan Liu",
+        "Shuainan Liu",
+        "Tong Liu",
+        "Yi Liu",
+        "Ziyu Liu",
+        "Zhonghang Lu",
+        "Jianwen Luo",
+        "Xuan Luo",
+        "Yanyi Luo",
+        "Huijie Lv",
+        "Mingyu Ma",
+        "Houcheng Min",
+        "Hongjun Mo",
+        "Songhao Ni",
+        "Chengjun Pan",
+        "Qiyuan Peng",
+        "Xiaoxuan Peng",
+        "Wanying Ren",
+        "Runhui Ruan",
+        "Jifei Shan",
+        "Zixin Shang",
+        "Bing Shao",
+        "Zhuohui Sheng",
+        "Jiayang Shi",
+        "Qingyun Shi",
+        "Yang Shu",
+        "Aierpanjiang Simayi",
+        "Sirui Song",
+        "Yuxiao Song",
+        "Jiahao Sun",
+        "Zhe Sun",
+        "Wenzhe Tan",
+        "Guoxiang Wang",
+        "Hanchen Wang",
+        "Jie Wang",
+        "Pengbo Wang",
+        "Qing Wang",
+        "Rui Wang",
+        "Weihang Wang",
+        "Xiaotao Wang",
+        "Yuhui Wang",
+        "Zhekai Wang",
+        "Zihan Wang",
+        "Zile Wang",
+        "Jinke Wu",
+        "Liwei Wu",
+        "Xuansheng Wu",
+        "Yida Wu",
+        "Yihao Wu",
+        "Yinqi Wu",
+        "Yue Wu",
+        "Yuhan Wu",
+        "Yuwa Wu",
+        "Zhiheng Xi",
+        "Ying Xiao",
+        "Zhide Xie",
+        "Caijun Xu",
+        "Xingle Xu",
+        "Yichen Xu",
+        "Yongfeng Xu",
+        "Xiaolei Yang",
+        "Zhixiong Yang",
+        "Jiacheng Yao",
+        "Dingcheng Yi",
+        "Shihong Yi",
+        "Jinhui Yin",
+        "Peizhou Yu",
+        "Shan Yu",
+        "Hao Yuan",
+        "Junjie Yuan",
+        "Xiongyao Zha",
+        "Bo Zhang",
+        "Caixian Zhang",
+        "Kaicheng Zhang",
+        "Pengxiang Zhang",
+        "Qiuyinzhe Zhang",
+        "Wei Zhang",
+        "Xiaoqian Zhang",
+        "Xinsen Zhang",
+        "Jiyuan Zhao",
+        "Shuyu Zhao",
+        "Pujun Zheng",
+        "Zheyu Zheng",
+        "Xiaoxue Zhong",
+        "Peiheng Zhou",
+        "Xiaohao Zhou",
+        "Xinyu Zhou",
+        "Fangyi Zhu",
+        "Guanru Zhu",
+        "Yulun Zhu",
+        "Jiabao Zhuang",
+        "Pengfei Cao",
+        "Zhicheng Dou",
+        "Xianpei Han",
+        "Ben He",
+        "Guoxiu He",
+        "Xuanjing Huang",
+        "Tao Ji",
+        "Yu-Gang Jiang",
+        "Dahua Lin",
+        "Hongyu Lin",
+        "Kang Liu",
+        "Yaojie Lu",
+        "Le Sun",
+        "Ji-Rong Wen",
+        "Jun Zhao",
+        "Yutao Zhu",
+        "Qi Zhang",
+        "Bowen Zhou"
+      ],
+      "abstract": "We introduce Sage S1.5 Flash, a 320-billion-parameter general-purpose mixture-of-experts model designed to reason over scientific evidence and act in interactive environments. Sage Sci-Perception uses dedicated encoders for molecular graphs and biological sequences and represents spectra as ordered patches of measurements. Modality-specific projectors map these representations into the input space of a shared backbone, which processes them alongside text and images. To develop the model's agent capabilities, we construct verifiable environments for tool use, search, and coding, as well as specialized workflows involving machine learning experiments and scientific software. Task completion is checked against execution results, changes in environment state, or submitted artifacts. We evaluate Sage S1.5 Flash on 33 benchmarks across seven domains. In the primary comparison against five baselines, it ranks first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench~2, and second on OSWorld-Verified (85.2), WebArena-Verified (67.6), and DeepResearch Bench~II (54.2). These results show particular strengths in using documentary evidence, producing verifiable workbooks, and carrying out machine learning tasks, alongside competitive performance in desktop and browser workflows that require the model to act on visual feedback.",
+      "published": "2026-11-16",
+      "categories": [],
+      "tags": [
+        "agents"
+      ],
+      "score": 37.7,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 98
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.21072",
+      "pdf": "https://arxiv.org/pdf/2611.21072"
+    },
+    {
+      "id": "2611.17834",
+      "title": "PaperCritic: Training AI Reviewers to Assess the Soundness of Papers",
+      "authors": [
+        "Hyun Ryu",
+        "Ji Yong Cho",
+        "Eunho Yang",
+        "Moontae Lee",
+        "June Yong Yang",
+        "Sean Welleck",
+        "Carolyn Rose"
+      ],
+      "abstract": "As AI conference submissions grow rapidly, AI reviewers are being considered as an alternative. However, simply imitating human reviewing is problematic because reviewing serves multiple purposes, including evaluating papers' soundness, interestingness, and clarity, the last two of which are subjective. In this work, we focus solely on evaluating soundness, the most important and objective criterion, and define the learning objective as jointly maximizing (1) precision, based on the soundness and substantiveness of review points, and (2) recall, the coverage of high-quality reference review points. Under this problem formulation, we construct a quality-labeled review point dataset, PaperSound-23K, using 1K ICLR submissions and 23K human-written and LLM-generated review points. Using this dataset, we train an AI reviewer model, PaperCritic, through reinforcement learning with the F1 score of precision and recall as the reward. Our experiments show that PaperCritic outperforms frontier models and models trained with other AI reviewer training methods on an in-domain test set. Surprisingly, learning to review ICLR submissions also transfers to reviewing Nature-family papers and even to out-of-domain reviewing tasks (e.g., code review, legal contract review, and feedback on story writing).",
+      "published": "2026-11-13",
+      "categories": [],
+      "tags": [
+        "bandits-rl"
+      ],
+      "score": 37.24,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 33
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.17834",
+      "pdf": "https://arxiv.org/pdf/2611.17834"
     }
   ]
 }
