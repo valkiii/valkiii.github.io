@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-21T05:31:49Z",
+  "generated": "2026-11-22T05:30:49Z",
   "window_days": 42,
   "items": [
     {
@@ -24,10 +24,10 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 60.92,
+      "score": 62.08,
       "signals": {
-        "hn_points": 368,
-        "hn_comments": 116,
+        "hn_points": 483,
+        "hn_comments": 142,
         "hn_url": "https://news.ycombinator.com/item?id=50577265",
         "hf_upvotes": 6
       },
@@ -66,7 +66,7 @@
         "bandits-rl",
         "causal-uplift"
       ],
-      "score": 57.02,
+      "score": 56.72,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -100,7 +100,7 @@
         "tabular-timeseries",
         "bandits-rl"
       ],
-      "score": 56.12,
+      "score": 55.58,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -131,7 +131,7 @@
         "eval-safety",
         "genai-llm"
       ],
-      "score": 50.95,
+      "score": 50.33,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -162,7 +162,7 @@
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 47.73,
+      "score": 47.37,
       "signals": {
         "hn_points": 31,
         "hn_comments": 0,
@@ -191,7 +191,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 46.14,
+      "score": 45.52,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -203,6 +203,38 @@
       "kind": "benchmark",
       "url": "https://arxiv.org/abs/2611.25200",
       "pdf": "https://arxiv.org/pdf/2611.25200"
+    },
+    {
+      "id": "2611.23236",
+      "title": "PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation",
+      "authors": [
+        "Shengxiang Lin",
+        "Jiajie Su",
+        "Pengyang Zhou",
+        "Xiang Chen",
+        "Xiaolin Zheng",
+        "Feng Tian",
+        "Chaochao Chen"
+      ],
+      "abstract": "LLM-enhanced recommender systems encode item side information into semantic embeddings, but these embeddings may leak sensitive textual attributes through inversion attacks. Existing input-side defenses rely on trusted collection or local token perturbation, often disrupting the inter-item semantic topology needed for recommendation. To address it, we introduce relational fidelity as the key objective, requiring semantic shift for privacy while preserving relative item relations for utility. Based on this principle, we propose prototype-guided progressive obfuscation (PGPO), which learns topology-aware obfuscation anchors for high-influence prototype words and propagates them through a static semantic graph. PGPO is optimized with GRPO using individual dissimilarity, structural consistency, and semantic constraint rewards. Experiments on two benchmarks show strong inversion defense with near-upper-bound recommendation performance. The code is available at https://github.com/Shengxiang-Lin/PGPO.",
+      "published": "2026-08-26",
+      "categories": [],
+      "tags": [
+        "recsys-nba",
+        "eval-safety"
+      ],
+      "score": 45.34,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 3
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.23236",
+      "pdf": "https://arxiv.org/pdf/2611.23236"
     },
     {
       "id": "2611.18397",
@@ -244,7 +276,7 @@
         "bandits-rl",
         "agents"
       ],
-      "score": 45.45,
+      "score": 44.96,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -256,38 +288,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.18397",
       "pdf": "https://arxiv.org/pdf/2611.18397"
-    },
-    {
-      "id": "2611.23236",
-      "title": "PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation",
-      "authors": [
-        "Shengxiang Lin",
-        "Jiajie Su",
-        "Pengyang Zhou",
-        "Xiang Chen",
-        "Xiaolin Zheng",
-        "Feng Tian",
-        "Chaochao Chen"
-      ],
-      "abstract": "LLM-enhanced recommender systems encode item side information into semantic embeddings, but these embeddings may leak sensitive textual attributes through inversion attacks. Existing input-side defenses rely on trusted collection or local token perturbation, often disrupting the inter-item semantic topology needed for recommendation. To address it, we introduce relational fidelity as the key objective, requiring semantic shift for privacy while preserving relative item relations for utility. Based on this principle, we propose prototype-guided progressive obfuscation (PGPO), which learns topology-aware obfuscation anchors for high-influence prototype words and propagates them through a static semantic graph. PGPO is optimized with GRPO using individual dissimilarity, structural consistency, and semantic constraint rewards. Experiments on two benchmarks show strong inversion defense with near-upper-bound recommendation performance. The code is available at https://github.com/Shengxiang-Lin/PGPO.",
-      "published": "2026-08-26",
-      "categories": [],
-      "tags": [
-        "recsys-nba",
-        "eval-safety"
-      ],
-      "score": 45.34,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 3
-      },
-      "why": null,
-      "difficulty": 1,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23236",
-      "pdf": "https://arxiv.org/pdf/2611.23236"
     },
     {
       "id": "2611.18130",
@@ -305,7 +305,7 @@
         "applied-finance",
         "agents"
       ],
-      "score": 44.94,
+      "score": 44.45,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -337,7 +337,7 @@
         "causal-uplift",
         "recsys-nba"
       ],
-      "score": 44.49,
+      "score": 44.28,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -367,7 +367,7 @@
         "eval-safety",
         "recsys-nba"
       ],
-      "score": 42.52,
+      "score": 42.04,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -403,7 +403,7 @@
         "genai-llm",
         "agents"
       ],
-      "score": 42.33,
+      "score": 41.87,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -432,7 +432,7 @@
         "genai-llm",
         "applied-finance"
       ],
-      "score": 41.62,
+      "score": 41.31,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -461,7 +461,7 @@
         "agents",
         "bandits-rl"
       ],
-      "score": 41.42,
+      "score": 41.02,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -473,6 +473,36 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.12886",
       "pdf": "https://arxiv.org/pdf/2611.12886"
+    },
+    {
+      "id": "2611.15348",
+      "title": "Breath-Dx: A Time Series Classification Benchmark for Disease Screening with eNose",
+      "authors": [
+        "Ivan Poddiakov",
+        "Ivan Kruzhilov",
+        "Galina Zubkova",
+        "Svetlana Erofeeva",
+        "Andrey Savchenko",
+        "Pavel Blinov"
+      ],
+      "abstract": "Electronic nose (eNose) technology offers a portable, non-invasive route for disease screening via exhaled breath analysis. However, progress in the field is hindered by the lack of systematic benchmarks that compare machine learning methods under realistic conditions, particularly sensor drift, a known but rarely quantified failure mode. Most existing studies rely on small, private datasets with inconsistent protocols, rendering results non-comparable and slowing progress. We introduce Breath-Dx, the first comprehensive benchmark of time series classification methods for breath-based disease screening. Our work leverages the Scent of Health (S-OH) dataset, the largest public clinical eNose collection to date, comprising 1,234 patients across nine diagnostic groups, each providing a 17-channel multivariate time series with explicit temporal train/test splits that account for sensor drift. We systematically evaluate 10 methods spanning four families: feature-based tabular learners, convolution-based models, graph-based, and time series architectures. All methods degrade significantly under temporal validation (0.05-0.12 AUC drop compared to random cross-validation), confirming that drift embeds a strong temporal signal. Under this realistic evaluation, the best methods achieve ROC AUC of 0.74-0.76 for some lung conditions, though others remain near chance. Recurrent architectures show the most consistent performance across diseases, while specialized time series methods achieve the highest peak results. Demographic confounders matter: breath signals provide independent diagnostic value for some conditions but add little beyond age for others. We release the S-OH dataset, all temporal splits, evaluation protocols, and code to enable reproducible research and accelerate progress in clinical breathomics.",
+      "published": "2026-11-11",
+      "categories": [],
+      "tags": [
+        "tabular-timeseries"
+      ],
+      "score": 40.65,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 33
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.15348",
+      "pdf": "https://arxiv.org/pdf/2611.15348"
     },
     {
       "id": "2611.22115",
@@ -626,7 +656,7 @@
         "agents",
         "ml-methods"
       ],
-      "score": 41.22,
+      "score": 40.63,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -654,7 +684,7 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 41.2,
+      "score": 40.57,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -668,34 +698,36 @@
       "pdf": "https://arxiv.org/pdf/2611.24738"
     },
     {
-      "id": "2611.15348",
-      "title": "Breath-Dx: A Time Series Classification Benchmark for Disease Screening with eNose",
+      "id": "2611.21373",
+      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
       "authors": [
-        "Ivan Poddiakov",
-        "Ivan Kruzhilov",
-        "Galina Zubkova",
-        "Svetlana Erofeeva",
-        "Andrey Savchenko",
-        "Pavel Blinov"
+        "Yipeng Du",
+        "Yuxi Li",
+        "Ying Zhang",
+        "Chong Sun",
+        "Chen Li",
+        "Jing Lyu",
+        "Ying Tai"
       ],
-      "abstract": "Electronic nose (eNose) technology offers a portable, non-invasive route for disease screening via exhaled breath analysis. However, progress in the field is hindered by the lack of systematic benchmarks that compare machine learning methods under realistic conditions, particularly sensor drift, a known but rarely quantified failure mode. Most existing studies rely on small, private datasets with inconsistent protocols, rendering results non-comparable and slowing progress. We introduce Breath-Dx, the first comprehensive benchmark of time series classification methods for breath-based disease screening. Our work leverages the Scent of Health (S-OH) dataset, the largest public clinical eNose collection to date, comprising 1,234 patients across nine diagnostic groups, each providing a 17-channel multivariate time series with explicit temporal train/test splits that account for sensor drift. We systematically evaluate 10 methods spanning four families: feature-based tabular learners, convolution-based models, graph-based, and time series architectures. All methods degrade significantly under temporal validation (0.05-0.12 AUC drop compared to random cross-validation), confirming that drift embeds a strong temporal signal. Under this realistic evaluation, the best methods achieve ROC AUC of 0.74-0.76 for some lung conditions, though others remain near chance. Recurrent architectures show the most consistent performance across diseases, while specialized time series methods achieve the highest peak results. Demographic confounders matter: breath signals provide independent diagnostic value for some conditions but add little beyond age for others. We release the S-OH dataset, all temporal splits, evaluation protocols, and code to enable reproducible research and accelerate progress in clinical breathomics.",
-      "published": "2026-11-11",
+      "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
+      "published": "2026-11-16",
       "categories": [],
       "tags": [
-        "tabular-timeseries"
+        "agents",
+        "bandits-rl"
       ],
-      "score": 41.09,
+      "score": 40.47,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 33
+        "hf_upvotes": 49
       },
       "why": null,
       "difficulty": 2,
-      "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.15348",
-      "pdf": "https://arxiv.org/pdf/2611.15348"
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.21373",
+      "pdf": "https://arxiv.org/pdf/2611.21373"
     },
     {
       "id": "2611.24789",
@@ -712,7 +744,7 @@
         "bandits-rl",
         "ml-methods"
       ],
-      "score": 41.07,
+      "score": 40.44,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -746,7 +778,7 @@
         "agents",
         "ml-methods"
       ],
-      "score": 41.07,
+      "score": 40.44,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -758,38 +790,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.24102",
       "pdf": "https://arxiv.org/pdf/2611.24102"
-    },
-    {
-      "id": "2611.21373",
-      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
-      "authors": [
-        "Yipeng Du",
-        "Yuxi Li",
-        "Ying Zhang",
-        "Chong Sun",
-        "Chen Li",
-        "Jing Lyu",
-        "Ying Tai"
-      ],
-      "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
-      "published": "2026-11-16",
-      "categories": [],
-      "tags": [
-        "agents",
-        "bandits-rl"
-      ],
-      "score": 41.04,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 49
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.21373",
-      "pdf": "https://arxiv.org/pdf/2611.21373"
     },
     {
       "id": "2611.21366",
@@ -819,7 +819,7 @@
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 39.92,
+      "score": 39.35,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -854,7 +854,7 @@
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 39.44,
+      "score": 38.81,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -885,7 +885,7 @@
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 38.6,
+      "score": 38.22,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -1115,7 +1115,7 @@
       "tags": [
         "agents"
       ],
-      "score": 37.7,
+      "score": 37.14,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -1146,7 +1146,7 @@
       "tags": [
         "bandits-rl"
       ],
-      "score": 37.24,
+      "score": 36.75,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
