@@ -12,7 +12,7 @@
   const ink = css("--ink") || "#eef1f7", ink2 = css("--ink-2") || "#a9b1c3";
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const lab = id => ((D.labels || {}).tag || {})[id] || id;
-  const SPREAD = 1100, hubs = new Map();
+  const SPREAD = 1800, hubs = new Map();
   D.topics.forEach(t => hubs.set(t.id, { id: t.id, label: t.label, col: css("--uc-" + t.colour) || ink2, x: t.x * SPREAD, y: t.y * SPREAD, papers: [], open: false, k: 0 }));
   hubs.set("other", { id: "other", label: "Other", col: ink2, x: SPREAD * 0.5, y: SPREAD * 1.12, papers: [], open: false, k: 0 });
 
