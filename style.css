@@ -756,3 +756,10 @@ button.btn { cursor: pointer; font-family: var(--body); }
 }
 @media (prefers-reduced-motion: reduce) { .js .wx, .js .wx-iris:not([hidden]) { display: none; } }
 /* === end === */
+
+/* knowledge graph (sg-graph.js) */
+.sg-views { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.sg-graph[hidden], .sg-map[hidden], .sg-maplist[hidden] { display: none !important; }
+.sg-gbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.sg-gbar input { flex: 1 1 220px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-2); color: var(--ink); font: 400 15px var(--body); }
+.sg-gcard { left: 12px; bottom: 12px; right: auto; max-width: min(420px, calc(100% - 90px)); display: grid; gap: 4px; padding: 12px 14px; }
