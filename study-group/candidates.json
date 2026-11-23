@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-22T05:30:49Z",
+  "generated": "2026-11-23T05:30:49Z",
   "window_days": 42,
   "items": [
     {
@@ -24,18 +24,55 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 62.08,
+      "score": 67.87,
       "signals": {
-        "hn_points": 483,
-        "hn_comments": 142,
+        "hn_points": 491,
+        "hn_comments": 145,
         "hn_url": "https://news.ycombinator.com/item?id=50577265",
-        "hf_upvotes": 6
+        "hf_upvotes": 20
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.21885",
       "pdf": "https://arxiv.org/pdf/2611.21885"
+    },
+    {
+      "id": "2611.19937",
+      "title": "AllocFlow: End-to-End Portfolio Trading Action Generation from Raw Market Data",
+      "authors": [
+        "Annan Wang",
+        "Yuchen Xie",
+        "Yu Cen",
+        "Leon Liangyu Chen",
+        "Qianyu Julie Zhu",
+        "Xin Li",
+        "Tianyi Wei",
+        "Weisi Lin"
+      ],
+      "abstract": "Real-world portfolio management requires converting noisy market observations into coordinated, simultaneous allocations across multiple assets under shared capital constraints. Advances in forecasting models and alpha discovery help identify opportunities. However, traditional pipelines often decouple signal forecasting from portfolio construction, potentially misaligning learning with allocation and execution objectives. We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories. To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly. To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme: strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that refines joint decisions using portfolio-level financial rewards and a frozen policy reference. On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from $27.79\\%$ to $51.38\\%$ and its Calmar ratio from $0.955$ to $4.043$, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of $4.90$ on six further months of unseen 2026 data without retraining.",
+      "published": "2026-11-15",
+      "categories": [
+        "cs.LG",
+        "q-fin.TR"
+      ],
+      "tags": [
+        "applied-finance",
+        "tabular-timeseries",
+        "bandits-rl"
+      ],
+      "score": 61.74,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 77
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "theory",
+      "url": "https://arxiv.org/abs/2611.19937",
+      "pdf": "https://arxiv.org/pdf/2611.19937"
     },
     {
       "id": "2611.04720",
@@ -66,7 +103,7 @@
         "bandits-rl",
         "causal-uplift"
       ],
-      "score": 56.72,
+      "score": 56.44,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -78,40 +115,6 @@
       "kind": "system",
       "url": "https://arxiv.org/abs/2611.04720",
       "pdf": "https://arxiv.org/pdf/2611.04720"
-    },
-    {
-      "id": "2611.19937",
-      "title": "AllocFlow: End-to-End Portfolio Trading Action Generation from Raw Market Data",
-      "authors": [
-        "Annan Wang",
-        "Yuchen Xie",
-        "Yu Cen",
-        "Leon Liangyu Chen",
-        "Qianyu Julie Zhu",
-        "Xin Li",
-        "Tianyi Wei",
-        "Weisi Lin"
-      ],
-      "abstract": "Real-world portfolio management requires converting noisy market observations into coordinated, simultaneous allocations across multiple assets under shared capital constraints. Advances in forecasting models and alpha discovery help identify opportunities. However, traditional pipelines often decouple signal forecasting from portfolio construction, potentially misaligning learning with allocation and execution objectives. We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories. To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly. To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme: strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that refines joint decisions using portfolio-level financial rewards and a frozen policy reference. On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from 27.79% to 51.38% and its Calmar ratio from 0.955 to 4.043, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of 4.90 on six further months of unseen 2026 data without retraining.",
-      "published": "2026-11-15",
-      "categories": [],
-      "tags": [
-        "applied-finance",
-        "tabular-timeseries",
-        "bandits-rl"
-      ],
-      "score": 55.58,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 72
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "theory",
-      "url": "https://arxiv.org/abs/2611.19937",
-      "pdf": "https://arxiv.org/pdf/2611.19937"
     },
     {
       "id": "2611.23808",
@@ -131,7 +134,7 @@
         "eval-safety",
         "genai-llm"
       ],
-      "score": 50.33,
+      "score": 49.74,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -157,12 +160,15 @@
       ],
       "abstract": "How little of a pretrained large language model (LLM) has to change for it to acquire new capabilities? We find that zeroing fewer than 0.05% of its weights, with no other modification, matches full fine-tuning (FFT) at scale across three LLM post-training regimes: reinforcement learning with verifiable rewards, supervised fine-tuning, and on-policy distillation. Our method, Deletion Tuning, learns a binary mask over the gate projection of transformer blocks. Two practical advantages follow: the trained mask is hundreds to thousands of times smaller than the corresponding FFT checkpoint, and Deletion Tuning forgets far less, which addresses a central challenge in continual learning. Under reinforcement learning, its prior-task accuracy stays near the base level while FFT, LoRA, and random sparse fine-tuning lose up to 5.4 points. To understand why masking alone suffices, we analyze the geometry of the learned weight changes under reinforcement learning using stable rank, spectrum drift, and principal-weight overlap. Compared with LoRA and random sparse fine-tuning, Deletion Tuning is closest to FFT across the three measures.",
       "published": "2026-11-07",
-      "categories": [],
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
       "tags": [
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 47.37,
+      "score": 47.02,
       "signals": {
         "hn_points": 31,
         "hn_comments": 0,
@@ -174,35 +180,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.10866",
       "pdf": "https://arxiv.org/pdf/2611.10866"
-    },
-    {
-      "id": "2611.25200",
-      "title": "Squoosh Bench: Evaluating UX-1 on 318 Historical Website A/B Tests",
-      "authors": [
-        "Rohith Pasula",
-        "Johari Dramiga",
-        "Viraj Shah",
-        "Suzan Halim",
-        "Tyler Dooskin"
-      ],
-      "abstract": "Experimentation teams must decide which proposed website changes to test with live traffic. We evaluated whether forecasts from simulated shoppers could inform that choice. We screened 412 historical website A/B tests and evaluated four systems on the 318 that ran longer than 21 days. Each system predicted an original win, a variant win, or an inconclusive result. Page roles were masked and recorded outcomes were withheld during inference. Squoosh UX-1, a model fine-tuned on human browsing data, simulated 1,000 shoppers per arm and correctly classified 267 of 318 outcomes (84.0%, 95% Wilson interval 79.5-87.6%, treating experiments as independent). Qwen3 Next 80B, the strongest general-purpose configuration on outcome accuracy, correctly classified 196 of 318 (61.6%). UX-1 favored the variant in 126 experiments. In the live tests, 118 of those variants won (93.7%), four lost, and four had inconclusive results. The remaining 192 experiments included 19 additional variant wins.",
-      "published": "2026-11-18",
-      "categories": [],
-      "tags": [
-        "causal-uplift"
-      ],
-      "score": 45.52,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 2
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.25200",
-      "pdf": "https://arxiv.org/pdf/2611.25200"
     },
     {
       "id": "2611.23236",
@@ -223,7 +200,36 @@
         "recsys-nba",
         "eval-safety"
       ],
-      "score": 45.34,
+      "score": 46.6,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 4
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.23236",
+      "pdf": "https://arxiv.org/pdf/2611.23236"
+    },
+    {
+      "id": "2611.25200",
+      "title": "Squoosh Bench: Evaluating UX-1 on 318 Historical Website A/B Tests",
+      "authors": [
+        "Rohith Pasula",
+        "Johari Dramiga",
+        "Viraj Shah",
+        "Suzan Halim",
+        "Tyler Dooskin"
+      ],
+      "abstract": "Experimentation teams must decide which proposed website changes to test with live traffic. We evaluated whether forecasts from simulated shoppers could inform that choice. We screened 412 historical website A/B tests and evaluated four systems on the 318 that ran longer than 21 days. Each system predicted an original win, a variant win, or an inconclusive result. Page roles were masked and recorded outcomes were withheld during inference. Squoosh UX-1, a model fine-tuned on human browsing data, simulated 1,000 shoppers per arm and correctly classified 267 of 318 outcomes (84.0%, 95% Wilson interval 79.5-87.6%, treating experiments as independent). Qwen3 Next 80B, the strongest general-purpose configuration on outcome accuracy, correctly classified 196 of 318 (61.6%). UX-1 favored the variant in 126 experiments. In the live tests, 118 of those variants won (93.7%), four lost, and four had inconclusive results. The remaining 192 experiments included 19 additional variant wins.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "causal-uplift"
+      ],
+      "score": 46.55,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -231,10 +237,10 @@
         "hf_upvotes": 3
       },
       "why": null,
-      "difficulty": 1,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23236",
-      "pdf": "https://arxiv.org/pdf/2611.23236"
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.25200",
+      "pdf": "https://arxiv.org/pdf/2611.25200"
     },
     {
       "id": "2611.18397",
@@ -270,53 +276,28 @@
       ],
       "abstract": "We introduce Gamer, a generalist agent framework built for long-horizon tasks in complex interactive environments. Its end-to-end architecture combines perception, memory management, and multi-step reasoning. A shared training and deployment pipeline supports interaction with both conventional 2D graphical interfaces and complex 3D simulated worlds. We first continue pre-training on a dataset constructed from tens of thousands of hours of device-level keyboard and mouse interaction. These trajectories span simulated games and embodied environments, allowing the model to learn environmental dynamics across both physical and virtual domains. Sparse-thinking instruction tuning then substantially reduces redundant computation while preserving the reasoning needed for complex decisions. We train the policy for long-horizon interaction with a stable multi-turn reinforcement learning method that addresses finite context windows, accumulated rollout errors, and sparse rewards. For real-time interaction, a cloud-edge inference engine serves numerous simulated game environments concurrently, supports unbounded-context execution, and keeps online inference latency low. Across multiple challenging 3D open-world games, Gamer demonstrates solid generalization and operational efficiency comparable to skilled players. It also achieves competitive results on a range of conventional 2D game benchmarks. These results suggest that even repetitive keyboard and mouse trajectories can support substantial gains from scaling data and learning algorithms. Training on these trajectories helps Gamer learn complex skills more steadily in environments with both physical and digital properties. This approach offers a path toward generalist agents that can interact across digital and physical worlds.",
       "published": "2026-11-13",
-      "categories": [],
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV"
+      ],
       "tags": [
         "genai-llm",
         "bandits-rl",
         "agents"
       ],
-      "score": 44.96,
+      "score": 44.98,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 144
+        "hf_upvotes": 157
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.18397",
       "pdf": "https://arxiv.org/pdf/2611.18397"
-    },
-    {
-      "id": "2611.18130",
-      "title": "JFinBench: A Continuously Refreshable Japanese Financial Benchmark from the Latest Certification Exams",
-      "authors": [
-        "Issa Sugiura",
-        "Taro Makino",
-        "Takashi Ishida"
-      ],
-      "abstract": "Large language models (LLMs) are increasingly applied to finance, creating a need for benchmarks that evaluate their capabilities across financial systems with different regulations and practices. However, existing financial benchmarks provide limited coverage of country-specific financial systems, and they are difficult to keep up to date as released questions leak into training data. We introduce JFinBench, a Japanese financial benchmark comprising 321 examples from the 2026 editions of six regularly administered certification exams covering accounting, tax, financial planning, and banking. To construct it, we develop a human-in-the-loop agentic pipeline in which a coding agent writes exam-specific conversion code and a review page, while a human verifies every example and feeds corrections back to the agent. This pipeline adapts to heterogeneous exam formats and reduces the effort of incorporating new exam editions, enabling periodic refreshes that mitigate data contamination. Evaluating 12 recent LLMs, we find that Claude Fable 5 and GPT-6 Astra exceed 93% overall, while even the best open-weight model, Kimi K3.1 Pro, trails Claude Fable 5 by 12 percentage points. When models can additionally use a terminal and web access, they retrieve the knowledge they lack and every model improves. The gap narrows but about 4 points remain, and the ranking of models stays largely the same, suggesting that knowledge held in the model itself remains valuable even with tools. We release the dataset, the evaluation code, and the construction pipeline.",
-      "published": "2026-11-13",
-      "categories": [],
-      "tags": [
-        "genai-llm",
-        "applied-finance",
-        "agents"
-      ],
-      "score": 44.45,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 3
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.18130",
-      "pdf": "https://arxiv.org/pdf/2611.18130"
     },
     {
       "id": "2610.37570",
@@ -337,7 +318,7 @@
         "causal-uplift",
         "recsys-nba"
       ],
-      "score": 44.28,
+      "score": 44.08,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -351,6 +332,37 @@
       "pdf": "https://arxiv.org/pdf/2610.37570"
     },
     {
+      "id": "2611.18130",
+      "title": "JFinBench: A Continuously Refreshable Japanese Financial Benchmark from the Latest Certification Exams",
+      "authors": [
+        "Issa Sugiura",
+        "Taro Makino",
+        "Takashi Ishida"
+      ],
+      "abstract": "Large language models (LLMs) are increasingly applied to finance, creating a need for benchmarks that evaluate their capabilities across financial systems with different regulations and practices. However, existing financial benchmarks provide limited coverage of country-specific financial systems, and they are difficult to keep up to date as released questions leak into training data. We introduce JFinBench, a Japanese financial benchmark comprising 321 examples from the 2026 editions of six regularly administered certification exams covering accounting, tax, financial planning, and banking. To construct it, we develop a human-in-the-loop agentic pipeline in which a coding agent writes exam-specific conversion code and a review page, while a human verifies every example and feeds corrections back to the agent. This pipeline adapts to heterogeneous exam formats and reduces the effort of incorporating new exam editions, enabling periodic refreshes that mitigate data contamination. Evaluating 12 recent LLMs, we find that Claude Fable 5 and GPT-6 Astra exceed 93% overall, while even the best open-weight model, Kimi K3.1 Pro, trails Claude Fable 5 by 12 percentage points. When models can additionally use a terminal and web access, they retrieve the knowledge they lack and every model improves. The gap narrows but about 4 points remain, and the ranking of models stays largely the same, suggesting that knowledge held in the model itself remains valuable even with tools. We release the dataset, the evaluation code, and the construction pipeline.",
+      "published": "2026-11-13",
+      "categories": [
+        "cs.AI"
+      ],
+      "tags": [
+        "genai-llm",
+        "applied-finance",
+        "agents"
+      ],
+      "score": 43.98,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 3
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.18130",
+      "pdf": "https://arxiv.org/pdf/2611.18130"
+    },
+    {
       "id": "2611.17820",
       "title": "Aligning AI Teams",
       "authors": [
@@ -361,18 +373,20 @@
       ],
       "abstract": "Previous work has shown that alignment training on individual LLM agents can fail to transfer to multi-agent settings. We investigate the underlying mechanisms for this failure, and explore interventions to preserve alignment transfer to multi-agent LLM teams. We focus on two software-engineering tasks (sepsis triage, a news recommender) and ten consulting-proposal generation tasks. We present four findings: (1) The single-vs-team safety gap does not show a clear trend with more capable models. We find that Anthropic's Mythos Preview shows the largest gap on one of our tasks but the smallest on another; (2) Many natural interventions, such as having agents critique each other's work or coordinate in a group chat, do not reliably bring agent teams back to single-agent alignment behavior; (3) diffusion of responsibility substantially accounts for the safety gap: agents in teams are less likely to proactively check for system-level safety failures and more likely to ignore, rationalize, or deflect responsibility for issues when they arise; (4) having a designated safety lead agent ensure system-level safety, and having a coordinator agent publish a safety specifications document are effective at restoring single-agent alignment. We also release magelab, a multi-agent LLM orchestration and experimentation framework. Our findings can help practitioners design agent teams that successfully preserve the behaviors expected of aligned individual agents.",
       "published": "2026-11-13",
-      "categories": [],
+      "categories": [
+        "cs.AI"
+      ],
       "tags": [
         "agents",
         "eval-safety",
         "recsys-nba"
       ],
-      "score": 42.04,
+      "score": 42.17,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 8
+        "hf_upvotes": 9
       },
       "why": null,
       "difficulty": 2,
@@ -397,18 +411,21 @@
       ],
       "abstract": "Decision models answer a question with a typed output, such as a choice among options with a probability for each, so one model can choose an agent's actions, evaluate actions already taken, or score every action to teach a policy with reinforcement learning. Prior work has studied them mainly as actors, judging their usefulness by how well they act. We ask whether a decision model that acts poorly can still teach well. We compare three decision models and three general LLMs as actors and judges on ALFWorld, and use JEV as a teacher on ALFWorld and WebShop. As actors, all six models are pulled away from a subgoal that must come first by an easier one. As judges that see the whole trajectory, the same models credit the steps toward that subgoal, and asking whether each action helped, rather than whether the task will succeed, separates useful from useless actions. As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop. These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate. Code is available at https://github.com/ZJU-REAL/decision-agents.",
       "published": "2026-11-12",
-      "categories": [],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
       "tags": [
         "bandits-rl",
         "genai-llm",
         "agents"
       ],
-      "score": 41.87,
+      "score": 41.57,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 38
+        "hf_upvotes": 39
       },
       "why": null,
       "difficulty": 2,
@@ -432,18 +449,53 @@
         "genai-llm",
         "applied-finance"
       ],
-      "score": 41.31,
+      "score": 41.25,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 45
+        "hf_upvotes": 47
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.07222",
       "pdf": "https://arxiv.org/pdf/2611.07222"
+    },
+    {
+      "id": "2611.21373",
+      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
+      "authors": [
+        "Yipeng Du",
+        "Yuxi Li",
+        "Ying Zhang",
+        "Chong Sun",
+        "Chen Li",
+        "Jing Lyu",
+        "Ying Tai"
+      ],
+      "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
+      "published": "2026-11-16",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "tags": [
+        "agents",
+        "bandits-rl"
+      ],
+      "score": 40.87,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 58
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.21373",
+      "pdf": "https://arxiv.org/pdf/2611.21373"
     },
     {
       "id": "2611.12886",
@@ -456,12 +508,14 @@
       ],
       "abstract": "Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges. Models may overlook useful tool-returned observations, while poorly grounded actions can limit the evidence available for subsequent distillation. We introduce Reframe, a post-training framework that treats the observation state, rather than only the output distribution, as an object of alignment. First, Ground-Drop-GRPO (GD-GRPO) trains spatial and temporal specialists with evidence-aware rewards and stochastic removal of the original visual input, encouraging them to acquire grounded evidence and use the returned observations. Second, Observation-Gated-MOPD (OG-MOPD) replaces deficient tool actions with canonical ones mid-rollout and resumes distillation from the repaired observation. The two stages complement each other, as learning to rely on tool-returned observations can help the policy benefit from observation repair. Neither stage requires a task-specific SFT cold start. Extensive experiments over 14 image and video benchmarks demonstrate that Reframe outperforms both Mix-RL and vanilla MOPD. Ablation results show that GD-GRPO increases observation dependence and tool gain compared with outcome-based GRPO.",
       "published": "2026-11-09",
-      "categories": [],
+      "categories": [
+        "cs.CV"
+      ],
       "tags": [
         "agents",
         "bandits-rl"
       ],
-      "score": 41.02,
+      "score": 40.64,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -487,11 +541,14 @@
       ],
       "abstract": "Electronic nose (eNose) technology offers a portable, non-invasive route for disease screening via exhaled breath analysis. However, progress in the field is hindered by the lack of systematic benchmarks that compare machine learning methods under realistic conditions, particularly sensor drift, a known but rarely quantified failure mode. Most existing studies rely on small, private datasets with inconsistent protocols, rendering results non-comparable and slowing progress. We introduce Breath-Dx, the first comprehensive benchmark of time series classification methods for breath-based disease screening. Our work leverages the Scent of Health (S-OH) dataset, the largest public clinical eNose collection to date, comprising 1,234 patients across nine diagnostic groups, each providing a 17-channel multivariate time series with explicit temporal train/test splits that account for sensor drift. We systematically evaluate 10 methods spanning four families: feature-based tabular learners, convolution-based models, graph-based, and time series architectures. All methods degrade significantly under temporal validation (0.05-0.12 AUC drop compared to random cross-validation), confirming that drift embeds a strong temporal signal. Under this realistic evaluation, the best methods achieve ROC AUC of 0.74-0.76 for some lung conditions, though others remain near chance. Recurrent architectures show the most consistent performance across diseases, while specialized time series methods achieve the highest peak results. Demographic confounders matter: breath signals provide independent diagnostic value for some conditions but add little beyond age for others. We release the S-OH dataset, all temporal splits, evaluation protocols, and code to enable reproducible research and accelerate progress in clinical breathomics.",
       "published": "2026-11-11",
-      "categories": [],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 40.65,
+      "score": 40.23,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -656,12 +713,12 @@
         "agents",
         "ml-methods"
       ],
-      "score": 40.63,
+      "score": 40.13,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 165
+        "hf_upvotes": 167
       },
       "why": null,
       "difficulty": 2,
@@ -684,78 +741,18 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 40.57,
+      "score": 40.09,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 147
+        "hf_upvotes": 150
       },
       "why": null,
       "difficulty": 2,
       "kind": "system",
       "url": "https://arxiv.org/abs/2611.24738",
       "pdf": "https://arxiv.org/pdf/2611.24738"
-    },
-    {
-      "id": "2611.21373",
-      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
-      "authors": [
-        "Yipeng Du",
-        "Yuxi Li",
-        "Ying Zhang",
-        "Chong Sun",
-        "Chen Li",
-        "Jing Lyu",
-        "Ying Tai"
-      ],
-      "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
-      "published": "2026-11-16",
-      "categories": [],
-      "tags": [
-        "agents",
-        "bandits-rl"
-      ],
-      "score": 40.47,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 49
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.21373",
-      "pdf": "https://arxiv.org/pdf/2611.21373"
-    },
-    {
-      "id": "2611.24789",
-      "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
-      "authors": [
-        "Phuong Tuan Dat",
-        "Qi Li",
-        "Xinchao Wang"
-      ],
-      "abstract": "World action models (WAMs) have shown promising generalization and data efficiency in robot manipulation by coupling action generation with predictions of future visual dynamics. Translating these capabilities into reliable task execution, however, remains a challenge for existing post-training methods. Offline supervised fine-tuning provides dense supervision on expert trajectories, but its flow-matching action expert is trained only on noised demonstration actions and never on the intermediate states produced by its own sampler; task-specific adaptation can also compromise pretrained capabilities. On-policy reinforcement learning trains on the policy's own behavior, yet sparse task rewards make exploration and credit assignment difficult, while dense reward shaping still provides scalar evaluations rather than direct action targets. We introduce HINT-WAM, the first on-policy self-distillation framework that supervises the action expert on its own sampling trajectories using hindsight, the future video of the demonstration, as privileged information available to the WAM itself. For each demonstration observation, the student generates its action through its own denoising trajectory, and at the states along this trajectory the same model acts as a teacher conditioned additionally on this hindsight, providing a conditional action distribution as a dense training target, while the student sees only deployment-time inputs and needs no environmental rewards or simulator interaction. To transfer this supervision to a flow-matching action expert, HINT-WAM distills the teacher into the student with an energy score, a distribution-level objective that matches the teacher's action distribution from the student's own samples rather than regressing its velocity field. The project web is available in https://tuandattt.github.io/hintwam/.",
-      "published": "2026-11-18",
-      "categories": [],
-      "tags": [
-        "bandits-rl",
-        "ml-methods"
-      ],
-      "score": 40.44,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 22
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.24789",
-      "pdf": "https://arxiv.org/pdf/2611.24789"
     },
     {
       "id": "2611.24102",
@@ -778,7 +775,7 @@
         "agents",
         "ml-methods"
       ],
-      "score": 40.44,
+      "score": 39.85,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -790,6 +787,34 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.24102",
       "pdf": "https://arxiv.org/pdf/2611.24102"
+    },
+    {
+      "id": "2611.24789",
+      "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
+      "authors": [
+        "Phuong Tuan Dat",
+        "Qi Li",
+        "Xinchao Wang"
+      ],
+      "abstract": "World action models (WAMs) have shown promising generalization and data efficiency in robot manipulation by coupling action generation with predictions of future visual dynamics. Translating these capabilities into reliable task execution, however, remains a challenge for existing post-training methods. Offline supervised fine-tuning provides dense supervision on expert trajectories, but its flow-matching action expert is trained only on noised demonstration actions and never on the intermediate states produced by its own sampler; task-specific adaptation can also compromise pretrained capabilities. On-policy reinforcement learning trains on the policy's own behavior, yet sparse task rewards make exploration and credit assignment difficult, while dense reward shaping still provides scalar evaluations rather than direct action targets. We introduce HINT-WAM, the first on-policy self-distillation framework that supervises the action expert on its own sampling trajectories using hindsight, the future video of the demonstration, as privileged information available to the WAM itself. For each demonstration observation, the student generates its action through its own denoising trajectory, and at the states along this trajectory the same model acts as a teacher conditioned additionally on this hindsight, providing a conditional action distribution as a dense training target, while the student sees only deployment-time inputs and needs no environmental rewards or simulator interaction. To transfer this supervision to a flow-matching action expert, HINT-WAM distills the teacher into the student with an energy score, a distribution-level objective that matches the teacher's action distribution from the student's own samples rather than regressing its velocity field. The project web is available in https://tuandattt.github.io/hintwam/.",
+      "published": "2026-11-18",
+      "categories": [],
+      "tags": [
+        "bandits-rl",
+        "ml-methods"
+      ],
+      "score": 39.85,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 22
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.24789",
+      "pdf": "https://arxiv.org/pdf/2611.24789"
     },
     {
       "id": "2611.21366",
@@ -814,17 +839,19 @@
       ],
       "abstract": "Streaming video LLMs can continuously observe the world, yet often handle user requests in isolation. We introduce ALIVE, an interactive streaming video model supporting proactive monitoring, streaming task coordination, and feedback-seeking interaction. We construct ALIVE-SFT-288K and ALIVE-RL-3K for two-stage training. Contrastive supervised fine-tuning teaches when and how to respond, while reinforcement learning with Behavior-Aligned Credit Assignment (BACA) combines trajectory-level and local advantages to refine decisions, responses, and silence across multi-turn interactions. We also introduce FSI-Bench to evaluate feedback seeking and subsequent task completion. ALIVE achieves the highest overall scores among the compared models on four public benchmarks and FSI-Bench, demonstrating strong streaming understanding and interactive capabilities.",
       "published": "2026-11-16",
-      "categories": [],
+      "categories": [
+        "cs.CV"
+      ],
       "tags": [
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 39.35,
+      "score": 39.08,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 40
+        "hf_upvotes": 42
       },
       "why": null,
       "difficulty": 1,
@@ -854,12 +881,12 @@
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 38.81,
+      "score": 38.64,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 12
+        "hf_upvotes": 13
       },
       "why": null,
       "difficulty": 2,
@@ -879,13 +906,15 @@
         "Xingxuan Zhang",
         "Peng Cui"
       ],
-      "abstract": "Generation, imputation, and prediction query different aspects of the same tabular distribution, but are usually evaluated separately. This leaves unclear which capabilities they share, how their training objectives interact, and whether one model can perform all three well. We introduce the One Table Benchmark (), spanning 56 datasets, 46 registered methods, and 20 capability axes under aligned data splits and explicit task contracts. We compare task ranks on aligned support, train five backbones under all seven non-empty objective combinations on five datasets with three seeds, and contrast fixed-model profiles with specialist portfolios. Rank comparisons connect imputation and prediction through numerical recovery and dependence preservation, and link generation to both through predictive utility; distributional fidelity follows different, sometimes opposing, rankings. Objective interventions show the largest pooled gains from including the recipient's own objective. Generation has the broadest coverage of positive pooled auxiliary effects, while prediction shows potential to improve imputation and synthetic-data utility, with responses that vary across backbones. Cross-addition effects reveal that objective benefits need not add and depend on the objectives already present. Fixed-model comparisons expose corresponding utility--fidelity trade-offs: some generalists surpass specialist portfolios on utility, while fidelity continues to favor specialization. Frozen foundation models show strong prediction and numerical point imputation, together with promising synthetic-data utility, highlighting their potential across all three tasks. These findings motivate unified tabular models that share useful conditional information while improving categorical reconstruction and faithful joint sampling.",
+      "abstract": "Generation, imputation, and prediction query different aspects of the same tabular distribution, but are usually evaluated separately. This leaves unclear which capabilities they share, how their training objectives interact, and whether one model can perform all three well. We introduce the One Table Benchmark (\\ours{}), spanning 56 datasets, 46 registered methods, and 20 capability axes under aligned data splits and explicit task contracts. We compare task ranks on aligned support, train five backbones under all seven non-empty objective combinations on five datasets with three seeds, and contrast fixed-model profiles with specialist portfolios. Rank comparisons connect imputation and prediction through numerical recovery and dependence preservation, and link generation to both through predictive utility; distributional fidelity follows different, sometimes opposing, rankings. Objective interventions show the largest pooled gains from including the recipient's own objective. Generation has the broadest coverage of positive pooled auxiliary effects, while prediction shows potential to improve imputation and synthetic-data utility, with responses that vary across backbones. Cross-addition effects reveal that objective benefits need not add and depend on the objectives already present. Fixed-model comparisons expose corresponding utility--fidelity trade-offs: some generalists surpass specialist portfolios on utility, while fidelity continues to favor specialization. Frozen foundation models show strong prediction and numerical point imputation, together with promising synthetic-data utility, highlighting their potential across all three tasks. These findings motivate unified tabular models that share useful conditional information while improving categorical reconstruction and faithful joint sampling.",
       "published": "2026-11-08",
-      "categories": [],
+      "categories": [
+        "cs.LG"
+      ],
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 38.22,
+      "score": 37.86,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -1109,18 +1138,20 @@
         "Qi Zhang",
         "Bowen Zhou"
       ],
-      "abstract": "We introduce Sage S1.5 Flash, a 320-billion-parameter general-purpose mixture-of-experts model designed to reason over scientific evidence and act in interactive environments. Sage Sci-Perception uses dedicated encoders for molecular graphs and biological sequences and represents spectra as ordered patches of measurements. Modality-specific projectors map these representations into the input space of a shared backbone, which processes them alongside text and images. To develop the model's agent capabilities, we construct verifiable environments for tool use, search, and coding, as well as specialized workflows involving machine learning experiments and scientific software. Task completion is checked against execution results, changes in environment state, or submitted artifacts. We evaluate Sage S1.5 Flash on 33 benchmarks across seven domains. In the primary comparison against five baselines, it ranks first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench~2, and second on OSWorld-Verified (85.2), WebArena-Verified (67.6), and DeepResearch Bench~II (54.2). These results show particular strengths in using documentary evidence, producing verifiable workbooks, and carrying out machine learning tasks, alongside competitive performance in desktop and browser workflows that require the model to act on visual feedback.",
+      "abstract": "We introduce Sage S2.1 Flash, a 320-billion-parameter general-purpose mixture-of-experts model designed to reason over scientific evidence and act in interactive environments. Sage Sci-Perception uses dedicated encoders for molecular graphs and biological sequences and represents spectra as ordered patches of measurements. Modality-specific projectors map these representations into the input space of a shared backbone, which processes them alongside text and images. To develop the model's agent capabilities, we construct verifiable environments for tool use, search, and coding, as well as specialized workflows involving machine learning experiments and scientific software. Task completion is checked against execution results, changes in environment state, or submitted artifacts. We evaluate Sage S2.1 Flash on 33 benchmarks across seven domains. In the primary comparison against five baselines, it ranks first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench 2, and second on OSWorld-Verified (85.2), WebArena-Verified (67.6), and DeepResearch Bench II (54.2). These results show particular strengths in using documentary evidence, producing verifiable workbooks, and carrying out machine learning tasks, alongside competitive performance in desktop and browser workflows that require the model to act on visual feedback.",
       "published": "2026-11-16",
-      "categories": [],
+      "categories": [
+        "cs.AI"
+      ],
       "tags": [
         "agents"
       ],
-      "score": 37.14,
+      "score": 36.77,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 98
+        "hf_upvotes": 101
       },
       "why": null,
       "difficulty": 1,
@@ -1129,35 +1160,34 @@
       "pdf": "https://arxiv.org/pdf/2611.21072"
     },
     {
-      "id": "2611.17834",
-      "title": "PaperCritic: Training AI Reviewers to Assess the Soundness of Papers",
+      "id": "2611.26627",
+      "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
       "authors": [
-        "Hyun Ryu",
-        "Ji Yong Cho",
-        "Eunho Yang",
-        "Moontae Lee",
-        "June Yong Yang",
-        "Sean Welleck",
-        "Carolyn Rose"
+        "Tuna Han Salih Meral",
+        "Kaan Oktay",
+        "Alec Helbling",
+        "Atakan Kara",
+        "Duen Horng Chau",
+        "Pinar Yanardag"
       ],
-      "abstract": "As AI conference submissions grow rapidly, AI reviewers are being considered as an alternative. However, simply imitating human reviewing is problematic because reviewing serves multiple purposes, including evaluating papers' soundness, interestingness, and clarity, the last two of which are subjective. In this work, we focus solely on evaluating soundness, the most important and objective criterion, and define the learning objective as jointly maximizing (1) precision, based on the soundness and substantiveness of review points, and (2) recall, the coverage of high-quality reference review points. Under this problem formulation, we construct a quality-labeled review point dataset, PaperSound-23K, using 1K ICLR submissions and 23K human-written and LLM-generated review points. Using this dataset, we train an AI reviewer model, PaperCritic, through reinforcement learning with the F1 score of precision and recall as the reward. Our experiments show that PaperCritic outperforms frontier models and models trained with other AI reviewer training methods on an in-domain test set. Surprisingly, learning to review ICLR submissions also transfers to reviewing Nature-family papers and even to out-of-domain reviewing tasks (e.g., code review, legal contract review, and feedback on story writing).",
-      "published": "2026-11-13",
+      "abstract": "Reinforcement learning (RL) post-training substantially improves the visual quality, text rendering, and compositional accuracy of diffusion transformers. Because capabilities such as rendering requested text or composing multiple objects are inherently prompt-dependent, a natural hypothesis is that improving them requires learning complex, input-dependent transformations. To isolate how much of these gains an input-independent shift explains, we probe each RL-tuned model with a deliberately simple parameterization: a fixed set of steering vectors added to the block outputs of the frozen base model. On SD3.5-M, these vectors hold 65x fewer parameters than the RL-tuned LoRA (0.29M against 18.8M). We fit them to match the velocity predictions of public RL-tuned checkpoints, with no reward in the objective. Although the vectors are identical for every prompt, token, and sampling seed, they recover 90.0-96.3% of the reward gains of six RL-tuned image models, and 89.8% and 111.9% on two RL-tuned video models. Initialized at zero and trained with online RL, the vectors alone exceed the reward gains of weight-based RL on text rendering (OCR) and human preference (PickScore) on SD3.5-M. A constant shift thus suffices for most of the gain of policy-gradient RL post-training: without new input-dependent transformations, it steers the pretrained generator toward what it can already compute.",
+      "published": "2026-11-19",
       "categories": [],
       "tags": [
         "bandits-rl"
       ],
-      "score": 36.75,
+      "score": 36.73,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 33
+        "hf_upvotes": 20
       },
       "why": null,
-      "difficulty": 1,
+      "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.17834",
-      "pdf": "https://arxiv.org/pdf/2611.17834"
+      "url": "https://arxiv.org/abs/2611.26627",
+      "pdf": "https://arxiv.org/pdf/2611.26627"
     }
   ]
 }
