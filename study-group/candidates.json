@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-24T05:32:48Z",
+  "generated": "2026-11-25T05:31:49Z",
   "window_days": 42,
   "items": [
     {
@@ -26,10 +26,10 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 68.14,
+      "score": 67.67,
       "signals": {
-        "hn_points": 493,
-        "hn_comments": 145,
+        "hn_points": 494,
+        "hn_comments": 146,
         "hn_url": "https://news.ycombinator.com/item?id=50577265",
         "hf_upvotes": 23
       },
@@ -63,7 +63,7 @@
         "tabular-timeseries",
         "bandits-rl"
       ],
-      "score": 60.8,
+      "score": 60.34,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -103,7 +103,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 58.6,
+      "score": 58.36,
       "signals": {
         "hn_points": 49,
         "hn_comments": 8,
@@ -149,7 +149,7 @@
         "applied-finance",
         "agents"
       ],
-      "score": 51.29,
+      "score": 51.0,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -161,6 +161,44 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.07464",
       "pdf": "https://arxiv.org/pdf/2611.07464"
+    },
+    {
+      "id": "2611.30898",
+      "title": "World Models as Native Latent Action Models",
+      "authors": [
+        "Qinyue Li",
+        "Weijie Qiao",
+        "Qingyi Tao",
+        "Zerui Gong",
+        "Zhe Yang",
+        "Quanzhou Li",
+        "Taolin Zhang",
+        "Jinglin He",
+        "Zhonghua Wu",
+        "Chen Change Loy"
+      ],
+      "abstract": "Large and diverse video sources, such as egocentric human video and heterogeneous robot recordings, carry rich dynamics but come either without actions or without a shared action space. Latent action models (LAMs) can recover these dynamics, but they train their inverse- and forward-dynamics models (IDM, FDM) from scratch, trading off pixel reconstruction against latent capacity and accuracy. Pretrained video world models natively generate high-fidelity dynamics, yet represent them densely, entangled across all layers. Viewing the world model as a LAM, we show that these dynamics can be extracted with minimal changes to the model. Native LAM operates one pretrained video diffusion transformer as both IDM and FDM, with learnable dynamics registers as the only causal bridge between the two, and trains on counterfactual temporal pairs that differ in motion alone, so that the registers distill a video's dynamics into a compact native latent action. We further propose a pretraining paradigm for vision-language-action (VLA) policies, Pretraining Actions from World models (PAWlicy), in which Native LAM serves as a dynamics teacher on large-scale video; unlike world action models, it never generates video. Native latent actions outperform existing LAMs on the LARY benchmark in both action classification and control regression, and replay the same motion on new robots, in new scenes, and from human hands to robots, although no transfer objective is used in training. With a 3.8B model, PAWlicy reaches a 93.6% average success rate on RoboTwin 2.0 trained with domain-randomized demonstrations, the highest among VLAs. On RoboDojo, it is competitive on every dimension we evaluate, and its Precision, evaluated by us, is on par with the leading leaderboard entries. On real robots, it improves over the pi_0.5 baseline on both tasks. Both stages use only public data and a publicly released world model.",
+      "published": "2026-11-23",
+      "categories": [
+        "cs.CV",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "tags": [
+        "causal-uplift"
+      ],
+      "score": 50.02,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 25
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.30898",
+      "pdf": "https://arxiv.org/pdf/2611.30898"
     },
     {
       "id": "2611.23808",
@@ -182,7 +220,7 @@
         "eval-safety",
         "genai-llm"
       ],
-      "score": 48.57,
+      "score": 48.04,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -216,7 +254,7 @@
         "genai-llm",
         "bandits-rl"
       ],
-      "score": 47.19,
+      "score": 46.88,
       "signals": {
         "hn_points": 32,
         "hn_comments": 0,
@@ -289,7 +327,7 @@
         "agents",
         "recsys-nba"
       ],
-      "score": 46.18,
+      "score": 46.08,
       "signals": {
         "hn_points": 125,
         "hn_comments": 14,
@@ -320,7 +358,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 45.99,
+      "score": 45.45,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -332,6 +370,40 @@
       "kind": "benchmark",
       "url": "https://arxiv.org/abs/2611.25200",
       "pdf": "https://arxiv.org/pdf/2611.25200"
+    },
+    {
+      "id": "2611.31015",
+      "title": "Can Latent Reasoning Drive LLM Outputs Without a Trace?",
+      "authors": [
+        "Tomer Ashuach",
+        "Zorik Gekhman",
+        "Avi Caciularu",
+        "Ori Ram",
+        "Jonathan Herzig"
+      ],
+      "abstract": "LLMs typically solve complex tasks with chain-of-thought (CoT) reasoning, which is also the main tool for monitoring them for misaligned behavior. However, standard transformers can also solve tasks with complete latent reasoning (CLR), carrying out the whole task internally and outputting only the final answer. Theory bounds the depth of CLR, the number of sequential steps it can carry out, and recent work measured it to be shallow. In this work, we ask whether CLR is deep enough for a model to pursue a hidden objective that requires reasoning. Such a model would generate a CoT that appears to solve the given task, while a latent multi-step computation decides its answer based on the hidden objective. First, we show that a simple auxiliary loss allows models to solve a multi-step task latently at least 5x deeper than previously reported. Then, in two common tasks, decision-making and code generation, we train a model to pursue such a hidden objective, which decides a loan or plants a vulnerability. The model's CoT justifies the output with no trace of the hidden objective, and a strong LLM monitor does not flag it. Finally, using activation patching, we find that the latent computation is completed before the model generates its CoT, which takes no part in it. Altogether, we show that a hidden objective that requires reasoning can go unseen by a monitor that reads only the output.",
+      "published": "2026-11-23",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "tags": [
+        "genai-llm",
+        "applied-finance"
+      ],
+      "score": 45.15,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 10
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.31015",
+      "pdf": "https://arxiv.org/pdf/2611.31015"
     },
     {
       "id": "2611.18397",
@@ -377,7 +449,7 @@
         "bandits-rl",
         "agents"
       ],
-      "score": 44.5,
+      "score": 44.08,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -391,39 +463,71 @@
       "pdf": "https://arxiv.org/pdf/2611.18397"
     },
     {
-      "id": "2610.37570",
-      "title": "LCM-Promo: An LLM-Based Uplift Model for Promotion Allocation",
+      "id": "2611.30662",
+      "title": "WeMM-Ecom: Advancing Multimodal Content Understanding for WeChat E-Commerce",
       "authors": [
-        "Nesta Midavaine",
-        "Floris Fok",
-        "Paulo Mendes",
-        "Joao Silva",
-        "Önder Akaçık",
-        "Dimas Lima",
-        "Zülküf Genç"
+        "Binhui Xie",
+        "Jinmin Li",
+        "Haomiao Tang",
+        "Guangting Wang",
+        "Song Jin",
+        "Jianwei Zhu",
+        "Fengyun Rao",
+        "Jing Lyu"
       ],
-      "abstract": "We present LCM-Promo, an LLM-based uplift model for promotion allocation. LCM-Promo is a task-specific Large Commerce Model (LCM): a finetuned LLM trained on transactional commerce data to predict user intent and promotion response. It learns monotonic promotion-response curves from production logs by interpreting single-token outputs as conversion-threshold probabilities, while conditioning on session context such as day and delivery shift. In a production A/B test on churn reactivation, LCM-Promo increased conversion by 1% and reduced promotion cost by 6% relative to the Segment-EMA production baseline.",
-      "published": "2026-10-27",
+      "abstract": "We present WeMM-Ecom, a family of multimodal large language models that deliver frontier e-commerce capabilities while achieving state-of-the-art general-purpose performance at their respective scales. The family spans five sizes, from a 0.8B dense model to a 35B mixture-of-experts model with 3B active parameters. Our training pipeline begins with two-stage continued pre-training that progressively raises the proportion of e-commerce data within a diverse multimodal data mixture, followed by hybrid-thinking post-training that combines on-policy distillation and reinforcement learning to support both non-thinking and thinking modes. For evaluation, we construct a comprehensive suite of 28 e-commerce benchmarks (23 in-house and five open-source) covering eight business scenarios and complement it with 64 public general-purpose benchmarks. On the e-commerce suite, WeMM-Ecom-35B-A3B surpasses substantially larger open-source flagship models, including Qwen3.8-Flash-Next, HY4, and DeepSeek-V4.1-Flash. On the general-purpose suite, every WeMM-Ecom model surpasses its similarly sized Qwen3.5 counterpart, with the lightweight variants (e.g., WeMM-Ecom-2B) showing clear advantages over leading lightweight models such as Qwen3.5-2B, MiniCPM-V-4.7-1B, and LFM3-VL-2B. Beyond benchmarks, WeMM-Ecom now powers hundreds of production use cases in WeChat, including catalog management, multimodal product search, and livestream commerce, serving billion-scale requests per day. We publicly release all model weights and detail our data curation, training recipe, and benchmark construction to facilitate future work on domain-specialized multimodal models. We have released the model weights and code to facilitate future research at https://github.com/Tencent/WeMM-Ecom.",
+      "published": "2026-11-23",
       "categories": [
-        "cs.LG",
-        "cs.IR"
+        "cs.AI",
+        "cs.CV"
       ],
       "tags": [
-        "causal-uplift",
-        "recsys-nba"
+        "genai-llm",
+        "bandits-rl"
       ],
-      "score": 43.89,
+      "score": 43.35,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 5
+        "hf_upvotes": 53
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2610.37570",
-      "pdf": "https://arxiv.org/pdf/2610.37570"
+      "url": "https://arxiv.org/abs/2611.30662",
+      "pdf": "https://arxiv.org/pdf/2611.30662"
+    },
+    {
+      "id": "2611.18130",
+      "title": "JFinBench: A Continuously Refreshable Japanese Financial Benchmark from the Latest Certification Exams",
+      "authors": [
+        "Issa Sugiura",
+        "Taro Makino",
+        "Takashi Ishida"
+      ],
+      "abstract": "Large language models (LLMs) are increasingly applied to finance, creating a need for benchmarks that evaluate their capabilities across financial systems with different regulations and practices. However, existing financial benchmarks provide limited coverage of country-specific financial systems, and they are difficult to keep up to date as released questions leak into training data. We introduce JFinBench, a Japanese financial benchmark comprising 321 examples from the 2026 editions of six regularly administered certification exams covering accounting, tax, financial planning, and banking. To construct it, we develop a human-in-the-loop agentic pipeline in which a coding agent writes exam-specific conversion code and a review page, while a human verifies every example and feeds corrections back to the agent. This pipeline adapts to heterogeneous exam formats and reduces the effort of incorporating new exam editions, enabling periodic refreshes that mitigate data contamination. Evaluating 12 recent LLMs, we find that Claude Fable 5 and GPT-6 Astra exceed 93% overall, while even the best open-weight model, Kimi K3.1 Pro, trails Claude Fable 5 by 12 percentage points. When models can additionally use a terminal and web access, they retrieve the knowledge they lack and every model improves. The gap narrows but about 4 points remain, and the ranking of models stays largely the same, suggesting that knowledge held in the model itself remains valuable even with tools. We release the dataset, the evaluation code, and the construction pipeline.",
+      "published": "2026-11-13",
+      "categories": [
+        "cs.AI"
+      ],
+      "tags": [
+        "genai-llm",
+        "applied-finance",
+        "agents"
+      ],
+      "score": 43.12,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 3
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.18130",
+      "pdf": "https://arxiv.org/pdf/2611.18130"
     },
     {
       "id": "2611.29613",
@@ -448,7 +552,7 @@
         "recsys-nba",
         "causal-uplift"
       ],
-      "score": 43.59,
+      "score": 42.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -480,7 +584,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 43.59,
+      "score": 42.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -492,37 +596,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.29462",
       "pdf": "https://arxiv.org/pdf/2611.29462"
-    },
-    {
-      "id": "2611.18130",
-      "title": "JFinBench: A Continuously Refreshable Japanese Financial Benchmark from the Latest Certification Exams",
-      "authors": [
-        "Issa Sugiura",
-        "Taro Makino",
-        "Takashi Ishida"
-      ],
-      "abstract": "Large language models (LLMs) are increasingly applied to finance, creating a need for benchmarks that evaluate their capabilities across financial systems with different regulations and practices. However, existing financial benchmarks provide limited coverage of country-specific financial systems, and they are difficult to keep up to date as released questions leak into training data. We introduce JFinBench, a Japanese financial benchmark comprising 321 examples from the 2026 editions of six regularly administered certification exams covering accounting, tax, financial planning, and banking. To construct it, we develop a human-in-the-loop agentic pipeline in which a coding agent writes exam-specific conversion code and a review page, while a human verifies every example and feeds corrections back to the agent. This pipeline adapts to heterogeneous exam formats and reduces the effort of incorporating new exam editions, enabling periodic refreshes that mitigate data contamination. Evaluating 12 recent LLMs, we find that Claude Fable 5 and GPT-6 Astra exceed 93% overall, while even the best open-weight model, Kimi K3.1 Pro, trails Claude Fable 5 by 12 percentage points. When models can additionally use a terminal and web access, they retrieve the knowledge they lack and every model improves. The gap narrows but about 4 points remain, and the ranking of models stays largely the same, suggesting that knowledge held in the model itself remains valuable even with tools. We release the dataset, the evaluation code, and the construction pipeline.",
-      "published": "2026-11-13",
-      "categories": [
-        "cs.AI"
-      ],
-      "tags": [
-        "genai-llm",
-        "applied-finance",
-        "agents"
-      ],
-      "score": 43.54,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 3
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.18130",
-      "pdf": "https://arxiv.org/pdf/2611.18130"
     },
     {
       "id": "2611.29094",
@@ -545,7 +618,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 42.93,
+      "score": 42.31,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -573,7 +646,7 @@
         "recsys-nba",
         "agents"
       ],
-      "score": 42.93,
+      "score": 42.31,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -587,27 +660,26 @@
       "pdf": "https://arxiv.org/pdf/2611.28946"
     },
     {
-      "id": "2611.28604",
-      "title": "MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation",
+      "id": "2611.27514",
+      "title": "Deep Cross-Division Network for Product-and-Ratio Feature Interactions in Industrial Ranking",
       "authors": [
-        "Zunlong Liu",
-        "Weijie Feng",
-        "Jingzhi Li",
-        "Lei Zhu",
-        "Zhiyong Cheng",
-        "Meng Wang"
+        "Mikhail Trapeznikov",
+        "Sofia Gulevskaia",
+        "Maksim Utushkin",
+        "Aleksandr Poslavsky",
+        "Alexander D'yakonov"
       ],
-      "abstract": "Large Language Models (LLMs) are transforming recommender systems from conventional preference matching toward reasoning-driven and explainable decision-making. Multi-agent collaboration further advances this paradigm by distributing recommendation reasoning across specialized agents. However, existing frameworks rarely assess the reliability of intermediate reasoning during collaboration, allowing erroneous judgments to propagate across agents and ultimately degrade recommendation quality. To address this issue, we propose Multi-Agent Debate-based Recommendation (MADRec), an evidence-grounded multi-agent framework that enhances the reliability of multi-agent recommendation reasoning. MADRec consists of three coordinated modules. First, the Multi-Agent Debate (MAD) module enables an Interaction Agent and a Semantic Agent to analyze interaction signals and content-level semantic signals from complementary perspectives, generating diverse recommendation judgments through structured debate. Second, the Evidence-Grounded Retrieval-Augmented Reasoning (EG-RAR) module grounds the Semantic Agent's reasoning in item-level evidence and refines candidate scores by assessing how well the evidence supports the corresponding semantic claims. Third, the Judge-based Ranking Calibration (JRC) module leverages debate-derived reliability cues to adaptively calibrate interaction-based and semantic ranking results for the final recommendation. Extensive experiments on three real-world datasets demonstrate that MADRec consistently outperforms competitive baselines and enhances the reliability of multi-agent recommendation reasoning.",
-      "published": "2026-11-21",
+      "abstract": "Learning effective feature interactions is essential for industrial recommender systems. DCN and DCNv2 efficiently automate polynomial feature crossing. However, their cross layers construct interactions using only non-negative integer powers of the input features, with the maximum degree controlled by network depth. Consequently, they cannot directly represent the reciprocal terms required for ratios, rates, and normalized counts unless such features are explicitly provided as inputs. We introduce DCDN, a Deep Cross-Division Network that augments a DCNv2-style cross layer with a division branch. DCDN jointly learns product, ratio, and mixed product-ratio interactions. We characterize the representable interactions as multivariate Laurent polynomials and show that a $K$-layer DCDN generates Laurent monomials of $\\ell_1$-order up to $K+1$, with signed degree between $-K$ and $K+1$. We evaluate DCDN against a production-optimized neural-ranking baseline built around DCNv2 and supplied with manually engineered ratio features. Replacing the DCNv2 block with DCDN allowed us to eliminate the entire class of manually engineered ratio features from the model input, reducing the number of input features by $40.1\\%$. DCDN is deployed in the production ranking stack of a major short-video service. In a live A/B test on this service, DCDN increased likes by $3.25\\%$, shares by $16.26\\%$, total view time (TVT) by $0.33\\%$, and clicks to open fullscreen by $0.38\\%$; all changes were statistically significant. The number of shown videos decreased slightly ($-0.24\\%$). These results demonstrate that DCDN can improve user engagement while eliminating reliance on manually engineered ratio features. Our code is publicly released at https://github.com/rw404/DCDN.",
+      "published": "2026-11-20",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "cs.LG"
       ],
       "tags": [
-        "genai-llm",
         "recsys-nba",
-        "agents"
+        "causal-uplift"
       ],
-      "score": 42.93,
+      "score": 41.71,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -616,48 +688,41 @@
       },
       "why": null,
       "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.28604",
-      "pdf": "https://arxiv.org/pdf/2611.28604"
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.27514",
+      "pdf": "https://arxiv.org/pdf/2611.27514"
     },
     {
-      "id": "2611.17167",
-      "title": "Actor, Judge, or Teacher? Understanding Decision Models in Long-Horizon Agents",
+      "id": "2611.17820",
+      "title": "Aligning AI Teams",
       "authors": [
-        "Haochen Liu",
-        "Qianhao Zhu",
-        "Zixuan Wang",
-        "Dingming Li",
-        "Tongbo Chen",
-        "Peng Qiu",
-        "Yingqi Qu",
-        "Weiming Lu",
-        "Jun Xiao",
-        "Yongliang Shen"
+        "Siddarth Srinivasan",
+        "Morgan Jane Matthews",
+        "Jascha Sohl-Dickstein",
+        "Erik Jones"
       ],
-      "abstract": "Decision models answer a question with a typed output, such as a choice among options with a probability for each, so one model can choose an agent's actions, evaluate actions already taken, or score every action to teach a policy with reinforcement learning. Prior work has studied them mainly as actors, judging their usefulness by how well they act. We ask whether a decision model that acts poorly can still teach well. We compare three decision models and three general LLMs as actors and judges on ALFWorld, and use JEV as a teacher on ALFWorld and WebShop. As actors, all six models are pulled away from a subgoal that must come first by an easier one. As judges that see the whole trajectory, the same models credit the steps toward that subgoal, and asking whether each action helped, rather than whether the task will succeed, separates useful from useless actions. As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop. These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate. Code is available at https://github.com/ZJU-REAL/decision-agents.",
-      "published": "2026-11-12",
+      "abstract": "Previous work has shown that alignment training on individual LLM agents can fail to transfer to multi-agent settings. We investigate the underlying mechanisms for this failure, and explore interventions to preserve alignment transfer to multi-agent LLM teams. We focus on two software-engineering tasks (sepsis triage, a news recommender) and ten consulting-proposal generation tasks. We present four findings: (1) The single-vs-team safety gap does not show a clear trend with more capable models. We find that Anthropic's Mythos Preview shows the largest gap on one of our tasks but the smallest on another; (2) Many natural interventions, such as having agents critique each other's work or coordinate in a group chat, do not reliably bring agent teams back to single-agent alignment behavior; (3) diffusion of responsibility substantially accounts for the safety gap: agents in teams are less likely to proactively check for system-level safety failures and more likely to ignore, rationalize, or deflect responsibility for issues when they arise; (4) having a designated safety lead agent ensure system-level safety, and having a coordinator agent publish a safety specifications document are effective at restoring single-agent alignment. We also release magelab, a multi-agent LLM orchestration and experimentation framework. Our findings can help practitioners design agent teams that successfully preserve the behaviors expected of aligned individual agents.",
+      "published": "2026-11-13",
       "categories": [
-        "cs.AI",
-        "cs.CL"
+        "cs.AI"
       ],
       "tags": [
-        "bandits-rl",
-        "genai-llm",
-        "agents"
+        "agents",
+        "eval-safety",
+        "recsys-nba"
       ],
-      "score": 41.15,
+      "score": 41.31,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 39
+        "hf_upvotes": 9
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.17167",
-      "pdf": "https://arxiv.org/pdf/2611.17167"
+      "url": "https://arxiv.org/abs/2611.17820",
+      "pdf": "https://arxiv.org/pdf/2611.17820"
     },
     {
       "id": "2611.29270",
@@ -675,7 +740,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 40.59,
+      "score": 39.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -687,37 +752,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.29270",
       "pdf": "https://arxiv.org/pdf/2611.29270"
-    },
-    {
-      "id": "2611.12886",
-      "title": "Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning",
-      "authors": [
-        "Haozhi Yuan",
-        "Handong Li",
-        "Yifan Zhang",
-        "Qianshan Wei"
-      ],
-      "abstract": "Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges. Models may overlook useful tool-returned observations, while poorly grounded actions can limit the evidence available for subsequent distillation. We introduce Reframe, a post-training framework that treats the observation state, rather than only the output distribution, as an object of alignment. First, Ground-Drop-GRPO (GD-GRPO) trains spatial and temporal specialists with evidence-aware rewards and stochastic removal of the original visual input, encouraging them to acquire grounded evidence and use the returned observations. Second, Observation-Gated-MOPD (OG-MOPD) replaces deficient tool actions with canonical ones mid-rollout and resumes distillation from the repaired observation. The two stages complement each other, as learning to rely on tool-returned observations can help the policy benefit from observation repair. Neither stage requires a task-specific SFT cold start. Extensive experiments over 14 image and video benchmarks demonstrate that Reframe outperforms both Mix-RL and vanilla MOPD. Ablation results show that GD-GRPO increases observation dependence and tool gain compared with outcome-based GRPO.",
-      "published": "2026-11-09",
-      "categories": [
-        "cs.CV"
-      ],
-      "tags": [
-        "agents",
-        "bandits-rl"
-      ],
-      "score": 40.28,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 41
-      },
-      "why": null,
-      "difficulty": 1,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.12886",
-      "pdf": "https://arxiv.org/pdf/2611.12886"
     },
     {
       "id": "2611.21373",
@@ -741,7 +775,7 @@
         "agents",
         "bandits-rl"
       ],
-      "score": 40.07,
+      "score": 39.58,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -774,7 +808,7 @@
       "tags": [
         "tabular-timeseries"
       ],
-      "score": 39.83,
+      "score": 39.45,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -788,96 +822,81 @@
       "pdf": "https://arxiv.org/pdf/2611.15348"
     },
     {
-      "id": "2611.28372",
-      "title": "Treatment Policy Design in the Presence of Measurement Error",
+      "id": "2611.31201",
+      "title": "Embo-Harness: Towards Understanding Frontier-Model-as-Policy Harness",
       "authors": [
-        "Chang Liu",
-        "AmirEmad Ghassami"
+        "Xiao-Ming Wu",
+        "Kang Liao",
+        "Yuexiao Ma",
+        "Taolin Zhang",
+        "Mingqian Zhou",
+        "Nuo Chen",
+        "Ziming Li",
+        "Yihang Luo",
+        "Rui Li",
+        "Zhonghua Wu",
+        "Tianyu Xie",
+        "Xiawu Zheng",
+        "Zhongang Cai",
+        "Zhi Hou",
+        "Chen Change Loy"
       ],
-      "abstract": "In many applications, treatments are assigned based on unit features, leading to personalized treatment policies. This often involves optimizing objective functions with counterfactual quantities such as the conditional average treatment effect (CATE). In practice, some key features may be measured with error and ignoring such errors can introduce systematic bias. We study how to design personalized treatment policies when some features are latent and only noisy measurements are available. We ask how policies can be constructed when the CATE is not identifiable, and how uncertainty from measurement error can be incorporated into policy design. We propose two frameworks for treatment policy design based on partial identification, focusing on the measurement mechanism-the conditional distribution of observed measurements given unobserved features. The first framework builds on ideas from proximal causal inference. The second adopts a modular Bayesian approach based on a reparameterized likelihood, using Hamiltonian Monte Carlo and Bayesian regression models to separately perform posterior inference on the measurement mechanism and nuisance functions. Posterior quantiles are then used to construct credible intervals for the CATE that account for uncertainty in both components. Treatment policies are then derived by comparing the null value of the CATE to these bounds. The proposed methods provide a coherent way to account for measurement error and model uncertainty in personalized treatment policy design.",
-      "published": "2026-11-20",
-      "categories": [
-        "stat.ME"
-      ],
-      "tags": [
-        "causal-uplift",
-        "ml-methods"
-      ],
-      "score": 39.31,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 3,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.28372",
-      "pdf": "https://arxiv.org/pdf/2611.28372"
-    },
-    {
-      "id": "2611.27666",
-      "title": "Can pretrained Transformers deliver semiparametrically efficient inference?",
-      "authors": [
-        "Han Yan",
-        "Jin Zhu",
-        "Chengchun Shi",
-        "Tengyao Wang"
-      ],
-      "abstract": "Semiparametric models provide a broad framework for statistical inference, yet efficient estimation typically relies on influence function correction tailored to each estimand and on nuisance estimation repeated for every sample. We show that a single pretrained Transformer can deliver efficient estimation and valid inference for a family of estimands in one forward pass, without deriving efficient influence functions or estimating nuisance functions. Pretrained on simulated data with the true parameter as the only label, the Transformer learns the posterior mean and covariance of the queried estimand and hence returns an estimate and a Wald-type confidence region. Theoretically, we prove that, for locally flat pretraining priors of slowly growing complexity, the posterior mean is efficient for every queried estimand. The Transformer inherits this efficiency with asymptotically exact coverage, in probability over evaluation populations and queries, even under distribution shift. We also reveal that the guarantee places much higher demands on pretraining when the data-generating distribution is fixed, as in classical frequentist inference. Experiments on causal inference, partial linear regression, and survival analysis show that the pretrained model generally achieves the lowest estimation error among competing methods, with nearly nominal coverage, at a computational cost of only about 0.02 seconds per dataset.",
-      "published": "2026-11-20",
-      "categories": [
-        "stat.ML",
-        "cs.LG",
-        "math.ST"
-      ],
-      "tags": [
-        "causal-uplift",
-        "tabular-timeseries"
-      ],
-      "score": 39.31,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 3,
-      "kind": "theory",
-      "url": "https://arxiv.org/abs/2611.27666",
-      "pdf": "https://arxiv.org/pdf/2611.27666"
-    },
-    {
-      "id": "2611.24789",
-      "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
-      "authors": [
-        "Phuong Tuan Dat",
-        "Qi Li",
-        "Xinchao Wang"
-      ],
-      "abstract": "World action models (WAMs) have shown promising generalization and data efficiency in robot manipulation by coupling action generation with predictions of future visual dynamics. Translating these capabilities into reliable task execution, however, remains a challenge for existing post-training methods. Offline supervised fine-tuning provides dense supervision on expert trajectories, but its flow-matching action expert is trained only on noised demonstration actions and never on the intermediate states produced by its own sampler; task-specific adaptation can also compromise pretrained capabilities. On-policy reinforcement learning trains on the policy's own behavior, yet sparse task rewards make exploration and credit assignment difficult, while dense reward shaping still provides scalar evaluations rather than direct action targets. We introduce \\textbf{HINT-WAM}, the first on-policy self-distillation framework that supervises the action expert on its own sampling trajectories using hindsight, the future video of the demonstration, as privileged information available to the WAM itself. For each demonstration observation, the student generates its action through its own denoising trajectory, and at the states along this trajectory the same model acts as a teacher conditioned additionally on this hindsight, providing a conditional action distribution as a dense training target, while the student sees only deployment-time inputs and needs no environmental rewards or simulator interaction. To transfer this supervision to a flow-matching action expert, HINT-WAM distills the teacher into the student with an energy score, a distribution-level objective that matches the teacher's action distribution from the student's own samples rather than regressing its velocity field. The project web is available in https://tuandattt.github.io/hintwam/.",
-      "published": "2026-11-18",
+      "abstract": "Frontier multimodal models exhibit extraordinary generalization in generating robot actions from observations and instructions, enabling a new paradigm in which they serve directly as policies within closed-loop robotic harnesses. However, the design principles of such harnesses, and the capabilities underlying their strong performance, remain unclear. We present Embo-Harness, a framework for systematically studying frontier-model-as-policy harnesses. We investigate four components of the robotic agentic loop, namely, prompting, planning, action execution, and tool use, and distill six empirical findings into a practical recipe. This recipe prioritizes interfaces that exploit the model's native visual reasoning and tool-use capabilities over handcrafted plans, skills, or action priors, and identifies effective choices for action representation, chunking, reasoning effort, visual observations, short multi-action sequences, and policy refinement. On RoboLab-120, Embo-Harness achieves an 83.3\\% success rate, outperforming the strongest reported baseline by 26.2 percentage points. It also succeeds in 15 of 20 zero-shot trials across four real-world manipulation tasks. Beyond performance, controlled interventions indicate that the studied model depends more strongly on accurate spatial target estimation than on explicit low-level joint or trajectory generation. These results provide both a practical recipe for building strong frontier-model-as-policy harnesses and a clearer account of the capabilities that drive their performance.",
+      "published": "2026-11-23",
       "categories": [
         "cs.RO"
       ],
       "tags": [
-        "bandits-rl",
-        "ml-methods"
+        "agents"
       ],
-      "score": 39.28,
+      "score": 39.1,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 22
+        "hf_upvotes": 90
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.24789",
-      "pdf": "https://arxiv.org/pdf/2611.24789"
+      "url": "https://arxiv.org/abs/2611.31201",
+      "pdf": "https://arxiv.org/pdf/2611.31201"
+    },
+    {
+      "id": "2611.24102",
+      "title": "IDEA: Intent-Dominance Evidence Audit for Inference-Time Backdoor Detection in GUI Agents",
+      "authors": [
+        "Zhizhuo Kou",
+        "Sizai Hou",
+        "Jian Yang",
+        "Ge Sun",
+        "Junyu Luo",
+        "Wenkai Zhang",
+        "Sirui Han",
+        "Yike Guo"
+      ],
+      "abstract": "Organizations increasingly deploy downloaded open-weight GUI agents. A backdoored agent passes acceptance tests on clean data and misbehaves only when a visual trigger appears on screen, turning an unvetted checkpoint into a supply-chain risk. However, existing sample-level detectors target image classifiers and CLIP-style encoders, leaving step-level backdoor detection for GUI agents unaddressed. On clean steps, the instruction drives the action; when an unreferenced screen region hijacks the step, the instruction loses control over the decision state or that region dictates it instead. We term this signature intent--evidence dominance inversion and propose IDEA (Intent-Dominance Evidence Audit) to detect backdoor activation at inference time for each step without trigger knowledge or attack data. Specifically, Intent Counterfactual Probing (ICP) measures how far redirected instructions move the decision state, and Region Causal Audit (RCA) quantifies how far ablating a candidate region moves it. A gated conformal score compares both displacements against clean steps at the same distance from the clean manifold, providing a finite-sample false-positive guarantee. Extensive experiments on Qwen2.5-VL-3B across five attack families show that IDEA consistently detects backdoor activation under a controlled false-positive rate and outperforms state-of-the-art detection methods, while localizing the trigger region for every alarm and adding only modest inference overhead.",
+      "published": "2026-11-18",
+      "categories": [
+        "cs.CV"
+      ],
+      "tags": [
+        "causal-uplift",
+        "agents",
+        "ml-methods"
+      ],
+      "score": 38.74,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 5
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.24102",
+      "pdf": "https://arxiv.org/pdf/2611.24102"
     }
   ]
 }
