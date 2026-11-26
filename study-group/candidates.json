@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-25T05:31:49Z",
+  "generated": "2026-11-26T05:32:49Z",
   "window_days": 42,
   "items": [
     {
@@ -26,12 +26,12 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 67.67,
+      "score": 67.44,
       "signals": {
         "hn_points": 494,
         "hn_comments": 146,
         "hn_url": "https://news.ycombinator.com/item?id=50577265",
-        "hf_upvotes": 23
+        "hf_upvotes": 24
       },
       "why": null,
       "difficulty": 2,
@@ -63,12 +63,12 @@
         "tabular-timeseries",
         "bandits-rl"
       ],
-      "score": 60.34,
+      "score": 59.97,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 71
+        "hf_upvotes": 72
       },
       "why": null,
       "difficulty": 2,
@@ -103,7 +103,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 58.36,
+      "score": 58.13,
       "signals": {
         "hn_points": 49,
         "hn_comments": 8,
@@ -117,50 +117,88 @@
       "pdf": "https://arxiv.org/pdf/2611.02618"
     },
     {
-      "id": "2611.07464",
-      "title": "FINCOSMOS: An Open-World Evaluation Paradigm for Agents in Finance",
+      "id": "2611.32884",
+      "title": "Lazy Agents Answer Against Their Own Beliefs: Reinforcement Learning with Verifiable Beliefs Teaches Them to Act on What They Believe",
       "authors": [
-        "Yupeng Cao",
-        "Xueqing Peng",
-        "Lingfei Qian",
-        "Haohang Li",
-        "Yangyang Yu",
-        "Anke Xu",
-        "Wenbo Cao",
-        "Yan Wang",
-        "Yuechen Jiang",
-        "Yuyan Wang",
-        "Zhuohan Xie",
-        "Yankai Chen",
-        "Zehan Li",
-        "Jimin Huang",
-        "Xue Liu",
-        "Jian-Yun Nie",
-        "Sophia Ananiadou"
+        "Richmond Sin Jing Xuan",
+        "Peilin Feng",
+        "Wenbin Wang",
+        "Soujanya Poria"
       ],
-      "abstract": "Language agents increasingly work for users on the open Web, and finance is where trusting them is hardest. The data must come from the Web, the strategy lives in the user's head, and correctness depends on time, so an agent can fail silently: a strategy the user never asked for, unverified data, or a backtest that uses the future yields a report as convincing as a correct one. Existing benchmarks close the world somewhere, fixing the task, the data, or the timeline, and thereby remove these failures instead of measuring them. We introduce FINCOSMOS, an open-world evaluation paradigm for agents doing financial work. A simulated user holds a hidden strategy sampled from a compositional grammar and reveals it only when asked. The agent receives no data, so it must acquire data from the Web, build its own backtest under a data cutoff, and deliver verifiable results. Grading needs no reference answer. Programs verify point-in-time correctness and recompute every reported metric, the delivered strategy is checked against the hidden specification, and a run is accepted only when the user is satisfied and none of 15 veto checks fails. Across four coding agents and a model without tools in 150 sessions, no session is accepted: every session that the simulated user signed off fails a program check, and agents raise only 54--64\\% of the details they were not told. Human experts attribute 88.33\\% of failures to the agents. With FINCOSMOS feedback, an agent with persistent memory learned all ten tasks.",
-      "published": "2026-11-05",
+      "abstract": "AI agents working on long tasks often commit to an answer before they have enough evidence, a behavior called laziness. In our evaluations, they frequently commit even while their stated belief still names several possible answers. An outcome reward at the end of the episode scores only the final answer, so it cannot teach the agent when to commit, because a lucky guess receives the same reward as an answer backed by evidence. During training, however, the simulator can compute the exact posterior over the answer at every step and tell whether the evidence is already enough. We propose Reinforcement Learning with Verifiable Beliefs (RLVB), which rewards the agent for taking further steps while this posterior still allows several answers and for committing once the evidence is sufficient. The reward needs no judge, critic or reward model, and it never reads the belief line the agent writes before each action. We also introduce Pro Worlds, a benchmark of visual puzzles where the agent views a large world through a small window. We evaluate three vision-language models on three benchmarks, two of which are never seen in training. RLVB improves the base model in all nine settings, by 17.1% on average. Under the outcome reward, GRPO and PPO fall below the base model on average. RLVB also outperforms PPO with a process reward from an LLM judge by 9.3% on average while using 1.6 times fewer GPU-hours. The trained agent answers with sufficient evidence in 51%, 12% and 74% of the episodes on the three benchmarks, against 8%, 0.4% and 36% for the base model. Its accuracy gain therefore comes from answering more often at high levels of evidence. The belief line shows how the agent reaches this evidence: it acts on its own belief. It commits at only 0.1 to 2.2% of the turns at which the evidence is insufficient and its line still names several answers, against 3 to 68% for the base model.",
+      "published": "2026-11-24",
       "categories": [
-        "cs.AI",
-        "cs.CL",
-        "q-fin.CP"
+        "cs.AI"
       ],
       "tags": [
-        "applied-finance",
+        "bandits-rl",
+        "genai-llm",
         "agents"
       ],
-      "score": 51.0,
+      "score": 51.58,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 25
+        "hf_upvotes": 98
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.07464",
-      "pdf": "https://arxiv.org/pdf/2611.07464"
+      "url": "https://arxiv.org/abs/2611.32884",
+      "pdf": "https://arxiv.org/pdf/2611.32884"
+    },
+    {
+      "id": "2611.25403",
+      "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+      "authors": [
+        "Weiyu Han",
+        "Haoyu Jiang",
+        "Jie Sheng",
+        "Youxi Pan",
+        "Xianglong Liu",
+        "Zeqi Ren",
+        "Dongquan Yi",
+        "Yinhao Liu",
+        "Ruobing Zuo",
+        "Ze Zhao",
+        "Huilin He",
+        "Nairong Zhang",
+        "Xinyi He",
+        "Xiao Tan",
+        "Jun Wang",
+        "Pan Fang",
+        "Wei Zeng",
+        "Jianan Su",
+        "Kaixin Shen",
+        "Jingtong Wu",
+        "Hao Li",
+        "Shuai Chen",
+        "Jiangming Yang",
+        "Tianyi Zhang"
+      ],
+      "abstract": "We report the development of Antom 3-in-1 Transformer, a payment foundation model that integrates sequence, tabular, and graph representations for payment risk detection. The model contains approximately 7B parameters, with approximately 1.7B activated per task route. Antom 3-in-1 Transformer is pretrained to learn reusable behavioral and relational representations, primarily on Ant International's internal payment data. In a cross-business transfer experiment, pretraining improves the target business metric by 34.5% over the same architecture trained from scratch. With only 25% of the training labels, the pretrained model outperforms the full-label scratch baseline in Average Precision (AP) and Recall@0.5% on different merchant domains. In a four-month online experiment on Ant International's billion-scale payment platform, the model reduced the overall loss rate by 37.88% relative to XGB-Online.",
+      "published": "2026-11-19",
+      "categories": [
+        "cs.LG"
+      ],
+      "tags": [
+        "tabular-timeseries",
+        "genai-llm",
+        "applied-finance"
+      ],
+      "score": 50.43,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 104
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.25403",
+      "pdf": "https://arxiv.org/pdf/2611.25403"
     },
     {
       "id": "2611.30898",
@@ -187,12 +225,12 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 50.02,
+      "score": 49.98,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 25
+        "hf_upvotes": 28
       },
       "why": null,
       "difficulty": 2,
@@ -220,7 +258,7 @@
         "eval-safety",
         "genai-llm"
       ],
-      "score": 48.04,
+      "score": 47.52,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -232,40 +270,6 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.23808",
       "pdf": "https://arxiv.org/pdf/2611.23808"
-    },
-    {
-      "id": "2611.10866",
-      "title": "The Surprising Effectiveness of Deleting Weights in LLM Post-Training",
-      "authors": [
-        "Jack Lu",
-        "Zhenbang Yang",
-        "Mike Lasby",
-        "Tejas Pote",
-        "Yani Ioannou",
-        "Mengye Ren"
-      ],
-      "abstract": "How little of a pretrained large language model (LLM) has to change for it to acquire new capabilities? We find that zeroing fewer than 0.05% of its weights, with no other modification, matches full fine-tuning (FFT) at scale across three LLM post-training regimes: reinforcement learning with verifiable rewards, supervised fine-tuning, and on-policy distillation. Our method, Deletion Tuning, learns a binary mask over the gate projection of transformer blocks. Two practical advantages follow: the trained mask is hundreds to thousands of times smaller than the corresponding FFT checkpoint, and Deletion Tuning forgets far less, which addresses a central challenge in continual learning. Under reinforcement learning, its prior-task accuracy stays near the base level while FFT, LoRA, and random sparse fine-tuning lose up to 5.4 points. To understand why masking alone suffices, we analyze the geometry of the learned weight changes under reinforcement learning using stable rank, spectrum drift, and principal-weight overlap. Compared with LoRA and random sparse fine-tuning, Deletion Tuning is closest to FFT across the three measures.",
-      "published": "2026-11-07",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "tags": [
-        "genai-llm",
-        "bandits-rl"
-      ],
-      "score": 46.88,
-      "signals": {
-        "hn_points": 32,
-        "hn_comments": 0,
-        "hn_url": "https://news.ycombinator.com/item?id=50447363",
-        "hf_upvotes": 16
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.10866",
-      "pdf": "https://arxiv.org/pdf/2611.10866"
     },
     {
       "id": "2611.23236",
@@ -305,6 +309,40 @@
       "pdf": "https://arxiv.org/pdf/2611.23236"
     },
     {
+      "id": "2611.31015",
+      "title": "Can Latent Reasoning Drive LLM Outputs Without a Trace?",
+      "authors": [
+        "Tomer Ashuach",
+        "Zorik Gekhman",
+        "Avi Caciularu",
+        "Ori Ram",
+        "Jonathan Herzig"
+      ],
+      "abstract": "LLMs typically solve complex tasks with chain-of-thought (CoT) reasoning, which is also the main tool for monitoring them for misaligned behavior. However, standard transformers can also solve tasks with complete latent reasoning (CLR), carrying out the whole task internally and outputting only the final answer. Theory bounds the depth of CLR, the number of sequential steps it can carry out, and recent work measured it to be shallow. In this work, we ask whether CLR is deep enough for a model to pursue a hidden objective that requires reasoning. Such a model would generate a CoT that appears to solve the given task, while a latent multi-step computation decides its answer based on the hidden objective. First, we show that a simple auxiliary loss allows models to solve a multi-step task latently at least 5x deeper than previously reported. Then, in two common tasks, decision-making and code generation, we train a model to pursue such a hidden objective, which decides a loan or plants a vulnerability. The model's CoT justifies the output with no trace of the hidden objective, and a strong LLM monitor does not flag it. Finally, using activation patching, we find that the latent computation is completed before the model generates its CoT, which takes no part in it. Altogether, we show that a hidden objective that requires reasoning can go unseen by a monitor that reads only the output.",
+      "published": "2026-11-23",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "tags": [
+        "genai-llm",
+        "applied-finance"
+      ],
+      "score": 46.25,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 14
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.31015",
+      "pdf": "https://arxiv.org/pdf/2611.31015"
+    },
+    {
       "id": "2610.21375",
       "title": "Memorilla: Latent Semantic Memory for LLMs",
       "authors": [
@@ -327,7 +365,7 @@
         "agents",
         "recsys-nba"
       ],
-      "score": 46.08,
+      "score": 45.98,
       "signals": {
         "hn_points": 125,
         "hn_comments": 14,
@@ -358,7 +396,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 45.45,
+      "score": 44.94,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -372,38 +410,137 @@
       "pdf": "https://arxiv.org/pdf/2611.25200"
     },
     {
-      "id": "2611.31015",
-      "title": "Can Latent Reasoning Drive LLM Outputs Without a Trace?",
+      "id": "2611.34436",
+      "title": "Grounding User Preferences in Shared Multimodal Concepts for Recommendation",
       "authors": [
-        "Tomer Ashuach",
-        "Zorik Gekhman",
-        "Avi Caciularu",
-        "Ori Ram",
-        "Jonathan Herzig"
+        "Ao Xu",
+        "Jinhui Huang",
+        "Wenqiang Tang",
+        "Tiehua Mei",
+        "Hongru Hou",
+        "Hengrui Chen",
+        "Jiaqing Liang",
+        "Deqing Yang"
       ],
-      "abstract": "LLMs typically solve complex tasks with chain-of-thought (CoT) reasoning, which is also the main tool for monitoring them for misaligned behavior. However, standard transformers can also solve tasks with complete latent reasoning (CLR), carrying out the whole task internally and outputting only the final answer. Theory bounds the depth of CLR, the number of sequential steps it can carry out, and recent work measured it to be shallow. In this work, we ask whether CLR is deep enough for a model to pursue a hidden objective that requires reasoning. Such a model would generate a CoT that appears to solve the given task, while a latent multi-step computation decides its answer based on the hidden objective. First, we show that a simple auxiliary loss allows models to solve a multi-step task latently at least 5x deeper than previously reported. Then, in two common tasks, decision-making and code generation, we train a model to pursue such a hidden objective, which decides a loan or plants a vulnerability. The model's CoT justifies the output with no trace of the hidden objective, and a strong LLM monitor does not flag it. Finally, using activation patching, we find that the latent computation is completed before the model generates its CoT, which takes no part in it. Altogether, we show that a hidden objective that requires reasoning can go unseen by a monitor that reads only the output.",
-      "published": "2026-11-23",
+      "abstract": "Multimodal recommendation has substantially advanced item understanding by incorporating rich visual and textual content. Yet user preferences are still commonly encoded as implicit signals tied to individual items, leaving recurring semantic factors without persistent identities that can be shared across items. We introduce MKGE, a multimodal knowledge graph framework that represents these factors as canonical, addressable concepts. MKGE induces a domain-adaptive concept vocabulary from item images and titles, grounds each user's interaction history in supported concepts, and jointly models direct user-item evidence and concept-mediated preference signals. By turning recurring semantics into shared coordinates, MKGE enables evidence from different items to accumulate around the same preference factors. Extensive experiments on three public benchmarks demonstrate that MKGE consistently outperforms collaborative, knowledge-graph, multimodal, and recent LLM/MLLM-based recommenders across all six reported metrics. Controlled studies further demonstrate the importance of canonical concept identities and personalized user-concept correspondence, with especially pronounced gains over removing or rewiring the user graph for low-activity users. These results establish canonical multimodal concepts as effective units for preference modeling and transfer. Code, constructed knowledge graphs, and prompts are available at https://github.com/Garden1a-X/MKGE.",
+      "published": "2026-11-25",
       "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
+        "cs.IR"
       ],
       "tags": [
-        "genai-llm",
-        "applied-finance"
+        "recsys-nba",
+        "genai-llm"
       ],
-      "score": 45.15,
+      "score": 44.28,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 10
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.34436",
+      "pdf": "https://arxiv.org/pdf/2611.34436"
+    },
+    {
+      "id": "2611.33628",
+      "title": "Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation",
+      "authors": [
+        "Yu Ren",
+        "Pengcheng Li",
+        "Weijun Xu",
+        "Hengzhong Zhou",
+        "Shufeng Ye",
+        "Qiang Xiao",
+        "Dongjing Wang",
+        "Chuanjiang Luo",
+        "Yong Li"
+      ],
+      "abstract": "Modern music platforms expose users to heterogeneous audio content domains such as songs, playlists, and podcasts. Multi-domain sequential recommendation (MDSR) seeks to exploit such cross-domain behavior, yet two obstacles persist in practice. First, joint optimization across heterogeneous domains is prone to negative transfer, with high-traffic domains dominating the shared parameter space and suppressing weaker domains. Second, conventional ID-based collaborative signals fail to bridge domains that are semantically related but exhibit little behavioral overlap. This paper presents CAMAR, a multi-modal causal disentanglement framework for multi-domain audio recommendation. From a causal perspective, user behavior is modeled as the joint outcome of a domain-invariant preference and domain-specific preferences. Guided by this view, CAMAR factorizes user representations into domain-invariant and domain-specific components and enforces domain adversarial invariance together with orthogonality, restricting cross-domain interaction to the invariant subspace and suppressing harmful transfer paths. To strengthen cross-domain semantic coupling, CAMAR derives trainable semantic-ID embeddings from pre-trained text, vision, and audio features through residual quantization, yielding an end-to-end multi-modal adaptation tailored to recommendation. A transfer network imputes user representations for inactive domains, mitigating cross-domain cold start. Experiments on both public and industrial datasets demonstrate consistent gains over strong baselines. In online A/B tests on NetEase Cloud Music, one of China's largest music streaming platforms, CAMAR delivers consistent gains across all three domains in their main traffic scenarios, validating its effectiveness in multi-domain audio recommendation at scale.",
+      "published": "2026-11-25",
+      "categories": [
+        "cs.IR",
+        "cs.SD"
+      ],
+      "tags": [
+        "recsys-nba",
+        "causal-uplift"
+      ],
+      "score": 44.28,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.33628",
+      "pdf": "https://arxiv.org/pdf/2611.33628"
+    },
+    {
+      "id": "2611.34407",
+      "title": "Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy",
+      "authors": [
+        "Yige Luo",
+        "Shining Zhang",
+        "Jikun Liu",
+        "Hongjiao Qiang",
+        "Ran Guan"
+      ],
+      "abstract": "We formalize Agentic Waterfall Feed, a new problem of personalized information discovery in which users actively direct recommendations and the system adapts to evolving needs inferred from both explicit requests and browsing behavior. We address this problem with the Agentic Waterfall framework, whose language-model controller maintains persistent user state and coordinates content retrieval, ranking, and state updates. To evaluate systems on this task, we contribute the Agentic Waterfall Dataset and a replay-based evaluation protocol. The dataset combines real content metadata with simulated interaction histories. The protocol compares systems under shared histories using relevance scores and blind judgments of how well recommendations satisfy current user goals and constraints. Agentic Waterfall remains competitive with strong baselines on conventional recommendation tasks across five public benchmarks. On the Agentic Waterfall Dataset, it outperforms the strongest baseline in both evaluations, with relative improvements of up to 16.1%.",
+      "published": "2026-11-25",
+      "categories": [
+        "cs.AI",
+        "cs.IR"
+      ],
+      "tags": [
+        "recsys-nba",
+        "agents"
+      ],
+      "score": 44.28,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.34407",
+      "pdf": "https://arxiv.org/pdf/2611.34407"
+    },
+    {
+      "id": "2611.34330",
+      "title": "RecField: Embedding Recommendations into Spatial Movie Organization as Affordances for Serendipitous Encounters",
+      "authors": [
+        "Kenta Oku"
+      ],
+      "abstract": "Research on serendipity-oriented recommender systems has focused on algorithms that recommend unexpected yet useful items. However, serendipity is increasingly viewed as a user experience shaped by both algorithmic outputs and system features. This study positions recommendations not as the primary goal users pursue but as an environmental affordance that creates opportunities for discovery during other activities. We propose RecField, a spatial movie organization interface where users freely arrange movies into collection zones. For each collection, RecField provides attribute-based recommendation lists labeled according to their recommendation perspectives. A between-subjects experiment ($N$ = 57) examined the effects of recommendations on discoveries made during a foreground task of creating and organizing personal movie profiles. Although recommendations did not significantly affect environment-level perceived serendipity, ratings of encounter-related aspects tended to be higher, with small effect sizes. At the individual-movie level, favorites in the recommendation condition received significantly higher ratings for stimulating the desire to watch and broadening preferences, but not for novelty or unexpectedness. Notably, only 14\\% of evaluated favorites in the recommendation condition were added directly from recommendation lists. Differences in ratings showed similar effect sizes even when the analysis was restricted to favorites added through other routes. These findings suggest that embedded recommendations can contribute to serendipitous experiences both directly through item acceptance and indirectly by prompting users' own exploration and re-evaluation. They also highlight the value of evaluating serendipity at both the environment and item levels and the limitations of relying solely on direct recommendation acceptance rates.",
+      "published": "2026-11-25",
+      "categories": [
+        "cs.IR",
+        "cs.HC"
+      ],
+      "tags": [
+        "recsys-nba"
+      ],
+      "score": 44.28,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.31015",
-      "pdf": "https://arxiv.org/pdf/2611.31015"
+      "url": "https://arxiv.org/abs/2611.34330",
+      "pdf": "https://arxiv.org/pdf/2611.34330"
     },
     {
       "id": "2611.18397",
@@ -449,12 +586,12 @@
         "bandits-rl",
         "agents"
       ],
-      "score": 44.08,
+      "score": 44.03,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 156
+        "hf_upvotes": 166
       },
       "why": null,
       "difficulty": 2,
@@ -463,284 +600,121 @@
       "pdf": "https://arxiv.org/pdf/2611.18397"
     },
     {
-      "id": "2611.30662",
-      "title": "WeMM-Ecom: Advancing Multimodal Content Understanding for WeChat E-Commerce",
+      "id": "2611.32855",
+      "title": "Speculative Decoding for Semantic-ID-Based Generative Recommendations",
       "authors": [
-        "Binhui Xie",
-        "Jinmin Li",
-        "Haomiao Tang",
-        "Guangting Wang",
-        "Song Jin",
-        "Jianwei Zhu",
-        "Fengyun Rao",
-        "Jing Lyu"
+        "Harshal A. Chaudhari"
       ],
-      "abstract": "We present WeMM-Ecom, a family of multimodal large language models that deliver frontier e-commerce capabilities while achieving state-of-the-art general-purpose performance at their respective scales. The family spans five sizes, from a 0.8B dense model to a 35B mixture-of-experts model with 3B active parameters. Our training pipeline begins with two-stage continued pre-training that progressively raises the proportion of e-commerce data within a diverse multimodal data mixture, followed by hybrid-thinking post-training that combines on-policy distillation and reinforcement learning to support both non-thinking and thinking modes. For evaluation, we construct a comprehensive suite of 28 e-commerce benchmarks (23 in-house and five open-source) covering eight business scenarios and complement it with 64 public general-purpose benchmarks. On the e-commerce suite, WeMM-Ecom-35B-A3B surpasses substantially larger open-source flagship models, including Qwen3.8-Flash-Next, HY4, and DeepSeek-V4.1-Flash. On the general-purpose suite, every WeMM-Ecom model surpasses its similarly sized Qwen3.5 counterpart, with the lightweight variants (e.g., WeMM-Ecom-2B) showing clear advantages over leading lightweight models such as Qwen3.5-2B, MiniCPM-V-4.7-1B, and LFM3-VL-2B. Beyond benchmarks, WeMM-Ecom now powers hundreds of production use cases in WeChat, including catalog management, multimodal product search, and livestream commerce, serving billion-scale requests per day. We publicly release all model weights and detail our data curation, training recipe, and benchmark construction to facilitate future work on domain-specialized multimodal models. We have released the model weights and code to facilitate future research at https://github.com/Tencent/WeMM-Ecom.",
+      "abstract": "Generative recommender systems with Semantic IDs (SIDs) represent each item as a short sequence of $L$ discrete tokens and use a sequence model to predict the next item's tokens from a user's history. Industry-scale deployments typically use these models to retrieve multiple candidates per request with constrained beam search. However, this incurs a fixed cost of $L$ sequential model calls per request, and accuracy degrades as the SID generator becomes less sharp, without a guarantee on how close the output is to the exact top-$K$. Production systems therefore cannot detect degraded retrieval for individual requests. We propose SIDECAR, which uses approximate draft candidates and a tree-attention pass to score the entire draft in a single model call, memory permitting. This pass bounds the probability of every unexplored SID prefix and certifies the exact top-$K$ if the draft contains them. Otherwise, a branch-and-bound fallback expands only the parts of the trie that can still change the output, reaching certification within at most $L$ calls for any draft. Moreover, under a budget of $M$ tokens per call and $Y$ calls, which for $Y = L$ matches the resources of a beam search of width $M$, SIDECAR announces a factor $1 + δ$ within which its list will be exact at every rank. Depending on model sharpness, SIDECAR returns the exact top-$K$ using a fraction of beam search's calls or memory. Even when the budget is too small to recover the exact top-$K$, SIDECAR, unlike beam search, reports the announced factor, allowing the serving system to stop early once a quality target or latency limit is reached.",
+      "published": "2026-11-24",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "recsys-nba"
+      ],
+      "score": 43.59,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.32855",
+      "pdf": "https://arxiv.org/pdf/2611.32855"
+    },
+    {
+      "id": "2611.33036",
+      "title": "Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems",
+      "authors": [
+        "Hao Wu",
+        "Sipeng Chen",
+        "Weikai Li",
+        "Tianyi Chen",
+        "Qiancheng Yang",
+        "Hang Zhou",
+        "Yizhou Sun",
+        "Wei Wang",
+        "Xiao Luo"
+      ],
+      "abstract": "Large language models (LLMs) provide a flexible interface for recommendation systems. However, their issued rankings require reliable instance-level uncertainty monitoring. In this scenario, comparing uncertainty quantification (UQ) methods becomes challenging because LLM rankers lack a standard item-classification head. Their scores may depend on option labels, prompts, generation procedures, and the available user and item evidence. Existing methods derive uncertainty from different sources and apply it at different stages of the recommendation process. Some methods evaluate an issued ranking, whereas others use uncertainty to change the ranking itself, making direct comparison difficult. Here we introduce a fixed-ranking benchmark which evaluates eight heterogeneous UQ signals as record-level monitors under a shared output contract. We evaluate these signals across four recommendation datasets and two LLM backbones under a shared fixed-ranking protocol. From the results, we draw three main observations. First, UQ method ordering changes across backbones even on the same reference instances. Second, ranking-aligned Top10Mass provides the strongest scalar Error@10 detection in several evaluation conditions, reflecting effective cutoff-aligned monitoring, while its advantage narrows for popularity-tail targets. Third, scalar UQ signals are weak at identifying which control has the larger clipped NDCG@10 difference, whereas source-specific signals, including Perturbation Rank Instability and simple listwise distances, provide stronger paired-control agreement, reflecting their sensitivity to the two controlled evidence sources. These findings motivate us to evaluate ranking-failure detection, robustness across recommendation conditions, and responses to controlled evidence changes as distinct properties of UQ.",
+      "published": "2026-11-24",
+      "categories": [
+        "cs.IR",
+        "cs.CL",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "tags": [
+        "genai-llm",
+        "recsys-nba",
+        "ml-methods"
+      ],
+      "score": 43.59,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.33036",
+      "pdf": "https://arxiv.org/pdf/2611.33036"
+    },
+    {
+      "id": "2611.29897",
+      "title": "Motion Mamba 2.0: Autoregressive Diffusion Mamba for Long-Horizon Humanoid Control",
+      "authors": [
+        "Yue Huang",
+        "Tianshan Zhang",
+        "Zeyu Zhang",
+        "Jayeon Kang",
+        "Akide Liu",
+        "Sungjoon Choi",
+        "Dacheng Tao",
+        "Hao Tang"
+      ],
+      "abstract": "Long-horizon, real-time controllable motion generation is essential for interactive animation and humanoid robotics, where an agent must respond to changing instructions and spatial goals while moving. Existing autoregressive diffusion methods generate motion incrementally, but bounded attention caches limit access to distant history, while repeated denoising introduces substantial inference overhead. We present Motion Mamba 2.0, a Mamba-based root-body diffusion architecture that integrates local attention, resumable recurrent states, and persistent content memory (PCM) for long-horizon controllable motion generation. PCM transforms compressed motion history from Mamba recurrent states, together with state changes and text-conditioned features, into dynamically updated content slots accessible to local attention. To enable efficient inference, we further develop an execution scheme tailored to this architecture, combining CUDA Graph replay, fused kernels, and execution-flow simplification while preserving the canonical history update. Evaluations on retargeted HiPHI demonstrate accurate terminal control over rollouts of up to 39.52 s, while short-horizon comparisons on BONES Seed and retargeted HumanML3D show that the model also retains strong spatial control and text-motion matching. On an RTX 4090, the optimized execution reduces median complete-window latency from 1685.35 to 276.14 ms, achieving a median paired speedup of 6.138$\\times$ while preserving identical outputs and committed states in the tested rollouts. Moreover, we conduct extensive real-world evaluation on the Unitree G1, demonstrating sequential text-guided action composition, expressive motion, and interactive locomotion through keyboard and mouse control.",
       "published": "2026-11-23",
       "categories": [
-        "cs.AI",
+        "cs.RO",
         "cs.CV"
       ],
-      "tags": [
-        "genai-llm",
-        "bandits-rl"
-      ],
-      "score": 43.35,
+      "tags": [],
+      "score": 43.34,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 53
+        "hf_upvotes": 215
       },
       "why": null,
-      "difficulty": 2,
+      "difficulty": 3,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.30662",
-      "pdf": "https://arxiv.org/pdf/2611.30662"
+      "url": "https://arxiv.org/abs/2611.29897",
+      "pdf": "https://arxiv.org/pdf/2611.29897"
     },
     {
-      "id": "2611.18130",
-      "title": "JFinBench: A Continuously Refreshable Japanese Financial Benchmark from the Latest Certification Exams",
+      "id": "2611.34057",
+      "title": "Design-based causal inference for ROC curves",
       "authors": [
-        "Issa Sugiura",
-        "Taro Makino",
-        "Takashi Ishida"
+        "Bufan Li",
+        "Haoyang Yu"
       ],
-      "abstract": "Large language models (LLMs) are increasingly applied to finance, creating a need for benchmarks that evaluate their capabilities across financial systems with different regulations and practices. However, existing financial benchmarks provide limited coverage of country-specific financial systems, and they are difficult to keep up to date as released questions leak into training data. We introduce JFinBench, a Japanese financial benchmark comprising 321 examples from the 2026 editions of six regularly administered certification exams covering accounting, tax, financial planning, and banking. To construct it, we develop a human-in-the-loop agentic pipeline in which a coding agent writes exam-specific conversion code and a review page, while a human verifies every example and feeds corrections back to the agent. This pipeline adapts to heterogeneous exam formats and reduces the effort of incorporating new exam editions, enabling periodic refreshes that mitigate data contamination. Evaluating 12 recent LLMs, we find that Claude Fable 5 and GPT-6 Astra exceed 93% overall, while even the best open-weight model, Kimi K3.1 Pro, trails Claude Fable 5 by 12 percentage points. When models can additionally use a terminal and web access, they retrieve the knowledge they lack and every model improves. The gap narrows but about 4 points remain, and the ranking of models stays largely the same, suggesting that knowledge held in the model itself remains valuable even with tools. We release the dataset, the evaluation code, and the construction pipeline.",
-      "published": "2026-11-13",
+      "abstract": "In randomized experiments, causal inference traditionally focuses on the average treatment effect, yet comparing the treatment and control potential outcome distributions is often of interest. Under complete randomization, we adopt a design-based framework without imposing an outcome model to study the receiver operating characteristic (ROC) curve, which measures the proportion of treated outcomes exceeding each upper quantile of the control distribution. We propose an estimator that depends only on pooled outcome ranks, establish its asymptotic normality, and construct conservative variance estimators and confidence intervals. We also develop covariate adjustment directly for the ROC estimator, preserving the target estimand while achieving an asymptotic variance no larger than that of the unadjusted estimator. We further construct simultaneous confidence bands over an interior range of quantile levels and extend pointwise inference to the extreme upper tail of the control distribution, with both extensions accommodating covariate adjustment. Simulation studies and an application to a large-scale online learning experiment illustrate the proposed methods.",
+      "published": "2026-11-25",
       "categories": [
-        "cs.AI"
-      ],
-      "tags": [
-        "genai-llm",
-        "applied-finance",
-        "agents"
-      ],
-      "score": 43.12,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 3
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.18130",
-      "pdf": "https://arxiv.org/pdf/2611.18130"
-    },
-    {
-      "id": "2611.29613",
-      "title": "Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents",
-      "authors": [
-        "Junpeng Hou",
-        "Jiaxing Qu",
-        "Derek Cheng",
-        "Jaewon Yang",
-        "Abhinav Naikawadi",
-        "Karthik Subbian"
-      ],
-      "abstract": "Web-scale recommender models evolve primarily through retraining or fine-tuning. We propose \\emph{weight coding}, a methodology for model evolution through direct, executable weight edits. A large language model (LLM) agent inspects model structure and parameters, formulates hypotheses, and implements edits using evaluation feedback. The loop progresses from localized changes to targeted searches and composition, allowing edited components to adapt to one another. A cached engine enables rapid forward evaluation without backpropagation. On Pinterest's 147M-parameter Image Search two-tower retriever, weight coding improves held-out recall@10 of production model by up to 15.0 percentage points (+24\\% relative) with few edits in about 1/4 GPU hours of a full post-training finetune, while a common launch only improves around 1\\%. After reinitializing the entire 13.6M-parameter interaction module randomly while retaining the surrounding trained model, searching 2,448 mixing and normalization parameters yields 9.8 points above production. Offline gains span the full funnel including dense retrieval, generative retrieval and ranking, with up to 1.37B learnable parameters and different edits for each architecture. Steering edits provide explicit control of model performance over segments like freshness and product. Weight coding requires no serving change and online A/B tests increase saves per user from the edited retrieval source by 8.4\\% to 10.7\\%, aligned with the target business objectives. Our results establish weight coding as a practical and useful tool for model development and and behavioral control in a real web-scale production system, with potential to extend to both pre-training and post-training stages across the funnel.",
-      "published": "2026-11-22",
-      "categories": [
-        "cs.IR",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "tags": [
-        "genai-llm",
-        "recsys-nba",
-        "causal-uplift"
-      ],
-      "score": 42.93,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.29613",
-      "pdf": "https://arxiv.org/pdf/2611.29613"
-    },
-    {
-      "id": "2611.29462",
-      "title": "MoR4Rec: Mixture-of-Recursion for Sequential Recommendation",
-      "authors": [
-        "Tiwari Ankit Satyaprakash",
-        "Adamya Shyam",
-        "Vikas Kumar",
-        "Bharti Rana",
-        "Venkateswara Rao Kagita"
-      ],
-      "abstract": "Sequential recommender systems aim to predict a user's next interaction by modeling temporal dependencies in historical behavior sequences. To capture such dependencies, recent approaches increasingly rely on attention-based architectures, particularly transformers. While effective at modeling long-range sequential patterns, these models apply a fixed computation depth to all interaction items, treating them as equally complex. However, user behavior is inherently heterogeneous, with many interactions following simple repetitive patterns, whereas others require modeling higher-order dependencies. This mismatch leads to inefficient utilization of model capacity and unnecessary computational overhead, particularly in deep transformer-based architectures. To address this issue, we propose MoR4Rec, a sequential recommendation framework based on a Mixture-of-Recursion paradigm, which enables item-wise adaptive computation through a shared transformer backbone. A learned routing mechanism dynamically assigns each item to an appropriate recursion depth, allocating deeper computation to complex interactions while processing simpler patterns more efficiently. To improve computational efficiency, we develop a cascade-based strategy with key-value sharing across recursion steps. We further introduce a gated attention mechanism that adaptively regulates contextual information during recursive sequence modeling. Extensive experiments on three benchmark datasets show that MoR4Rec consistently outperforms strong transformer-based baselines, achieving average gains of 2.28% in Recall@5, 2.50% in NDCG@5, and 2.0% in MRR@5 over the strongest baseline. The improvements remain consistent across top-10 and top-20 recommendation cutoffs, while comparisons with vanilla transformers demonstrate the computational efficiency of adaptive recursive processing.",
-      "published": "2026-11-22",
-      "categories": [
-        "cs.IR",
-        "cs.AI"
-      ],
-      "tags": [
-        "recsys-nba"
-      ],
-      "score": 42.93,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.29462",
-      "pdf": "https://arxiv.org/pdf/2611.29462"
-    },
-    {
-      "id": "2611.29094",
-      "title": "HME-PFD: Heterogeneous Mixture-of-Experts Privileged Feature Distillation",
-      "authors": [
-        "Wen Xu",
-        "Xiaomin Zhang",
-        "Yucheng Yang",
-        "Danny Liu",
-        "Xunlong Gui",
-        "Fei Huang",
-        "Sha Meng"
-      ],
-      "abstract": "Knowledge distillation (KD) is widely used to transfer knowledge from large teacher models to smaller student models, facilitating efficient serving of machine learning systems. In the context of ads recommendation, privileged features distillation (PFD) extends KD by allowing the teacher model to leverage privileged features, i.e., features available only during training, to enhance distillation performance. However, in real-world scenarios, privileged features often have limited coverage and exhibit heterogeneous distributions, resulting in training examples of varying importance for distillation and model learning. We propose Heterogeneous Mixture-of-Experts Privileged Feature Distillation (HME-PFD), a novel approach that incorporates privileged features into the routing module of a Mixture-of-Experts-based student model. Our method introduces both hard-coded and learnable routing modules, enabling the student to dynamically determine expert assignment based on the availability and values of privileged features. This design allows the student model to better handle the heterogeneous data scenario, where privileged features are partially observed, by differentiating between high- and low-signal samples. Extensive experiments on two post-click conversion prediction tasks demonstrate that HME-PFD consistently outperforms baseline methods. Our results show that leveraging privileged features for expert routing in the student model leads to improved model performance, even when privileged features are incomplete or sparse.",
-      "published": "2026-11-21",
-      "categories": [
-        "cs.LG",
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba"
-      ],
-      "score": 42.31,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.29094",
-      "pdf": "https://arxiv.org/pdf/2611.29094"
-    },
-    {
-      "id": "2611.28946",
-      "title": "ChatGPT Can't Sell (And That's Probably a Good Thing): Buyer-Aligned AI Advice, the Sales-Representative Gap, and Evidence from Commercial Conversations",
-      "authors": [
-        "Benjamin Tannenbaum"
-      ],
-      "abstract": "AI assistants and merchant sales agents have different objectives: assistants should help buyers compare options and preserve the choice not to purchase, while sales agents also guide qualified buyers toward an authorized next step. We study this sales-representative gap with three evidence streams. In 12,178 historical English GPT-family conversations screened for commercial or transactional intent, a 279-request sample contained recommendation language in 63 first replies (22.6%) and no narrow transactional action wording. In a 56-conversation explicit-buying sample, 24 replies (42.9%) contained recommendation markers, 32 (57.1%) qualification phrases, and none transaction-specific phrases. These lexical measures do not estimate successful selling. A 2026 brand-monitoring cohort of 1,050 GPT-5.4--Gemini answer pairs over 383 purchase-related prompts showed transaction-specific phrases in 0.0% of recommendation-worded prompts, 0.21% of price/comparison prompts, and 9.52% of explicitly transaction-worded prompts. The prompts are selected, not organic shopping sessions. In a prospective pilot across five matched hypothetical product scenarios, sales instructions produced more next-step language than general-assistant instructions (5/5 vs. 2/5), but no increase in clean product choice (3/5 in both); unsupported offers and fit errors also occurred. This pilot cannot establish a population effect. A separate company-affiliated randomized field study reports higher engaged-visitor conversion for Javo, a commercially trained sales agent, than for a frontier-model agent in shared tooling, but does not identify the mechanism. We argue that apparent reluctance to sell can be appropriate for buyer-aligned assistants. Merchant agents should optimize qualified decision progress through catalog grounding, truthful authorization, and safeguards against unsuitable sales.",
-      "published": "2026-11-21",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba",
-        "agents"
-      ],
-      "score": 42.31,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "position",
-      "url": "https://arxiv.org/abs/2611.28946",
-      "pdf": "https://arxiv.org/pdf/2611.28946"
-    },
-    {
-      "id": "2611.27514",
-      "title": "Deep Cross-Division Network for Product-and-Ratio Feature Interactions in Industrial Ranking",
-      "authors": [
-        "Mikhail Trapeznikov",
-        "Sofia Gulevskaia",
-        "Maksim Utushkin",
-        "Aleksandr Poslavsky",
-        "Alexander D'yakonov"
-      ],
-      "abstract": "Learning effective feature interactions is essential for industrial recommender systems. DCN and DCNv2 efficiently automate polynomial feature crossing. However, their cross layers construct interactions using only non-negative integer powers of the input features, with the maximum degree controlled by network depth. Consequently, they cannot directly represent the reciprocal terms required for ratios, rates, and normalized counts unless such features are explicitly provided as inputs. We introduce DCDN, a Deep Cross-Division Network that augments a DCNv2-style cross layer with a division branch. DCDN jointly learns product, ratio, and mixed product-ratio interactions. We characterize the representable interactions as multivariate Laurent polynomials and show that a $K$-layer DCDN generates Laurent monomials of $\\ell_1$-order up to $K+1$, with signed degree between $-K$ and $K+1$. We evaluate DCDN against a production-optimized neural-ranking baseline built around DCNv2 and supplied with manually engineered ratio features. Replacing the DCNv2 block with DCDN allowed us to eliminate the entire class of manually engineered ratio features from the model input, reducing the number of input features by $40.1\\%$. DCDN is deployed in the production ranking stack of a major short-video service. In a live A/B test on this service, DCDN increased likes by $3.25\\%$, shares by $16.26\\%$, total view time (TVT) by $0.33\\%$, and clicks to open fullscreen by $0.38\\%$; all changes were statistically significant. The number of shown videos decreased slightly ($-0.24\\%$). These results demonstrate that DCDN can improve user engagement while eliminating reliance on manually engineered ratio features. Our code is publicly released at https://github.com/rw404/DCDN.",
-      "published": "2026-11-20",
-      "categories": [
-        "cs.IR",
-        "cs.LG"
-      ],
-      "tags": [
-        "recsys-nba",
-        "causal-uplift"
-      ],
-      "score": 41.71,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.27514",
-      "pdf": "https://arxiv.org/pdf/2611.27514"
-    },
-    {
-      "id": "2611.17820",
-      "title": "Aligning AI Teams",
-      "authors": [
-        "Siddarth Srinivasan",
-        "Morgan Jane Matthews",
-        "Jascha Sohl-Dickstein",
-        "Erik Jones"
-      ],
-      "abstract": "Previous work has shown that alignment training on individual LLM agents can fail to transfer to multi-agent settings. We investigate the underlying mechanisms for this failure, and explore interventions to preserve alignment transfer to multi-agent LLM teams. We focus on two software-engineering tasks (sepsis triage, a news recommender) and ten consulting-proposal generation tasks. We present four findings: (1) The single-vs-team safety gap does not show a clear trend with more capable models. We find that Anthropic's Mythos Preview shows the largest gap on one of our tasks but the smallest on another; (2) Many natural interventions, such as having agents critique each other's work or coordinate in a group chat, do not reliably bring agent teams back to single-agent alignment behavior; (3) diffusion of responsibility substantially accounts for the safety gap: agents in teams are less likely to proactively check for system-level safety failures and more likely to ignore, rationalize, or deflect responsibility for issues when they arise; (4) having a designated safety lead agent ensure system-level safety, and having a coordinator agent publish a safety specifications document are effective at restoring single-agent alignment. We also release magelab, a multi-agent LLM orchestration and experimentation framework. Our findings can help practitioners design agent teams that successfully preserve the behaviors expected of aligned individual agents.",
-      "published": "2026-11-13",
-      "categories": [
-        "cs.AI"
-      ],
-      "tags": [
-        "agents",
-        "eval-safety",
-        "recsys-nba"
-      ],
-      "score": 41.31,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 9
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.17820",
-      "pdf": "https://arxiv.org/pdf/2611.17820"
-    },
-    {
-      "id": "2611.29270",
-      "title": "A comparison of knot point screening algorithms for highly adaptive lasso",
-      "authors": [
-        "Yadi Weng",
-        "Sky Qiu"
-      ],
-      "abstract": "Highly adaptive lasso (HAL) is a nonparametric regression estimator with a rate of convergence $n^{-1/3}(\\log n)^{d/2}$, where the data dimension $d$ only appears in the power of the log of sample size. This fast rate is crucial for many causal inference tasks, where efficient estimation typically requires nuisance parameters to be estimated at a specific rate. HAL achieves this rate and, when paired with semiparametrically efficient estimators -- such as those constructed using targeted maximum likelihood estimation (TMLE) -- can be used to develop efficient estimators. Beyond causal inference, HAL is applicable to a wide range of supervised machine learning tasks. The procedure for HAL involves first performing a basis expansion on the original design matrix $X$ and then computing a lasso solution path. Cross-validation is used to select the optimal $L_1$-norm for the coefficients. For datasets with all continuous covariates and no ties, the HAL design matrix can reach a dimension as large as $n \\times n(2^d-1)$, imposing a significant computational and memory burden. To address this, screening algorithms are applied at both the variable and knot-point levels to make HAL practical for datasets of moderate to large sizes. In this work, we propose outcome-blind knot point screening based on center-based clustering -- $k$-means and partitioning around medoids (PAM) -- and compare it with the quantile-based screening implemented in the hal9001 R package at matched design-matrix sizes. Across 153 simulation settings, $k$-means and PAM significantly improved test $R^2$ in 97 and 111 settings, respectively, with gains that grow with covariate skewness, while producing slightly smaller design matrices. On nine real-world datasets, they reduced the cross-validated mean squared error by 35-36% on the dataset with the most skewed predictors and performed comparably on the others.",
-      "published": "2026-11-22",
-      "categories": [
-        "stat.ML",
-        "cs.LG"
+        "stat.ME"
       ],
       "tags": [
         "causal-uplift"
       ],
-      "score": 39.93,
+      "score": 41.28,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -750,153 +724,157 @@
       "why": null,
       "difficulty": 4,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.29270",
-      "pdf": "https://arxiv.org/pdf/2611.29270"
+      "url": "https://arxiv.org/abs/2611.34057",
+      "pdf": "https://arxiv.org/pdf/2611.34057"
     },
     {
-      "id": "2611.21373",
-      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
+      "id": "2611.34779",
+      "title": "Adaptive Reliability Reserves for Residential Battery Fleets",
       "authors": [
-        "Yipeng Du",
-        "Yuxi Li",
-        "Ying Zhang",
-        "Chong Sun",
-        "Chen Li",
-        "Jing Lyu",
-        "Ying Tai"
+        "Maruthi Vemula",
+        "Neeraj Praneeth Gajula"
       ],
-      "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
-      "published": "2026-11-16",
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "tags": [
-        "agents",
-        "bandits-rl"
-      ],
-      "score": 39.58,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 55
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.21373",
-      "pdf": "https://arxiv.org/pdf/2611.21373"
-    },
-    {
-      "id": "2611.15348",
-      "title": "Breath-Dx: A Time Series Classification Benchmark for Disease Screening with eNose",
-      "authors": [
-        "Ivan Poddiakov",
-        "Ivan Kruzhilov",
-        "Galina Zubkova",
-        "Svetlana Erofeeva",
-        "Andrey Savchenko",
-        "Pavel Blinov"
-      ],
-      "abstract": "Electronic nose (eNose) technology offers a portable, non-invasive route for disease screening via exhaled breath analysis. However, progress in the field is hindered by the lack of systematic benchmarks that compare machine learning methods under realistic conditions, particularly sensor drift, a known but rarely quantified failure mode. Most existing studies rely on small, private datasets with inconsistent protocols, rendering results non-comparable and slowing progress. We introduce Breath-Dx, the first comprehensive benchmark of time series classification methods for breath-based disease screening. Our work leverages the Scent of Health (S-OH) dataset, the largest public clinical eNose collection to date, comprising 1,234 patients across nine diagnostic groups, each providing a 17-channel multivariate time series with explicit temporal train/test splits that account for sensor drift. We systematically evaluate 10 methods spanning four families: feature-based tabular learners, convolution-based models, graph-based, and time series architectures. All methods degrade significantly under temporal validation (0.05-0.12 AUC drop compared to random cross-validation), confirming that drift embeds a strong temporal signal. Under this realistic evaluation, the best methods achieve ROC AUC of 0.74-0.76 for some lung conditions, though others remain near chance. Recurrent architectures show the most consistent performance across diseases, while specialized time series methods achieve the highest peak results. Demographic confounders matter: breath signals provide independent diagnostic value for some conditions but add little beyond age for others. We release the S-OH dataset, all temporal splits, evaluation protocols, and code to enable reproducible research and accelerate progress in clinical breathomics.",
-      "published": "2026-11-11",
+      "abstract": "In a Houston 2024 replay, replacing a fixed 20 percent battery reserve with a county-risk threshold raises observed five-hour backup coverage from 75.0 percent to 86.5 percent and adds USD 10.2 in modeled annualized margin per home (paired 95 percent interval: USD +1.7 to USD +21.7). The paired coverage-gain interval includes zero. This is a conditional simulation result, not measured company reliability. Residential batteries face this tradeoff because market discharge consumes energy also needed for household outages. We release HomeFleet-ERCOT, combining observed prices and county outages with identified simulated homes and causal controller inputs. We compare independent-home optimization with 21 proximal policy optimization (PPO) training runs; ten promise-cost candidates span 31.1 percent-96.3 percent backup coverage. Of these, 10 have lower modeled margin than fixed 20 percent, and 3 also have lower coverage. Chronological, geographic, fleet, and storm tests examine transfer. An alert charging override has a conditional energy-and-power sufficiency guarantee, but only 19.5 percent of 41 county mass-outage episodes provide enough continuous warning for every battery preset. Synthetic tests include short, missed, and false warnings, load uplift, capacity loss, and dropout. A static AC audit retains existing feeder violations; aging comparisons expose model sensitivity. The released benchmark, controllers, and checkpoints provide a reproducible basis for comparing these tradeoffs. This work supports the design of residential battery programs that assess market value and household backup service together.",
+      "published": "2026-11-25",
       "categories": [
         "cs.LG",
-        "cs.AI"
-      ],
-      "tags": [
-        "tabular-timeseries"
-      ],
-      "score": 39.45,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 33
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.15348",
-      "pdf": "https://arxiv.org/pdf/2611.15348"
-    },
-    {
-      "id": "2611.31201",
-      "title": "Embo-Harness: Towards Understanding Frontier-Model-as-Policy Harness",
-      "authors": [
-        "Xiao-Ming Wu",
-        "Kang Liao",
-        "Yuexiao Ma",
-        "Taolin Zhang",
-        "Mingqian Zhou",
-        "Nuo Chen",
-        "Ziming Li",
-        "Yihang Luo",
-        "Rui Li",
-        "Zhonghua Wu",
-        "Tianyu Xie",
-        "Xiawu Zheng",
-        "Zhongang Cai",
-        "Zhi Hou",
-        "Chen Change Loy"
-      ],
-      "abstract": "Frontier multimodal models exhibit extraordinary generalization in generating robot actions from observations and instructions, enabling a new paradigm in which they serve directly as policies within closed-loop robotic harnesses. However, the design principles of such harnesses, and the capabilities underlying their strong performance, remain unclear. We present Embo-Harness, a framework for systematically studying frontier-model-as-policy harnesses. We investigate four components of the robotic agentic loop, namely, prompting, planning, action execution, and tool use, and distill six empirical findings into a practical recipe. This recipe prioritizes interfaces that exploit the model's native visual reasoning and tool-use capabilities over handcrafted plans, skills, or action priors, and identifies effective choices for action representation, chunking, reasoning effort, visual observations, short multi-action sequences, and policy refinement. On RoboLab-120, Embo-Harness achieves an 83.3\\% success rate, outperforming the strongest reported baseline by 26.2 percentage points. It also succeeds in 15 of 20 zero-shot trials across four real-world manipulation tasks. Beyond performance, controlled interventions indicate that the studied model depends more strongly on accurate spatial target estimation than on explicit low-level joint or trajectory generation. These results provide both a practical recipe for building strong frontier-model-as-policy harnesses and a clearer account of the capabilities that drive their performance.",
-      "published": "2026-11-23",
-      "categories": [
-        "cs.RO"
-      ],
-      "tags": [
-        "agents"
-      ],
-      "score": 39.1,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 90
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.31201",
-      "pdf": "https://arxiv.org/pdf/2611.31201"
-    },
-    {
-      "id": "2611.24102",
-      "title": "IDEA: Intent-Dominance Evidence Audit for Inference-Time Backdoor Detection in GUI Agents",
-      "authors": [
-        "Zhizhuo Kou",
-        "Sizai Hou",
-        "Jian Yang",
-        "Ge Sun",
-        "Junyu Luo",
-        "Wenkai Zhang",
-        "Sirui Han",
-        "Yike Guo"
-      ],
-      "abstract": "Organizations increasingly deploy downloaded open-weight GUI agents. A backdoored agent passes acceptance tests on clean data and misbehaves only when a visual trigger appears on screen, turning an unvetted checkpoint into a supply-chain risk. However, existing sample-level detectors target image classifiers and CLIP-style encoders, leaving step-level backdoor detection for GUI agents unaddressed. On clean steps, the instruction drives the action; when an unreferenced screen region hijacks the step, the instruction loses control over the decision state or that region dictates it instead. We term this signature intent--evidence dominance inversion and propose IDEA (Intent-Dominance Evidence Audit) to detect backdoor activation at inference time for each step without trigger knowledge or attack data. Specifically, Intent Counterfactual Probing (ICP) measures how far redirected instructions move the decision state, and Region Causal Audit (RCA) quantifies how far ablating a candidate region moves it. A gated conformal score compares both displacements against clean steps at the same distance from the clean manifold, providing a finite-sample false-positive guarantee. Extensive experiments on Qwen2.5-VL-3B across five attack families show that IDEA consistently detects backdoor activation under a controlled false-positive rate and outperforms state-of-the-art detection methods, while localizing the trigger region for every alarm and adding only modest inference overhead.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.CV"
+        "eess.SY"
       ],
       "tags": [
         "causal-uplift",
-        "agents",
-        "ml-methods"
+        "eval-safety"
       ],
-      "score": 38.74,
+      "score": 41.28,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 5
+        "hf_upvotes": null
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.24102",
-      "pdf": "https://arxiv.org/pdf/2611.24102"
+      "url": "https://arxiv.org/abs/2611.34779",
+      "pdf": "https://arxiv.org/pdf/2611.34779"
+    },
+    {
+      "id": "2611.32708",
+      "title": "Contrastive Proxy Forests: Completeness-Preserving Proxy Learning from Multimodal Records",
+      "authors": [
+        "Kyoungeui Hong",
+        "Zijun Gao",
+        "Ruishan Liu"
+      ],
+      "abstract": "Proximal causal inference removes unmeasured confounding using two proxies of the confounder, an outcome-side W and a treatment-side Z. The proxies must satisfy exclusion restrictions and be complete, meaning that they reflect every aspect of the confounder. In practice, they are a few variables hand-picked from a structured table, even though clinical notes and physiological waveforms carry rich information about the confounder. Such records are too high-dimensional for a proximal estimator, and generic compression such as PCA may keep modality-specific variation (style) instead of the confounder, destroying completeness. Our key observation is that, under the proximal condition, the confounder is the only link between a treatment-side and an outcome-side modality beyond the covariates. Learning what they share therefore captures the confounder and filters out modality-specific style. Contrastive Proxy Forests (CPF) learns both proxies by contrasting the two modalities, given the covariates, on a separate unlabeled sample, and passes them to a proximal causal forest. This contrastive objective has an exact closed-form solution, ridge canonical correlation analysis. We prove that CPF preserves the exclusion restrictions exactly and that its proxies inherit the completeness of the raw records under conditions we characterize. Where style is strong, CPF lowers the error of conditional effects by 10-22% relative to PCA proxies, and on MIMIC-IV it is the only method whose point estimate of warfarin's effect on stroke falls inside the range of randomized trials.",
+      "published": "2026-11-24",
+      "categories": [
+        "cs.LG"
+      ],
+      "tags": [
+        "causal-uplift"
+      ],
+      "score": 40.59,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 3,
+      "kind": "theory",
+      "url": "https://arxiv.org/abs/2611.32708",
+      "pdf": "https://arxiv.org/pdf/2611.32708"
+    },
+    {
+      "id": "2611.33440",
+      "title": "Adaptive confidence bands for a continuous treatment effect curve under shape constraints",
+      "authors": [
+        "Charles R. Doss",
+        "R. Oliver VandenBerg"
+      ],
+      "abstract": "In causal inference with observational data new inferential targets arise when treatment is continuous rather than discrete. Here we form (simultaneous) confidence bands over the continuous treatment effect curve. We form confidence bands based on assuming the curve satisfies shape constraints of either monotonicity or concavity, under the assumption of no unmeasured confounding. As is commonly the case, two nuisance functions arise, and our bands are asymptotically valid if the product of the error rates of the two nuisance functions is small enough. We also develop non-causal shape constrained bands in regression with fixed or random non-uniform grid which are of independent interest. Furthermore, our bands are adaptive to a range of function flatness and smoothness levels in that when the true flatness/smoothness level is unknown the bands still achieve the same (optimal) rate of convergence (in sup-norm) as when the true smoothness level is known. We demonstrate these bands through simulations and an application to the effect of nurse staffing on hospital performance.",
+      "published": "2026-11-24",
+      "categories": [
+        "stat.ME"
+      ],
+      "tags": [
+        "causal-uplift"
+      ],
+      "score": 40.59,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 4,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.33440",
+      "pdf": "https://arxiv.org/pdf/2611.33440"
+    },
+    {
+      "id": "2611.30986",
+      "title": "Reinforcing Diffusion Models by Instantaneous Trajectory Distribution Matching",
+      "authors": [
+        "Yihong Luo"
+      ],
+      "abstract": "Forward diffusion reinforcement learning (RL)---enabling deterministic ODE sampling without trajectory backpropagation---has grown increasingly popular for efficiently aligning diffusion models. However, we reveal that existing methods essentially rely on signed reward-weighted regression (RWR), regressing the trainable policy velocity onto rollouts from a behavior distribution. Unbiased baseline subtraction implicitly assumes that the policy velocity equals the behavior marginal velocity---an idealized assumption violated under classifier-free guidance (CFG) rollouts, offline/off-policy updates, and imperfect online self-consistency. This behavior--policy mismatch breaks baseline invariance and injects baseline-induced gradient drift, destabilizing training. To resolve this issue, we propose Instantaneous Trajectory Distribution Matching (iTDM), taking the infinitesimal limit of Trajectory Distribution Matching toward a time-local reward-guided target via the posterior-score identity to yield a sample-level gradient anchored at the behavior velocity without learning an additional reward-tilted target score. Tracking this velocity with an online auxiliary denoiser guarantees exact baseline invariance at the auxiliary optimum, effectively suppressing baseline drift across both online and offline RL. Extensive experiments across compositional generation, text rendering, and preference alignment show that iTDM achieves state-of-the-art in-domain and out-of-domain performance across group-wise online/offline RL and pairwise offline RL. Notably, on the challenging GenEval2 benchmark, iTDM converges nearly 3\\times faster than competing methods while scaling smoothly to 0.87 without collapse. Furthermore, iTDM scales effectively to the 5.6B FLUX.3 model, achieving better performance across both in-domain and unseen metrics. Code is available at https://github.com/Luo-Yihong/iTDM",
+      "published": "2026-11-23",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "tags": [
+        "bandits-rl"
+      ],
+      "score": 40.25,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 14
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.30986",
+      "pdf": "https://arxiv.org/pdf/2611.30986"
+    },
+    {
+      "id": "2611.30583",
+      "title": "Interrogation Protocols for AI Control",
+      "authors": [
+        "Aniruddh Pramod",
+        "Matthew Khoriaty",
+        "James Lucassen",
+        "Adam Kaufman"
+      ],
+      "abstract": "As the intelligence of an AI agent increases relative to a trusted monitor, so does the risk that the monitor will fail to understand the agent's actions or to evaluate them confidently. We introduce interrogation protocols to a high-stakes AI control setting, and allow the monitor to ask the untrusted agent questions about confusing actions. For interrogation to improve safety, a weaker model must be able to distinguish misleading explanations produced by an attack policy from genuine ones produced by an honest policy. We find that on a held-out subset of BashArena, an interrogation protocol improves safety at a 1% audit budget from 72.6% for an actions-only baseline, which does not use interrogations, to 79.5% (+7.0 pp [+0.9, +20.1], 95% paired bootstrap interval), but most of this uplift can be captured by having a trusted model state a specific concern. More broadly, our work suggests that interrogating agents can improve safety, allowing monitors to catch more attacks at a larger capability gap.",
+      "published": "2026-11-23",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "tags": [
+        "causal-uplift",
+        "eval-safety",
+        "agents"
+      ],
+      "score": 39.93,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.30583",
+      "pdf": "https://arxiv.org/pdf/2611.30583"
     }
   ]
 }
