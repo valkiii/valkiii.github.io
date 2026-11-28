@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-27T05:31:49Z",
+  "generated": "2026-11-28T05:30:49Z",
   "window_days": 42,
   "items": [
     {
@@ -26,7 +26,7 @@
       "tags": [
         "genai-llm"
       ],
-      "score": 67.0,
+      "score": 66.58,
       "signals": {
         "hn_points": 494,
         "hn_comments": 146,
@@ -63,7 +63,7 @@
         "tabular-timeseries",
         "bandits-rl"
       ],
-      "score": 59.55,
+      "score": 59.15,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -103,7 +103,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 57.91,
+      "score": 57.7,
       "signals": {
         "hn_points": 49,
         "hn_comments": 8,
@@ -153,6 +153,44 @@
       "pdf": "https://arxiv.org/pdf/2610.21375"
     },
     {
+      "id": "2611.30898",
+      "title": "World Models as Native Latent Action Models",
+      "authors": [
+        "Qinyue Li",
+        "Weijie Qiao",
+        "Qingyi Tao",
+        "Zerui Gong",
+        "Zhe Yang",
+        "Quanzhou Li",
+        "Taolin Zhang",
+        "Jinglin He",
+        "Zhonghua Wu",
+        "Chen Change Loy"
+      ],
+      "abstract": "Large and diverse video sources, such as egocentric human video and heterogeneous robot recordings, carry rich dynamics but come either without actions or without a shared action space. Latent action models (LAMs) can recover these dynamics, but they train their inverse- and forward-dynamics models (IDM, FDM) from scratch, trading off pixel reconstruction against latent capacity and accuracy. Pretrained video world models natively generate high-fidelity dynamics, yet represent them densely, entangled across all layers. Viewing the world model as a LAM, we show that these dynamics can be extracted with minimal changes to the model. Native LAM operates one pretrained video diffusion transformer as both IDM and FDM, with learnable dynamics registers as the only causal bridge between the two, and trains on counterfactual temporal pairs that differ in motion alone, so that the registers distill a video's dynamics into a compact native latent action. We further propose a pretraining paradigm for vision-language-action (VLA) policies, Pretraining Actions from World models (PAWlicy), in which Native LAM serves as a dynamics teacher on large-scale video; unlike world action models, it never generates video. Native latent actions outperform existing LAMs on the LARY benchmark in both action classification and control regression, and replay the same motion on new robots, in new scenes, and from human hands to robots, although no transfer objective is used in training. With a 3.8B model, PAWlicy reaches a 93.6% average success rate on RoboTwin 2.0 trained with domain-randomized demonstrations, the highest among VLAs. On RoboDojo, it is competitive on every dimension we evaluate, and its Precision, evaluated by us, is on par with the leading leaderboard entries. On real robots, it improves over the pi_0.5 baseline on both tasks. Both stages use only public data and a publicly released world model.",
+      "published": "2026-11-23",
+      "categories": [
+        "cs.CV",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "tags": [
+        "causal-uplift"
+      ],
+      "score": 48.95,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 29
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "benchmark",
+      "url": "https://arxiv.org/abs/2611.30898",
+      "pdf": "https://arxiv.org/pdf/2611.30898"
+    },
+    {
       "id": "2611.32884",
       "title": "Lazy Agents Answer Against Their Own Beliefs: Reinforcement Learning with Verifiable Beliefs Teaches Them to Act on What They Believe",
       "authors": [
@@ -171,12 +209,12 @@
         "genai-llm",
         "agents"
       ],
-      "score": 50.92,
+      "score": 48.01,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 98
+        "hf_upvotes": 65
       },
       "why": null,
       "difficulty": 2,
@@ -223,12 +261,12 @@
         "genai-llm",
         "applied-finance"
       ],
-      "score": 49.92,
+      "score": 46.98,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 104
+        "hf_upvotes": 67
       },
       "why": null,
       "difficulty": 2,
@@ -237,75 +275,33 @@
       "pdf": "https://arxiv.org/pdf/2611.25403"
     },
     {
-      "id": "2611.30898",
-      "title": "World Models as Native Latent Action Models",
+      "id": "2611.31619",
+      "title": "What a Forecasting Leaderboard Can Establish: Resolution Reporting for Zero-Shot Time-Series Models",
       "authors": [
-        "Qinyue Li",
-        "Weijie Qiao",
-        "Qingyi Tao",
-        "Zerui Gong",
-        "Zhe Yang",
-        "Quanzhou Li",
-        "Taolin Zhang",
-        "Jinglin He",
-        "Zhonghua Wu",
-        "Chen Change Loy"
+        "Arya Sikder",
+        "Sriram Pillutla"
       ],
-      "abstract": "Large and diverse video sources, such as egocentric human video and heterogeneous robot recordings, carry rich dynamics but come either without actions or without a shared action space. Latent action models (LAMs) can recover these dynamics, but they train their inverse- and forward-dynamics models (IDM, FDM) from scratch, trading off pixel reconstruction against latent capacity and accuracy. Pretrained video world models natively generate high-fidelity dynamics, yet represent them densely, entangled across all layers. Viewing the world model as a LAM, we show that these dynamics can be extracted with minimal changes to the model. Native LAM operates one pretrained video diffusion transformer as both IDM and FDM, with learnable dynamics registers as the only causal bridge between the two, and trains on counterfactual temporal pairs that differ in motion alone, so that the registers distill a video's dynamics into a compact native latent action. We further propose a pretraining paradigm for vision-language-action (VLA) policies, Pretraining Actions from World models (PAWlicy), in which Native LAM serves as a dynamics teacher on large-scale video; unlike world action models, it never generates video. Native latent actions outperform existing LAMs on the LARY benchmark in both action classification and control regression, and replay the same motion on new robots, in new scenes, and from human hands to robots, although no transfer objective is used in training. With a 3.8B model, PAWlicy reaches a 93.6% average success rate on RoboTwin 2.0 trained with domain-randomized demonstrations, the highest among VLAs. On RoboDojo, it is competitive on every dimension we evaluate, and its Precision, evaluated by us, is on par with the leading leaderboard entries. On real robots, it improves over the pi_0.5 baseline on both tasks. Both stages use only public data and a publicly released world model.",
+      "abstract": "A foundation model for time series is pretrained once and then asked to forecast series it has never seen, so the evidence for it is its score on held-out datasets. Such datasets are scarce, and a few public leaderboards carry most comparisons, yet none of them states how small a difference its datasets can detect. We call that quantity the resolution of a board and introduce Vernier, a tool that computes it from the files a board already publishes. Vernier also reports which entries a board cannot separate from its leader and whether its order changes when unrelated parties submit. GIFT-Eval resolves 6.8 rank places, and its displayed neighbours sit 0.91 apart. The ten places of its top ten hold fewer than two resolvable steps. fev-bench, Chronos Benchmark II and TIME show the same pattern: their resolution is 3.6 to 19 times the gap between neighbours. With each of its 2,554 series as an independent source, BOOM is the one board that resolves its top ten. Below the resolution the order depends on who else submitted: across four boards, rules that rank against the pool reversed 43 top-ten pairs with neither entry rerun, in one update in seven. Boards also do not record how much history a model receives. On 70 configurations, shortening it raised the error of three of four open models, two of them by 15%. We release Vernier, which runs this report with one command on any leaderboard that publishes per-dataset scores: https://github.com/therealram18/vernier",
       "published": "2026-11-23",
       "categories": [
-        "cs.CV",
         "cs.LG",
-        "cs.RO"
+        "stat.ME"
       ],
       "tags": [
-        "causal-uplift"
+        "tabular-timeseries"
       ],
-      "score": 49.35,
+      "score": 46.78,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 28
+        "hf_upvotes": 58
       },
       "why": null,
       "difficulty": 2,
       "kind": "benchmark",
-      "url": "https://arxiv.org/abs/2611.30898",
-      "pdf": "https://arxiv.org/pdf/2611.30898"
-    },
-    {
-      "id": "2611.23808",
-      "title": "PReMind: When Personal Memory Meets Visual Hazards",
-      "authors": [
-        "Yeongtak Oh",
-        "Donghyeok Lee",
-        "Joonhee Oh",
-        "Jaewon Jeong",
-        "Sungroh Yoon"
-      ],
-      "abstract": "Personalized vision-language assistants use visual observations and personal memories to provide advice tailored to the user. When the observed scene contains a physical hazard, personal context, such as allergies, medical conditions, or mobility constraints, can change what help is appropriate. Responding appropriately therefore requires recognizing the visible hazard and applying the relevant person's information. We introduce PReMind-Bench, a diagnostic benchmark that evaluates this combination across diverse hazards and personal-memory conditions. It separately measures memory access, grounding, abstention, and hazard response, and assesses joint success on interdependency cases. Existing models often satisfy one requirement while failing the other, and training only for safety or personalization leaves a gap in joint success. We therefore propose PReMind, a two-phase reinforcement learning framework that combines on-demand and forced-call interactions (memory always retrieved) to jointly train grounded memory use and hazard response. At 4B, PReMind raises joint success from 12.9% to 28.6% over its base on the interdependency set and improves hazard adequacy and correct abstention on the main test. Joint-success gains persist under forced-call evaluation and under a second LLM judge across three Phase II seeds; averaged over these seeds, joint success also improves on unseen hazard groups. These findings highlight the need to evaluate and train personal assistants to connect visual evidence with the relevant person's context.",
-      "published": "2026-11-18",
-      "categories": [
-        "cs.CV"
-      ],
-      "tags": [
-        "recsys-nba",
-        "eval-safety",
-        "genai-llm"
-      ],
-      "score": 47.04,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": 8
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.23808",
-      "pdf": "https://arxiv.org/pdf/2611.23808"
+      "url": "https://arxiv.org/abs/2611.31619",
+      "pdf": "https://arxiv.org/pdf/2611.31619"
     },
     {
       "id": "2611.23236",
@@ -343,6 +339,39 @@
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.23236",
       "pdf": "https://arxiv.org/pdf/2611.23236"
+    },
+    {
+      "id": "2611.23808",
+      "title": "PReMind: When Personal Memory Meets Visual Hazards",
+      "authors": [
+        "Yeongtak Oh",
+        "Donghyeok Lee",
+        "Joonhee Oh",
+        "Jaewon Jeong",
+        "Sungroh Yoon"
+      ],
+      "abstract": "Personalized vision-language assistants use visual observations and personal memories to provide advice tailored to the user. When the observed scene contains a physical hazard, personal context, such as allergies, medical conditions, or mobility constraints, can change what help is appropriate. Responding appropriately therefore requires recognizing the visible hazard and applying the relevant person's information. We introduce PReMind-Bench, a diagnostic benchmark that evaluates this combination across diverse hazards and personal-memory conditions. It separately measures memory access, grounding, abstention, and hazard response, and assesses joint success on interdependency cases. Existing models often satisfy one requirement while failing the other, and training only for safety or personalization leaves a gap in joint success. We therefore propose PReMind, a two-phase reinforcement learning framework that combines on-demand and forced-call interactions (memory always retrieved) to jointly train grounded memory use and hazard response. At 4B, PReMind raises joint success from 12.9% to 28.6% over its base on the interdependency set and improves hazard adequacy and correct abstention on the main test. Joint-success gains persist under forced-call evaluation and under a second LLM judge across three Phase II seeds; averaged over these seeds, joint success also improves on unseen hazard groups. These findings highlight the need to evaluate and train personal assistants to connect visual evidence with the relevant person's context.",
+      "published": "2026-11-18",
+      "categories": [
+        "cs.CV"
+      ],
+      "tags": [
+        "recsys-nba",
+        "eval-safety",
+        "genai-llm"
+      ],
+      "score": 46.57,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": 8
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.23808",
+      "pdf": "https://arxiv.org/pdf/2611.23808"
     },
     {
       "id": "2611.34575",
@@ -469,7 +498,7 @@
         "bandits-rl",
         "ml-methods"
       ],
-      "score": 46.24,
+      "score": 45.58,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -503,7 +532,7 @@
         "genai-llm",
         "applied-finance"
       ],
-      "score": 45.62,
+      "score": 45.03,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -534,7 +563,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 44.45,
+      "score": 43.98,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -591,53 +620,18 @@
         "bandits-rl",
         "agents"
       ],
-      "score": 43.65,
+      "score": 43.42,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 166
+        "hf_upvotes": 170
       },
       "why": null,
       "difficulty": 2,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.18397",
       "pdf": "https://arxiv.org/pdf/2611.18397"
-    },
-    {
-      "id": "2611.34436",
-      "title": "Grounding User Preferences in Shared Multimodal Concepts for Recommendation",
-      "authors": [
-        "Ao Xu",
-        "Jinhui Huang",
-        "Wenqiang Tang",
-        "Tiehua Mei",
-        "Hongru Hou",
-        "Hengrui Chen",
-        "Jiaqing Liang",
-        "Deqing Yang"
-      ],
-      "abstract": "Multimodal recommendation has substantially advanced item understanding by incorporating rich visual and textual content. Yet user preferences are still commonly encoded as implicit signals tied to individual items, leaving recurring semantic factors without persistent identities that can be shared across items. We introduce MKGE, a multimodal knowledge graph framework that represents these factors as canonical, addressable concepts. MKGE induces a domain-adaptive concept vocabulary from item images and titles, grounds each user's interaction history in supported concepts, and jointly models direct user-item evidence and concept-mediated preference signals. By turning recurring semantics into shared coordinates, MKGE enables evidence from different items to accumulate around the same preference factors. Extensive experiments on three public benchmarks demonstrate that MKGE consistently outperforms collaborative, knowledge-graph, multimodal, and recent LLM/MLLM-based recommenders across all six reported metrics. Controlled studies further demonstrate the importance of canonical concept identities and personalized user-concept correspondence, with especially pronounced gains over removing or rewiring the user graph for low-activity users. These results establish canonical multimodal concepts as effective units for preference modeling and transfer. Code, constructed knowledge graphs, and prompts are available at https://github.com/Garden1a-X/MKGE.",
-      "published": "2026-11-25",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba",
-        "genai-llm"
-      ],
-      "score": 43.59,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 1,
-      "kind": "method",
-      "url": "https://arxiv.org/abs/2611.34436",
-      "pdf": "https://arxiv.org/pdf/2611.34436"
     },
     {
       "id": "2611.34330",
@@ -654,7 +648,7 @@
       "tags": [
         "recsys-nba"
       ],
-      "score": 43.59,
+      "score": 42.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -691,7 +685,7 @@
         "recsys-nba",
         "causal-uplift"
       ],
-      "score": 43.59,
+      "score": 42.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -724,7 +718,7 @@
         "recsys-nba",
         "agents"
       ],
-      "score": 43.59,
+      "score": 42.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -738,49 +732,26 @@
       "pdf": "https://arxiv.org/pdf/2611.34407"
     },
     {
-      "id": "2611.32855",
-      "title": "Speculative Decoding for Semantic-ID-Based Generative Recommendations",
+      "id": "2611.34436",
+      "title": "Grounding User Preferences in Shared Multimodal Concepts for Recommendation",
       "authors": [
-        "Harshal A. Chaudhari"
+        "Ao Xu",
+        "Jinhui Huang",
+        "Wenqiang Tang",
+        "Tiehua Mei",
+        "Hongru Hou",
+        "Hengrui Chen",
+        "Jiaqing Liang",
+        "Deqing Yang"
       ],
-      "abstract": "Generative recommender systems with Semantic IDs (SIDs) represent each item as a short sequence of $L$ discrete tokens and use a sequence model to predict the next item's tokens from a user's history. Industry-scale deployments typically use these models to retrieve multiple candidates per request with constrained beam search. However, this incurs a fixed cost of $L$ sequential model calls per request, and accuracy degrades as the SID generator becomes less sharp, without a guarantee on how close the output is to the exact top-$K$. Production systems therefore cannot detect degraded retrieval for individual requests. We propose SIDECAR, which uses approximate draft candidates and a tree-attention pass to score the entire draft in a single model call, memory permitting. This pass bounds the probability of every unexplored SID prefix and certifies the exact top-$K$ if the draft contains them. Otherwise, a branch-and-bound fallback expands only the parts of the trie that can still change the output, reaching certification within at most $L$ calls for any draft. Moreover, under a budget of $M$ tokens per call and $Y$ calls, which for $Y = L$ matches the resources of a beam search of width $M$, SIDECAR announces a factor $1 + δ$ within which its list will be exact at every rank. Depending on model sharpness, SIDECAR returns the exact top-$K$ using a fraction of beam search's calls or memory. Even when the budget is too small to recover the exact top-$K$, SIDECAR, unlike beam search, reports the announced factor, allowing the serving system to stop early once a quality target or latency limit is reached.",
-      "published": "2026-11-24",
+      "abstract": "Multimodal recommendation has substantially advanced item understanding by incorporating rich visual and textual content. Yet user preferences are still commonly encoded as implicit signals tied to individual items, leaving recurring semantic factors without persistent identities that can be shared across items. We introduce MKGE, a multimodal knowledge graph framework that represents these factors as canonical, addressable concepts. MKGE induces a domain-adaptive concept vocabulary from item images and titles, grounds each user's interaction history in supported concepts, and jointly models direct user-item evidence and concept-mediated preference signals. By turning recurring semantics into shared coordinates, MKGE enables evidence from different items to accumulate around the same preference factors. Extensive experiments on three public benchmarks demonstrate that MKGE consistently outperforms collaborative, knowledge-graph, multimodal, and recent LLM/MLLM-based recommenders across all six reported metrics. Controlled studies further demonstrate the importance of canonical concept identities and personalized user-concept correspondence, with especially pronounced gains over removing or rewiring the user graph for low-activity users. These results establish canonical multimodal concepts as effective units for preference modeling and transfer. Code, constructed knowledge graphs, and prompts are available at https://github.com/Garden1a-X/MKGE.",
+      "published": "2026-11-25",
       "categories": [
         "cs.IR"
       ],
       "tags": [
-        "recsys-nba"
-      ],
-      "score": 42.93,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 2,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.32855",
-      "pdf": "https://arxiv.org/pdf/2611.32855"
-    },
-    {
-      "id": "2611.31951",
-      "title": "User-Adaptive Fusion of Multiple Foundation Models for Recommender Systems",
-      "authors": [
-        "Sunwoo Kim",
-        "Hyunjin Hwang",
-        "Geon Lee",
-        "Kyungho Kim",
-        "Kijung Shin"
-      ],
-      "abstract": "Can recommender systems benefit from combining a collection of foundation models within and across modalities? While different foundation models may capture complementary aspects of item metadata, we find that naively combining their representations yields only marginal gains over using a single foundation model. We make a key observation: the users who benefit vary across foundation models. Motivated by this observation, we introduce UF2O, a user-adaptive approach for fusing multiple foundation models for recommendation. In a nutshell, UF2O models the contribution of each foundation model as user-specific by maintaining separate recommendation views and adaptively combining their scores for each user. By performing fusion at the score level, UF2O can also fuse heterogeneous foundation models without directly aligning their representation spaces. Extensive experiments that jointly combine four foundation models on four datasets show that UF2O outperforms existing fusion approaches in both static and sequential recommendation settings, with improvements of up to 7% over the strongest fusion baseline. The code, datasets, and supplementary materials for our work are available at https://github.com/kswoo97/UFFO.",
-      "published": "2026-11-24",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "recsys-nba"
+        "recsys-nba",
+        "genai-llm"
       ],
       "score": 42.93,
       "signals": {
@@ -791,9 +762,9 @@
       },
       "why": null,
       "difficulty": 1,
-      "kind": "system",
-      "url": "https://arxiv.org/abs/2611.31951",
-      "pdf": "https://arxiv.org/pdf/2611.31951"
+      "kind": "method",
+      "url": "https://arxiv.org/abs/2611.34436",
+      "pdf": "https://arxiv.org/pdf/2611.34436"
     },
     {
       "id": "2611.29897",
@@ -815,18 +786,76 @@
         "cs.CV"
       ],
       "tags": [],
-      "score": 42.71,
+      "score": 42.45,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": 215
+        "hf_upvotes": 228
       },
       "why": null,
       "difficulty": 3,
       "kind": "method",
       "url": "https://arxiv.org/abs/2611.29897",
       "pdf": "https://arxiv.org/pdf/2611.29897"
+    },
+    {
+      "id": "2611.31951",
+      "title": "User-Adaptive Fusion of Multiple Foundation Models for Recommender Systems",
+      "authors": [
+        "Sunwoo Kim",
+        "Hyunjin Hwang",
+        "Geon Lee",
+        "Kyungho Kim",
+        "Kijung Shin"
+      ],
+      "abstract": "Can recommender systems benefit from combining a collection of foundation models within and across modalities? While different foundation models may capture complementary aspects of item metadata, we find that naively combining their representations yields only marginal gains over using a single foundation model. We make a key observation: the users who benefit vary across foundation models. Motivated by this observation, we introduce UF2O, a user-adaptive approach for fusing multiple foundation models for recommendation. In a nutshell, UF2O models the contribution of each foundation model as user-specific by maintaining separate recommendation views and adaptively combining their scores for each user. By performing fusion at the score level, UF2O can also fuse heterogeneous foundation models without directly aligning their representation spaces. Extensive experiments that jointly combine four foundation models on four datasets show that UF2O outperforms existing fusion approaches in both static and sequential recommendation settings, with improvements of up to 7% over the strongest fusion baseline. The code, datasets, and supplementary materials for our work are available at https://github.com/kswoo97/UFFO.",
+      "published": "2026-11-24",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "recsys-nba"
+      ],
+      "score": 42.31,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 1,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.31951",
+      "pdf": "https://arxiv.org/pdf/2611.31951"
+    },
+    {
+      "id": "2611.32855",
+      "title": "Speculative Decoding for Semantic-ID-Based Generative Recommendations",
+      "authors": [
+        "Harshal A. Chaudhari"
+      ],
+      "abstract": "Generative recommender systems with Semantic IDs (SIDs) represent each item as a short sequence of $L$ discrete tokens and use a sequence model to predict the next item's tokens from a user's history. Industry-scale deployments typically use these models to retrieve multiple candidates per request with constrained beam search. However, this incurs a fixed cost of $L$ sequential model calls per request, and accuracy degrades as the SID generator becomes less sharp, without a guarantee on how close the output is to the exact top-$K$. Production systems therefore cannot detect degraded retrieval for individual requests. We propose SIDECAR, which uses approximate draft candidates and a tree-attention pass to score the entire draft in a single model call, memory permitting. This pass bounds the probability of every unexplored SID prefix and certifies the exact top-$K$ if the draft contains them. Otherwise, a branch-and-bound fallback expands only the parts of the trie that can still change the output, reaching certification within at most $L$ calls for any draft. Moreover, under a budget of $M$ tokens per call and $Y$ calls, which for $Y = L$ matches the resources of a beam search of width $M$, SIDECAR announces a factor $1 + δ$ within which its list will be exact at every rank. Depending on model sharpness, SIDECAR returns the exact top-$K$ using a fraction of beam search's calls or memory. Even when the budget is too small to recover the exact top-$K$, SIDECAR, unlike beam search, reports the announced factor, allowing the serving system to stop early once a quality target or latency limit is reached.",
+      "published": "2026-11-24",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "recsys-nba"
+      ],
+      "score": 42.31,
+      "signals": {
+        "hn_points": null,
+        "hn_comments": null,
+        "hn_url": null,
+        "hf_upvotes": null
+      },
+      "why": null,
+      "difficulty": 2,
+      "kind": "system",
+      "url": "https://arxiv.org/abs/2611.32855",
+      "pdf": "https://arxiv.org/pdf/2611.32855"
     },
     {
       "id": "2611.34779",
@@ -845,7 +874,7 @@
         "causal-uplift",
         "eval-safety"
       ],
-      "score": 40.59,
+      "score": 39.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -873,7 +902,7 @@
       "tags": [
         "causal-uplift"
       ],
-      "score": 40.59,
+      "score": 39.93,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -913,7 +942,7 @@
       "tags": [
         "agents"
       ],
-      "score": 40.07,
+      "score": 39.42,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
@@ -927,61 +956,33 @@
       "pdf": "https://arxiv.org/pdf/2611.34849"
     },
     {
-      "id": "2611.33440",
-      "title": "Adaptive confidence bands for a continuous treatment effect curve under shape constraints",
+      "id": "2611.30986",
+      "title": "Reinforcing Diffusion Models by Instantaneous Trajectory Distribution Matching",
       "authors": [
-        "Charles R. Doss",
-        "R. Oliver VandenBerg"
+        "Yihong Luo"
       ],
-      "abstract": "In causal inference with observational data new inferential targets arise when treatment is continuous rather than discrete. Here we form (simultaneous) confidence bands over the continuous treatment effect curve. We form confidence bands based on assuming the curve satisfies shape constraints of either monotonicity or concavity, under the assumption of no unmeasured confounding. As is commonly the case, two nuisance functions arise, and our bands are asymptotically valid if the product of the error rates of the two nuisance functions is small enough. We also develop non-causal shape constrained bands in regression with fixed or random non-uniform grid which are of independent interest. Furthermore, our bands are adaptive to a range of function flatness and smoothness levels in that when the true flatness/smoothness level is unknown the bands still achieve the same (optimal) rate of convergence (in sup-norm) as when the true smoothness level is known. We demonstrate these bands through simulations and an application to the effect of nurse staffing on hospital performance.",
-      "published": "2026-11-24",
+      "abstract": "Forward diffusion reinforcement learning (RL)---enabling deterministic ODE sampling without trajectory backpropagation---has grown increasingly popular for efficiently aligning diffusion models. However, we reveal that existing methods essentially rely on signed reward-weighted regression (RWR), regressing the trainable policy velocity onto rollouts from a behavior distribution. Unbiased baseline subtraction implicitly assumes that the policy velocity equals the behavior marginal velocity---an idealized assumption violated under classifier-free guidance (CFG) rollouts, offline/off-policy updates, and imperfect online self-consistency. This behavior--policy mismatch breaks baseline invariance and injects baseline-induced gradient drift, destabilizing training. To resolve this issue, we propose Instantaneous Trajectory Distribution Matching (iTDM), taking the infinitesimal limit of Trajectory Distribution Matching toward a time-local reward-guided target via the posterior-score identity to yield a sample-level gradient anchored at the behavior velocity without learning an additional reward-tilted target score. Tracking this velocity with an online auxiliary denoiser guarantees exact baseline invariance at the auxiliary optimum, effectively suppressing baseline drift across both online and offline RL. Extensive experiments across compositional generation, text rendering, and preference alignment show that iTDM achieves state-of-the-art in-domain and out-of-domain performance across group-wise online/offline RL and pairwise offline RL. Notably, on the challenging GenEval2 benchmark, iTDM converges nearly 3\\times faster than competing methods while scaling smoothly to 0.87 without collapse. Furthermore, iTDM scales effectively to the 5.6B FLUX.3 model, achieving better performance across both in-domain and unseen metrics. Code is available at https://github.com/Luo-Yihong/iTDM",
+      "published": "2026-11-23",
       "categories": [
-        "stat.ME"
+        "cs.LG",
+        "cs.AI",
+        "cs.CV"
       ],
       "tags": [
-        "causal-uplift"
+        "bandits-rl"
       ],
-      "score": 39.93,
+      "score": 39.39,
       "signals": {
         "hn_points": null,
         "hn_comments": null,
         "hn_url": null,
-        "hf_upvotes": null
+        "hf_upvotes": 15
       },
       "why": null,
-      "difficulty": 4,
+      "difficulty": 2,
       "kind": "method",
-      "url": "https://arxiv.org/abs/2611.33440",
-      "pdf": "https://arxiv.org/pdf/2611.33440"
-    },
-    {
-      "id": "2611.32708",
-      "title": "Contrastive Proxy Forests: Completeness-Preserving Proxy Learning from Multimodal Records",
-      "authors": [
-        "Kyoungeui Hong",
-        "Zijun Gao",
-        "Ruishan Liu"
-      ],
-      "abstract": "Proximal causal inference removes unmeasured confounding using two proxies of the confounder, an outcome-side W and a treatment-side Z. The proxies must satisfy exclusion restrictions and be complete, meaning that they reflect every aspect of the confounder. In practice, they are a few variables hand-picked from a structured table, even though clinical notes and physiological waveforms carry rich information about the confounder. Such records are too high-dimensional for a proximal estimator, and generic compression such as PCA may keep modality-specific variation (style) instead of the confounder, destroying completeness. Our key observation is that, under the proximal condition, the confounder is the only link between a treatment-side and an outcome-side modality beyond the covariates. Learning what they share therefore captures the confounder and filters out modality-specific style. Contrastive Proxy Forests (CPF) learns both proxies by contrasting the two modalities, given the covariates, on a separate unlabeled sample, and passes them to a proximal causal forest. This contrastive objective has an exact closed-form solution, ridge canonical correlation analysis. We prove that CPF preserves the exclusion restrictions exactly and that its proxies inherit the completeness of the raw records under conditions we characterize. Where style is strong, CPF lowers the error of conditional effects by 10-22% relative to PCA proxies, and on MIMIC-IV it is the only method whose point estimate of warfarin's effect on stroke falls inside the range of randomized trials.",
-      "published": "2026-11-24",
-      "categories": [
-        "cs.LG"
-      ],
-      "tags": [
-        "causal-uplift"
-      ],
-      "score": 39.93,
-      "signals": {
-        "hn_points": null,
-        "hn_comments": null,
-        "hn_url": null,
-        "hf_upvotes": null
-      },
-      "why": null,
-      "difficulty": 3,
-      "kind": "theory",
-      "url": "https://arxiv.org/abs/2611.32708",
-      "pdf": "https://arxiv.org/pdf/2611.32708"
+      "url": "https://arxiv.org/abs/2611.30986",
+      "pdf": "https://arxiv.org/pdf/2611.30986"
     }
   ]
 }
